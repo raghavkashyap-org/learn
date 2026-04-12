@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>DevDocs — Master Reference Hub</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  
+  :root {
+    --bg: #f5f5f5;
+    --card-bg: #ffffff;
+    --text: #1a1a1a;
+    --subtitle: #666;
+    --accent: #378ADD;
+    --border: #e5e5e5;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #111;
+      --card-bg: #1e1e1e;
+      --text: #e5e5e5;
+      --subtitle: #888;
+      --accent: #4fa3f7;
+      --border: #2a2a2a;
+    }
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    padding: 2rem 1.5rem;
+    line-height: 1.5;
+  }
+
+  header {
+    max-width: 1000px;
+    margin: 0 auto 3rem auto;
+  }
+
+  h1 { font-size: 28px; font-weight: 600; margin-bottom: 8px; }
+  .subtitle { color: var(--subtitle); font-size: 15px; }
+
+  /* Search & Controls */
+  .controls {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+  }
+
+  .search-box {
+    flex: 1;
+    padding: 12px 16px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--card-bg);
+    color: var(--text);
+    outline: none;
+    font-size: 14px;
+  }
+
+  .btn-add {
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 0 20px;
+    border-radius: 10px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: opacity 0.2s;
+  }
+
+  /* Grid Layout */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .doc-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .doc-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    border-color: var(--accent);
+  }
+
+  .doc-icon {
+    font-size: 24px;
+    margin-bottom: 12px;
+    display: block;
+  }
+
+  .doc-title {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--text);
+  }
+
+  .doc-desc {
+    font-size: 13px;
+    color: var(--subtitle);
+    margin-bottom: 16px;
+  }
+
+  .doc-meta {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 700;
+    color: var(--accent);
+  }
+
+  /* Modal Styles */
+  .modal {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.6);
+    align-items: center; justify-content: center;
+    z-index: 100;
+    backdrop-filter: blur(4px);
+  }
+
+  .modal-content {
+    background: var(--card-bg);
+    padding: 24px;
+    border-radius: 16px;
+    width: 90%;
+    max-width: 400px;
+    border: 1px solid var(--border);
+  }
+
+  .form-group { margin-bottom: 15px; }
+  .form-group label { display: block; font-size: 12px; margin-bottom: 5px; color: var(--subtitle); }
+  .form-group input { 
+    width: 100%; padding: 10px; border-radius: 6px; 
+    border: 1px solid var(--border); background: var(--bg); color: var(--text);
+  }
+
+  @media (max-width: 600px) {
+    h1 { font-size: 22px; }
+    .controls { flex-direction: column; }
+    .btn-add { padding: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Reference Library</h1>
+  <p class="subtitle">A collection of quick-reference guides for tools and languages.</p>
+  
+  <div class="controls">
+    <input type="text" class="search-box" id="search" placeholder="Search references (e.g. Git, cURL)...">
+    <button class="btn-add" onclick="toggleModal(true)">+ Add Reference</button>
+  </div>
+</header>
+
+<main class="grid" id="guideGrid"></main>
+
+<div class="modal" id="addModal">
+  <div class="modal-content">
+    <h2 style="margin-bottom: 15px; font-size: 18px;">Add New Guide</h2>
+    <div class="form-group">
+      <label>Guide Title</label>
+      <input type="text" id="newTitle" placeholder="e.g. Docker Commands">
+    </div>
+    <div class="form-group">
+      <label>URL / File Path</label>
+      <input type="text" id="newPath" placeholder="e.g. docs/docker.html">
+    </div>
+    <div class="form-group">
+      <label>Description</label>
+      <input type="text" id="newDesc" placeholder="Brief summary...">
+    </div>
+    <div style="display: flex; gap: 10px; margin-top: 20px;">
+      <button class="btn-add" style="flex: 1;" onclick="addNewGuide()">Save Guide</button>
+      <button class="btn-add" style="flex: 1; background: #666;" onclick="toggleModal(false)">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Initial Guides - To add more files in the future, just add objects here
+  let guides = [
+    {
+      title: "cURL Reference",
+      desc: "100+ commands for HTTP requests, auth, and debugging.",
+      path: "./curl.html", // Path to your provided code file
+      icon: "🌐",
+      tag: "Network"
+    },
+    {
+      title: "Git Cheatsheet",
+      desc: "Workflow essentials, branching, and commit management.",
+      path: "./git_reference.html",
+      icon: "🌿",
+      tag: "VCS"
+    },
+    {
+      title: "Linux CLI",
+      desc: "Bash scripting, file permissions, and system monitoring.",
+      path: "#",
+      icon: "🐧",
+      tag: "OS"
+    }
+  ];
+
+  function renderGuides(filter = "") {
+    const grid = document.getElementById('guideGrid');
+    grid.innerHTML = "";
+    
+    const filtered = guides.filter(g => 
+      g.title.toLowerCase().includes(filter.toLowerCase()) || 
+      g.tag.toLowerCase().includes(filter.toLowerCase())
+    );
+
+    filtered.forEach(guide => {
+      const card = document.createElement('a');
+      card.href = guide.path;
+      card.className = 'doc-card';
+      card.innerHTML = `
+        <div>
+          <span class="doc-icon">${guide.icon}</span>
+          <div class="doc-title">${guide.title}</div>
+          <p class="doc-desc">${guide.desc}</p>
+        </div>
+        <div class="doc-meta">${guide.tag}</div>
+      `;
+      grid.appendChild(card);
+    });
+  }
+
+  function toggleModal(show) {
+    document.getElementById('addModal').style.display = show ? 'flex' : 'none';
+  }
+
+  function addNewGuide() {
+    const title = document.getElementById('newTitle').value;
+    const path = document.getElementById('newPath').value;
+    const desc = document.getElementById('newDesc').value;
+
+    if(title && path) {
+      guides.push({ title, path, desc, icon: "📄", tag: "New" });
+      renderGuides();
+      toggleModal(false);
+      // Optional: Clear inputs
+      document.getElementById('newTitle').value = "";
+      document.getElementById('newPath').value = "";
+      document.getElementById('newDesc').value = "";
+    }
+  }
+
+  document.getElementById('search').addEventListener('input', (e) => {
+    renderGuides(e.target.value);
+  });
+
+  // Initial Render
+  renderGuides();
+</script>
+</body>
+</html>

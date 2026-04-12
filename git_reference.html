@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Git Command Reference — 250+ Commands</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --bg: #0d0f14;
+  --surface: #141720;
+  --surface2: #1a1e2a;
+  --border: rgba(255,255,255,0.07);
+  --border2: rgba(255,255,255,0.12);
+  --text: #e8eaf0;
+  --muted: #7a7f94;
+  --hint: #4a4f62;
+  --orange: #f0702a;
+  --orange-dim: rgba(240,112,42,0.12);
+  --orange-glow: rgba(240,112,42,0.25);
+  --green: #4af08a;
+  --green-dim: rgba(74,240,138,0.08);
+  --mono: 'JetBrains Mono', monospace;
+  --display: 'Syne', sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--mono);
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  line-height: 1.6;
+}
+
+/* ---- HEADER ---- */
+.header {
+  background: linear-gradient(135deg, #141720 0%, #0d0f14 60%);
+  border-bottom: 1px solid var(--border2);
+  padding: 2.5rem 2rem 2rem;
+  position: relative;
+  overflow: hidden;
+}
+.header::before {
+  content: '';
+  position: absolute;
+  top: -60px; right: -60px;
+  width: 300px; height: 300px;
+  background: radial-gradient(circle, rgba(240,112,42,0.15) 0%, transparent 70%);
+  pointer-events: none;
+}
+.header-inner { max-width: 1200px; margin: 0 auto; }
+.git-logo {
+  display: inline-flex; align-items: center; gap: 10px;
+  margin-bottom: 1rem;
+}
+.git-icon {
+  width: 36px; height: 36px;
+  background: var(--orange);
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; font-weight: 700; color: #fff;
+  font-family: var(--display);
+}
+.git-logo-text {
+  font-family: var(--display);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--orange);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+h1 {
+  font-family: var(--display);
+  font-size: clamp(26px, 4vw, 40px);
+  font-weight: 800;
+  color: var(--text);
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin-bottom: 0.5rem;
+}
+h1 span { color: var(--orange); }
+.subtitle {
+  font-size: 13px;
+  color: var(--muted);
+  font-weight: 300;
+  letter-spacing: 0.02em;
+}
+.header-stats {
+  display: flex; gap: 2rem; margin-top: 1.5rem; flex-wrap: wrap;
+}
+.stat { display: flex; flex-direction: column; gap: 2px; }
+.stat-num {
+  font-size: 22px; font-weight: 600; color: var(--orange);
+  font-family: var(--display);
+}
+.stat-label { font-size: 11px; color: var(--muted); letter-spacing: 0.05em; text-transform: uppercase; }
+
+/* ---- CONTROLS ---- */
+.controls {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 1rem 2rem;
+  position: sticky; top: 0; z-index: 100;
+}
+.controls-inner {
+  max-width: 1200px; margin: 0 auto;
+  display: flex; flex-direction: column; gap: 10px;
+}
+.search-wrap {
+  position: relative;
+}
+.search-icon {
+  position: absolute; left: 12px; top: 50%; transform: translateY(-50%);
+  color: var(--muted); font-size: 13px; pointer-events: none;
+}
+.search-box {
+  width: 100%;
+  padding: 9px 12px 9px 34px;
+  background: var(--surface2);
+  border: 1px solid var(--border2);
+  border-radius: 8px;
+  color: var(--text);
+  font-family: var(--mono);
+  font-size: 13px;
+  outline: none;
+  transition: border 0.15s, box-shadow 0.15s;
+}
+.search-box::placeholder { color: var(--hint); }
+.search-box:focus {
+  border-color: var(--orange);
+  box-shadow: 0 0 0 3px var(--orange-dim);
+}
+.cats {
+  display: flex; gap: 6px; flex-wrap: wrap;
+}
+.cat-btn {
+  padding: 4px 12px;
+  border-radius: 20px;
+  border: 1px solid var(--border2);
+  background: transparent;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 11px;
+  cursor: pointer;
+  transition: all 0.15s;
+  white-space: nowrap;
+  letter-spacing: 0.03em;
+}
+.cat-btn:hover { border-color: var(--border2); color: var(--text); background: var(--surface2); }
+.cat-btn.active { font-weight: 600; color: #0d0f14; }
+
+/* ---- MAIN ---- */
+.main { max-width: 1200px; margin: 0 auto; padding: 1.5rem 2rem 3rem; }
+.results-bar {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 1rem;
+  font-size: 12px; color: var(--muted);
+}
+.count-badge {
+  background: var(--orange-dim);
+  color: var(--orange);
+  border: 1px solid var(--orange-glow);
+  padding: 2px 10px; border-radius: 20px;
+  font-size: 11px; font-weight: 600;
+}
+
+/* ---- CARDS ---- */
+.cmd-list { display: flex; flex-direction: column; gap: 6px; }
+.cmd-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  transition: border-color 0.15s;
+}
+.cmd-card:hover { border-color: var(--border2); }
+.cmd-header {
+  display: grid;
+  grid-template-columns: auto 1fr 1fr auto;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.1s;
+}
+.cmd-header:hover { background: var(--surface2); }
+.cmd-badge {
+  font-size: 10px;
+  padding: 2px 8px;
+  border-radius: 20px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+.cmd-flag {
+  font-family: var(--mono);
+  font-size: 12.5px;
+  color: var(--green);
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.cmd-short {
+  font-size: 12px;
+  color: var(--muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.chevron {
+  color: var(--hint);
+  font-size: 9px;
+  transition: transform 0.2s;
+  flex-shrink: 0;
+}
+.cmd-body {
+  display: none;
+  padding: 14px 16px;
+  border-top: 1px solid var(--border);
+  background: #0f1118;
+}
+.cmd-body.open { display: block; }
+.cmd-desc {
+  font-size: 12.5px;
+  color: #a0a8c0;
+  margin-bottom: 14px;
+  line-height: 1.7;
+  font-weight: 300;
+}
+.block-label {
+  font-size: 10px;
+  color: var(--hint);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+  font-weight: 600;
+}
+.code-block {
+  background: #080a0e;
+  border: 1px solid rgba(255,255,255,0.06);
+  border-left: 3px solid var(--orange);
+  border-radius: 6px;
+  padding: 10px 14px;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: #e0e4f0;
+  margin-bottom: 12px;
+  white-space: pre-wrap;
+  word-break: break-all;
+  line-height: 1.75;
+}
+.out-block {
+  background: #050608;
+  border: 1px solid rgba(255,255,255,0.04);
+  border-left: 3px solid var(--green);
+  border-radius: 6px;
+  padding: 10px 14px;
+  font-family: var(--mono);
+  font-size: 11.5px;
+  color: #4af08a;
+  white-space: pre-wrap;
+  word-break: break-all;
+  line-height: 1.75;
+}
+.section-block { margin-bottom: 12px; }
+
+/* ---- EMPTY ---- */
+.empty {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: var(--hint);
+  font-size: 13px;
+}
+.empty big { display: block; font-size: 32px; margin-bottom: 0.5rem; }
+
+/* ---- SCROLLBAR ---- */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--hint); border-radius: 3px; }
+
+@media (max-width: 700px) {
+  .cmd-header { grid-template-columns: auto 1fr auto; }
+  .cmd-short { display: none; }
+  .header { padding: 1.5rem 1rem 1rem; }
+  .controls { padding: 1rem; }
+  .main { padding: 1rem 1rem 3rem; }
+  .header-stats { gap: 1.5rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-inner">
+    <div class="git-logo">
+      <div class="git-icon">G</div>
+      <span class="git-logo-text">Command Reference</span>
+    </div>
+    <h1>Git <span>Mastery</span> Guide</h1>
+    <p class="subtitle">250+ commands • 18 categories • with examples &amp; real output</p>
+    <div class="header-stats">
+      <div class="stat"><span class="stat-num" id="total-count">250+</span><span class="stat-label">Commands</span></div>
+      <div class="stat"><span class="stat-num">18</span><span class="stat-label">Categories</span></div>
+      <div class="stat"><span class="stat-num">100%</span><span class="stat-label">Offline</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="controls">
+  <div class="controls-inner">
+    <div class="search-wrap">
+      <span class="search-icon">⌕</span>
+      <input class="search-box" id="search" type="text" placeholder="Search commands, flags, descriptions, examples..." autocomplete="off"/>
+    </div>
+    <div class="cats" id="cats"></div>
+  </div>
+</div>
+
+<div class="main">
+  <div class="results-bar">
+    <span id="stats-text"></span>
+    <span class="count-badge" id="count-badge"></span>
+  </div>
+  <div class="cmd-list" id="list"></div>
+</div>
+
+<script>
+const CMDS = [
+
+// ===== SETUP & CONFIG =====
+{cat:"Config",flag:"git config --global user.name",short:"Set global username",desc:"Sets your name globally for all Git commits. Stored in ~/.gitconfig. Required for proper commit attribution.",ex:`git config --global user.name "Jane Doe"`,out:`(no output — silently saved to ~/.gitconfig)`},
+{cat:"Config",flag:"git config --global user.email",short:"Set global email",desc:"Sets your email globally. Used to associate commits with your identity on platforms like GitHub.",ex:`git config --global user.email "jane@example.com"`,out:`(no output — saved to ~/.gitconfig)`},
+{cat:"Config",flag:"git config --list",short:"List all config values",desc:"Displays all active Git configuration values from system, global, and local scopes.",ex:`git config --list`,out:`user.name=Jane Doe\nuser.email=jane@example.com\ncore.editor=vim\ncore.autocrlf=input\npull.rebase=false`},
+{cat:"Config",flag:"git config --global core.editor",short:"Set default editor",desc:"Sets which text editor Git opens for commit messages and interactive rebases.",ex:`git config --global core.editor "code --wait"`,out:`(VS Code will now open for commit messages)`},
+{cat:"Config",flag:"git config --global alias.<name>",short:"Create a Git alias",desc:"Creates a shortcut alias for a Git command or sequence, saving typing for frequently used commands.",ex:`git config --global alias.st status\ngit st`,out:`On branch main\nYour branch is up to date with 'origin/main'.\nnothing to commit, working tree clean`},
+{cat:"Config",flag:"git config --global color.ui",short:"Enable colored output",desc:"Enables colored terminal output for Git commands like status, diff, and branch.",ex:`git config --global color.ui auto`,out:`(Git output now uses colors in terminal)`},
+{cat:"Config",flag:"git config --global pull.rebase",short:"Set pull strategy",desc:"Controls default behavior of git pull. 'true' rebases, 'false' merges, 'ff-only' fast-forward only.",ex:`git config --global pull.rebase true`,out:`(git pull will now rebase instead of merge)`},
+{cat:"Config",flag:"git config --global init.defaultBranch",short:"Set default branch name",desc:"Sets the default branch name for new repositories (e.g. main instead of master).",ex:`git config --global init.defaultBranch main`,out:`(new repos will use 'main' as default branch)`},
+{cat:"Config",flag:"git config --local",short:"Set repo-level config",desc:"Sets config only for the current repository, stored in .git/config, overriding global settings.",ex:`git config --local user.email "work@company.com"`,out:`(only this repo uses work email)`},
+{cat:"Config",flag:"git config --global core.autocrlf",short:"Line ending handling",desc:"Controls CRLF/LF conversion. 'true' converts to CRLF on Windows checkout, 'input' for Linux/Mac.",ex:`git config --global core.autocrlf input`,out:`(line endings normalized on commit)`},
+{cat:"Config",flag:"git config --global merge.tool",short:"Set merge tool",desc:"Specifies the external tool to use for resolving merge conflicts.",ex:`git config --global merge.tool vimdiff`,out:`(vimdiff opens for merge conflicts)`},
+{cat:"Config",flag:"git config --global diff.tool",short:"Set diff tool",desc:"Sets the external tool used by git difftool.",ex:`git config --global diff.tool meld`,out:`(meld opens for visual diffs)`},
+{cat:"Config",flag:"git config --global http.proxy",short:"Set HTTP proxy",desc:"Routes Git HTTP traffic through a proxy server.",ex:`git config --global http.proxy http://proxy.corp.com:8080`,out:`(git clone/fetch/push routes through proxy)`},
+{cat:"Config",flag:"git config --unset",short:"Remove a config key",desc:"Removes a specific key from the Git configuration.",ex:`git config --global --unset http.proxy`,out:`(proxy setting removed from ~/.gitconfig)`},
+{cat:"Config",flag:"git config --global core.excludesFile",short:"Global .gitignore",desc:"Points to a global gitignore file that applies to all repositories.",ex:`git config --global core.excludesFile ~/.gitignore_global`,out:`(patterns in ~/.gitignore_global ignored everywhere)`},
+{cat:"Config",flag:"git config --global push.default",short:"Set default push behavior",desc:"Controls which branches are pushed by default. Options: simple, current, upstream, matching, nothing.",ex:`git config --global push.default current`,out:`(git push pushes current branch to same-named remote branch)`},
+{cat:"Config",flag:"git config --global credential.helper",short:"Set credential store",desc:"Caches or stores credentials to avoid re-entering passwords.",ex:`git config --global credential.helper store`,out:`(credentials saved to ~/.git-credentials after first use)`},
+{cat:"Config",flag:"git config --show-origin",short:"Show config file origins",desc:"Displays each config key alongside which file it came from.",ex:`git config --list --show-origin`,out:`file:/home/user/.gitconfig  user.name=Jane Doe\nfile:.git/config  core.repositoryformatversion=0`},
+{cat:"Config",flag:"git config --global rerere.enabled",short:"Enable rerere",desc:"Enables 'Reuse Recorded Resolution' — Git remembers how you resolved conflicts and reuses fixes.",ex:`git config --global rerere.enabled true`,out:`(Git will auto-reuse previously recorded conflict resolutions)`},
+
+// ===== INIT & CLONE =====
+{cat:"Init/Clone",flag:"git init",short:"Initialize a new repo",desc:"Creates a new empty Git repository in the current directory by setting up the .git folder.",ex:`mkdir myproject && cd myproject\ngit init`,out:`Initialized empty Git repository in /home/user/myproject/.git/`},
+{cat:"Init/Clone",flag:"git init <directory>",short:"Init repo in folder",desc:"Creates a new Git repository inside the specified directory (creates it if needed).",ex:`git init myapp`,out:`Initialized empty Git repository in /home/user/myapp/.git/`},
+{cat:"Init/Clone",flag:"git init --bare",short:"Init bare repository",desc:"Creates a bare repository (no working directory) — used for remote/shared repos on servers.",ex:`git init --bare myrepo.git`,out:`Initialized empty Git repository in /srv/git/myrepo.git/`},
+{cat:"Init/Clone",flag:"git clone <url>",short:"Clone a repository",desc:"Downloads a repository from a remote URL and creates a local copy with full history.",ex:`git clone https://github.com/user/repo.git`,out:`Cloning into 'repo'...\nremote: Enumerating objects: 342, done.\nremote: Counting objects: 100% (342/342), done.\nReceiving objects: 100% (342/342), 1.24 MiB | 2.3 MiB/s, done.`},
+{cat:"Init/Clone",flag:"git clone <url> <dir>",short:"Clone into custom folder",desc:"Clones a repository into a specific local directory name instead of the default.",ex:`git clone https://github.com/user/repo.git mylocal`,out:`Cloning into 'mylocal'...\nremote: Counting objects: 342, done.\nReceiving objects: 100% (342/342), done.`},
+{cat:"Init/Clone",flag:"git clone --depth",short:"Shallow clone",desc:"Creates a shallow clone with only the last N commits — faster for large repos.",ex:`git clone --depth 1 https://github.com/user/repo.git`,out:`Cloning into 'repo'...\nremote: Counting objects: 1, done.\nReceiving objects: 100% (1/1), 2.34 KiB | 5.0 MiB/s, done.`},
+{cat:"Init/Clone",flag:"git clone --branch",short:"Clone specific branch",desc:"Clones and checks out a specific branch or tag instead of the default branch.",ex:`git clone --branch develop https://github.com/user/repo.git`,out:`Cloning into 'repo'...\nBranch 'develop' set up to track remote branch 'develop' from 'origin'.`},
+{cat:"Init/Clone",flag:"git clone --single-branch",short:"Clone one branch only",desc:"Clones only the specified branch, skipping all other branches' history.",ex:`git clone --single-branch --branch main https://github.com/user/repo.git`,out:`Cloning into 'repo'...\n(only 'main' branch history downloaded)`},
+{cat:"Init/Clone",flag:"git clone --mirror",short:"Mirror a repository",desc:"Creates a complete mirror with all refs (branches, tags, notes). Used for backups.",ex:`git clone --mirror https://github.com/user/repo.git`,out:`Cloning into bare repository 'repo.git'...\nremote: Counting objects: 342, done.\n(All refs mirrored)`},
+{cat:"Init/Clone",flag:"git clone --recurse-submodules",short:"Clone with submodules",desc:"Automatically initializes and clones all submodules defined in the repo.",ex:`git clone --recurse-submodules https://github.com/user/repo.git`,out:`Cloning into 'repo'...\nSubmodule 'lib/external' (https://github.com/user/lib.git) registered\nCloning into '/path/repo/lib/external'...`},
+
+// ===== STAGING & SNAPSHOT =====
+{cat:"Snapshot",flag:"git status",short:"Show working tree status",desc:"Shows the state of the working directory and staging area — which files are modified, staged, or untracked.",ex:`git status`,out:`On branch main\nChanges to be committed:\n  (use "git restore --staged <file>..." to unstage)\n\tmodified:   src/app.js\n\nChanges not staged for commit:\n\tmodified:   README.md\n\nUntracked files:\n\ttodo.txt`},
+{cat:"Snapshot",flag:"git status -s",short:"Short status output",desc:"Shows a compact two-column status. First column = staging area, second = working directory.",ex:`git status -s`,out:`M  src/app.js\n M README.md\n?? todo.txt`},
+{cat:"Snapshot",flag:"git add <file>",short:"Stage a file",desc:"Adds a specific file to the staging area, ready for the next commit.",ex:`git add README.md`,out:`(no output — file added to staging area)`},
+{cat:"Snapshot",flag:"git add .",short:"Stage all changes",desc:"Stages all modified and new files in the current directory and subdirectories.",ex:`git add .`,out:`(no output — all changes staged)`},
+{cat:"Snapshot",flag:"git add -p",short:"Interactive patch staging",desc:"Interactively select which hunks (chunks) of changes to stage. Great for splitting work into clean commits.",ex:`git add -p src/app.js`,out:`diff --git a/src/app.js b/src/app.js\n@@ -12,6 +12,7 @@ function init() {\n+  console.log('started');\n Stage this hunk [y,n,q,a,d,s,?]? y`},
+{cat:"Snapshot",flag:"git add -A",short:"Stage all including deletions",desc:"Stages all changes including new files, modifications, and deletions throughout the entire repo.",ex:`git add -A`,out:`(all files staged — new, modified, and deleted)`},
+{cat:"Snapshot",flag:"git add -u",short:"Stage tracked file changes only",desc:"Stages modifications and deletions of tracked files only (no untracked new files).",ex:`git add -u`,out:`(only previously tracked files staged)`},
+{cat:"Snapshot",flag:"git add -n",short:"Dry run add",desc:"Shows what would be staged without actually staging anything.",ex:`git add -n .`,out:`add 'src/new-feature.js'\nadd 'tests/feature.test.js'`},
+{cat:"Snapshot",flag:"git commit -m",short:"Commit with message",desc:"Records staged changes as a new commit with the given message.",ex:`git commit -m "feat: add user authentication module"`,out:`[main 4f2a3b1] feat: add user authentication module\n 2 files changed, 47 insertions(+), 3 deletions(-)`},
+{cat:"Snapshot",flag:"git commit -am",short:"Stage and commit tracked files",desc:"Stages all tracked file changes and commits in one step. Does not include untracked files.",ex:`git commit -am "fix: correct typo in README"`,out:`[main 8e1c9d2] fix: correct typo in README\n 1 file changed, 1 insertion(+), 1 deletion(-)`},
+{cat:"Snapshot",flag:"git commit --amend",short:"Amend last commit",desc:"Modifies the most recent commit — change its message or add more staged files to it.",ex:`git add forgot.txt\ngit commit --amend -m "feat: add auth module (complete)"`,out:`[main 5a7f1c3] feat: add auth module (complete)\n Date: Sun Apr 12 10:00:00 2026\n 3 files changed, 52 insertions(+), 3 deletions(-)`},
+{cat:"Snapshot",flag:"git commit --amend --no-edit",short:"Amend without changing message",desc:"Adds staged changes to the previous commit without changing the commit message.",ex:`git add missed-file.js\ngit commit --amend --no-edit`,out:`[main 5a7f1c3] feat: original message (unchanged)\n 3 files changed, 55 insertions(+)`},
+{cat:"Snapshot",flag:"git commit --allow-empty",short:"Create empty commit",desc:"Creates a commit with no file changes — useful for triggering CI pipelines or marking events.",ex:`git commit --allow-empty -m "chore: trigger CI build"`,out:`[main 9b1e4d0] chore: trigger CI build`},
+{cat:"Snapshot",flag:"git commit -S",short:"Sign commit with GPG",desc:"Signs the commit with your GPG key for cryptographic verification of authorship.",ex:`git commit -S -m "release: v2.0.0"`,out:`[main a1b2c3d] release: v2.0.0\n 1 file changed, 10 insertions(+)\nGPG signature applied`},
+{cat:"Snapshot",flag:"git restore <file>",short:"Discard working dir changes",desc:"Discards changes in the working directory for the specified file, reverting to last commit state.",ex:`git restore README.md`,out:`(README.md reverted to last committed state)`},
+{cat:"Snapshot",flag:"git restore --staged <file>",short:"Unstage a file",desc:"Removes a file from the staging area but keeps its changes in the working directory.",ex:`git restore --staged src/app.js`,out:`(src/app.js unstaged — changes kept in working directory)`},
+{cat:"Snapshot",flag:"git rm <file>",short:"Remove file from repo",desc:"Deletes a file from both the working directory and stages the removal for the next commit.",ex:`git rm oldfile.txt`,out:`rm 'oldfile.txt'`},
+{cat:"Snapshot",flag:"git rm --cached <file>",short:"Untrack file (keep local)",desc:"Removes a file from Git tracking without deleting it from disk. Useful for files accidentally committed.",ex:`git rm --cached secrets.env`,out:`rm 'secrets.env'\n(file still on disk, now untracked)`},
+{cat:"Snapshot",flag:"git mv <old> <new>",short:"Rename or move a file",desc:"Renames or moves a file and stages the change, preserving Git history.",ex:`git mv old-name.js new-name.js`,out:`(file renamed — staged automatically)`},
+{cat:"Snapshot",flag:"git clean -fd",short:"Remove untracked files & dirs",desc:"Deletes untracked files and directories from the working tree. Use -n to preview first.",ex:`git clean -n   # preview\ngit clean -fd  # actually clean`,out:`Would remove build/\nWould remove temp.log\n--- (after running -fd) ---\nRemoving build/\nRemoving temp.log`},
+
+// ===== DIFF =====
+{cat:"Diff",flag:"git diff",short:"Show unstaged changes",desc:"Shows differences between the working directory and the staging area (unstaged changes).",ex:`git diff src/app.js`,out:`diff --git a/src/app.js b/src/app.js\nindex a1b2c3..d4e5f6 100644\n--- a/src/app.js\n+++ b/src/app.js\n@@ -5,7 +5,8 @@ const app = express();\n-app.listen(3000);\n+const PORT = process.env.PORT || 3000;\n+app.listen(PORT);`},
+{cat:"Diff",flag:"git diff --staged",short:"Show staged changes",desc:"Shows differences between the staging area and the last commit — what will be included in the next commit.",ex:`git diff --staged`,out:`diff --git a/README.md b/README.md\nindex c1d2e3..f4a5b6 100644\n--- a/README.md\n+++ b/README.md\n@@ -1,3 +1,4 @@\n # MyApp\n+## Installation\n+Run npm install`},
+{cat:"Diff",flag:"git diff HEAD",short:"All changes since last commit",desc:"Shows all changes (staged + unstaged) between working directory and the last commit.",ex:`git diff HEAD`,out:`(shows both staged and unstaged changes combined)`},
+{cat:"Diff",flag:"git diff <branch1>..<branch2>",short:"Diff between branches",desc:"Shows what changes exist in branch2 that are not in branch1.",ex:`git diff main..feature/auth`,out:`diff --git a/src/auth.js b/src/auth.js\nnew file mode 100644\n+++ b/src/auth.js\n+const jwt = require('jsonwebtoken');`},
+{cat:"Diff",flag:"git diff <commit1> <commit2>",short:"Diff between commits",desc:"Shows changes between two specific commits identified by their hashes.",ex:`git diff a1b2c3d 4e5f6a7`,out:`diff --git a/package.json b/package.json\n--- a/package.json\n+++ b/package.json\n-  "version": "1.0.0"\n+  "version": "1.1.0"`},
+{cat:"Diff",flag:"git diff --stat",short:"Show diff summary",desc:"Shows a short summary of changed files, lines added, and lines removed instead of full diff.",ex:`git diff --stat HEAD~3`,out:` src/app.js    | 12 ++++++------\n README.md     |  4 ++++\n package.json  |  2 +-\n 3 files changed, 12 insertions(+), 6 deletions(-)`},
+{cat:"Diff",flag:"git diff --name-only",short:"List changed filenames",desc:"Shows only filenames that differ — no content diff.",ex:`git diff --name-only HEAD`,out:`src/app.js\nREADME.md\npackage.json`},
+{cat:"Diff",flag:"git diff -w",short:"Ignore whitespace",desc:"Ignores all whitespace changes when computing the diff.",ex:`git diff -w src/app.js`,out:`(whitespace-only changes not shown)`},
+{cat:"Diff",flag:"git diff --word-diff",short:"Word-level diff",desc:"Shows changes at the word level rather than line level — cleaner for prose changes.",ex:`git diff --word-diff README.md`,out:`## About\nThis is a [-simple-]{+powerful+} tool that helps you [-track-]{+manage+} files.`},
+{cat:"Diff",flag:"git difftool",short:"Open diff in visual tool",desc:"Opens the configured external diff tool (e.g. meld, vimdiff, VS Code) for reviewing changes.",ex:`git difftool HEAD~1`,out:`(opens configured diff tool with file comparison)`},
+{cat:"Diff",flag:"git diff --check",short:"Check for whitespace errors",desc:"Warns about lines with trailing whitespace or spaces before tabs.",ex:`git diff --check`,out:`src/app.js:47: trailing whitespace.\nsrc/app.js:52: new blank line at EOF.`},
+
+// ===== BRANCHING =====
+{cat:"Branch",flag:"git branch",short:"List local branches",desc:"Lists all local branches. The current branch is highlighted with an asterisk.",ex:`git branch`,out:`  develop\n  feature/auth\n* main\n  hotfix/login-bug`},
+{cat:"Branch",flag:"git branch -a",short:"List all branches",desc:"Lists all local and remote-tracking branches.",ex:`git branch -a`,out:`* main\n  develop\n  remotes/origin/main\n  remotes/origin/develop\n  remotes/origin/feature/payment`},
+{cat:"Branch",flag:"git branch -r",short:"List remote branches",desc:"Lists only remote-tracking branches.",ex:`git branch -r`,out:`  origin/HEAD -> origin/main\n  origin/develop\n  origin/feature/auth\n  origin/main`},
+{cat:"Branch",flag:"git branch <name>",short:"Create new branch",desc:"Creates a new branch at the current HEAD commit without switching to it.",ex:`git branch feature/user-profile`,out:`(branch created — still on current branch)`},
+{cat:"Branch",flag:"git branch -d <name>",short:"Delete merged branch",desc:"Deletes a branch only if it has been merged into the current branch.",ex:`git branch -d feature/auth`,out:`Deleted branch feature/auth (was 4f2a3b1).`},
+{cat:"Branch",flag:"git branch -D <name>",short:"Force delete branch",desc:"Forcefully deletes a branch even if it hasn't been merged — use carefully.",ex:`git branch -D feature/abandoned`,out:`Deleted branch feature/abandoned (was 9c3d5e7).`},
+{cat:"Branch",flag:"git branch -m <old> <new>",short:"Rename a branch",desc:"Renames a branch locally. If on current branch, omit old name.",ex:`git branch -m feature/login feature/authentication`,out:`(branch renamed to feature/authentication)`},
+{cat:"Branch",flag:"git branch -M <new>",short:"Force rename current branch",desc:"Renames the current branch, overwriting an existing branch of that name.",ex:`git branch -M main`,out:`(current branch renamed to 'main')`},
+{cat:"Branch",flag:"git branch --merged",short:"List merged branches",desc:"Shows branches that have been fully merged into the current branch — safe to delete.",ex:`git branch --merged main`,out:`  feature/auth\n  hotfix/typo\n* main`},
+{cat:"Branch",flag:"git branch --no-merged",short:"List unmerged branches",desc:"Shows branches not yet merged — may contain work that would be lost if deleted.",ex:`git branch --no-merged`,out:`  feature/payment\n  experiment/new-algo`},
+{cat:"Branch",flag:"git branch -v",short:"Show branch with last commit",desc:"Lists branches with their latest commit hash and message.",ex:`git branch -v`,out:`  develop    8e1c9d2 fix: correct login flow\n* main       4f2a3b1 feat: add auth module\n  hotfix     a2b3c4d fix: null pointer on logout`},
+{cat:"Branch",flag:"git branch --track",short:"Create tracking branch",desc:"Creates a new local branch that tracks a remote branch.",ex:`git branch --track feature/api origin/feature/api`,out:`Branch 'feature/api' set up to track remote branch 'feature/api' from 'origin'.`},
+{cat:"Branch",flag:"git switch <branch>",short:"Switch branches (modern)",desc:"Modern syntax for switching branches. Safer than checkout — only switches branches, not files.",ex:`git switch develop`,out:`Switched to branch 'develop'\nYour branch is up to date with 'origin/develop'.`},
+{cat:"Branch",flag:"git switch -c <branch>",short:"Create and switch branch",desc:"Creates a new branch and immediately switches to it.",ex:`git switch -c feature/payment`,out:`Switched to a new branch 'feature/payment'`},
+{cat:"Branch",flag:"git switch -",short:"Switch to previous branch",desc:"Switches back to the previously checked out branch (like cd -).",ex:`git switch -`,out:`Switched to branch 'main'\nYour branch is up to date with 'origin/main'.`},
+{cat:"Branch",flag:"git checkout <branch>",short:"Checkout branch (classic)",desc:"The classic way to switch branches. Also works for checking out files and commits.",ex:`git checkout develop`,out:`Switched to branch 'develop'\nYour branch is up to date with 'origin/develop'.`},
+{cat:"Branch",flag:"git checkout -b <branch>",short:"Create and checkout branch",desc:"Creates and switches to a new branch in one command.",ex:`git checkout -b feature/dark-mode`,out:`Switched to a new branch 'feature/dark-mode'`},
+{cat:"Branch",flag:"git checkout -b <branch> <remote>/<branch>",short:"Track remote branch locally",desc:"Creates a local branch that tracks a specific remote branch.",ex:`git checkout -b release origin/release`,out:`Branch 'release' set up to track remote branch 'release' from 'origin'.\nSwitched to a new branch 'release'`},
+{cat:"Branch",flag:"git checkout --orphan <name>",short:"Create orphan branch",desc:"Creates a new branch with no commit history — useful for GitHub Pages or fresh starts.",ex:`git checkout --orphan gh-pages`,out:`Switched to a new branch 'gh-pages'\n(no previous commits — clean slate)`},
+
+// ===== MERGE =====
+{cat:"Merge",flag:"git merge <branch>",short:"Merge a branch",desc:"Merges the specified branch into the current branch. Creates a merge commit if needed.",ex:`git switch main\ngit merge feature/auth`,out:`Updating 4f2a3b1..8e1c9d2\nFast-forward\n src/auth.js | 47 +++++++++++++++++\n 1 file changed, 47 insertions(+)`},
+{cat:"Merge",flag:"git merge --no-ff",short:"Merge with merge commit",desc:"Creates a merge commit even when fast-forward is possible — preserves branch history.",ex:`git merge --no-ff feature/payment`,out:`Merge made by the 'ort' strategy.\n src/payment.js | 82 ++++++++++++++++\n 1 file changed, 82 insertions(+)`},
+{cat:"Merge",flag:"git merge --ff-only",short:"Fast-forward only merge",desc:"Merges only if fast-forward is possible — aborts if a merge commit would be required.",ex:`git merge --ff-only origin/main`,out:`Updating 4f2a3b1..8e1c9d2\nFast-forward\n README.md | 2 +-\n 1 file changed, 1 insertion(+), 1 deletion(-)`},
+{cat:"Merge",flag:"git merge --squash",short:"Squash merge",desc:"Squashes all commits from the branch into a single set of changes ready to commit.",ex:`git merge --squash feature/experiments`,out:`Squash commit -- not updating HEAD\n(all changes staged, waiting for your commit)`},
+{cat:"Merge",flag:"git merge --abort",short:"Abort a merge",desc:"Cancels an in-progress merge and restores the state before the merge started.",ex:`git merge --abort`,out:`(merge cancelled, returned to pre-merge state)`},
+{cat:"Merge",flag:"git merge -Xours",short:"Prefer current branch on conflict",desc:"Auto-resolves conflicts by always preferring the current branch's version.",ex:`git merge -Xours feature/conflicting`,out:`Auto-merging src/config.js\nMerge made by the 'ort' strategy.\n (conflicts resolved by taking 'ours')`},
+{cat:"Merge",flag:"git merge -Xtheirs",short:"Prefer merged branch on conflict",desc:"Auto-resolves conflicts by always preferring the incoming branch's version.",ex:`git merge -Xtheirs origin/main`,out:`Auto-merging src/config.js\nMerge made by the 'ort' strategy.\n (conflicts resolved by taking 'theirs')`},
+{cat:"Merge",flag:"git mergetool",short:"Open merge conflict tool",desc:"Launches the configured visual merge tool for resolving conflicts interactively.",ex:`git mergetool`,out:`Merging:\nsrc/config.js\n\nNormal merge conflict for 'src/config.js':\n  {local}: modified file\n  {remote}: modified file\n(opens vimdiff/meld/etc.)`},
+
+// ===== REMOTE =====
+{cat:"Remote",flag:"git remote -v",short:"List remotes with URLs",desc:"Shows all configured remote connections with their fetch and push URLs.",ex:`git remote -v`,out:`origin  https://github.com/user/repo.git (fetch)\norigin  https://github.com/user/repo.git (push)\nupstream  https://github.com/original/repo.git (fetch)\nupstream  https://github.com/original/repo.git (push)`},
+{cat:"Remote",flag:"git remote add <name> <url>",short:"Add a remote",desc:"Adds a new remote connection pointing to the given URL.",ex:`git remote add origin https://github.com/user/repo.git`,out:`(no output — remote 'origin' added)`},
+{cat:"Remote",flag:"git remote remove <name>",short:"Remove a remote",desc:"Removes the named remote connection from the repository configuration.",ex:`git remote remove upstream`,out:`(upstream remote removed)`},
+{cat:"Remote",flag:"git remote rename <old> <new>",short:"Rename a remote",desc:"Renames a remote connection.",ex:`git remote rename origin github`,out:`Renaming remote references: done.`},
+{cat:"Remote",flag:"git remote set-url <name> <url>",short:"Change remote URL",desc:"Updates the URL for an existing remote — useful when switching from HTTPS to SSH.",ex:`git remote set-url origin git@github.com:user/repo.git`,out:`(origin URL updated to SSH)`},
+{cat:"Remote",flag:"git remote show <name>",short:"Show remote info",desc:"Shows detailed information about a remote including tracked branches and fetch/push configuration.",ex:`git remote show origin`,out:`* remote origin\n  Fetch URL: https://github.com/user/repo.git\n  Push  URL: https://github.com/user/repo.git\n  HEAD branch: main\n  Remote branches:\n    develop tracked\n    main    tracked\n  Local branch configured for 'git pull':\n    main merges with remote main`},
+{cat:"Remote",flag:"git remote prune <name>",short:"Prune stale remote refs",desc:"Removes remote-tracking branches that no longer exist on the remote server.",ex:`git remote prune origin`,out:`Pruning origin\nURL: https://github.com/user/repo.git\n * [pruned] origin/feature/old-login`},
+{cat:"Remote",flag:"git remote get-url <name>",short:"Show remote URL",desc:"Prints the URL for the specified remote.",ex:`git remote get-url origin`,out:`https://github.com/user/repo.git`},
+
+// ===== FETCH & PULL =====
+{cat:"Fetch/Pull",flag:"git fetch",short:"Fetch all remotes",desc:"Downloads changes from all remotes without merging. Updates remote-tracking branches.",ex:`git fetch`,out:`remote: Enumerating objects: 5, done.\nremote: Counting objects: 100% (5/5), done.\nFrom https://github.com/user/repo\n   4f2a3b1..8e1c9d2  main       -> origin/main`},
+{cat:"Fetch/Pull",flag:"git fetch <remote>",short:"Fetch from specific remote",desc:"Fetches from a specific remote repository only.",ex:`git fetch origin`,out:`From https://github.com/user/repo\n   4f2a3b1..8e1c9d2  main       -> origin/main\n * [new branch]      feature/x  -> origin/feature/x`},
+{cat:"Fetch/Pull",flag:"git fetch --all",short:"Fetch all remotes",desc:"Fetches from all configured remotes at once.",ex:`git fetch --all`,out:`Fetching origin\nFetching upstream\nFrom https://github.com/original/repo\n   3d4e5f6..7g8h9i0  main -> upstream/main`},
+{cat:"Fetch/Pull",flag:"git fetch --prune",short:"Fetch and prune stale refs",desc:"Fetches updates and removes any remote-tracking branches that no longer exist on the server.",ex:`git fetch --prune`,out:`From https://github.com/user/repo\n - [deleted]         (none)     -> origin/feature/old\n   4f2a3b1..8e1c9d2  main       -> origin/main`},
+{cat:"Fetch/Pull",flag:"git fetch --tags",short:"Fetch all tags",desc:"Fetches all tags from the remote repository.",ex:`git fetch --tags`,out:`From https://github.com/user/repo\n * [new tag]         v1.0.0     -> v1.0.0\n * [new tag]         v1.1.0     -> v1.1.0`},
+{cat:"Fetch/Pull",flag:"git pull",short:"Fetch and merge",desc:"Fetches from the tracked remote and merges changes into the current branch.",ex:`git pull`,out:`remote: Enumerating objects: 5, done.\nUpdating 4f2a3b1..8e1c9d2\nFast-forward\n src/app.js | 3 ++-\n 1 file changed, 2 insertions(+), 1 deletion(-)`},
+{cat:"Fetch/Pull",flag:"git pull --rebase",short:"Pull with rebase",desc:"Fetches and replays local commits on top of the remote branch instead of merging.",ex:`git pull --rebase origin main`,out:`remote: Counting objects: 5, done.\nFirst, rewinding head to replay your work on top of it...\nApplying: feat: add dark mode toggle`},
+{cat:"Fetch/Pull",flag:"git pull --ff-only",short:"Pull fast-forward only",desc:"Pulls only if a fast-forward is possible — aborts if diverged.",ex:`git pull --ff-only`,out:`Updating 4f2a3b1..8e1c9d2\nFast-forward\n README.md | 2 +-`},
+{cat:"Fetch/Pull",flag:"git pull --no-commit",short:"Pull without auto-commit",desc:"Merges changes but stops before creating the merge commit, letting you review first.",ex:`git pull --no-commit origin main`,out:`Automatic merge went well; stopped before committing as requested`},
+{cat:"Fetch/Pull",flag:"git pull -v",short:"Pull verbose",desc:"Verbose pull — shows exactly what is being fetched and merged.",ex:`git pull -v`,out:`POST git-upload-pack\n* branch            main       -> FETCH_HEAD\n  4f2a3b1..8e1c9d2  main       -> origin/main\nUpdating 4f2a3b1..8e1c9d2`},
+
+// ===== PUSH =====
+{cat:"Push",flag:"git push",short:"Push to remote",desc:"Pushes committed changes on current branch to the tracked remote branch.",ex:`git push`,out:`Enumerating objects: 5, done.\nCounting objects: 100% (5/5), done.\nTo https://github.com/user/repo.git\n   4f2a3b1..8e1c9d2  main -> main`},
+{cat:"Push",flag:"git push -u origin <branch>",short:"Push and set upstream",desc:"Pushes the branch and sets the upstream tracking link, so future pushes need only 'git push'.",ex:`git push -u origin feature/auth`,out:`Enumerating objects: 5, done.\nTo https://github.com/user/repo.git\n * [new branch]      feature/auth -> feature/auth\nBranch 'feature/auth' set up to track remote branch 'feature/auth' from 'origin'.`},
+{cat:"Push",flag:"git push --force",short:"Force push (overwrite remote)",desc:"Overwrites remote history with local. Dangerous on shared branches — can destroy others' work.",ex:`git push --force origin feature/auth`,out:`To https://github.com/user/repo.git\n + 4f2a3b1...8e1c9d2 feature/auth -> feature/auth (forced update)`},
+{cat:"Push",flag:"git push --force-with-lease",short:"Safe force push",desc:"Force pushes only if no one else has pushed since you last fetched — safer than --force.",ex:`git push --force-with-lease`,out:`To https://github.com/user/repo.git\n + 4f2a3b1...8e1c9d2 main -> main (forced update)`},
+{cat:"Push",flag:"git push origin --delete <branch>",short:"Delete remote branch",desc:"Deletes a branch on the remote repository.",ex:`git push origin --delete feature/auth`,out:`To https://github.com/user/repo.git\n - [deleted]         feature/auth`},
+{cat:"Push",flag:"git push --tags",short:"Push all tags",desc:"Pushes all local tags to the remote repository.",ex:`git push --tags`,out:`To https://github.com/user/repo.git\n * [new tag]         v1.0.0 -> v1.0.0\n * [new tag]         v1.1.0 -> v1.1.0`},
+{cat:"Push",flag:"git push origin <tag>",short:"Push a specific tag",desc:"Pushes a single named tag to the remote.",ex:`git push origin v2.0.0`,out:`To https://github.com/user/repo.git\n * [new tag]         v2.0.0 -> v2.0.0`},
+{cat:"Push",flag:"git push --all",short:"Push all branches",desc:"Pushes all local branches to the remote.",ex:`git push --all origin`,out:`To https://github.com/user/repo.git\n * [new branch]      develop -> develop\n * [new branch]      feature/x -> feature/x\n   4f2a3b1..8e1c9d2  main -> main`},
+{cat:"Push",flag:"git push --dry-run",short:"Simulate a push",desc:"Shows what would happen during a push without actually sending anything.",ex:`git push --dry-run origin main`,out:`To https://github.com/user/repo.git\n   4f2a3b1..8e1c9d2  main -> main\n(dry run — nothing actually pushed)`},
+
+// ===== LOG & INSPECTION =====
+{cat:"Log",flag:"git log",short:"Show commit history",desc:"Displays the commit history for the current branch, showing hash, author, date, and message.",ex:`git log`,out:`commit 8e1c9d2b4f5a6c7d8e9f0a1b2c3d4e5f6a7b8c9\nAuthor: Jane Doe <jane@example.com>\nDate:   Sun Apr 12 10:00:00 2026 +0530\n\n    feat: add authentication module\n\ncommit 4f2a3b1c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3\nAuthor: Jane Doe <jane@example.com>\nDate:   Sat Apr 11 09:00:00 2026 +0530\n\n    init: project setup`},
+{cat:"Log",flag:"git log --oneline",short:"One line per commit",desc:"Shows a compact view with just the short hash and commit message.",ex:`git log --oneline`,out:`8e1c9d2 feat: add authentication module\n4f2a3b1 init: project setup\na1b2c3d chore: add .gitignore`},
+{cat:"Log",flag:"git log --oneline --graph --all",short:"Visual branch graph",desc:"Displays an ASCII graph of branch and merge history for all branches — great for understanding history.",ex:`git log --oneline --graph --all`,out:`* 8e1c9d2 (HEAD -> main) feat: add auth\n| * 4a5b6c7 (feature/payment) feat: add payment\n|/\n* 4f2a3b1 init: project setup`},
+{cat:"Log",flag:"git log -n <number>",short:"Show last N commits",desc:"Limits the log to the last N commits.",ex:`git log -n 5 --oneline`,out:`8e1c9d2 feat: add auth\n4f2a3b1 init: project setup\na1b2c3d chore: add .gitignore\nb2c3d4e fix: typo\nc3d4e5f feat: homepage`},
+{cat:"Log",flag:"git log --author",short:"Filter by author",desc:"Shows only commits made by the specified author.",ex:`git log --author="Jane" --oneline`,out:`8e1c9d2 feat: add auth\n4f2a3b1 init: project setup\na1b2c3d chore: add .gitignore`},
+{cat:"Log",flag:"git log --since / --after",short:"Filter by date (from)",desc:"Shows commits after the given date.",ex:`git log --since="2026-01-01" --oneline`,out:`8e1c9d2 feat: add auth\n4f2a3b1 init: project setup`},
+{cat:"Log",flag:"git log --until / --before",short:"Filter by date (to)",desc:"Shows commits before the given date.",ex:`git log --until="2026-04-01" --oneline`,out:`a1b2c3d chore: add .gitignore\nb2c3d4e fix: typo`},
+{cat:"Log",flag:"git log --grep",short:"Search commit messages",desc:"Filters commits whose messages match the given pattern.",ex:`git log --grep="auth" --oneline`,out:`8e1c9d2 feat: add authentication module\n2f3a4b5 fix: authentication token expiry`},
+{cat:"Log",flag:"git log -S <string>",short:"Pickaxe search (content change)",desc:"Shows commits that added or removed lines containing the given string — the 'pickaxe' search.",ex:`git log -S "jwt.verify" --oneline`,out:`8e1c9d2 feat: add authentication module\n3b4c5d6 fix: verify JWT before decode`},
+{cat:"Log",flag:"git log -p",short:"Show patches with log",desc:"Shows the full diff (patch) for each commit in the log.",ex:`git log -p -1`,out:`commit 8e1c9d2...\nAuthor: Jane Doe\n\n    feat: add auth\n\ndiff --git a/src/auth.js b/src/auth.js\n+++ b/src/auth.js\n+const jwt = require('jsonwebtoken');`},
+{cat:"Log",flag:"git log --stat",short:"Show file change stats",desc:"Shows which files were changed and how many lines were added/removed per commit.",ex:`git log --stat -1`,out:`commit 8e1c9d2...\n    feat: add auth\n\n src/auth.js  | 47 +++++++++++++++++\n package.json |  2 +-\n 2 files changed, 48 insertions(+), 1 deletion(-)`},
+{cat:"Log",flag:"git log --format",short:"Custom log format",desc:"Formats log output using custom placeholders like %H (full hash), %s (subject), %an (author name).",ex:`git log --format="%h | %an | %ar | %s" -5`,out:`8e1c9d2 | Jane Doe | 2 hours ago | feat: add auth\n4f2a3b1 | Jane Doe | 1 day ago | init: project setup`},
+{cat:"Log",flag:"git log <file>",short:"Log for specific file",desc:"Shows commit history for a specific file, including renames.",ex:`git log --oneline src/auth.js`,out:`8e1c9d2 feat: add auth module\n3a4b5c6 refactor: split auth into services`},
+{cat:"Log",flag:"git log --follow <file>",short:"Follow file renames in log",desc:"Tracks a file's history through renames.",ex:`git log --follow --oneline src/auth.js`,out:`8e1c9d2 feat: add auth module\n3a4b5c6 refactor: split auth into services\n1a2b3c4 chore: rename login.js to auth.js`},
+{cat:"Log",flag:"git show <commit>",short:"Show commit details",desc:"Shows the metadata and diff for a specific commit.",ex:`git show 8e1c9d2`,out:`commit 8e1c9d2...\nAuthor: Jane Doe <jane@example.com>\nDate:   Sun Apr 12 10:00:00 2026\n\n    feat: add auth\n\ndiff --git a/src/auth.js b/src/auth.js\n+++ b/src/auth.js\n+const jwt = require('jsonwebtoken');`},
+{cat:"Log",flag:"git show --name-only",short:"Show commit file names only",desc:"Shows only the file names that were changed in the commit.",ex:`git show --name-only 8e1c9d2`,out:`commit 8e1c9d2...\n    feat: add auth\n\nsrc/auth.js\npackage.json`},
+{cat:"Log",flag:"git shortlog",short:"Summarize log by author",desc:"Groups commits by author with counts — useful for contribution summaries.",ex:`git shortlog -sn`,out:`    48  Jane Doe\n    31  John Smith\n    12  Alice Johnson`},
+{cat:"Log",flag:"git blame <file>",short:"Show who changed each line",desc:"Annotates each line of a file with the commit hash, author, and date of the last change.",ex:`git blame src/auth.js`,out:`8e1c9d2 (Jane Doe  2026-04-12 10:00) const jwt = require('jsonwebtoken');\n3a4b5c6 (John Smith 2026-03-15 09:30) const bcrypt = require('bcryptjs');`},
+{cat:"Log",flag:"git blame -L",short:"Blame specific line range",desc:"Shows blame for a specific range of lines.",ex:`git blame -L 10,20 src/auth.js`,out:`8e1c9d2 (Jane 2026-04-12) 10) const verify = (token) => {\n8e1c9d2 (Jane 2026-04-12) 11)   return jwt.verify(token, secret);\n8e1c9d2 (Jane 2026-04-12) 12) };`},
+
+// ===== TAGGING =====
+{cat:"Tag",flag:"git tag",short:"List all tags",desc:"Lists all tags in the repository in alphabetical order.",ex:`git tag`,out:`v1.0.0\nv1.1.0\nv1.2.0\nv2.0.0-rc.1`},
+{cat:"Tag",flag:"git tag <name>",short:"Create lightweight tag",desc:"Creates a lightweight tag at the current commit — just a pointer, no extra metadata.",ex:`git tag v1.0.0`,out:`(tag v1.0.0 created at current commit)`},
+{cat:"Tag",flag:"git tag -a <name> -m",short:"Create annotated tag",desc:"Creates an annotated tag with a message, tagger info, and timestamp — recommended for releases.",ex:`git tag -a v2.0.0 -m "Release version 2.0.0"`,out:`(annotated tag v2.0.0 created)`},
+{cat:"Tag",flag:"git tag -a <name> <commit>",short:"Tag a past commit",desc:"Creates an annotated tag on a specific past commit.",ex:`git tag -a v1.0.0 -m "Initial release" 4f2a3b1`,out:`(tag v1.0.0 created at commit 4f2a3b1)`},
+{cat:"Tag",flag:"git tag -d <name>",short:"Delete local tag",desc:"Deletes a local tag by name.",ex:`git tag -d v1.0.0-rc`,out:`Deleted tag 'v1.0.0-rc' (was 4f2a3b1)`},
+{cat:"Tag",flag:"git tag -l <pattern>",short:"List matching tags",desc:"Lists tags matching a wildcard pattern.",ex:`git tag -l "v2.*"`,out:`v2.0.0\nv2.0.1\nv2.1.0`},
+{cat:"Tag",flag:"git show <tag>",short:"Show tag details",desc:"Shows the tag metadata and the commit it points to.",ex:`git show v2.0.0`,out:`tag v2.0.0\nTagger: Jane Doe <jane@example.com>\nDate:   Sun Apr 12 10:00:00 2026\n\nRelease version 2.0.0\n\ncommit 8e1c9d2...`},
+{cat:"Tag",flag:"git push origin --delete <tag>",short:"Delete remote tag",desc:"Deletes a tag on the remote server.",ex:`git push origin --delete v1.0.0-rc`,out:`To https://github.com/user/repo.git\n - [deleted]         v1.0.0-rc`},
+{cat:"Tag",flag:"git describe",short:"Describe commit using tags",desc:"Describes a commit using the nearest reachable tag, useful for versioning build artifacts.",ex:`git describe --tags`,out:`v2.0.0-3-g8e1c9d2\n(3 commits after v2.0.0, at commit 8e1c9d2)`},
+
+// ===== STASH =====
+{cat:"Stash",flag:"git stash",short:"Stash working changes",desc:"Saves uncommitted changes (staged and unstaged) onto a temporary stack, cleaning the working directory.",ex:`git stash`,out:`Saved working directory and index state WIP on main: 4f2a3b1 feat: add auth`},
+{cat:"Stash",flag:"git stash push -m",short:"Stash with description",desc:"Creates a named stash with a message for easier identification later.",ex:`git stash push -m "WIP: dark mode CSS"`,out:`Saved working directory and index state On main: WIP: dark mode CSS`},
+{cat:"Stash",flag:"git stash list",short:"List all stashes",desc:"Shows all stashes with their index, branch, and description.",ex:`git stash list`,out:`stash@{0}: On main: WIP: dark mode CSS\nstash@{1}: WIP on main: 4f2a3b1 feat: add auth\nstash@{2}: On develop: experimental changes`},
+{cat:"Stash",flag:"git stash pop",short:"Apply and remove stash",desc:"Applies the most recent stash and removes it from the stash list.",ex:`git stash pop`,out:`On branch main\nChanges not staged for commit:\n  modified: src/app.css\nDropped stash@{0} (5a7c3d2...)`},
+{cat:"Stash",flag:"git stash apply",short:"Apply stash (keep it)",desc:"Applies the most recent stash without removing it from the stash list.",ex:`git stash apply stash@{1}`,out:`On branch main\nChanges not staged for commit:\n  modified: src/app.css\n(stash retained in list)`},
+{cat:"Stash",flag:"git stash drop",short:"Delete a stash",desc:"Removes a specific stash from the stash list without applying it.",ex:`git stash drop stash@{2}`,out:`Dropped stash@{2} (3b4c5d6...)`},
+{cat:"Stash",flag:"git stash clear",short:"Remove all stashes",desc:"Deletes all stashes from the stash list.",ex:`git stash clear`,out:`(all stashes removed)`},
+{cat:"Stash",flag:"git stash show",short:"Show stash changes",desc:"Shows a summary of the file changes in the latest stash.",ex:`git stash show -p stash@{0}`,out:`diff --git a/src/app.css b/src/app.css\n--- a/src/app.css\n+++ b/src/app.css\n+.dark-mode { background: #1a1a1a; }`},
+{cat:"Stash",flag:"git stash branch <name>",short:"Create branch from stash",desc:"Creates a new branch from the commit at which the stash was made, and applies the stash.",ex:`git stash branch feature/dark-mode stash@{0}`,out:`Switched to a new branch 'feature/dark-mode'\nOn branch feature/dark-mode\nChanges not staged for commit:\n  modified: src/app.css\nDropped stash@{0}`},
+{cat:"Stash",flag:"git stash --include-untracked",short:"Stash including new files",desc:"Stashes untracked (new) files along with tracked changes.",ex:`git stash --include-untracked`,out:`Saved working directory and index state WIP on main: 4f2a3b1\n(includes new untracked files)`},
+{cat:"Stash",flag:"git stash --patch",short:"Interactive stash selection",desc:"Interactively selects which hunks to stash, similar to git add -p.",ex:`git stash --patch`,out:`diff --git a/src/app.js...\n@@ -5,3 +5,4 @@\nStash this hunk [y,n,q,a,d,?]? y`},
+
+// ===== UNDO & RESET =====
+{cat:"Undo",flag:"git reset HEAD~1",short:"Undo last commit (keep changes)",desc:"Moves the branch pointer back one commit. Changes from the commit are kept in the working directory.",ex:`git reset HEAD~1`,out:`Unstaged changes after reset:\nM src/auth.js`},
+{cat:"Undo",flag:"git reset --soft HEAD~1",short:"Undo last commit (staged)",desc:"Undoes the last commit and keeps changes staged — ready to re-commit.",ex:`git reset --soft HEAD~1`,out:`(last commit undone, all changes are staged)`},
+{cat:"Undo",flag:"git reset --hard HEAD~1",short:"Undo last commit (discard all)",desc:"Completely removes the last commit and ALL changes — destructive and irreversible without reflog.",ex:`git reset --hard HEAD~1`,out:`HEAD is now at 4f2a3b1 feat: add auth`},
+{cat:"Undo",flag:"git reset --hard origin/main",short:"Reset to match remote",desc:"Discards all local commits and changes, resetting to match the remote branch exactly.",ex:`git reset --hard origin/main`,out:`HEAD is now at 8e1c9d2 feat: latest remote commit`},
+{cat:"Undo",flag:"git revert <commit>",short:"Revert a commit (safe)",desc:"Creates a new commit that reverses the changes from the specified commit. Safe for shared history.",ex:`git revert 8e1c9d2`,out:`[main 9f0a1b2] Revert "feat: add auth"\n 2 files changed, 47 deletions(-)`},
+{cat:"Undo",flag:"git revert --no-commit",short:"Revert without committing",desc:"Reverts the changes into the working directory/staging area without creating a commit.",ex:`git revert --no-commit 8e1c9d2`,out:`(reverted changes staged, ready for custom commit)`},
+{cat:"Undo",flag:"git revert HEAD",short:"Revert last commit",desc:"Creates a new commit that undoes the most recent commit.",ex:`git revert HEAD`,out:`[main a1b2c3d] Revert "feat: add auth"\n 2 files changed, 47 deletions(-)`},
+{cat:"Undo",flag:"git reflog",short:"Show history of HEAD changes",desc:"Shows a log of all HEAD movements — the safety net for recovering 'lost' commits.",ex:`git reflog`,out:`8e1c9d2 (HEAD -> main) HEAD@{0}: commit: feat: add auth\n4f2a3b1 HEAD@{1}: reset: moving to HEAD~1\na1b2c3d HEAD@{2}: commit: init: project setup`},
+{cat:"Undo",flag:"git reflog expire",short:"Expire old reflog entries",desc:"Removes old reflog entries older than the specified time. Default expiry is 90 days.",ex:`git reflog expire --expire=30.days refs/heads/main`,out:`(reflog entries older than 30 days expired)`},
+{cat:"Undo",flag:"git checkout -- <file>",short:"Discard file changes (classic)",desc:"Classic syntax for discarding working directory changes for a file. Replaced by git restore in modern Git.",ex:`git checkout -- src/app.js`,out:`(src/app.js reverted to last committed state)`},
+{cat:"Undo",flag:"git reset HEAD <file>",short:"Unstage file (classic)",desc:"Removes a file from the staging area (classic syntax). Replaced by git restore --staged in modern Git.",ex:`git reset HEAD src/app.js`,out:`Unstaged changes after reset:\nM src/app.js`},
+
+// ===== REBASE =====
+{cat:"Rebase",flag:"git rebase <branch>",short:"Rebase onto a branch",desc:"Replays current branch commits on top of the specified branch, creating a linear history.",ex:`git switch feature/auth\ngit rebase main`,out:`First, rewinding head to replay your work on top of it...\nApplying: feat: add JWT authentication\nApplying: feat: add auth middleware`},
+{cat:"Rebase",flag:"git rebase -i HEAD~<n>",short:"Interactive rebase",desc:"Opens an interactive editor to squash, reword, reorder, edit, or drop the last N commits.",ex:`git rebase -i HEAD~3`,out:`pick 8e1c9d2 feat: add auth\npick 4f2a3b1 fix: token expiry\npick a1b2c3d chore: cleanup\n\n# Commands: p=pick, r=reword, e=edit, s=squash, d=drop`},
+{cat:"Rebase",flag:"git rebase --onto",short:"Rebase onto different base",desc:"Moves a range of commits from one base to another — very precise branch surgery.",ex:`git rebase --onto main server client`,out:`First, rewinding head...\nApplying: feat: client-specific changes\n(rebased client commits onto main, skipping server commits)`},
+{cat:"Rebase",flag:"git rebase --continue",short:"Continue after conflict",desc:"Continues the rebase operation after you have resolved a merge conflict.",ex:`# after resolving conflicts:\ngit add src/auth.js\ngit rebase --continue`,out:`Applying: feat: add JWT authentication\n(rebase continues with next commit)`},
+{cat:"Rebase",flag:"git rebase --abort",short:"Abort rebase",desc:"Cancels the rebase operation and returns the branch to its original state.",ex:`git rebase --abort`,out:`(rebase aborted, HEAD returned to original position)`},
+{cat:"Rebase",flag:"git rebase --skip",short:"Skip a commit in rebase",desc:"Skips the current commit that is causing conflicts during a rebase.",ex:`git rebase --skip`,out:`Applying: feat: next commit after skipped one`},
+{cat:"Rebase",flag:"git rebase -x <cmd>",short:"Run command after each commit",desc:"Runs the specified shell command after each rebased commit — useful for running tests.",ex:`git rebase -i HEAD~5 -x "npm test"`,out:`Applying: feat: add auth\nExecuting: npm test\n(tests pass)\nApplying: fix: token expiry\nExecuting: npm test\n(tests pass)`},
+{cat:"Rebase",flag:"git rebase --autosquash",short:"Auto-apply squash! fixup! commits",desc:"Automatically rearranges commits starting with 'squash!' or 'fixup!' to be applied to the right commit.",ex:`git commit -m "fixup! feat: add auth"\ngit rebase -i --autosquash HEAD~4`,out:`(fixup! commit auto-placed and applied to feat: add auth)`},
+
+// ===== CHERRY-PICK =====
+{cat:"Cherry-pick",flag:"git cherry-pick <commit>",short:"Apply a single commit",desc:"Applies the changes from a specific commit onto the current branch as a new commit.",ex:`git cherry-pick 8e1c9d2`,out:`[main a1b2c3d] feat: add auth\n Date: Sun Apr 12 10:00:00 2026\n 2 files changed, 47 insertions(+)`},
+{cat:"Cherry-pick",flag:"git cherry-pick <c1>..<c2>",short:"Cherry-pick a range",desc:"Applies a range of commits (from c1, exclusive, to c2, inclusive) to the current branch.",ex:`git cherry-pick 4f2a3b1..8e1c9d2`,out:`[main a1b2c3] feat: payment flow\n[main b2c3d4] fix: validation bug\n[main c3d4e5] chore: tests`},
+{cat:"Cherry-pick",flag:"git cherry-pick -n",short:"Cherry-pick without committing",desc:"Applies changes from a commit to the working directory without creating a commit.",ex:`git cherry-pick -n 8e1c9d2`,out:`(changes applied to staging area — no commit made)`},
+{cat:"Cherry-pick",flag:"git cherry-pick --continue",short:"Continue cherry-pick",desc:"Continues a cherry-pick that was paused due to a conflict.",ex:`git add src/auth.js\ngit cherry-pick --continue`,out:`[main 9a8b7c6] feat: add auth (cherry-picked)\n 2 files changed, 47 insertions(+)`},
+{cat:"Cherry-pick",flag:"git cherry-pick --abort",short:"Abort cherry-pick",desc:"Cancels an in-progress cherry-pick and restores the branch to its prior state.",ex:`git cherry-pick --abort`,out:`(cherry-pick cancelled, branch restored)`},
+{cat:"Cherry-pick",flag:"git cherry-pick -e",short:"Edit commit message on pick",desc:"Opens the editor to let you change the commit message of the cherry-picked commit.",ex:`git cherry-pick -e 8e1c9d2`,out:`(editor opens — you can change the commit message)`},
+
+// ===== BISECT =====
+{cat:"Bisect",flag:"git bisect start",short:"Start bisect session",desc:"Begins a binary search through commit history to find the commit that introduced a bug.",ex:`git bisect start`,out:`(bisect session started)`},
+{cat:"Bisect",flag:"git bisect bad",short:"Mark commit as bad",desc:"Marks the current commit as 'bad' (contains the bug). Usually called first with HEAD.",ex:`git bisect bad HEAD`,out:`(current commit marked as bad)`},
+{cat:"Bisect",flag:"git bisect good <commit>",short:"Mark commit as good",desc:"Marks a known-good commit. Git then checks out the midpoint for testing.",ex:`git bisect good v1.0.0`,out:`Bisecting: 12 revisions left to test after this (roughly 4 steps)\n[8e1c9d2] feat: add payment module`},
+{cat:"Bisect",flag:"git bisect reset",short:"End bisect session",desc:"Ends the bisect session and returns to the original branch/commit.",ex:`git bisect reset`,out:`Previous HEAD position was 4f2a3b1 feat: add payment\nSwitched to branch 'main'`},
+{cat:"Bisect",flag:"git bisect run <script>",short:"Automate bisect",desc:"Runs a script for each commit to automatically determine good/bad — fully automated bug hunting.",ex:`git bisect run npm test`,out:`running npm test\n...\n8e1c9d2 is the first bad commit\n(bisect complete — bug introduced at 8e1c9d2)`},
+{cat:"Bisect",flag:"git bisect log",short:"Show bisect log",desc:"Displays the sequence of bisect steps taken so far.",ex:`git bisect log`,out:`# good: [4f2a3b1] v1.0.0\ngit bisect good 4f2a3b1\n# bad: [8e1c9d2] feat: add payment\ngit bisect bad 8e1c9d2`},
+{cat:"Bisect",flag:"git bisect skip",short:"Skip untestable commit",desc:"Marks the current commit as untestable and moves to the next one.",ex:`git bisect skip`,out:`Bisecting: 11 revisions left to test after this (roughly 4 steps)\n[7d8e9f0] another commit to test`},
+
+// ===== SUBMODULES =====
+{cat:"Submodule",flag:"git submodule add <url>",short:"Add a submodule",desc:"Adds an external repository as a submodule at the given path.",ex:`git submodule add https://github.com/org/lib.git libs/lib`,out:`Cloning into 'libs/lib'...\nremote: Counting objects: 234, done.\n(creates .gitmodules entry)`},
+{cat:"Submodule",flag:"git submodule init",short:"Initialize submodules",desc:"Registers submodules defined in .gitmodules into .git/config (local configuration).",ex:`git submodule init`,out:`Submodule 'libs/lib' (https://github.com/org/lib.git) registered for path 'libs/lib'`},
+{cat:"Submodule",flag:"git submodule update",short:"Update submodules",desc:"Checks out the pinned commit for each submodule as recorded in the parent repo.",ex:`git submodule update`,out:`Submodule path 'libs/lib': checked out 'a1b2c3d4e5f6a7b8'`},
+{cat:"Submodule",flag:"git submodule update --init",short:"Init and update submodules",desc:"Combines initialization and checkout in one command — use when first cloning a repo with submodules.",ex:`git submodule update --init --recursive`,out:`Submodule 'libs/lib' (https://github.com/org/lib.git) registered\nSubmodule path 'libs/lib': checked out 'a1b2c3d4'`},
+{cat:"Submodule",flag:"git submodule update --remote",short:"Update submodules to latest",desc:"Updates each submodule to the latest commit on its tracked branch (not just the pinned commit).",ex:`git submodule update --remote --merge`,out:`Submodule path 'libs/lib': merged in 'a1b2c3d4' (latest remote)`},
+{cat:"Submodule",flag:"git submodule status",short:"Show submodule status",desc:"Shows the current commit each submodule is checked out at.",ex:`git submodule status`,out:` a1b2c3d4e5f6a7b8 libs/lib (v1.2.0)\n+ f6a7b8c9d0e1f2a3 libs/utils (v2.0.1-dirty)`},
+{cat:"Submodule",flag:"git submodule foreach",short:"Run command in all submodules",desc:"Runs a shell command in each submodule directory.",ex:`git submodule foreach git pull origin main`,out:`Entering 'libs/lib'\nAlready up to date.\nEntering 'libs/utils'\nUpdating a1b2c3d..b2c3d4e`},
+{cat:"Submodule",flag:"git submodule deinit",short:"Deinitialize a submodule",desc:"Unregisters a submodule from .git/config without removing files.",ex:`git submodule deinit libs/lib`,out:`Cleared directory 'libs/lib'\nSubmodule 'libs/lib' unregistered from config`},
+
+// ===== WORKTREE =====
+{cat:"Worktree",flag:"git worktree add <path> <branch>",short:"Add a linked worktree",desc:"Creates a new working tree linked to the repo — work on two branches simultaneously without stashing.",ex:`git worktree add ../project-hotfix hotfix/critical-bug`,out:`Preparing worktree (checking out 'hotfix/critical-bug')\nHEAD is now at 4f2a3b1 fix: critical login bug`},
+{cat:"Worktree",flag:"git worktree list",short:"List all worktrees",desc:"Shows all worktrees linked to this repository.",ex:`git worktree list`,out:`/home/user/project           8e1c9d2 [main]\n/home/user/project-hotfix   4f2a3b1 [hotfix/critical-bug]`},
+{cat:"Worktree",flag:"git worktree remove <path>",short:"Remove a worktree",desc:"Removes a linked worktree (must have no uncommitted changes).",ex:`git worktree remove ../project-hotfix`,out:`(worktree removed)`},
+{cat:"Worktree",flag:"git worktree prune",short:"Prune stale worktrees",desc:"Removes worktree administrative files for worktrees that no longer exist.",ex:`git worktree prune`,out:`(stale worktree entries pruned)`},
+{cat:"Worktree",flag:"git worktree lock",short:"Lock a worktree",desc:"Prevents a worktree from being pruned if it is on a removable drive.",ex:`git worktree lock --reason "on USB drive" ../project-backup`,out:`(worktree locked)`},
+
+// ===== ARCHIVE & BUNDLE =====
+{cat:"Archive",flag:"git archive",short:"Create a file archive",desc:"Creates a tar or zip archive of the repository at a specific tree/tag without the .git folder.",ex:`git archive --format=zip --output=release.zip HEAD`,out:`(release.zip created — contains project files only, no .git)`},
+{cat:"Archive",flag:"git archive <tag>",short:"Archive a specific tag",desc:"Creates an archive of the repository at a specific tag.",ex:`git archive --format=tar.gz -o v2.0.0.tar.gz v2.0.0`,out:`(v2.0.0.tar.gz created — snapshot of tag v2.0.0)`},
+{cat:"Archive",flag:"git bundle create",short:"Create a bundle file",desc:"Packages the repository into a single portable file that can be transported and cloned.",ex:`git bundle create repo.bundle --all`,out:`(repo.bundle created — portable git repo package)`},
+{cat:"Archive",flag:"git bundle verify",short:"Verify a bundle file",desc:"Verifies that a bundle file is valid and shows its contents.",ex:`git bundle verify repo.bundle`,out:`The bundle contains these 2 refs:\n  4f2a3b1 refs/heads/main\n  8e1c9d2 refs/heads/develop\nThe bundle records a complete history.`},
+{cat:"Archive",flag:"git bundle clone",short:"Clone from a bundle",desc:"Clones a repository from a bundle file.",ex:`git clone repo.bundle myproject`,out:`Cloning into 'myproject'...\nreceiving objects: 100% (342/342)\nresult has multiple head branches`},
+
+// ===== ADVANCED / PLUMBING =====
+{cat:"Advanced",flag:"git ls-files",short:"List tracked files",desc:"Lists all files being tracked by Git in the current repository.",ex:`git ls-files`,out:`README.md\npackage.json\nsrc/app.js\nsrc/auth.js\ntests/auth.test.js`},
+{cat:"Advanced",flag:"git ls-files --others",short:"List untracked files",desc:"Shows all files in the working directory not tracked by Git.",ex:`git ls-files --others --exclude-standard`,out:`node_modules/\ntodo.txt\n.env.local`},
+{cat:"Advanced",flag:"git cat-file -t <hash>",short:"Show object type",desc:"Shows the type of a Git object (blob, tree, commit, tag).",ex:`git cat-file -t 8e1c9d2`,out:`commit`},
+{cat:"Advanced",flag:"git cat-file -p <hash>",short:"Print object content",desc:"Prints the content of any Git object — useful for low-level inspection.",ex:`git cat-file -p 8e1c9d2`,out:`tree 4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3\nparent 4f2a3b1c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3\nauthor Jane Doe <jane@example.com> 1712912400 +0530\n\nfeat: add authentication module`},
+{cat:"Advanced",flag:"git hash-object",short:"Compute object hash",desc:"Computes the SHA-1 hash of a file as Git would store it.",ex:`git hash-object README.md`,out:`a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0`},
+{cat:"Advanced",flag:"git rev-parse HEAD",short:"Get current commit hash",desc:"Outputs the full SHA-1 hash of the commit HEAD points to.",ex:`git rev-parse HEAD`,out:`8e1c9d2b4f5a6c7d8e9f0a1b2c3d4e5f6a7b8c9d`},
+{cat:"Advanced",flag:"git rev-parse --abbrev-ref HEAD",short:"Get current branch name",desc:"Outputs just the branch name that HEAD points to.",ex:`git rev-parse --abbrev-ref HEAD`,out:`main`},
+{cat:"Advanced",flag:"git count-objects",short:"Count object database",desc:"Counts the number of loose objects and their disk consumption.",ex:`git count-objects -vH`,out:`count: 245\nsize: 1.20 MiB\nin-pack: 1023\npacks: 2\nsize-pack: 3.45 MiB`},
+{cat:"Advanced",flag:"git gc",short:"Garbage collect repo",desc:"Runs garbage collection to clean up unnecessary files and optimize the local repo.",ex:`git gc`,out:`Enumerating objects: 1268, done.\nCounting objects: 100% (1268/1268)\nCompressing objects: 100% (412/412)\nTotal 1268 (delta 856), reused 1268 (delta 856), pack-reused 0`},
+{cat:"Advanced",flag:"git fsck",short:"Verify object integrity",desc:"Verifies the connectivity and validity of objects in the database.",ex:`git fsck`,out:`Checking object directories: 100%\nChecking connectivity: done.\n(no errors — repository is healthy)`},
+{cat:"Advanced",flag:"git prune",short:"Remove unreachable objects",desc:"Removes objects not reachable from any branch or tag — usually called by git gc.",ex:`git prune`,out:`(unreachable objects removed)`},
+{cat:"Advanced",flag:"git notes add",short:"Add a note to a commit",desc:"Attaches a note to a commit without changing the commit hash.",ex:`git notes add -m "Reviewed by Alice" 8e1c9d2`,out:`(note attached to commit 8e1c9d2)`},
+{cat:"Advanced",flag:"git notes show",short:"Show notes on a commit",desc:"Shows the note attached to a specific commit.",ex:`git notes show 8e1c9d2`,out:`Reviewed by Alice`},
+{cat:"Advanced",flag:"git grep <pattern>",short:"Search content in repo",desc:"Searches for a text pattern in tracked files — like grep but respects .gitignore.",ex:`git grep "jwt.verify"`,out:`src/auth.js:const decoded = jwt.verify(token, secret);\nsrc/middleware.js:jwt.verify(token, process.env.SECRET)`},
+{cat:"Advanced",flag:"git grep -n",short:"Grep with line numbers",desc:"Searches for a pattern and shows the line numbers of matches.",ex:`git grep -n "jwt.verify"`,out:`src/auth.js:12:const decoded = jwt.verify(token, secret);\nsrc/middleware.js:28:jwt.verify(token, process.env.SECRET)`},
+{cat:"Advanced",flag:"git apply <patch>",short:"Apply a patch file",desc:"Applies a patch file generated by git diff or git format-patch.",ex:`git apply fix-auth.patch`,out:`(patch applied to working directory)`},
+{cat:"Advanced",flag:"git format-patch",short:"Create patch files",desc:"Creates patch files for each commit, suitable for emailing or sharing.",ex:`git format-patch HEAD~3`,out:`0001-feat-add-auth.patch\n0002-fix-token-expiry.patch\n0003-chore-cleanup.patch`},
+{cat:"Advanced",flag:"git am",short:"Apply mailbox patches",desc:"Applies patches from a mailbox file created by git format-patch.",ex:`git am 0001-feat-add-auth.patch`,out:`Applying: feat: add authentication module`},
+{cat:"Advanced",flag:"git filter-branch",short:"Rewrite branch history",desc:"Rewrites Git history by applying filters. Powerful but dangerous — prefer git filter-repo.",ex:`git filter-branch --tree-filter 'rm -f passwords.txt' HEAD`,out:`Rewrite 8e1c9d2... (342/342)\nRef 'refs/heads/main' was rewritten`},
+{cat:"Advanced",flag:"git replace",short:"Create object replacement",desc:"Creates a replacement for a Git object — advanced history manipulation without rewriting.",ex:`git replace 8e1c9d2 a1b2c3d`,out:`(8e1c9d2 now transparently replaced by a1b2c3d)`},
+{cat:"Advanced",flag:"git interpret-trailers",short:"Add structured trailers to commit",desc:"Adds structured key-value trailers (like Signed-off-by) to commit messages.",ex:`echo "feat: add auth" | git interpret-trailers --trailer "Reviewed-by: Alice"`,out:`feat: add auth\n\nReviewed-by: Alice`},
+{cat:"Advanced",flag:"git symbolic-ref HEAD",short:"Show or set symbolic ref",desc:"Shows what HEAD points to, or sets a symbolic ref. Used internally and in bare repos.",ex:`git symbolic-ref HEAD`,out:`refs/heads/main`},
+{cat:"Advanced",flag:"git update-index --assume-unchanged",short:"Ignore local changes to tracked file",desc:"Tells Git to ignore changes to a file even though it's tracked. Useful for local config files.",ex:`git update-index --assume-unchanged config/local.yml`,out:`(changes to config/local.yml will no longer show in status)`},
+{cat:"Advanced",flag:"git update-index --skip-worktree",short:"Skip worktree for a file",desc:"More persistent than --assume-unchanged. Tells Git to skip checking the file in the worktree.",ex:`git update-index --skip-worktree .env`,out:`(local .env changes permanently ignored by git status)`},
+{cat:"Advanced",flag:"git sparse-checkout",short:"Enable sparse checkout",desc:"Allows checking out only a subset of files from a large repository.",ex:`git sparse-checkout init\ngit sparse-checkout set src/`,out:`(only src/ directory is checked out locally)`},
+{cat:"Advanced",flag:"git maintenance start",short:"Enable background maintenance",desc:"Enables scheduled background Git maintenance tasks like gc and fetch.",ex:`git maintenance start`,out:`(background maintenance scheduled via cron/launchctl)`},
+{cat:"Advanced",flag:"git range-diff",short:"Compare two commit ranges",desc:"Compares two sequences of commits — useful for reviewing rebased or amended series.",ex:`git range-diff main feature/auth~3 feature/auth`,out:`1: 4f2a3b1 = 1: a1b2c3d feat: add login form\n2: 8e1c9d2 ! 2: b2c3d4e feat: JWT verification\n    @@ -5,3 +5,4 @@\n    + improved error handling`},
+
+// ===== MORE CONFIG =====
+{cat:"Config",flag:"git config --global core.pager",short:"Set pager for output",desc:"Sets the pager program for long output like git log. Use 'cat' to disable paging.",ex:`git config --global core.pager "less -FX"`,out:`(git log output now uses less -FX as pager)`},
+{cat:"Config",flag:"git config --global branch.autosetuprebase",short:"Auto-rebase on branch setup",desc:"Makes new branches automatically configured to rebase instead of merge on pull.",ex:`git config --global branch.autosetuprebase always`,out:`(new tracking branches always rebase by default)`},
+{cat:"Config",flag:"git config --global log.date",short:"Set log date format",desc:"Sets the default date format used in git log output.",ex:`git config --global log.date relative`,out:`(dates in git log now show as '2 hours ago', '3 days ago')`},
+{cat:"Config",flag:"git config --global core.whitespace",short:"Configure whitespace detection",desc:"Specifies which whitespace issues Git should detect and report.",ex:`git config --global core.whitespace trailing-space,space-before-tab`,out:`(Git now warns on trailing spaces and spaces before tabs)`},
+{cat:"Config",flag:"git config --global commit.template",short:"Set commit message template",desc:"Points to a file that Git uses as a template when opening the commit message editor.",ex:`git config --global commit.template ~/.gitmessage`,out:`(git commit opens editor pre-filled with ~/.gitmessage)`},
+{cat:"Config",flag:"git config --global fetch.prune",short:"Auto-prune on fetch",desc:"Automatically prunes remote-tracking branches that no longer exist on every fetch.",ex:`git config --global fetch.prune true`,out:`(stale remote-tracking branches pruned automatically on every fetch)`},
+
+// ===== MORE SNAPSHOT =====
+{cat:"Snapshot",flag:"git commit --fixup",short:"Create fixup commit",desc:"Creates a commit prefixed with 'fixup!' pointing to an earlier commit — used with --autosquash.",ex:`git commit --fixup 8e1c9d2`,out:`[main a1b2c3d] fixup! feat: add auth\n 1 file changed, 2 insertions(+)`},
+{cat:"Snapshot",flag:"git commit --squash",short:"Create squash commit",desc:"Creates a commit prefixed with 'squash!' for use with interactive rebase --autosquash.",ex:`git commit --squash 8e1c9d2`,out:`[main b2c3d4e] squash! feat: add auth\n 1 file changed, 5 insertions(+)`},
+
+// ===== MORE LOG =====
+{cat:"Log",flag:"git log --decorate",short:"Show branch/tag labels",desc:"Adds branch and tag labels to the commit log output.",ex:`git log --oneline --decorate`,out:`8e1c9d2 (HEAD -> main, origin/main, tag: v2.0.0) feat: add auth\n4f2a3b1 init: project setup`},
+{cat:"Log",flag:"git log --all",short:"Show all refs in log",desc:"Shows commits from all branches, tags, and refs — not just the current branch.",ex:`git log --oneline --all`,out:`8e1c9d2 (main) feat: add auth\n5a6b7c8 (feature/payment) feat: payment\n4f2a3b1 init: project setup`},
+{cat:"Log",flag:"git whatchanged",short:"Show what changed per commit",desc:"Shows what files changed in each commit — older command similar to git log --stat.",ex:`git whatchanged -1`,out:`commit 8e1c9d2...\nAuthor: Jane\n:100644 100644 a1b2c3... d4e5f6... M  src/auth.js`},
+
+// ===== MORE DIFF =====
+{cat:"Diff",flag:"git diff --no-index",short:"Diff two files outside repo",desc:"Compares any two files on the filesystem — works outside of a Git repo.",ex:`git diff --no-index file-a.js file-b.js`,out:`diff --git a/file-a.js b/file-b.js\n--- a/file-a.js\n+++ b/file-b.js\n@@ -1,3 +1,4 @@\n+const debug = true;`},
+{cat:"Diff",flag:"git diff --compact-summary",short:"Compact file summary diff",desc:"Shows a brief one-line summary per changed file including mode changes.",ex:`git diff --compact-summary HEAD~3`,out:` src/auth.js (new)    | 47 +++++\n README.md            |  4 ++-\n 2 files changed, 51 insertions(+)`},
+
+// ===== MORE BRANCH =====
+{cat:"Branch",flag:"git branch --set-upstream-to",short:"Set upstream for branch",desc:"Sets or changes the upstream remote tracking branch for the current branch.",ex:`git branch --set-upstream-to=origin/main main`,out:`branch 'main' set up to track 'origin/main'.`},
+{cat:"Branch",flag:"git branch --unset-upstream",short:"Remove upstream tracking",desc:"Removes the upstream tracking configuration from the current branch.",ex:`git branch --unset-upstream`,out:`(upstream tracking removed from current branch)`},
+{cat:"Branch",flag:"git branch --copy <new>",short:"Copy a branch",desc:"Creates a copy of the current branch with a new name, preserving reflog.",ex:`git branch --copy main main-backup`,out:`(main-backup created as a copy of main with reflog)`},
+
+// ===== MORE MERGE =====
+{cat:"Merge",flag:"git merge --no-commit --squash",short:"Preview squash merge",desc:"Prepares a squash merge for review: all changes from the branch are staged but not committed.",ex:`git merge --no-commit --squash feature/payment`,out:`Squash commit -- not updating HEAD\nAutomatic merge went well; stopped before committing as requested`},
+
+// ===== MORE REMOTE =====
+{cat:"Remote",flag:"git ls-remote <remote>",short:"List refs on remote server",desc:"Shows references (branches, tags) on a remote server without fetching them.",ex:`git ls-remote origin`,out:`8e1c9d2b4f5a6c7d  HEAD\n8e1c9d2b4f5a6c7d  refs/heads/main\n4f2a3b1c8d9e0f1a  refs/heads/develop\na1b2c3d4e5f6a7b8  refs/tags/v2.0.0`},
+{cat:"Remote",flag:"git fetch origin <branch>:<local>",short:"Fetch to specific local branch",desc:"Fetches a remote branch and stores it in a specific local branch name.",ex:`git fetch origin main:local-main`,out:`From https://github.com/user/repo\n * [new branch]  main -> local-main`},
+
+// ===== MORE UNDO =====
+{cat:"Undo",flag:"git restore --source=HEAD~2 <file>",short:"Restore file from older commit",desc:"Restores a specific file to its state from an older commit without affecting other files.",ex:`git restore --source=HEAD~2 src/auth.js`,out:`(src/auth.js restored to its version from 2 commits ago)`},
+{cat:"Undo",flag:"git revert -n HEAD~2..HEAD",short:"Batch revert range without commit",desc:"Reverts multiple commits into the working directory/staging area as a single revert.",ex:`git revert -n HEAD~2..HEAD`,out:`(last 2 commits reverted into working directory — not yet committed)`},
+
+// ===== MORE REBASE =====
+{cat:"Rebase",flag:"git rebase --edit-todo",short:"Edit rebase todo list",desc:"Opens the interactive rebase instruction file for editing during a paused rebase.",ex:`git rebase --edit-todo`,out:`(editor opens with current rebase todo list)`},
+{cat:"Rebase",flag:"git rebase --show-current-patch",short:"Show current rebase patch",desc:"Shows the patch being applied during a rebase — useful for understanding conflict context.",ex:`git rebase --show-current-patch`,out:`(shows diff of commit being applied)`},
+
+// ===== MORE ADVANCED =====
+{cat:"Advanced",flag:"git shortlog -s --all",short:"Contributor commit counts",desc:"Counts total commits per author across all branches.",ex:`git shortlog -s --all | sort -rn`,out:`   134  Jane Doe\n    89  John Smith\n    42  Alice Johnson\n    18  Bob Lee`},
+{cat:"Advanced",flag:"git stash show --stat",short:"Stash change stats",desc:"Shows a summary of which files and how many lines changed in a stash.",ex:`git stash show --stat stash@{0}`,out:` src/app.css  | 24 ++++++++++++++++\n src/themes.js | 12 ++++++++\n 2 files changed, 36 insertions(+)`},
+{cat:"Advanced",flag:"git log --no-merges",short:"Exclude merge commits",desc:"Shows commit history with merge commits filtered out for a cleaner view.",ex:`git log --no-merges --oneline -8`,out:`8e1c9d2 feat: add auth\n4f2a3b1 fix: token expiry\na1b2c3d chore: cleanup tests\nb2c3d4e feat: add homepage`},
+{cat:"Advanced",flag:"git log --merges",short:"Show only merge commits",desc:"Shows only merge commits in the log output.",ex:`git log --merges --oneline`,out:`c3d4e5f Merge branch 'feature/auth' into main\nd4e5f6a Merge pull request #42: add payment`},
+{cat:"Advanced",flag:"git diff HEAD -- <file>",short:"Diff file against HEAD",desc:"Shows all uncommitted changes for a specific file compared to the last commit.",ex:`git diff HEAD -- src/auth.js`,out:`diff --git a/src/auth.js b/src/auth.js\n--- a/src/auth.js\n+++ b/src/auth.js\n@@ -14,3 +14,5 @@\n+  // improved error handling\n+  if (!token) throw new Error('No token');`},
+{cat:"Advanced",flag:"git commit --dry-run",short:"Simulate a commit",desc:"Shows what would happen if you ran git commit, without actually creating a commit.",ex:`git commit --dry-run`,out:`On branch main\nChanges to be committed:\n  modified: src/auth.js\n(nothing committed — dry run)`},
+{cat:"Advanced",flag:"git check-ignore -v <file>",short:"Debug gitignore rules",desc:"Shows which .gitignore rule is causing a file to be ignored.",ex:`git check-ignore -v node_modules/`,out:`.gitignore:3:node_modules/  node_modules/`},
+{cat:"Advanced",flag:"git ls-tree HEAD",short:"List tree at commit",desc:"Shows the tree (files and directories) at a given commit, with object hashes.",ex:`git ls-tree HEAD`,out:`100644 blob a1b2c3d README.md\n040000 tree b2c3d4e src\n100644 blob c3d4e5f package.json`},
+
+]; // end CMDS
+
+const catKeys = [...new Set(CMDS.map(c => c.cat))];
+let activeCat = "All";
+let searchVal = "";
+
+const CAT_COLORS = {
+  "Config":      "#f0702a",
+  "Init/Clone":  "#4af08a",
+  "Snapshot":    "#4aa8f0",
+  "Diff":        "#f0c44a",
+  "Branch":      "#c44af0",
+  "Merge":       "#f04a7a",
+  "Remote":      "#4af0d8",
+  "Fetch/Pull":  "#a0f04a",
+  "Push":        "#f07a4a",
+  "Log":         "#4a7af0",
+  "Tag":         "#f04acf",
+  "Stash":       "#e8a04a",
+  "Undo":        "#f04a4a",
+  "Rebase":      "#8a4af0",
+  "Cherry-pick": "#4af0c4",
+  "Bisect":      "#d4f04a",
+  "Submodule":   "#f04a9f",
+  "Worktree":    "#4ac4f0",
+  "Archive":     "#f0d44a",
+  "Advanced":    "#90a0b0",
+};
+
+function catColor(c){ return CAT_COLORS[c] || "#888"; }
+
+function hexToRgba(hex, a){
+  let r=0,g=0,b=0;
+  if(hex[0]==="#") hex=hex.slice(1);
+  if(hex.length===3){ r=parseInt(hex[0]+hex[0],16); g=parseInt(hex[1]+hex[1],16); b=parseInt(hex[2]+hex[2],16); }
+  else { r=parseInt(hex.slice(0,2),16); g=parseInt(hex.slice(2,4),16); b=parseInt(hex.slice(4,6),16); }
+  return `rgba(${r},${g},${b},${a})`;
+}
+
+function renderCats(){
+  const d = document.getElementById("cats");
+  d.innerHTML="";
+  const all = document.createElement("button");
+  all.className="cat-btn"+(activeCat==="All"?" active":"");
+  all.textContent="All";
+  if(activeCat==="All"){ all.style.background="#f0702a"; all.style.color="#0d0f14"; all.style.borderColor="transparent"; }
+  all.onclick=()=>{ activeCat="All"; render(); };
+  d.appendChild(all);
+  catKeys.forEach(c=>{
+    const btn=document.createElement("button");
+    btn.className="cat-btn"+(activeCat===c?" active":"");
+    btn.textContent=c;
+    const col=catColor(c);
+    btn.style.borderColor=hexToRgba(col, 0.4);
+    btn.style.color=activeCat===c?"#0d0f14":col;
+    if(activeCat===c){ btn.style.background=col; btn.style.borderColor="transparent"; }
+    btn.onclick=()=>{ activeCat=c; render(); };
+    d.appendChild(btn);
+  });
+}
+
+function escapeHtml(s){ return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+
+function render(){
+  const q=searchVal.toLowerCase();
+  const filtered=CMDS.filter(c=>{
+    const mc=activeCat==="All"||c.cat===activeCat;
+    const ms=!q||c.flag.toLowerCase().includes(q)||c.short.toLowerCase().includes(q)||c.desc.toLowerCase().includes(q)||c.ex.toLowerCase().includes(q);
+    return mc&&ms;
+  });
+
+  renderCats();
+  document.getElementById("stats-text").textContent=`Showing ${filtered.length} of ${CMDS.length} commands`;
+  document.getElementById("count-badge").textContent=filtered.length;
+  document.getElementById("total-count").textContent=CMDS.length+"+";
+
+  const list=document.getElementById("list");
+  list.innerHTML="";
+
+  if(!filtered.length){
+    list.innerHTML='<div class="empty"><big>⌀</big>No commands match your search.</div>';
+    return;
+  }
+
+  filtered.forEach((cmd,i)=>{
+    const card=document.createElement("div");
+    card.className="cmd-card";
+    const col=catColor(cmd.cat);
+    card.style.borderLeft=`3px solid ${col}`;
+
+    const hdr=document.createElement("div");
+    hdr.className="cmd-header";
+    hdr.innerHTML=`
+      <span class="cmd-badge" style="background:${hexToRgba(col,0.15)};color:${col};border:1px solid ${hexToRgba(col,0.35)}">${escapeHtml(cmd.cat)}</span>
+      <span class="cmd-flag">${escapeHtml(cmd.flag)}</span>
+      <span class="cmd-short">${escapeHtml(cmd.short)}</span>
+      <span class="chevron" id="chev-${i}">&#9654;</span>
+    `;
+
+    const body=document.createElement("div");
+    body.className="cmd-body";
+    body.innerHTML=`
+      <p class="cmd-desc">${escapeHtml(cmd.desc)}</p>
+      <div class="section-block">
+        <div class="block-label">Example</div>
+        <div class="code-block">${escapeHtml(cmd.ex)}</div>
+      </div>
+      <div class="section-block">
+        <div class="block-label">Output</div>
+        <div class="out-block">${escapeHtml(cmd.out)}</div>
+      </div>
+    `;
+
+    hdr.onclick=()=>{
+      const isOpen=body.classList.contains("open");
+      document.querySelectorAll(".cmd-body.open").forEach(b=>b.classList.remove("open"));
+      document.querySelectorAll(".chevron").forEach(c=>c.style.transform="");
+      if(!isOpen){ body.classList.add("open"); document.getElementById("chev-"+i).style.transform="rotate(90deg)"; }
+    };
+
+    card.appendChild(hdr);
+    card.appendChild(body);
+    list.appendChild(card);
+  });
+}
+
+document.getElementById("search").oninput=function(){ searchVal=this.value; render(); };
+
+render();
+</script>
+</body>
+</html>

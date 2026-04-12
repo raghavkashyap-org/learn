@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>cURL Command Reference — 100+ Commands</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: #f5f5f5;
+    color: #1a1a1a;
+    padding: 1.5rem;
+    min-height: 100vh;
+  }
+  h1 {
+    font-size: 22px;
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+    color: #1a1a1a;
+  }
+  .subtitle {
+    font-size: 13px;
+    color: #666;
+    margin-bottom: 1.25rem;
+  }
+  .top {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+    align-items: center;
+  }
+  .search-box {
+    flex: 1;
+    min-width: 200px;
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background: #fff;
+    color: #1a1a1a;
+    font-size: 14px;
+    outline: none;
+    transition: border 0.15s, box-shadow 0.15s;
+  }
+  .search-box:focus {
+    border-color: #378ADD;
+    box-shadow: 0 0 0 3px rgba(55,138,221,0.15);
+  }
+  .cats {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+  }
+  .cat-btn {
+    padding: 5px 13px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    background: transparent;
+    color: #555;
+    font-size: 12px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.15s;
+    font-family: inherit;
+  }
+  .cat-btn:hover { opacity: 0.8; }
+  .cat-btn.active { font-weight: 500; color: #fff !important; border-color: transparent !important; }
+  .stats {
+    font-size: 12px;
+    color: #888;
+    margin-bottom: 0.75rem;
+  }
+  .cmd-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .cmd-card {
+    background: #fff;
+    border: 1px solid #e5e5e5;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .cmd-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.1s;
+  }
+  .cmd-header:hover { background: #f9f9f9; }
+  .cmd-badge {
+    font-size: 11px;
+    padding: 2px 9px;
+    border-radius: 20px;
+    font-weight: 500;
+    flex-shrink: 0;
+  }
+  .cmd-flag {
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    font-size: 13px;
+    color: #1a1a1a;
+    font-weight: 500;
+    flex: 1;
+    min-width: 0;
+  }
+  .cmd-desc-short {
+    font-size: 12px;
+    color: #666;
+    flex: 2;
+    min-width: 0;
+  }
+  .chevron {
+    font-size: 10px;
+    color: #aaa;
+    transition: transform 0.2s;
+    flex-shrink: 0;
+  }
+  .cmd-body {
+    display: none;
+    padding: 14px 16px;
+    border-top: 1px solid #f0f0f0;
+    background: #fafafa;
+  }
+  .cmd-body.open { display: block; }
+  .cmd-body p {
+    font-size: 13px;
+    color: #555;
+    margin-bottom: 12px;
+    line-height: 1.65;
+  }
+  .cmd-body h4 {
+    font-size: 11px;
+    font-weight: 500;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 6px;
+  }
+  .code-block {
+    background: #f0f0f0;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    padding: 10px 14px;
+    font-family: "SFMono-Regular", Consolas, monospace;
+    font-size: 12.5px;
+    color: #1a1a1a;
+    margin-bottom: 12px;
+    white-space: pre-wrap;
+    word-break: break-all;
+    line-height: 1.7;
+  }
+  .output-block {
+    background: #1e1e1e;
+    border-radius: 6px;
+    padding: 10px 14px;
+    font-family: "SFMono-Regular", Consolas, monospace;
+    font-size: 12px;
+    color: #a8ff78;
+    margin-bottom: 4px;
+    white-space: pre-wrap;
+    word-break: break-all;
+    line-height: 1.75;
+  }
+  .syntax-section { margin-bottom: 10px; }
+  .empty {
+    text-align: center;
+    padding: 3rem;
+    color: #aaa;
+    font-size: 14px;
+  }
+
+  @media (max-width: 600px) {
+    .cmd-desc-short { display: none; }
+    body { padding: 1rem; }
+  }
+
+  /* Dark mode */
+  @media (prefers-color-scheme: dark) {
+    body { background: #111; color: #e5e5e5; }
+    h1 { color: #e5e5e5; }
+    .subtitle { color: #888; }
+    .search-box { background: #1e1e1e; border-color: #333; color: #e5e5e5; }
+    .cat-btn { border-color: #444; color: #aaa; }
+    .cmd-card { background: #1e1e1e; border-color: #2a2a2a; }
+    .cmd-header:hover { background: #252525; }
+    .cmd-flag { color: #e5e5e5; }
+    .cmd-desc-short { color: #888; }
+    .cmd-body { background: #181818; border-top-color: #2a2a2a; }
+    .cmd-body p { color: #aaa; }
+    .code-block { background: #252525; border-color: #333; color: #e5e5e5; }
+    .stats { color: #666; }
+  }
+</style>
+</head>
+<body>
+
+<h1>cURL Command Reference</h1>
+<p class="subtitle">100+ curl commands with descriptions and example outputs. Click any row to expand.</p>
+
+<div class="top">
+  <input class="search-box" type="text" id="search" placeholder="Search commands, flags, descriptions..." />
+</div>
+<div class="cats" id="cats"></div>
+<div class="stats" id="stats"></div>
+<div class="cmd-list" id="list"></div>
+
+<script>
+const CMDS = [
+  {cat:"Basic", flag:"-X / --request", short:"Set HTTP method", desc:"Specifies the HTTP method to use. Common values: GET, POST, PUT, DELETE, PATCH, HEAD, OPTIONS.", ex:`curl -X GET https://httpbin.org/get`, out:`{\n  "args": {},\n  "headers": {\n    "Host": "httpbin.org",\n    "User-Agent": "curl/8.4.0"\n  },\n  "url": "https://httpbin.org/get"\n}`},
+  {cat:"Basic", flag:"-I / --head", short:"Fetch headers only", desc:"Fetches only the HTTP response headers without downloading the body. Useful for checking metadata.", ex:`curl -I https://example.com`, out:`HTTP/2 200\ncontent-type: text/html; charset=UTF-8\ncontent-length: 1256\ndate: Sun, 12 Apr 2026 10:00:00 GMT\nserver: ECS (nyb/1D2E)`},
+  {cat:"Basic", flag:"-s / --silent", short:"Silent mode", desc:"Suppresses progress meter and error messages. Useful in scripts where you only want the response.", ex:`curl -s https://httpbin.org/get`, out:`{\n  "url": "https://httpbin.org/get"\n}`},
+  {cat:"Basic", flag:"-v / --verbose", short:"Verbose output", desc:"Shows detailed information about the connection, request/response headers, and SSL handshake.", ex:`curl -v https://httpbin.org/get`, out:`* Trying 18.207.112.62:443...\n* Connected to httpbin.org port 443\n> GET /get HTTP/2\n> Host: httpbin.org\n< HTTP/2 200\n< content-type: application/json\n...\n{ "url": "https://httpbin.org/get" }`},
+  {cat:"Basic", flag:"-o / --output", short:"Save to file", desc:"Write the response body to a named file instead of stdout.", ex:`curl -o response.json https://httpbin.org/get`, out:`  % Total    % Received % Xferd  Average Speed\n100   256  100   256    0     0    512      0\nFile saved as response.json`},
+  {cat:"Basic", flag:"-O / --remote-name", short:"Save with remote filename", desc:"Saves the file using the filename from the URL path.", ex:`curl -O https://example.com/file.zip`, out:`  % Total    % Received\n100 10.2M  100 10.2M    0     0  1.20M      0  0:00:08\nSaved: file.zip`},
+  {cat:"Basic", flag:"-L / --location", short:"Follow redirects", desc:"If the server returns a 3xx redirect, curl will re-issue the request to the new URL automatically.", ex:`curl -L http://google.com`, out:`<html>...(Google homepage HTML)...</html>`},
+  {cat:"Basic", flag:"-i / --include", short:"Include response headers", desc:"Includes HTTP response headers in the output along with the body.", ex:`curl -i https://httpbin.org/get`, out:`HTTP/2 200\ncontent-type: application/json\n\n{\n  "url": "https://httpbin.org/get"\n}`},
+  {cat:"Basic", flag:"--url", short:"Explicit URL", desc:"Specifies the URL to fetch. Useful in config files or when using --config.", ex:`curl --url https://httpbin.org/get`, out:`{\n  "url": "https://httpbin.org/get"\n}`},
+  {cat:"Basic", flag:"-g / --globoff", short:"Disable URL globbing", desc:"Disables curl's URL globbing parser (bracket/curly brace expansion). Useful with complex URLs.", ex:`curl -g "https://example.com/{a,b}"`, out:`(fetches only the literal URL with curly braces)`},
+  {cat:"Basic", flag:"--max-filesize", short:"Max download size", desc:"Sets the max file size in bytes. If exceeded, curl will abort the download.", ex:`curl --max-filesize 1048576 https://example.com/bigfile.bin`, out:`curl: (63) Maximum file size exceeded`},
+  {cat:"Basic", flag:"-Z / --parallel", short:"Parallel transfers", desc:"Perform multiple transfers in parallel. Use with multiple -o options.", ex:`curl -Z -o f1.html https://example.com -o f2.html https://httpbin.org`, out:`(Both files downloaded simultaneously)`},
+  {cat:"Basic", flag:"--retry", short:"Retry on failure", desc:"Retries the request N times if it fails due to transient errors.", ex:`curl --retry 3 https://httpbin.org/get`, out:`(Retries up to 3 times on failure)\n{\n  "url": "https://httpbin.org/get"\n}`},
+  {cat:"Basic", flag:"--retry-delay", short:"Delay between retries", desc:"Waits N seconds between retry attempts.", ex:`curl --retry 3 --retry-delay 5 https://httpbin.org/get`, out:`(Waits 5 seconds between each retry)`},
+  {cat:"Basic", flag:"--retry-max-time", short:"Max total retry time", desc:"Sets the maximum total time (in seconds) for all retries.", ex:`curl --retry 5 --retry-max-time 60 https://httpbin.org/get`, out:`(Retries for at most 60 seconds total)`},
+
+  {cat:"Headers", flag:"-H / --header", short:"Send custom header", desc:"Adds a custom HTTP header to the request. Can be used multiple times for multiple headers.", ex:`curl -H "Authorization: Bearer token123" -H "Accept: application/json" https://httpbin.org/headers`, out:`{\n  "headers": {\n    "Accept": "application/json",\n    "Authorization": "Bearer token123",\n    "Host": "httpbin.org"\n  }\n}`},
+  {cat:"Headers", flag:"-A / --user-agent", short:"Set User-Agent", desc:"Sets the User-Agent header string sent to the server.", ex:`curl -A "MyApp/1.0 (Linux)" https://httpbin.org/user-agent`, out:`{\n  "user-agent": "MyApp/1.0 (Linux)"\n}`},
+  {cat:"Headers", flag:"-e / --referer", short:"Set Referer header", desc:"Sets the Referer header, indicating the page that linked to the request.", ex:`curl -e "https://google.com" https://httpbin.org/headers`, out:`{\n  "headers": {\n    "Referer": "https://google.com"\n  }\n}`},
+  {cat:"Headers", flag:"-H 'header;'", short:"Remove a header", desc:"Sending a header with a semicolon (no value) removes that header from the request.", ex:`curl -H "User-Agent;" https://httpbin.org/headers`, out:`{\n  "headers": {\n    "Host": "httpbin.org"\n  }\n}`},
+  {cat:"Headers", flag:"--compressed", short:"Request compression", desc:"Sends Accept-Encoding header and decompresses the response automatically.", ex:`curl --compressed https://httpbin.org/gzip`, out:`{\n  "gzipped": true,\n  "origin": "203.0.113.1"\n}`},
+  {cat:"Headers", flag:"-D / --dump-header", short:"Dump response headers to file", desc:"Writes the response headers into the specified file.", ex:`curl -D headers.txt https://httpbin.org/get`, out:`(Response body to stdout)\nHeaders saved to headers.txt:\nHTTP/2 200\ncontent-type: application/json`},
+  {cat:"Headers", flag:"--request-target", short:"Set request target", desc:"Specify the path portion of the request line, overriding the URL path.", ex:`curl --request-target /get https://httpbin.org`, out:`{\n  "url": "https://httpbin.org/get"\n}`},
+
+  {cat:"Auth", flag:"-u / --user", short:"Basic authentication", desc:"Sends HTTP Basic Auth credentials in the format user:password.", ex:`curl -u admin:secret https://httpbin.org/basic-auth/admin/secret`, out:`{\n  "authenticated": true,\n  "user": "admin"\n}`},
+  {cat:"Auth", flag:"--basic", short:"Force HTTP Basic Auth", desc:"Explicitly tells curl to use HTTP Basic authentication.", ex:`curl --basic -u user:pass https://httpbin.org/basic-auth/user/pass`, out:`{\n  "authenticated": true,\n  "user": "user"\n}`},
+  {cat:"Auth", flag:"--digest", short:"HTTP Digest Auth", desc:"Use HTTP Digest authentication, which hashes credentials before sending.", ex:`curl --digest -u user:pass https://httpbin.org/digest-auth/auth/user/pass`, out:`{\n  "authenticated": true,\n  "user": "user"\n}`},
+  {cat:"Auth", flag:"--bearer", short:"Bearer token auth", desc:"Sets the Authorization header with a Bearer token.", ex:`curl --bearer eyJhbGc.eyJzdWI.SflKxw https://api.example.com/data`, out:`{\n  "data": "protected resource"\n}`},
+  {cat:"Auth", flag:"--ntlm", short:"NTLM authentication", desc:"Use NTLM authentication (Windows NT LAN Manager). Common in corporate environments.", ex:`curl --ntlm -u DOMAIN\\user:pass https://internal.corp.com/api`, out:`{\n  "auth": "NTLM success"\n}`},
+  {cat:"Auth", flag:"--negotiate", short:"Kerberos/SPNEGO auth", desc:"Use HTTP Negotiate authentication (Kerberos), typically used with --user :", ex:`curl --negotiate -u : https://kerb.example.com/api`, out:`{\n  "auth": "Negotiate success"\n}`},
+  {cat:"Auth", flag:"--anyauth", short:"Auto-detect auth method", desc:"Let curl automatically pick the best authentication method offered by the server.", ex:`curl --anyauth -u user:pass https://httpbin.org/basic-auth/user/pass`, out:`{\n  "authenticated": true,\n  "user": "user"\n}`},
+  {cat:"Auth", flag:"--netrc", short:"Use .netrc credentials", desc:"Reads credentials from the ~/.netrc file. Format: machine host login user password pass.", ex:`curl --netrc https://api.github.com/user`, out:`{\n  "login": "yourusername",\n  "id": 123456\n}`},
+  {cat:"Auth", flag:"--oauth2-bearer", short:"OAuth2 Bearer token", desc:"Sets the Authorization: Bearer header with an OAuth2 token.", ex:`curl --oauth2-bearer myToken123 https://api.example.com/resource`, out:`{\n  "resource": "protected data"\n}`},
+
+  {cat:"Data", flag:"-d / --data", short:"Send POST data", desc:"Sends data in the body of a POST request. Content-Type is set to application/x-www-form-urlencoded.", ex:`curl -d "name=John&age=30" https://httpbin.org/post`, out:`{\n  "form": {\n    "age": "30",\n    "name": "John"\n  },\n  "url": "https://httpbin.org/post"\n}`},
+  {cat:"Data", flag:"--data-raw", short:"Send raw POST data", desc:"Like -d but does not interpret @ as a file reference. Sends the string as-is.", ex:`curl --data-raw '{"key":"@value"}' https://httpbin.org/post`, out:`{\n  "data": "{\"key\":\"@value\"}"\n}`},
+  {cat:"Data", flag:"--data-binary", short:"Send binary POST data", desc:"Sends data preserving newlines and binary content, unlike -d which strips newlines.", ex:`curl --data-binary @file.bin https://httpbin.org/post`, out:`{\n  "data": "(binary content)\n"\n}`},
+  {cat:"Data", flag:"--data-urlencode", short:"URL-encode POST data", desc:"URL-encodes the value before sending. Useful for data with special characters.", ex:`curl --data-urlencode "message=hello world!" https://httpbin.org/post`, out:`{\n  "form": {\n    "message": "hello world!"\n  }\n}`},
+  {cat:"Data", flag:"-F / --form", short:"Multipart form upload", desc:"Sends multipart/form-data. Use for file uploads or forms that mix file and text fields.", ex:`curl -F "file=@photo.jpg" -F "name=test" https://httpbin.org/post`, out:`{\n  "files": {\n    "file": "(binary JPEG data)"\n  },\n  "form": {\n    "name": "test"\n  }\n}`},
+  {cat:"Data", flag:"--form-string", short:"Form string (no file interpretation)", desc:"Like -F but treats @ and < literally — they are not interpreted as file references.", ex:`curl --form-string "note=@important" https://httpbin.org/post`, out:`{\n  "form": {\n    "note": "@important"\n  }\n}`},
+  {cat:"Data", flag:"-G / --get", short:"Append data as query string", desc:"When combined with -d, appends the data as GET query parameters instead of POST body.", ex:`curl -G -d "q=curl" -d "lang=en" https://httpbin.org/get`, out:`{\n  "args": {\n    "lang": "en",\n    "q": "curl"\n  },\n  "url": "https://httpbin.org/get?q=curl&lang=en"\n}`},
+  {cat:"Data", flag:"--json", short:"Send JSON data", desc:"Shorthand for -d with Content-Type: application/json and Accept: application/json headers.", ex:`curl --json '{"name":"Alice"}' https://httpbin.org/post`, out:`{\n  "json": {\n    "name": "Alice"\n  },\n  "headers": {\n    "Content-Type": "application/json"\n  }\n}`},
+  {cat:"Data", flag:"-T / --upload-file", short:"Upload file via PUT", desc:"Upload a file using HTTP PUT. The file content becomes the request body.", ex:`curl -T localfile.txt https://httpbin.org/put`, out:`{\n  "data": "(content of localfile.txt)",\n  "url": "https://httpbin.org/put"\n}`},
+
+  {cat:"File", flag:"-C / --continue-at", short:"Resume download", desc:"Resume a previously interrupted download at the specified byte offset. Use - for auto-detect.", ex:`curl -C - -O https://example.com/largefile.iso`, out:`** Resuming transfer from byte position 10485760\n100 650M  100 650M    0     0  5.2M\nSaved: largefile.iso`},
+  {cat:"File", flag:"-T / --upload-file with FTP", short:"FTP Upload", desc:"Upload a file to an FTP server.", ex:`curl -T report.pdf ftp://ftp.example.com/uploads/ --user user:pass`, out:`226 Transfer complete. Uploaded report.pdf (125432 bytes)`},
+  {cat:"File", flag:"--limit-rate", short:"Limit transfer rate", desc:"Limits the transfer to the specified rate. Use k, m, g suffixes for kilo/mega/gigabytes.", ex:`curl --limit-rate 100k -O https://example.com/file.zip`, out:`  % Total    % Received  Average Speed\n100  50.0M  100  50.0M    0     0   100k    0  0:08:20\nSaved: file.zip`},
+  {cat:"File", flag:"-r / --range", short:"Download byte range", desc:"Request only a specific byte range of the document. Useful for partial downloads.", ex:`curl -r 0-1023 https://httpbin.org/bytes/2048`, out:`(First 1024 bytes of the response)`},
+  {cat:"File", flag:"--ftp-create-dirs", short:"Create FTP directories", desc:"When uploading to FTP, creates the remote directory path if it doesn't exist.", ex:`curl --ftp-create-dirs -T file.txt ftp://ftp.example.com/new/dir/file.txt`, out:`(Creates /new/dir/ on server and uploads file.txt)`},
+  {cat:"File", flag:"--remote-name-all", short:"Save all with remote names", desc:"Use remote names for all downloaded files (like -O but for multiple URLs).", ex:`curl --remote-name-all https://example.com/a.txt https://example.com/b.txt`, out:`Saved: a.txt\nSaved: b.txt`},
+  {cat:"File", flag:"--output-dir", short:"Set output directory", desc:"Specifies the directory where downloaded files should be saved.", ex:`curl --output-dir /tmp/downloads -O https://example.com/file.txt`, out:`Saved: /tmp/downloads/file.txt`},
+  {cat:"File", flag:"--create-dirs", short:"Create dirs for output", desc:"Creates local directories as needed when saving files with -o.", ex:`curl --create-dirs -o downloads/2026/file.txt https://example.com/file.txt`, out:`(Creates downloads/2026/ directory)\nSaved: downloads/2026/file.txt`},
+  {cat:"File", flag:"-# / --progress-bar", short:"Simple progress bar", desc:"Shows a simple # progress bar instead of the default statistics.", ex:`curl -# -O https://example.com/largefile.bin`, out:`######################################################## 100.0%`},
+
+  {cat:"SSL", flag:"-k / --insecure", short:"Skip SSL verification", desc:"Bypasses SSL certificate verification. Useful for self-signed certs in dev environments.", ex:`curl -k https://self-signed.badssl.com/`, out:`(Response from server without SSL verification)\n<!DOCTYPE html>...(page content)...`},
+  {cat:"SSL", flag:"--cacert", short:"CA certificate file", desc:"Use the specified certificate file to verify the peer's SSL certificate.", ex:`curl --cacert /etc/ssl/myca.pem https://internal.corp.com`, out:`{\n  "status": "ok"\n}`},
+  {cat:"SSL", flag:"--capath", short:"CA certificate directory", desc:"Use the specified directory of CA certificates to verify the peer.", ex:`curl --capath /etc/ssl/certs https://secure.example.com`, out:`{\n  "secure": true\n}`},
+  {cat:"SSL", flag:"--cert", short:"Client certificate", desc:"Use the specified client certificate for SSL mutual authentication (mTLS).", ex:`curl --cert client.crt --key client.key https://mtls.example.com`, out:`{\n  "authenticated": true,\n  "subject": "CN=myclient"\n}`},
+  {cat:"SSL", flag:"--key", short:"Client private key", desc:"Specifies the private key file for the client certificate.", ex:`curl --cert client.pem --key client.key https://api.example.com`, out:`{\n  "client_cert": "CN=myclient"\n}`},
+  {cat:"SSL", flag:"--key-type", short:"Key type (PEM/DER/ENG)", desc:"Specifies the type of the private key file: PEM, DER, or ENG.", ex:`curl --cert cert.pem --key key.der --key-type DER https://api.example.com`, out:`(Authenticates using DER-format key)`},
+  {cat:"SSL", flag:"--tls-max", short:"Maximum TLS version", desc:"Sets the maximum TLS version to use: 1.0, 1.1, 1.2, or 1.3.", ex:`curl --tls-max 1.3 https://httpbin.org/get`, out:`(Negotiates TLS up to version 1.3)\n{\n  "url": "https://httpbin.org/get"\n}`},
+  {cat:"SSL", flag:"--tlsv1.2", short:"Use TLS 1.2 minimum", desc:"Forces curl to use TLS version 1.2 or higher.", ex:`curl --tlsv1.2 https://httpbin.org/get`, out:`(Connected using TLS 1.2)\n{\n  "url": "https://httpbin.org/get"\n}`},
+  {cat:"SSL", flag:"--tlsv1.3", short:"Use TLS 1.3 minimum", desc:"Forces curl to use TLS version 1.3.", ex:`curl --tlsv1.3 https://httpbin.org/get`, out:`(Connected using TLS 1.3)\n{\n  "url": "https://httpbin.org/get"\n}`},
+  {cat:"SSL", flag:"--cert-type", short:"Certificate type", desc:"Specify the type of the client certificate: PEM, DER, or P12.", ex:`curl --cert client.p12 --cert-type P12 https://api.example.com`, out:`(Authenticated using PKCS#12 certificate)`},
+  {cat:"SSL", flag:"--pinnedpubkey", short:"Pin public key", desc:"Pins the server's public key. Only accepts connections matching this key hash.", ex:`curl --pinnedpubkey sha256//abc123== https://example.com`, out:`(Connects only if public key matches pinned hash)`},
+  {cat:"SSL", flag:"--ssl-reqd", short:"Require SSL/TLS upgrade", desc:"Forces an SSL/TLS upgrade (e.g., for FTP/IMAP connections).", ex:`curl --ssl-reqd ftp://ftp.example.com --user user:pass`, out:`226 Transfer complete.`},
+
+  {cat:"Proxy", flag:"-x / --proxy", short:"Use HTTP/HTTPS proxy", desc:"Route traffic through the specified proxy server.", ex:`curl -x http://proxy.corp.com:8080 https://httpbin.org/ip`, out:`{\n  "origin": "10.0.0.5"  (proxy IP)\n}`},
+  {cat:"Proxy", flag:"--proxy-user", short:"Proxy authentication", desc:"Provide credentials for the proxy server.", ex:`curl -x http://proxy.corp.com:8080 --proxy-user admin:secret https://httpbin.org/ip`, out:`{\n  "origin": "10.0.0.5"\n}`},
+  {cat:"Proxy", flag:"--socks4", short:"SOCKS4 proxy", desc:"Use a SOCKS4 proxy at the given address.", ex:`curl --socks4 127.0.0.1:1080 https://httpbin.org/ip`, out:`{\n  "origin": "192.168.1.100"\n}`},
+  {cat:"Proxy", flag:"--socks5", short:"SOCKS5 proxy", desc:"Use a SOCKS5 proxy. Supports more authentication methods and IPv6 than SOCKS4.", ex:`curl --socks5 127.0.0.1:1080 https://httpbin.org/ip`, out:`{\n  "origin": "192.168.1.100"\n}`},
+  {cat:"Proxy", flag:"--socks5-hostname", short:"SOCKS5 with hostname resolution", desc:"Use SOCKS5 proxy and let the proxy resolve hostnames (prevents DNS leaks).", ex:`curl --socks5-hostname 127.0.0.1:1080 https://httpbin.org/ip`, out:`{\n  "origin": "(proxied IP)"\n}`},
+  {cat:"Proxy", flag:"--noproxy", short:"Bypass proxy for hosts", desc:"Comma-separated list of hosts to connect to directly, bypassing the proxy.", ex:`curl -x http://proxy:8080 --noproxy "localhost,127.0.0.1,*.internal.com" https://api.example.com`, out:`(api.example.com via proxy; internal hosts go direct)`},
+  {cat:"Proxy", flag:"--proxy-cacert", short:"CA cert for proxy", desc:"Specify a CA certificate file for verifying the proxy's SSL certificate.", ex:`curl -x https://proxy.corp.com --proxy-cacert corp-ca.pem https://api.example.com`, out:`(Verifies proxy SSL using corp-ca.pem)`},
+
+  {cat:"Timeout", flag:"--connect-timeout", short:"Connection timeout", desc:"Maximum time in seconds to wait for the connection to be established.", ex:`curl --connect-timeout 5 https://httpbin.org/delay/10`, out:`curl: (28) Connection timeout after 5001 milliseconds`},
+  {cat:"Timeout", flag:"-m / --max-time", short:"Max total time", desc:"Maximum total time in seconds for the entire operation (connect + transfer).", ex:`curl -m 10 https://httpbin.org/delay/15`, out:`curl: (28) Operation timed out after 10001 milliseconds`},
+  {cat:"Timeout", flag:"--speed-limit", short:"Min transfer speed", desc:"If the transfer speed stays below this (bytes/sec), abort the transfer.", ex:`curl --speed-limit 1000 --speed-time 10 https://example.com/file.zip`, out:`curl: (28) transfer closed with 456 bytes remaining to read`},
+  {cat:"Timeout", flag:"--speed-time", short:"Time before speed abort", desc:"Number of seconds below speed-limit before curl aborts. Default is 30 seconds.", ex:`curl --speed-limit 1000 --speed-time 5 https://example.com/file.zip`, out:`(Aborts if speed < 1000 B/s for 5 seconds)`},
+  {cat:"Timeout", flag:"--expect100-timeout", short:"Expect: 100 timeout", desc:"Max time to wait for a 100-continue response from the server.", ex:`curl --expect100-timeout 5 -d @bigfile.bin https://httpbin.org/post`, out:`(Waits 5 seconds for 100-continue before sending body)`},
+
+  {cat:"Output", flag:"-w / --write-out", short:"Custom output format", desc:"Formats the output after a transfer using variables like %{http_code}, %{size_download}, %{time_total}.", ex:`curl -w "Status: %{http_code}\\nTime: %{time_total}s\\nSize: %{size_download} bytes\\n" -s -o /dev/null https://httpbin.org/get`, out:`Status: 200\nTime: 0.312s\nSize: 256 bytes`},
+  {cat:"Output", flag:"-S / --show-error", short:"Show errors with -s", desc:"When used with --silent, shows error messages if they occur.", ex:`curl -sS https://invalid.nonexistent.host/`, out:`curl: (6) Could not resolve host: invalid.nonexistent.host`},
+  {cat:"Output", flag:"--stderr", short:"Redirect stderr to file", desc:"Redirects curl's error and progress output to the specified file.", ex:`curl --stderr errors.log https://httpbin.org/get`, out:`(Response to stdout, errors to errors.log)`},
+  {cat:"Output", flag:"-q / --disable", short:"Disable curlrc", desc:"Prevents curl from reading the default ~/.curlrc configuration file.", ex:`curl -q https://httpbin.org/get`, out:`{\n  "url": "https://httpbin.org/get"\n}`},
+  {cat:"Output", flag:"--trace", short:"Full trace dump", desc:"Dumps a full trace of all incoming/outgoing data to the specified file.", ex:`curl --trace trace.txt https://httpbin.org/get`, out:`== Info: Trying 18.207.112.62:443...\n=> Send header, 75 bytes (0x4b)\n0000: 47 45 54 20 2f 67 65 74  GET /get`},
+  {cat:"Output", flag:"--trace-ascii", short:"ASCII trace dump", desc:"Like --trace but decodes data as ASCII for readability.", ex:`curl --trace-ascii trace.txt https://httpbin.org/get`, out:`== Info: Trying 18.207.112.62:443...\n=> Send header, 75 bytes\n0000: GET /get HTTP/2\n0018: Host: httpbin.org`},
+  {cat:"Output", flag:"--trace-time", short:"Add timestamps to trace", desc:"Prepends each trace line with a timestamp.", ex:`curl --trace-ascii - --trace-time https://httpbin.org/get`, out:`10:32:45.123456 == Info: Trying 18.207.112.62:443...\n10:32:45.456789 => Send header, 75 bytes`},
+  {cat:"Output", flag:"--no-progress-meter", short:"Suppress progress meter", desc:"Suppresses the progress meter but still shows errors (unlike --silent which hides both).", ex:`curl --no-progress-meter https://httpbin.org/get`, out:`{\n  "url": "https://httpbin.org/get"\n}`},
+
+  {cat:"Redirect", flag:"--max-redirs", short:"Max redirect count", desc:"Sets the maximum number of redirects to follow. Default is 30.", ex:`curl -L --max-redirs 5 https://bit.ly/example`, out:`(Follows up to 5 redirects then stops)\n<html>...(final destination)...</html>`},
+  {cat:"Redirect", flag:"--post301", short:"Keep POST on 301", desc:"By default curl converts POST to GET on 301 redirect. This flag preserves POST.", ex:`curl -X POST --post301 -d "data=test" -L https://httpbin.org/redirect-to?url=/post`, out:`{\n  "form": {\n    "data": "test"\n  }\n}`},
+  {cat:"Redirect", flag:"--post302", short:"Keep POST on 302", desc:"By default curl converts POST to GET on 302 redirect. This flag preserves POST.", ex:`curl -X POST --post302 -d "data=test" -L https://httpbin.org/redirect-to?url=/post`, out:`{\n  "form": {\n    "data": "test"\n  }\n}`},
+  {cat:"Redirect", flag:"--post303", short:"Keep POST on 303", desc:"By default, a 303 See Other converts POST to GET. This flag keeps it POST.", ex:`curl -X POST --post303 -d "data=test" -L https://httpbin.org/redirect-to?url=/post`, out:`{\n  "form": {\n    "data": "test"\n  }\n}`},
+  {cat:"Redirect", flag:"-0 / --http1.0", short:"Use HTTP 1.0", desc:"Forces curl to use HTTP 1.0 instead of newer versions.", ex:`curl -0 https://httpbin.org/get`, out:`(Connected via HTTP/1.0)\n{\n  "url": "https://httpbin.org/get"\n}`},
+  {cat:"Redirect", flag:"--http1.1", short:"Use HTTP 1.1", desc:"Forces HTTP/1.1 protocol.", ex:`curl --http1.1 https://httpbin.org/get`, out:`(Connected via HTTP/1.1)\n{\n  "url": "https://httpbin.org/get"\n}`},
+  {cat:"Redirect", flag:"--http2", short:"Use HTTP/2", desc:"Use HTTP/2 (requires curl compiled with HTTP/2 support).", ex:`curl --http2 https://httpbin.org/get`, out:`(Connected via HTTP/2)\n{\n  "url": "https://httpbin.org/get"\n}`},
+  {cat:"Redirect", flag:"--http2-prior-knowledge", short:"HTTP/2 without upgrade", desc:"Use HTTP/2 without HTTP/1.1 Upgrade (assumes server supports h2 directly).", ex:`curl --http2-prior-knowledge https://nghttp2.org/httpbin/get`, out:`(Directly starts HTTP/2 connection)\n{\n  "url": "https://nghttp2.org/httpbin/get"\n}`},
+  {cat:"Redirect", flag:"--http3", short:"Use HTTP/3 (QUIC)", desc:"Use HTTP/3 / QUIC protocol (requires curl with HTTP/3 support).", ex:`curl --http3 https://quic.tech:8443`, out:`(Connected via HTTP/3 / QUIC)\nOK`},
+
+  {cat:"Advanced", flag:"-b / --cookie", short:"Send cookies", desc:"Sends the specified cookies with the request. Can be a string or file path.", ex:`curl -b "session=abc123; lang=en" https://httpbin.org/cookies`, out:`{\n  "cookies": {\n    "lang": "en",\n    "session": "abc123"\n  }\n}`},
+  {cat:"Advanced", flag:"-c / --cookie-jar", short:"Save cookies to file", desc:"Saves received cookies to the specified file (Netscape cookie format).", ex:`curl -c cookies.txt https://httpbin.org/cookies/set/user/alice`, out:`(Cookies saved to cookies.txt)\n302 Found — redirected`},
+  {cat:"Advanced", flag:"-b cookies.txt", short:"Load cookies from file", desc:"Sends cookies from a cookie jar file.", ex:`curl -b cookies.txt https://httpbin.org/cookies`, out:`{\n  "cookies": {\n    "user": "alice"\n  }\n}`},
+  {cat:"Advanced", flag:"--junk-session-cookies", short:"Ignore session cookies", desc:"When loading a cookie file, discard session cookies (non-persistent ones).", ex:`curl -b cookies.txt --junk-session-cookies https://example.com`, out:`(Session cookies from file are ignored)`},
+  {cat:"Advanced", flag:"-K / --config", short:"Read config from file", desc:"Reads curl configuration options from the specified file.", ex:`curl -K mycurl.conf`, out:`(Reads all options from mycurl.conf and executes)`},
+  {cat:"Advanced", flag:"--interface", short:"Use network interface", desc:"Bind to the specified network interface, IP address, or hostname.", ex:`curl --interface eth0 https://httpbin.org/ip`, out:`{\n  "origin": "192.168.1.10"\n}`},
+  {cat:"Advanced", flag:"--resolve", short:"Override DNS resolution", desc:"Provides a custom address for a specific host, bypassing DNS.", ex:`curl --resolve "api.example.com:443:127.0.0.1" https://api.example.com/status`, out:`{\n  "status": "ok"\n} (served from 127.0.0.1)`},
+  {cat:"Advanced", flag:"--dns-servers", short:"Custom DNS servers", desc:"Use the specified DNS servers instead of system defaults.", ex:`curl --dns-servers 8.8.8.8,1.1.1.1 https://httpbin.org/get`, out:`(Resolved using Google DNS 8.8.8.8)\n{\n  "url": "https://httpbin.org/get"\n}`},
+  {cat:"Advanced", flag:"--doh-url", short:"DNS-over-HTTPS", desc:"Use DNS-over-HTTPS to resolve hostnames.", ex:`curl --doh-url https://cloudflare-dns.com/dns-query https://httpbin.org/get`, out:`(Hostname resolved via DoH)\n{\n  "url": "https://httpbin.org/get"\n}`},
+  {cat:"Advanced", flag:"-4 / --ipv4", short:"Force IPv4", desc:"Forces curl to resolve and use IPv4 addresses only.", ex:`curl -4 https://httpbin.org/ip`, out:`{\n  "origin": "203.0.113.1"  (IPv4 address)\n}`},
+  {cat:"Advanced", flag:"-6 / --ipv6", short:"Force IPv6", desc:"Forces curl to resolve and use IPv6 addresses only.", ex:`curl -6 https://httpbin.org/ip`, out:`{\n  "origin": "2001:db8::1"  (IPv6 address)\n}`},
+  {cat:"Advanced", flag:"--keepalive-time", short:"TCP keepalive interval", desc:"Sets the interval in seconds between TCP keepalive probes.", ex:`curl --keepalive-time 30 https://httpbin.org/get`, out:`(Sends keepalive probe every 30 seconds during transfer)`},
+  {cat:"Advanced", flag:"--no-keepalive", short:"Disable keepalive", desc:"Disables TCP keepalive probes on the socket.", ex:`curl --no-keepalive https://httpbin.org/get`, out:`{\n  "url": "https://httpbin.org/get"\n}`},
+  {cat:"Advanced", flag:"--tcp-nodelay", short:"Disable Nagle's algorithm", desc:"Enables TCP_NODELAY option, which disables Nagle's algorithm for lower latency.", ex:`curl --tcp-nodelay https://httpbin.org/get`, out:`(Lower latency connection)\n{\n  "url": "https://httpbin.org/get"\n}`},
+  {cat:"Advanced", flag:"--tcp-fastopen", short:"TCP Fast Open", desc:"Enables TCP Fast Open to reduce connection latency on repeat connections.", ex:`curl --tcp-fastopen https://httpbin.org/get`, out:`(Uses TFO if server supports it)\n{\n  "url": "https://httpbin.org/get"\n}`},
+  {cat:"Advanced", flag:"--unix-socket", short:"Connect via Unix socket", desc:"Connect using a Unix domain socket path instead of a TCP connection.", ex:`curl --unix-socket /var/run/docker.sock http://localhost/v1.41/containers/json`, out:`[{"Id":"abc123","Names":["/myapp"],"Image":"nginx",...}]`},
+  {cat:"Advanced", flag:"--aws-sigv4", short:"AWS SigV4 signing", desc:"Signs requests using AWS Signature Version 4 authentication.", ex:`curl --aws-sigv4 "aws:amz:us-east-1:s3" --user "$KEY:$SECRET" "https://mybucket.s3.amazonaws.com/file.txt"`, out:`(file content)\nAWS authenticated response`},
+  {cat:"Advanced", flag:"--mail-from", short:"SMTP sender address", desc:"Sets the SMTP envelope sender address for email sending.", ex:`curl --mail-from sender@example.com --mail-rcpt rcpt@example.com --upload-file mail.txt smtp://smtp.example.com`, out:`(Email sent successfully)`},
+  {cat:"Advanced", flag:"--mail-rcpt", short:"SMTP recipient", desc:"Sets the SMTP recipient address. Can be used multiple times.", ex:`curl --mail-from a@x.com --mail-rcpt b@x.com -T msg.txt smtp://mail.x.com`, out:`(Mail delivered to b@x.com)`},
+  {cat:"Advanced", flag:"--ftp-ssl", short:"Use SSL for FTP", desc:"Makes curl try to use SSL/TLS for the FTP connection.", ex:`curl --ftp-ssl ftp://ftp.example.com/pub/ --user user:pass`, out:`234 AUTH TLS successful\n226 Directory listing done.`},
+  {cat:"Advanced", flag:"--ftp-pasv", short:"FTP passive mode", desc:"Forces FTP to use PASV (passive) mode instead of active mode.", ex:`curl --ftp-pasv ftp://ftp.example.com/pub/ --user user:pass`, out:`227 Entering Passive Mode (10,0,0,1,19,148)\n226 Directory sent OK.`},
+  {cat:"Advanced", flag:"--alt-svc", short:"Alt-Svc cache file", desc:"Enables Alt-Svc support and specifies a file to store/read Alt-Svc headers.", ex:`curl --alt-svc altsvc.cache https://nghttp2.org/`, out:`(Stores Alt-Svc header info for future requests)`},
+  {cat:"Advanced", flag:"--hsts", short:"HSTS cache file", desc:"Enables HSTS and specifies the cache file.", ex:`curl --hsts hsts.cache https://example.com`, out:`(Stores HSTS policy — future requests forced to HTTPS)`},
+  {cat:"Advanced", flag:"--happy-eyeballs-timeout-ms", short:"Happy Eyeballs timeout", desc:"Controls the delay in milliseconds before starting an IPv4 connection when IPv6 is preferred.", ex:`curl --happy-eyeballs-timeout-ms 200 https://httpbin.org/ip`, out:`(Uses Happy Eyeballs algorithm with 200ms timeout) {"origin": "203.0.113.1"}`},
+
+  {cat:"Debug", flag:"--fail / -f", short:"Fail silently on HTTP errors", desc:"Returns a non-zero exit code if HTTP server returns a 4xx or 5xx error, without outputting the body.", ex:`curl -f https://httpbin.org/status/404; echo "Exit: $?"`, out:`curl: (22) The requested URL returned error: 404\nExit: 22`},
+  {cat:"Debug", flag:"--fail-with-body", short:"Fail but show body", desc:"Like --fail but still outputs the response body on failure.", ex:`curl --fail-with-body https://httpbin.org/status/500`, out:`(500 error body shown)\ncurl: (22) The requested URL returned error: 500`},
+  {cat:"Debug", flag:"--version / -V", short:"Show curl version info", desc:"Displays the curl version, supported protocols, and features.", ex:`curl --version`, out:`curl 8.7.1 (x86_64-pc-linux-gnu) libcurl/8.7.1 OpenSSL/3.2.1\nRelease-Date: 2024-03-27\nProtocols: dict file ftp ftps gopher http https imap...\cnFeatures: alt-svc AsynchDNS brotli HSTS HTTP2 HTTP3...`},
+  {cat:"Debug", flag:"--help / -h", short:"Show help", desc:"Displays the help message listing all available options.", ex:`curl --help all | head -20`, out:`Usage: curl [options...] <url>\n --abstract-unix-socket <path>  Connect via abstract Unix domain socket\n --alt-svc <filename>    Enable alt-svc with this cache file\n --anyauth               Pick any authentication method\n...`},
+  {cat:"Debug", flag:"-p / --proxytunnel", short:"Tunnel through proxy", desc:"Use the HTTP CONNECT method to tunnel through a proxy (used with -x).", ex:`curl -x http://proxy:8080 -p https://httpbin.org/get`, out:`(CONNECT tunnel established through proxy)\n{\n  "url": "https://httpbin.org/get"\n}`},
+  {cat:"Debug", flag:"--path-as-is", short:"Preserve URL path", desc:"Prevents curl from squashing ../ sequences in URL paths.", ex:`curl --path-as-is https://httpbin.org/anything/../get`, out:`{\n  "url": "https://httpbin.org/anything/../get"\n} (path preserved as-is)`},
+  {cat:"Debug", flag:"--proto", short:"Allowed protocols", desc:"Restricts which protocols curl is allowed to use.", ex:`curl --proto '=https' https://httpbin.org/get`, out:`(Only HTTPS allowed)\n{\n  "url": "https://httpbin.org/get"\n}`},
+  {cat:"Debug", flag:"--proto-redir", short:"Protocols allowed on redirect", desc:"Restricts protocols allowed when following redirects.", ex:`curl --proto-redir '=https' -L http://example.com`, out:`(Redirects only followed if they stay on HTTPS)`},
+  {cat:"Debug", flag:"--max-redirs 0", short:"Disable all redirects", desc:"Setting max-redirs to 0 disables redirect following entirely.", ex:`curl --max-redirs 0 http://google.com`, out:`curl: (47) Maximum (0) redirects followed`},
+  {cat:"Debug", flag:"--local-port", short:"Bind to local port range", desc:"Forces curl to use the specified local port range for the connection.", ex:`curl --local-port 5000-5100 https://httpbin.org/get`, out:`(Binds local port between 5000-5100)\n{\n  "url": "https://httpbin.org/get"\n}`},
+  {cat:"Debug", flag:"--preproxy", short:"Pre-proxy (SOCKS chain)", desc:"Use this proxy BEFORE the main --proxy. Allows chaining proxies.", ex:`curl --preproxy socks5://127.0.0.1:1080 -x http://corp-proxy:8080 https://httpbin.org/ip`, out:`(Traffic: SOCKS5 -> HTTP proxy -> httpbin.org)\n{\n  "origin": "(exit IP)"\n}`},
+  {cat:"Debug", flag:"--stderr -", short:"Print stderr to stdout", desc:"Redirect curl's error/progress output to stdout (useful for logging pipelines).", ex:`curl --stderr - https://httpbin.org/get 2>&1 | head`, out:`  % Total    % Received % Xferd  Average Speed\n...\n{\n  "url": "https://httpbin.org/get"\n}`},
+];
+
+const catKeys = [...new Set(CMDS.map(c => c.cat))];
+let activeCat = "All";
+let searchVal = "";
+
+const CAT_COLORS = {
+  "Basic":"#378ADD","Headers":"#1D9E75","Auth":"#D85A30","Data":"#7F77DD",
+  "File":"#BA7517","SSL":"#D4537E","Proxy":"#639922","Timeout":"#888780",
+  "Output":"#185FA5","Redirect":"#E24B4A","Advanced":"#533AB7","Debug":"#3B6D11"
+};
+
+function catColor(c){ return CAT_COLORS[c] || "#888"; }
+
+function hexToRgba(hex, a){
+  const r=parseInt(hex.slice(1,3),16),g=parseInt(hex.slice(3,5),16),b=parseInt(hex.slice(5,7),16);
+  return `rgba(${r},${g},${b},${a})`;
+}
+
+function renderCats(){
+  const d = document.getElementById("cats");
+  d.innerHTML = "";
+  const all = document.createElement("button");
+  all.className = "cat-btn" + (activeCat==="All"?" active":"");
+  all.textContent = "All";
+  if(activeCat==="All"){ all.style.background="#1a1a1a"; all.style.borderColor="transparent"; }
+  all.onclick = ()=>{ activeCat="All"; render(); };
+  d.appendChild(all);
+  catKeys.forEach(c=>{
+    const btn = document.createElement("button");
+    btn.className = "cat-btn" + (activeCat===c?" active":"");
+    btn.textContent = c;
+    btn.style.borderColor = catColor(c);
+    btn.style.color = activeCat===c ? "#fff" : catColor(c);
+    if(activeCat===c) btn.style.background = catColor(c);
+    btn.onclick = ()=>{ activeCat=c; render(); };
+    d.appendChild(btn);
+  });
+}
+
+function render(){
+  const q = searchVal.toLowerCase();
+  const filtered = CMDS.filter(c=>{
+    const matchCat = activeCat==="All" || c.cat===activeCat;
+    const matchSearch = !q || c.flag.toLowerCase().includes(q) || c.short.toLowerCase().includes(q) || c.desc.toLowerCase().includes(q) || c.ex.toLowerCase().includes(q);
+    return matchCat && matchSearch;
+  });
+
+  renderCats();
+  document.getElementById("stats").textContent = `Showing ${filtered.length} of ${CMDS.length} commands`;
+
+  const list = document.getElementById("list");
+  list.innerHTML = "";
+
+  if(!filtered.length){
+    list.innerHTML = '<div class="empty">No commands match your search.</div>';
+    return;
+  }
+
+  filtered.forEach((cmd, i)=>{
+    const card = document.createElement("div");
+    card.className = "cmd-card";
+    const col = catColor(cmd.cat);
+    card.style.borderLeft = `3px solid ${col}`;
+
+    const hdr = document.createElement("div");
+    hdr.className = "cmd-header";
+    hdr.innerHTML = `
+      <span class="cmd-badge" style="background:${hexToRgba(col,0.12)};color:${col}">${cmd.cat}</span>
+      <span class="cmd-flag">${cmd.flag}</span>
+      <span class="cmd-desc-short">${cmd.short}</span>
+      <span class="chevron" id="chev-${i}">&#9654;</span>
+    `;
+
+    const body = document.createElement("div");
+    body.className = "cmd-body";
+    body.id = "body-" + i;
+    body.innerHTML = `
+      <p>${cmd.desc}</p>
+      <div class="syntax-section">
+        <h4>Example command</h4>
+        <div class="code-block">${cmd.ex}</div>
+      </div>
+      <div class="syntax-section">
+        <h4>Example output</h4>
+        <div class="output-block">${cmd.out}</div>
+      </div>
+    `;
+
+    hdr.onclick = ()=>{
+      const isOpen = body.classList.contains("open");
+      document.querySelectorAll(".cmd-body.open").forEach(b => b.classList.remove("open"));
+      document.querySelectorAll(".chevron").forEach(c => c.style.transform = "");
+      if(!isOpen){
+        body.classList.add("open");
+        document.getElementById("chev-" + i).style.transform = "rotate(90deg)";
+      }
+    };
+
+    card.appendChild(hdr);
+    card.appendChild(body);
+    list.appendChild(card);
+  });
+}
+
+document.getElementById("search").oninput = function(){
+  searchVal = this.value;
+  render();
+};
+
+render();
+</script>
+</body>
+</html>
