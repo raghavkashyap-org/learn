@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Advanced Linux SysUtils Reference</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: #f5f5f5;
+    color: #1a1a1a;
+    padding: 1.5rem;
+    min-height: 100vh;
+  }
+  h1 { font-size: 24px; font-weight: 600; margin-bottom: 0.25rem; color: #1a1a1a; letter-spacing: -0.5px; }
+  .subtitle { font-size: 13px; color: #666; margin-bottom: 1.5rem; }
+  .top { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 1rem; align-items: center; }
+  .search-box {
+    flex: 1;
+    min-width: 200px;
+    padding: 10px 14px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background: #fff;
+    color: #1a1a1a;
+    font-size: 14px;
+    outline: none;
+    transition: border 0.15s, box-shadow 0.15s;
+  }
+  .search-box:focus { border-color: #7F77DD; box-shadow: 0 0 0 3px rgba(127,119,221,0.15); }
+  .cats { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 1rem; }
+  .cat-btn {
+    padding: 6px 14px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    background: transparent;
+    color: #555;
+    font-size: 12px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.15s;
+    font-family: inherit;
+  }
+  .cat-btn:hover { opacity: 0.8; }
+  .cat-btn.active { font-weight: 500; color: #fff !important; border-color: transparent !important; }
+  .stats { font-size: 12px; color: #888; margin-bottom: 0.75rem; }
+  .cmd-list { display: flex; flex-direction: column; gap: 8px; }
+  .cmd-card { background: #fff; border: 1px solid #e5e5e5; border-radius: 8px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.02); }
+  .cmd-header { display: flex; align-items: center; gap: 12px; padding: 12px 16px; cursor: pointer; user-select: none; transition: background 0.1s; }
+  .cmd-header:hover { background: #fdfdfd; }
+  .cmd-badge { font-size: 11px; padding: 3px 10px; border-radius: 20px; font-weight: 600; flex-shrink: 0; text-transform: uppercase; letter-spacing: 0.05em; }
+  .cmd-flag { font-family: "SFMono-Regular", Consolas, monospace; font-size: 13.5px; color: #1a1a1a; font-weight: 600; flex: 1.5; min-width: 0; }
+  .cmd-desc-short { font-size: 13px; color: #555; flex: 2; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .chevron { font-size: 10px; color: #aaa; transition: transform 0.2s; flex-shrink: 0; }
+  .cmd-body { display: none; padding: 16px 20px; border-top: 1px solid #f0f0f0; background: #fafafa; }
+  .cmd-body.open { display: block; }
+  .cmd-body p { font-size: 13.5px; color: #444; margin-bottom: 14px; line-height: 1.6; }
+  .cmd-body h4 { font-size: 11px; font-weight: 600; color: #888; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px; }
+  .code-block { background: #f0f0f0; border: 1px solid #e0e0e0; border-radius: 6px; padding: 12px 16px; font-family: "SFMono-Regular", Consolas, monospace; font-size: 12.5px; color: #1a1a1a; margin-bottom: 14px; white-space: pre-wrap; word-break: break-all; line-height: 1.6; }
+  .output-block { background: #1e1e1e; border-radius: 6px; padding: 12px 16px; font-family: "SFMono-Regular", Consolas, monospace; font-size: 12px; color: #a8ff78; margin-bottom: 4px; white-space: pre-wrap; word-break: break-all; line-height: 1.6; overflow-x: auto; }
+  .syntax-section { margin-bottom: 12px; }
+  .empty { text-align: center; padding: 3rem; color: #aaa; font-size: 14px; }
+
+  @media (max-width: 768px) {
+    .cmd-desc-short { display: none; }
+    .cmd-flag { flex: 1; }
+  }
+
+  /* Dark mode */
+  @media (prefers-color-scheme: dark) {
+    body { background: #0f1115; color: #e5e5e5; }
+    h1 { color: #e5e5e5; }
+    .subtitle { color: #888; }
+    .search-box { background: #1a1d24; border-color: #2a2d35; color: #e5e5e5; }
+    .cat-btn { border-color: #333; color: #aaa; }
+    .cmd-card { background: #1a1d24; border-color: #2a2d35; box-shadow: none; }
+    .cmd-header:hover { background: #20242c; }
+    .cmd-flag { color: #e5e5e5; }
+    .cmd-desc-short { color: #999; }
+    .cmd-body { background: #14161a; border-top-color: #2a2d35; }
+    .cmd-body p { color: #bbb; }
+    .code-block { background: #20242c; border-color: #2a2d35; color: #58a6ff; }
+    .output-block { background: #0d0f12; color: #3fb950; }
+    .stats { color: #666; }
+  }
+</style>
+</head>
+<body>
+
+<h1>Advanced Linux SysUtils Reference</h1>
+<p class="subtitle">Expert-level commands for system tracing, network analysis, memory management, and sandboxing.</p>
+
+<div class="top">
+  <input class="search-box" type="text" id="search" placeholder="Search commands, flags, descriptions..." />
+</div>
+<div class="cats" id="cats"></div>
+<div class="stats" id="stats"></div>
+<div class="cmd-list" id="list"></div>
+
+<script>
+const CMDS = [
+  // --- NETWORKING & THREAT DETECTION ---
+  {cat:"Network", flag:"tcpdump -i any -nn -A -s0", short:"Sniff cleartext traffic", desc:"Captures and prints packets on all interfaces in ASCII (-A), avoiding DNS/port resolution (-nn). Critical for real-time threat detection and building IDS datasets.", ex:`sudo tcpdump -i any -nn -A -s0 port 80`, out:`10:11:52.123456 IP 192.168.1.5.54321 > 93.184.216.34.80: Flags [P.], seq 1:120... \nE..p..@.@.p...Q...D"...P.......P.s....... \nGET / HTTP/1.1\r\nHost: example.com\r\n`},
+  {cat:"Network", flag:"tcpdump -w capture.pcap", short:"Write packets to PCAP", desc:"Saves raw packet data to a file for later deep-packet inspection with Wireshark or Scapy.", ex:`sudo tcpdump -i eth0 -w flow_data.pcap tcp port 443`, out:`tcpdump: listening on eth0, link-type EN10MB (Ethernet), capture size 262144 bytes\n^C\n145 packets captured\n148 packets received by filter`},
+  {cat:"Network", flag:"ss -tulpn", short:"Show listening sockets", desc:"Modern replacement for netstat. Displays all TCP/UDP listening ports, along with the process IDs and names owning them. Essential for verifying isolated environments.", ex:`sudo ss -tulpn`, out:`Netid  State   Recv-Q  Send-Q   Local Address:Port    Peer Address:Port  Process\ntcp    LISTEN  0       128      127.0.0.1:8000        0.0.0.0:* users:(("python3",pid=4512,fd=3))`},
+  {cat:"Network", flag:"ss -s", short:"Socket statistics", desc:"Provides a quick, high-level summary of all established, closed, and orphaned network connections.", ex:`ss -s`, out:`Total: 142 (kernel 210)\nTCP:   45 (estab 12, closed 20, orphaned 0, synrecv 0, timewait 15/0), ports 0`},
+  {cat:"Network", flag:"lsof -i :<port>", short:"Identify process on port", desc:"Lists open files associated with a specific network port. In Linux, everything is a file, including network sockets.", ex:`sudo lsof -i :8080`, out:`COMMAND   PID USER   FD   TYPE DEVICE SIZE/OFF NODE NAME\nnode    12345 user   12u  IPv4  54321      0t0  TCP *:http-alt (LISTEN)`},
+  {cat:"Network", flag:"ip -s link", short:"Network interface stats", desc:"Shows detailed statistics for network interfaces, including dropped packets, errors, and RX/TX bytes. Highly useful for debugging network bottlenecks.", ex:`ip -s link show enp3s0`, out:`2: enp3s0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP mode DEFAULT\n    RX: bytes  packets  errors  dropped overrun mcast\n    10485760   12405    0       0       0       0\n    TX: bytes  packets  errors  dropped carrier collsns\n    5242880    8401     0       0       0       0`},
+  {cat:"Network", flag:"socat -v TCP-L:8080,fork", short:"Bidirectional byte stream relay", desc:"The Swiss Army knife of networking. Creates a listening TCP socket that forks on connection. Useful for intercepting API traffic, creating quick proxies, or testing zero-knowledge architectures.", ex:`socat -v TCP-L:8080,fork TCP:api.remote.com:80`, out:`> 2026/04/12 10:11:52.123456  length=64 from=0 to=63\nGET / HTTP/1.1\r\nHost: api.remote.com\r\n\n< 2026/04/12 10:11:52.234567  length=128 from=0 to=127\nHTTP/1.1 200 OK\r\nContent-Type: application/json`},
+
+  // --- PROCESS & SYSTEM TRACING ---
+  {cat:"Tracing", flag:"strace -p <pid> -e trace=open,read", short:"Trace syscalls", desc:"Intercepts and records the system calls which are called by a process. Absolutely vital for debugging compiled binaries (like C++) when you don't have the source code.", ex:`sudo strace -p 1234 -e trace=openat,read`, out:`openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3\nread(3, "\\177ELF\\2\\1\\1\\3\\0\\0\\0\\0\\0\\0\\0\\0\\3\\0>\\0\\1\\0\\0\\0...", 832) = 832`},
+  {cat:"Tracing", flag:"strace -c ./binary", short:"Syscall profiling", desc:"Runs the specified command until it exits and compiles a summary of system calls, showing time spent, calls, and errors. Great for identifying bottlenecks.", ex:`strace -c ./a.out`, out:`% time     seconds  usecs/call     calls    errors syscall\n------ ----------- ----------- --------- --------- ----------------\n 45.21    0.004123          12       345           mmap\n 30.10    0.002810           5       512           read\n------ ----------- ----------- --------- --------- ----------------\n100.00    0.009121                   958           total`},
+  {cat:"Tracing", flag:"ltrace ./binary", short:"Trace library calls", desc:"Similar to strace, but intercepts dynamic library calls (e.g., glibc functions like malloc, printf) instead of kernel system calls.", ex:`ltrace ./a.out`, out:`malloc(1024)                                     = 0x55f1c3a7b2a0\nstrcpy(0x55f1c3a7b2a0, "Test string")            = 0x55f1c3a7b2a0\nputs("Test string")                              = 12\n+++ exited (status 0) +++`},
+  {cat:"Tracing", flag:"perf stat ./binary", short:"Hardware performance counters", desc:"Uses Linux performance counters to gather statistics on CPU cycles, cache misses, and branch mispredictions. Essential for hyper-optimizing Data Structures & Algorithms implementations.", ex:`perf stat ./dsa_benchmark`, out:` Performance counter stats for './dsa_benchmark':\n\n         12.34 msec task-clock                #    0.985 CPUs utilized          \n             5      context-switches          #  405.186 /sec                   \n    34,567,890      cycles                    #    2.801 GHz                    \n    12,345,678      instructions              #    0.36  insn per cycle         \n       450,123      cache-misses              #    3.120 % of all cache refs`},
+  {cat:"Tracing", flag:"bpftrace -e", short:"eBPF dynamic tracing", desc:"Allows safe, low-overhead dynamic tracing of the Linux kernel and user-level applications. The modern standard for real-time system introspection.", ex:`sudo bpftrace -e 'tracepoint:syscalls:sys_enter_execve { printf("%s called %s\\n", comm, str(args->filename)); }'`, out:`Attaching 1 probe...\nbash called /usr/bin/ls\nmake called /usr/bin/g++\ng++ called /usr/libexec/gcc/x86_64-linux-gnu/13/cc1plus`},
+
+  // --- MEMORY & RESOURCES ---
+  {cat:"Memory", flag:"valgrind --leak-check=full", short:"Memory profiling", desc:"Executes a program in a simulated CPU to detect memory leaks, uninitialized memory usage, and out-of-bounds array access. Crucial for C/C++ development.", ex:`valgrind --leak-check=full --show-leak-kinds=all ./a.out`, out:`==12345== HEAP SUMMARY:\n==12345==     in use at exit: 40 bytes in 1 blocks\n==12345==   total heap usage: 2 allocs, 1 frees, 1,064 bytes allocated\n==12345== \n==12345== 40 bytes in 1 blocks are definitely lost in loss record 1 of 1\n==12345==    at 0x483B7F3: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)\n==12345==    by 0x10915E: main (main.cpp:5)`},
+  {cat:"Memory", flag:"pmap -x <pid>", short:"Process memory map", desc:"Reports the memory map of a process, showing exactly how much physical RAM (RSS) and dirty memory each shared library and heap segment is consuming.", ex:`pmap -x 1234`, out:`1234:   ./a.out\nAddress           Kbytes     RSS   Dirty Mode  Mapping\n000055f1c3a7a000       4       4       0 r---- a.out\n000055f1c3a7b000       4       4       4 rw--- a.out\n000055f1c48bc000     132      12      12 rw---   [ anon ]\n...`},
+  {cat:"Memory", flag:"vmstat 1 5", short:"Virtual memory stats", desc:"Reports information about processes, memory, paging, block IO, traps, and CPU activity. '1 5' means 1-second intervals, 5 times.", ex:`vmstat 1 5`, out:`procs -----------memory---------- ---swap-- -----io---- -system-- ------cpu-----\n r  b   swpd   free   buff  cache   si   so    bi    bo   in   cs us sy id wa st\n 1  0      0 123456  45678 890123    0    0    12    34  150  250 15  5 80  0  0`},
+  {cat:"Memory", flag:"slabtop -o", short:"Kernel slab cache info", desc:"Displays detailed real-time information about kernel slab caches. Useful if the kernel itself is leaking memory or consuming too much RAM due to massive file/network operations.", ex:`sudo slabtop -o | head -n 10`, out:` Active / Total Objects (% used)    : 1245000 / 1300000 (95.7%)\n Active / Total Slabs (% used)      : 45000 / 45000 (100.0%)\n Active / Total Caches (% used)     : 105 / 150 (70.0%)\n\n  OBJS ACTIVE  USE OBJ SIZE  SLABS OBJ/SLAB CACHE SIZE NAME\n345000 340000  98%    0.19K   15000       23      60000K dentry`},
+
+  // --- SANDBOXING & NAMESPACES ---
+  {cat:"Isolation", flag:"nsenter -t <pid> -n", short:"Enter network namespace", desc:"Executes a program in the namespace(s) of a target process. Excellent for debugging 'dark' or rootless containers by injecting a shell into their isolated network stack.", ex:`sudo nsenter -t 4512 -n -m /bin/bash`, out:`root@container-namespace:/# ip a\n(Shows the isolated container's network interfaces instead of the host's)`},
+  {cat:"Isolation", flag:"unshare -r -n", short:"Run isolated process", desc:"Runs a program with some namespaces unshared from the parent. '-r' maps current user to root in the new namespace, '-n' isolates the network. Perfect for testing code safely.", ex:`unshare -r -n /bin/bash`, out:`root@isolated:~# ping 8.8.8.8\nping: connect: Network is unreachable`},
+  {cat:"Isolation", flag:"lsns -p <pid>", short:"List namespaces", desc:"Lists information about all the currently accessible namespaces or those of a specific process. Helps visualize how deeply sandboxed a tool is.", ex:`lsns -p 1234`, out:`        NS TYPE   NPROCS   PID USER    COMMAND\n4026531835 cgroup      1  1234 user    /bin/bash\n4026531836 pid         1  1234 user    /bin/bash\n4026531840 net         1  1234 user    /bin/bash`},
+  {cat:"Isolation", flag:"cgexec -g", short:"Run in control group", desc:"Runs a task in specified cgroups. Useful for strictly limiting the CPU, memory, or disk I/O a process can consume.", ex:`sudo cgexec -g memory:my_sandbox ./untrusted_binary`, out:`(Process runs but is OOM-killed if it exceeds the limit set in the my_sandbox cgroup)`},
+
+  // --- TEXT, LOGS & DATA PIPELINES ---
+  {cat:"Data Ops", flag:"awk '{print $1}'", short:"Column extraction & logic", desc:"A complete text processing language. Extracts the first column (e.g., IPs from an access log). Can handle complex math and conditional logic per line.", ex:`awk '{print $1}' /var/log/nginx/access.log | sort | uniq -c | sort -nr | head -3`, out:`  1450 192.168.1.100\n   890 10.0.0.5\n   412 172.16.0.1`},
+  {cat:"Data Ops", flag:"sed -i 's/old/new/g'", short:"Stream editor replacement", desc:"Finds and replaces strings in a file seamlessly. The '-i' flag edits the file in-place.", ex:`sed -i 's/127.0.0.1/0.0.0.0/g' docker-compose.yml`, out:`(Silently updates all instances of 127.0.0.1 to 0.0.0.0 in the file)`},
+  {cat:"Data Ops", flag:"jq '.[] | select(.id)'", short:"JSON parsing", desc:"The ultimate tool for slicing, filtering, and mapping JSON data in the terminal. Essential when working with APIs like FastAPI.", ex:`curl -s https://api.github.com/repos/torvalds/linux/commits | jq '.[0].commit.author.name'`, out:`"Linus Torvalds"`}, 
+  {cat:"Data Ops", flag:"xargs -I {} -P 4", short:"Parallel execution", desc:"Builds and executes command lines from standard input. '-P' runs commands in parallel, drastically speeding up bulk operations.", ex:`find . -name "*.cpp" | xargs -I {} -P 4 g++ -O3 {} -o {}.out`, out:`(Compiles all C++ files in the directory using 4 parallel threads)`},
+  {cat:"Data Ops", flag:"grep -Pzo", short:"Multiline PCRE regex", desc:"Uses Perl-Compatible Regular Expressions (-P), treats input as a single line (-z) to match across line breaks, and outputs only the match (-o).", ex:`grep -Pzo '(?s)-----BEGIN PGP MESSAGE-----.*?-----END PGP MESSAGE-----' dump.txt`, out:`-----BEGIN PGP MESSAGE-----\nhQEMAw... (multiline content) ...\n-----END PGP MESSAGE-----`},
+  
+  // --- FILE SYSTEM & DISK ---
+  {cat:"Storage", flag:"inotifywait -m -r -e", short:"Filesystem monitoring", desc:"Uses the Linux inotify interface to wait for changes to files. Extremely useful for triggering automated builds (e.g., compiling a Makefile on file save).", ex:`inotifywait -m -r -e modify,create,delete ./src/`, out:`Setting up watches.  Beware: since -r was given, this may take a while!\nWatches established.\n./src/ MODIFY main.cpp\n./src/ CREATE temp.swp`},
+  {cat:"Storage", flag:"rsync -avzP", short:"Incremental sync", desc:"Fast, versatile, remote (and local) file-copying tool. Transfers only the delta (changes) of files. 'P' shows progress and keeps partially transferred files.", ex:`rsync -avzP ./project/ user@aws-instance:/var/www/project/`, out:`sending incremental file list\nmain.cpp\n          4,500 100%    4.29MB/s    0:00:00 (xfr#1, to-chk=12/15)`},
+  {cat:"Storage", flag:"find . -type f -exec", short:"Find and execute", desc:"Searches the directory tree and executes a command on each found file securely, bypassing argument list too long errors.", ex:`find . -type f -name "*.log" -exec rm {} +`, out:`(Silently deletes all .log files in the directory tree)`},
+  {cat:"Storage", flag:"lsblk -o NAME,FSTYPE,SIZE,MOUNTPOINT", short:"List block devices", desc:"Displays information about all available block devices (hard drives, flash drives). Much safer and easier to read than fdisk -l.", ex:`lsblk -o NAME,FSTYPE,SIZE,MOUNTPOINT`, out:`NAME        FSTYPE   SIZE MOUNTPOINT\nvda                  50G \n├─vda1      ext4     49G /\n└─vda14               4M \nvdb         ext4    100G /mnt/data`},
+  {cat:"Storage", flag:"stat -c '%a %n'", short:"Detailed file metadata", desc:"Displays file or file system status. Much more detailed than ls -l, showing exact modify/access/change epoch timestamps or octal permissions.", ex:`stat -c 'Perms: %a | Owner: %U | File: %n' config.json`, out:`Perms: 644 | Owner: root | File: config.json`},
+  // --- KERNEL & HARDWARE ---
+  {cat:"Kernel", flag:"sysctl -a", short:"List all kernel parameters", desc:"Displays all configurable kernel parameters currently loaded in sysfs. Useful for network and memory tuning.", ex:`sysctl -a | grep ip_forward`, out:`net.ipv4.ip_forward = 1\nnet.ipv6.conf.all.forwarding = 0`},
+  {cat:"Kernel", flag:"sysctl -w", short:"Modify kernel parameter", desc:"Temporarily changes a kernel parameter on the fly (until next reboot).", ex:`sudo sysctl -w net.ipv4.tcp_syncookies=1`, out:`net.ipv4.tcp_syncookies = 1`},
+  {cat:"Kernel", flag:"dmesg -wH", short:"Follow kernel ring buffer", desc:"Follows the kernel ring buffer in real-time with human-readable timestamps. Essential for debugging hardware hot-plugging or driver panics.", ex:`dmesg -wH`, out:`[  +0.000042] usb 1-1: new high-speed USB device number 5 using xhci_hcd\n[  +0.145123] usb-storage 1-1:1.0: USB Mass Storage device detected`},
+  {cat:"Kernel", flag:"lsmod", short:"List loaded kernel modules", desc:"Formats the contents of /proc/modules to show what kernel modules are currently loaded and their dependencies.", ex:`lsmod | grep kvm`, out:`kvm_intel             315392  0\nkvm                   847872  1 kvm_intel\nirqbypass              16384  1 kvm`},
+  {cat:"Kernel", flag:"modprobe -r", short:"Remove kernel module", desc:"Safely unloads a kernel module and its unused dependencies. Far safer than rmmod.", ex:`sudo modprobe -r uvcvideo`, out:`(Silently removes the webcam driver module if not in use)`},
+  {cat:"Hardware", flag:"dmidecode -t memory", short:"Read BIOS/DMI RAM info", desc:"Dumps the system's DMI (SMBIOS) table to reveal hardware specifics, such as physical RAM slots, speeds, and maximum capacity without opening the case.", ex:`sudo dmidecode -t memory | grep -i size`, out:`Maximum Capacity: 128 GB\nSize: 16 GB\nSize: 16 GB\nSize: No Module Installed`},
+  {cat:"Hardware", flag:"lspci -nnk", short:"List PCI devices & drivers", desc:"Displays all PCI buses and devices connected, including the exact kernel driver in use and the hardware vendor/device IDs.", ex:`lspci -nnk | grep -A 2 VGA`, out:`01:00.0 VGA compatible controller [0300]: NVIDIA Corporation [10de:1f08] (rev a1)\n        Subsystem: NVIDIA Corporation [10de:1f08]\n        Kernel driver in use: nvidia`},
+  {cat:"Hardware", flag:"lshw -short", short:"Hardware summary", desc:"Extracts detailed information on the hardware configuration of the machine and formats it into a concise table.", ex:`sudo lshw -short`, out:`H/W path       Device     Class      Description\n================================================\n                          system     PowerEdge R740\n/0                        bus        0WWMD\n/0/0                      memory     64GiB System Memory`},
+  {cat:"Hardware", flag:"numactl --hardware", short:"NUMA node topology", desc:"Shows the Non-Uniform Memory Access (NUMA) architecture of the CPU(s) and memory, critical for optimizing thread placement in high-performance C++ apps.", ex:`numactl --hardware`, out:`available: 2 nodes (0-1)\nnode 0 cpus: 0 1 2 3 4 5 6 7\nnode 0 size: 32154 MB\nnode 1 cpus: 8 9 10 11 12 13 14 15`},
+
+  // --- SECURITY & AUDITING ---
+  {cat:"Security", flag:"auditctl -w -p -k", short:"Add syscall/file audit rule", desc:"Instructs the Linux Audit daemon to watch a specific file or directory for read/write/execute/attribute changes.", ex:`sudo auditctl -w /etc/shadow -p wa -k shadow_changes`, out:`(Rule added silently. Any write/attribute change to /etc/shadow is now logged to audit.log)`},
+  {cat:"Security", flag:"ausearch -k", short:"Search audit logs", desc:"Queries the auditd logs for specific events using the keys defined via auditctl.", ex:`sudo ausearch -k shadow_changes | grep type=SYSCALL`, out:`type=SYSCALL msg=audit(1681294012.123:45): arch=c000003e syscall=257 success=yes exit=3 a0=ffffff9c a1=7ffe2a...`},
+  {cat:"Security", flag:"chattr +i", short:"Make file immutable", desc:"Changes file attributes on a Linux file system to make it immutable. Even root cannot delete, rename, or write to it until the attribute is removed (-i).", ex:`sudo chattr +i /etc/resolv.conf`, out:`(File is now locked. Attempting to rm yields: "Operation not permitted")`},
+  {cat:"Security", flag:"lsattr", short:"List file attributes", desc:"Displays second-extended file system attributes (like immutability or append-only flags), which are invisible to standard 'ls'.", ex:`lsattr /etc/resolv.conf`, out:`----i---------e------- /etc/resolv.conf`},
+  {cat:"Security", flag:"getfacl", short:"Get file ACLs", desc:"Displays the Access Control Lists (ACLs) of a file, revealing fine-grained permissions beyond the standard owner/group/others.", ex:`getfacl /var/www/html`, out:`# file: /var/www/html\n# owner: root\n# group: root\nuser::rwx\nuser:www-data:r-x\ngroup::r-x\nmask::r-x\nother::r-x`},
+  {cat:"Security", flag:"setfacl -m", short:"Modify file ACLs", desc:"Sets specific Access Control List permissions, allowing you to grant a specific user read/write access without changing the file's owner or group.", ex:`setfacl -m u:raghav:rw /var/log/syslog`, out:`(Grants user 'raghav' read/write access to syslog without making him root)`},
+  {cat:"Security", flag:"aa-status", short:"AppArmor status", desc:"Displays the current operational state of AppArmor, including which profiles are loaded and which processes are currently confined.", ex:`sudo aa-status`, out:`apparmor module is loaded.\n45 profiles are loaded.\n43 profiles are in enforce mode.\n2 profiles are in complain mode.\n12 processes have profiles defined.`},
+
+  // --- TRAFFIC CONTROL & FIREWALL ---
+  {cat:"Traffic", flag:"tc qdisc add dev", short:"Simulate network latency", desc:"Uses Linux Traffic Control to inject artificial delay, packet loss, or jitter into a network interface. Perfect for testing distributed systems.", ex:`sudo tc qdisc add dev eth0 root netem delay 100ms 20ms`, out:`(All outgoing traffic on eth0 now experiences 100ms delay with a ±20ms jitter)`},
+  {cat:"Traffic", flag:"tc -s qdisc ls", short:"Show traffic control rules", desc:"Lists the current active traffic control queueing disciplines and their statistics.", ex:`tc -s qdisc ls dev eth0`, out:`qdisc netem 8001: root refcnt 2 limit 1000 delay 100ms  20ms\n Sent 14502 bytes 102 pkt (dropped 0, overlimits 0 requeues 0)`},
+  {cat:"Traffic", flag:"iptables-save", short:"Dump firewall rules", desc:"Dumps the entire current iptables rule set to stdout. Usually piped to a file to backup rules before making changes.", ex:`sudo iptables-save > firewall.rules`, out:`*filter\n:INPUT ACCEPT [0:0]\n:FORWARD ACCEPT [0:0]\n:OUTPUT ACCEPT [0:0]\n-A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT\nCOMMIT`},
+  {cat:"Traffic", flag:"nft list ruleset", short:"Dump nftables rules", desc:"The modern replacement for iptables. Dumps all currently active packet filtering rules across all families (ip, ip6, inet, arp, bridge).", ex:`sudo nft list ruleset`, out:`table inet filter {\n    chain input {\n        type filter hook input priority 0; policy drop;\n        ct state established,related accept\n    }\n}`},
+  {cat:"Traffic", flag:"arping -I", short:"Send ARP requests", desc:"Pings a destination IP using ARP packets instead of ICMP. Useful for discovering if an IP is alive on the local subnet even if ICMP is blocked.", ex:`sudo arping -I eth0 -c 3 192.168.1.1`, out:`ARPING 192.168.1.1 from 192.168.1.5 eth0\nUnicast reply from 192.168.1.1 [00:1A:2B:3C:4D:5E]  1.123ms`},
+
+  // --- PERFORMANCE & PROFILING ---
+  {cat:"Perf", flag:"pidstat -d 1", short:"Process I/O stats", desc:"Reports I/O statistics for individual Linux tasks/processes in real-time. Crucial for finding processes thrashing the disk.", ex:`pidstat -d 1 3`, out:`10:11:12      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command\n10:11:13     1000     14502      0.00   4500.00      0.00       2  postgres`},
+  {cat:"Perf", flag:"mpstat -P ALL 1", short:"Per-CPU usage", desc:"Displays CPU utilization statistics for every individual logical core on the system, updated every 1 second.", ex:`mpstat -P ALL 1 2`, out:`10:12:00     CPU    %usr   %nice    %sys %iowait    %irq   %soft  %steal  %guest  %gnice   %idle\n10:12:01     all    5.12    0.00    1.25    0.10    0.00    0.05    0.00    0.00    0.00   93.48\n10:12:01       0   12.50    0.00    2.50    0.00    0.00    0.00    0.00    0.00    0.00   85.00`},
+  {cat:"Perf", flag:"iostat -xz 1", short:"Extended block I/O", desc:"Provides deep metrics on disk utilization, wait times, and queue lengths. The '-z' flag hides idle devices.", ex:`iostat -xz 1 2`, out:`Device            r/s     w/s     rkB/s     wkB/s   rrqm/s   wrqm/s  %rrqm  %wrqm r_await w_await aqu-sz rareq-sz wareq-sz  svctm  %util\nnvme0n1         12.00  345.00    128.00  14500.00     0.00    12.00   0.00   3.36    0.50    1.20   0.45    10.67    42.03   0.80  28.50`},
+  {cat:"Perf", flag:"sar -n DEV 1", short:"Historical network stats", desc:"Collects, reports, or saves system activity information. Shows real-time or historical network throughput per interface.", ex:`sar -n DEV 1 2`, out:`10:15:01        IFACE   rxpck/s   txpck/s    rxkB/s    txkB/s   rxcmp/s   txcmp/s  rxmcst/s   %ifutil\n10:15:02         eth0   1450.00    850.00   1250.45    450.20      0.00      0.00      0.00      1.02`},
+  {cat:"Perf", flag:"htop -d 10 -t", short:"Tree-view process monitor", desc:"Interactive process viewer. '-t' opens it directly in tree view (showing parent/child relationships) and '-d 10' updates every 1 second (10 tenths).", ex:`htop -d 10 -t`, out:`(Interactive ncurses UI displaying process hierarchy and resource usage)`},
+  
+  // --- ADVANCED STORAGE (LVM / ZFS) ---
+  {cat:"Storage", flag:"pvs && vgs && lvs", short:"LVM summary", desc:"Provides a quick, highly readable summary of all Physical Volumes, Volume Groups, and Logical Volumes managed by LVM.", ex:`pvs && vgs && lvs`, out:`  PV         VG     Fmt  Attr PSize   PFree\n  /dev/sda2  ubuntu lvm2 a--  100.00g 10.00g\n  VG     #PV #LV #SN Attr   VSize   VFree\n  ubuntu   1   2   0 wz--n- 100.00g 10.00g\n  LV   VG     Attr       LSize  Pool Origin\n  root ubuntu -wi-ao---- 80.00g`},
+  {cat:"Storage", flag:"lvresize -r -L +10G", short:"Resize LV and Filesystem", desc:"Increases the size of a Logical Volume by 10GB and automatically resizes the underlying filesystem (ext4/xfs) to fill the new space (-r).", ex:`sudo lvresize -r -L +10G /dev/ubuntu/root`, out:`Size of logical volume ubuntu/root changed from 80.00 GiB to 90.00 GiB.\nLogical volume ubuntu/root successfully resized.\nresize2fs 1.46.5 (30-Dec-2021)\nFilesystem on /dev/mapper/ubuntu-root is now 23592960 (4k) blocks long.`},
+  {cat:"Storage", flag:"zpool status -x", short:"ZFS pool health", desc:"Checks the health of all ZFS storage pools. The '-x' flag only outputs information if there is a problem (otherwise it prints 'all pools are healthy').", ex:`zpool status -x`, out:`all pools are healthy`},
+  {cat:"Storage", flag:"btrfs fi df", short:"Btrfs space usage", desc:"Shows the true disk space allocation for a Btrfs filesystem, which is much more accurate than standard 'df' due to Btrfs's copy-on-write nature.", ex:`sudo btrfs filesystem df /`, out:`Data, single: total=45.00GiB, used=38.12GiB\nSystem, DUP: total=32.00MiB, used=16.00KiB\nMetadata, DUP: total=1.50GiB, used=845.00MiB`},
+
+  // --- SYSTEMD & INIT ---
+  {cat:"Systemd", flag:"systemd-analyze blame", short:"Boot time analysis", desc:"Prints a list of all running units, ordered by the time they took to initialize. Vital for debugging slow Linux boot times.", ex:`systemd-analyze blame | head -5`, out:`12.345s NetworkManager-wait-online.service\n 4.123s plymouth-quit-wait.service\n 1.450s docker.service\n 1.100s snapd.service\n 0.850s containerd.service`},
+  {cat:"Systemd", flag:"journalctl -xeu", short:"Unit log tracing", desc:"Follows the end of the systemd journal (-e), providing extra explanation metadata (-x), filtered for a specific systemd unit/service (-u).", ex:`sudo journalctl -xeu ssh.service`, out:`Apr 12 10:11:52 server sshd[1450]: Accepted publickey for user from 192.168.1.5 port 54321 ssh2\n-- Subject: A new session has been established`},
+  {cat:"Systemd", flag:"systemctl list-timers", short:"List systemd cron jobs", desc:"Displays all active systemd timers (the modern replacement for cron jobs), showing when they last ran and when they will run next.", ex:`systemctl list-timers --all`, out:`NEXT                         LEFT          LAST                         PASSED  UNIT                         ACTIVATES\nSun 2026-04-12 11:00:00 IST  48min left    Sun 2026-04-12 10:00:00 IST  11min ago apt-daily.timer              apt-daily.service`},
+  {cat:"Systemd", flag:"systemd-cgls", short:"Cgroup tree view", desc:"Recursively shows the contents of the Linux control group hierarchy, illustrating exactly which processes belong to which systemd slices/services.", ex:`systemd-cgls`, out:`Control group /:\n-.slice\n├─user.slice\n│ └─user-1000.slice\n│   └─user@1000.service\n│     └─init.scope\n│       ├─1450 /lib/systemd/systemd --user\n├─system.slice\n│ ├─docker.service\n│ │ └─2450 /usr/bin/dockerd -H fd://`},
+
+  // --- ADVANCED TEXT & DATA ---
+  {cat:"Data Ops", flag:"xxd -g 1", short:"Hex dump", desc:"Creates a hex dump of a given file or standard input. '-g 1' groups the output by single bytes. Can also reverse the operation (-r) to patch binaries.", ex:`echo "Hello" | xxd -g 1`, out:`00000000: 48 65 6c 6c 6f 0a                                Hello.`},
+  {cat:"Data Ops", flag:"strings -n 8", short:"Extract text from binaries", desc:"Scans binary files (like compiled C++ executables or memory dumps) and prints printable character sequences of at least 8 characters long (-n 8).", ex:`strings -n 8 ./malware.elf | grep http`, out:`http://command-and-control.badguy.com/payload\nhttps://pastebin.com/raw/xyz123`},
+  {cat:"Data Ops", flag:"jq '.[] | keys'", short:"JSON key extraction", desc:"Parses a JSON array and extracts only the keys of the objects. Excellent for exploring the schema of undocumented APIs.", ex:`curl -s https://api.github.com/users/raghav/repos | jq '.[0] | keys'`, out:`[\n  "allow_forking",\n  "archive_url",\n  "archived",\n  "assignees_url",\n  "clone_url"\n]`},
+  {cat:"Data Ops", flag:"split -b 100M", short:"Split large files", desc:"Splits a massive file into smaller chunks based on byte size (-b). Useful for transferring huge database dumps over unreliable networks or strict file size limits.", ex:`split -b 100M backup.sql chunk_`, out:`(Creates files chunk_aa, chunk_ab, chunk_ac, each exactly 100MB)`},
+  {cat:"Data Ops", flag:"diff <(cmd1) <(cmd2)", short:"Process substitution diff", desc:"Compares the output of two commands directly in memory without creating temporary files. Extremely powerful for state comparison.", ex:`diff <(ls /dir1) <(ls /dir2)`, out:`2d1\n< missing_file.txt\n4a4\n> extra_file.log`},
+    // --- LOW-LEVEL DISK & FILESYSTEM ---
+  {cat:"Storage", flag:"smartctl -a /dev/nvme0n1", short:"Read SMART disk health", desc:"Dumps the Self-Monitoring, Analysis and Reporting Technology (SMART) data from a drive. Essential for predicting catastrophic hardware failures before they happen.", ex:`sudo smartctl -a /dev/sda | grep -i "reallocated"`, out:`  5 Reallocated_Sector_Ct   0x0033   100   100   010    Pre-fail  Always       -       0`},
+  {cat:"Storage", flag:"tune2fs -l", short:"Ext4 filesystem parameters", desc:"Lists the contents of the superblock on an ext2/ext3/ext4 filesystem. Useful to see when a drive was last checked, its block size, and its UUID.", ex:`sudo tune2fs -l /dev/vda1 | grep "Mount count"`, out:`Mount count:              42\nMaximum mount count:      -1`},
+  {cat:"Storage", flag:"debugfs -R", short:"Interactive ext4 debugger", desc:"A powerful interactive filesystem debugger. Allows you to undelete files, view raw inodes, or dump filesystem structures without mounting the drive.", ex:`sudo debugfs -R "stat <2>" /dev/sda1`, out:`Inode: 2   Type: directory    Mode:  0755   Flags: 0x80000\nGeneration: 0    Version: 0x00000000\nUser:     0   Group:     0   Size: 4096\nFile ACL: 0    Directory ACL: 0\nLinks: 19   Blockcount: 8`},
+  {cat:"Storage", flag:"wipefs -a", short:"Wipe filesystem signatures", desc:"Erases all filesystem, RAID, and partition-table signatures from a device. Much faster than zeroing the whole drive when you just want to reformat safely.", ex:`sudo wipefs -a /dev/sdb`, out:`/dev/sdb: 8 bytes were erased at offset 0x200 (gpt): 45 46 49 20 50 41 52 54\n/dev/sdb: 2 bytes were erased at offset 0x1fe (PMBR): 55 aa`},
+  {cat:"Storage", flag:"hdparm -tT", short:"Measure disk read speed", desc:"Performs timings of device reads for benchmark and comparison purposes. Tests both cached (RAM) and buffered (Disk) read speeds.", ex:`sudo hdparm -tT /dev/sda`, out:`/dev/sda:\n Timing cached reads:   18454 MB in  2.00 seconds = 9241.60 MB/sec\n Timing buffered disk reads: 1450 MB in  3.01 seconds = 481.25 MB/sec`},
+  {cat:"Storage", flag:"dd if=/dev/urandom", short:"Secure disk overwrite", desc:"Writes cryptographically secure pseudorandom data to a block device, effectively destroying all previous data beyond forensic recovery.", ex:`sudo dd if=/dev/urandom of=/dev/sdc bs=4M status=progress`, out:`1450234592 bytes (1.5 GB, 1.3 GiB) copied, 12 s, 120 MB/s`},
+
+  // --- ADVANCED PROCESS SCHEDULING ---
+  {cat:"Process", flag:"taskset -cp", short:"CPU affinity binding", desc:"Retrieves or sets the CPU affinity of a running process. Forces a process to only run on specific CPU cores, maximizing L1/L2 cache hits for high-performance apps.", ex:`taskset -cp 0,2,4 1450`, out:`pid 1450's current affinity list: 0-7\npid 1450's new affinity list: 0,2,4`},
+  {cat:"Process", flag:"chrt -f 99", short:"Real-time scheduling", desc:"Manipulates the real-time attributes of a process. Setting a task to SCHED_FIFO (-f) with priority 99 means the kernel will prioritize it above almost everything else.", ex:`sudo chrt -f -p 99 1234`, out:`(Process 1234 now runs as a real-time FIFO thread)`},
+  {cat:"Process", flag:"ionice -c 1 -n 0", short:"I/O scheduling priority", desc:"Sets the I/O scheduling class and priority. '-c 1' sets it to 'Real-time' (highest), while '-c 3' sets it to 'Idle' (only writes when disk is not busy).", ex:`sudo ionice -c 3 -p 4512`, out:`(Process 4512 will now only perform disk I/O when the system is idle)`},
+  {cat:"Process", flag:"prlimit --pid", short:"View/set resource limits", desc:"Gets and sets process resource limits (ulimit) for a running process dynamically, without needing to restart the service.", ex:`prlimit --pid 1450 --nofile`, out:`RESOURCE DESCRIPTION               SOFT  HARD UNITS\nNOFILE   max number of open files  1024 40960 files`},
+  {cat:"Process", flag:"renice -n -10 -p", short:"Change process niceness", desc:"Alters the scheduling priority of running processes. Lower numbers (down to -20) mean higher priority. Requires root for negative values.", ex:`sudo renice -n -15 -p 1234`, out:`1234 (process ID) old priority 0, new priority -15`},
+
+  // --- NETWORK NAMESPACES & TUNNELS ---
+  {cat:"Network", flag:"ip netns add", short:"Create network namespace", desc:"Creates a logically isolated network stack (interfaces, routing tables, iptables rules). This is the fundamental Linux technology behind Docker networks.", ex:`sudo ip netns add isolated_net`, out:`(Creates a new empty network namespace named isolated_net)`},
+  {cat:"Network", flag:"ip link add veth0 type veth", short:"Create Virtual Ethernet pair", desc:"Creates a pair of connected virtual ethernet devices. Used to connect network namespaces to the host's root network or to bridge interfaces.", ex:`sudo ip link add veth0 type veth peer name veth1`, out:`(Creates veth0 and veth1. Traffic sent into veth0 comes out of veth1)`},
+  {cat:"Network", flag:"ip tunnel add", short:"Create GRE/IPIP tunnel", desc:"Creates a point-to-point IP tunnel, encapsulating packets within packets to route private traffic over a public network.", ex:`sudo ip tunnel add tun0 mode gre remote 203.0.113.5 local 198.51.100.2 ttl 255`, out:`(Creates a GRE tunnel interface named tun0)`},
+  {cat:"Network", flag:"bridge fdb show", short:"Forwarding Database", desc:"Shows the MAC address forwarding database of a bridge interface. Essential for debugging Layer 2 switching issues in virtualized environments.", ex:`bridge fdb show dev docker0`, out:`02:42:ac:11:00:02 veth45a1b2c vlan 1 master docker0 permanent\n33:33:00:00:00:01 docker0 self permanent`},
+  {cat:"Network", flag:"ethtool -S", short:"NIC hardware statistics", desc:"Queries the Network Interface Card (NIC) directly for hardware-level statistics, such as ring buffer drops or hardware offload errors.", ex:`ethtool -S eth0 | grep drop`, out:`     rx_queue_0_drops: 0\n     rx_queue_1_drops: 145\n     tx_queue_0_drops: 0`},
+  {cat:"Network", flag:"wg show", short:"WireGuard status", desc:"Displays the current configuration and runtime status of WireGuard interfaces, including connected peers, handshakes, and data transferred.", ex:`sudo wg show wg0`, out:`interface: wg0\n  public key: aBcDeF...=\n  private key: (hidden)\n  listening port: 51820\n\npeer: ZyXwVu...=\n  endpoint: 198.51.100.5:54321\n  latest handshake: 1 minute, 12 seconds ago\n  transfer: 1.45 GiB received, 450.20 MiB sent`},
+  {cat:"Network", flag:"ss -K dst", short:"Kill TCP connection", desc:"Forcibly closes an established TCP connection matching the specified filter directly from the kernel. Extremely useful for instantly dropping malicious IPs.", ex:`sudo ss -K dst 185.15.59.224`, out:`Netid  State   Recv-Q Send-Q   Local Address:Port    Peer Address:Port\ntcp    ESTAB   0      0        10.0.0.5:443          185.15.59.224:54321\nConnection closed by kernel.`},
+
+  // --- CRYPTOGRAPHY & SECRETS ---
+  {cat:"Security", flag:"openssl s_client -connect", short:"Debug SSL/TLS connection", desc:"Acts as a generic SSL/TLS client. Prints the entire certificate chain, cipher suites negotiated, and SSL handshake details. Crucial for debugging cert issues.", ex:`openssl s_client -connect api.example.com:443 -servername api.example.com < /dev/null`, out:`CONNECTED(00000003)\ndepth=2 C = US, O = Internet Security Research Group, CN = ISRG Root X1\nverify return:1\n...\nSSL-Session:\n    Protocol  : TLSv1.3\n    Cipher    : TLS_AES_256_GCM_SHA384`},
+  {cat:"Security", flag:"openssl x509 -text", short:"Decode local certificate", desc:"Decodes and prints the contents of a PEM/DER encoded X.509 certificate in plain text, showing Subject Alternative Names, Expiration dates, and issuers.", ex:`openssl x509 -in cert.pem -text -noout | grep -A 2 Validity`, out:`        Validity\n            Not Before: Apr 12 10:00:00 2026 GMT\n            Not After : Jul 11 10:00:00 2026 GMT`},
+  {cat:"Security", flag:"cryptsetup luksFormat", short:"Encrypt block device", desc:"Initializes a Linux Unified Key Setup (LUKS) partition. Encrypts the entire block device at the sector level, rendering it unreadable without the passphrase/keyfile.", ex:`sudo cryptsetup -y -v luksFormat /dev/nvme0n1p3`, out:`WARNING!\n========\nThis will overwrite data on /dev/nvme0n1p3 irrevocably.\nAre you sure? (Type 'yes' in capital letters): YES\nCommand successful.`},
+  {cat:"Security", flag:"shred -uz", short:"Securely delete file", desc:"Overwrites a file multiple times with random data to hide its contents from magnetic/flash recovery, then zeroes it out (-z) and removes it (-u).", ex:`shred -uzv private_key.pem`, out:`shred: private_key.pem: pass 1/3 (random)...\nshred: private_key.pem: pass 2/3 (random)...\nshred: private_key.pem: pass 3/3 (random)...\nshred: private_key.pem: pass 4/4 (000000)...\nshred: private_key.pem: removed`},
+  {cat:"Security", flag:"gpg -c", short:"Symmetric file encryption", desc:"Encrypts a file symmetrically using a passphrase. Does not require setting up public/private key pairs. Perfect for quick, secure file sharing.", ex:`gpg -c --cipher-algo AES256 secret_data.tar.gz`, out:`(Prompts for password, creates secret_data.tar.gz.gpg)`},
+
+  // --- CONTAINERS & VIRTUALIZATION ---
+  {cat:"Isolation", flag:"crictl inspectp", short:"Inspect Kubernetes Pod", desc:"CLI for CRI-compatible container runtimes (like containerd). Inspects the low-level details of a Pod Sandbox, including its cgroups, namespaces, and IP allocations.", ex:`sudo crictl inspectp 1a2b3c4d5e6f`, out:`{\n  "info": {\n    "pid": 14502,\n    "runtimeSpec": {\n      "linux": {\n        "namespaces": [\n          { "type": "network", "path": "/var/run/netns/cni-1234" }`},
+  {cat:"Isolation", flag:"virsh list --all", short:"List KVM/QEMU VMs", desc:"The main interface for managing virtd guest domains (Virtual Machines). Shows all running, suspended, and shut down VMs on the hypervisor.", ex:`virsh list --all`, out:` Id   Name                 State\n--------------------------------------\n 1    k8s-control-plane    running\n 2    k8s-worker-1         running\n -    win10-testing        shut off`},
+  {cat:"Isolation", flag:"qemu-img info", short:"VM disk image stats", desc:"Displays information about a QEMU disk image (qcow2, raw, vmdk), including its virtual size, actual disk size, and backing files.", ex:`qemu-img info disk.qcow2`, out:`image: disk.qcow2\nfile format: qcow2\nvirtual size: 50 GiB (53687091200 bytes)\ndisk size: 12.4 GiB\ncluster_size: 65536\nFormat specific information:\n    compat: 1.1`},
+  {cat:"Isolation", flag:"docker inspect --format", short:"Filter container data", desc:"Extracts highly specific information from Docker's JSON output using Go templates. Essential for scripting automation around containers.", ex:`docker inspect --format '{{.State.Pid}}' my_postgres`, out:`14502`},
+
+  // --- KERNEL DEBUGGING (EXTREME) ---
+  {cat:"Kernel", flag:"kexec -e", short:"Hot-reboot Linux kernel", desc:"Replaces the currently running kernel with a new one directly in memory, completely bypassing the BIOS/UEFI hardware initialization phase for lightning-fast reboots.", ex:`sudo kexec -l /boot/vmlinuz-new --initrd=/boot/initrd-new.img --reuse-cmdline && sudo kexec -e`, out:`(System immediately shuts down userland and boots the new kernel without power cycling)`},
+  {cat:"Kernel", flag:"udevadm monitor", short:"Monitor kernel hardware events", desc:"Listens to the kernel uevent netlink socket and prints the device events (like plugging in a USB or attaching a virtual drive) in real-time.", ex:`udevadm monitor --environment --udev`, out:`UDEV  [10:15:01.123] add      /devices/pci0000:00/.../usb1/1-1 (usb)\nACTION=add\nDEVPATH=/devices/pci0000:00/.../usb1/1-1\nSUBSYSTEM=usb\nID_VENDOR=Yubico`},
+  {cat:"Kernel", flag:"echo c > /proc/sysrq-trigger", short:"Trigger Kernel Panic", desc:"Uses the Magic SysRq key to deliberately crash the kernel. Used by kernel developers to test kdump (kernel crash dump) mechanisms.", ex:`sudo sh -c 'echo c > /proc/sysrq-trigger'`, out:`(System instantly kernel panics, writes a core dump, and reboots)`},
+
+  // --- BINARY ANALYSIS & REVERSE ENGINEERING ---
+  {cat:"Binary", flag:"readelf -d", short:"Show dynamic dependencies", desc:"Displays the dynamic section of an ELF binary, revealing exactly which shared libraries it requires and its RPATH/RUNPATH. Crucial for debugging 'shared object not found' errors.", ex:`readelf -d /usr/bin/python3 | grep NEEDED`, out:` 0x0000000000000001 (NEEDED)                     Shared library: [libpthread.so.0]\n 0x0000000000000001 (NEEDED)                     Shared library: [libc.so.6]\n 0x0000000000000001 (NEEDED)                     Shared library: [libdl.so.2]`},
+  {cat:"Binary", flag:"objdump -d -M intel", short:"Disassemble binary", desc:"Disassembles the executable sections of an object file using Intel syntax (instead of AT&T). Essential for reverse engineering and exploit development.", ex:`objdump -d -M intel ./vulnerable.bin | head -n 10`, out:`0000000000401126 <main>:\n  401126:       55                      push   rbp\n  401127:       48 89 e5                mov    rbp,rsp\n  40112a:       48 83 ec 10             sub    rsp,0x10\n  40112e:       bf 04 20 40 00          mov    edi,0x402004`},
+  {cat:"Binary", flag:"nm -D", short:"List dynamic symbols", desc:"Lists the dynamic symbols of an object file. Used to see exactly what functions a compiled binary exports or imports from shared libraries.", ex:`nm -D /lib/x86_64-linux-gnu/libc.so.6 | grep ' malloc$'`, out:`000000000009d130 T malloc`},
+  {cat:"Binary", flag:"ldd -v", short:"Verbose library linking", desc:"Prints shared object dependencies along with detailed versioning information, showing exactly which version of a library satisfied the link requirement.", ex:`ldd -v /bin/ls | grep -A 2 "Version information"`, out:`Version information:\n        /bin/ls:\n                libc.so.6 (GLIBC_2.33) => /lib/x86_64-linux-gnu/libc.so.6\n                libc.so.6 (GLIBC_2.34) => /lib/x86_64-linux-gnu/libc.so.6`},
+  {cat:"Binary", flag:"gcore <pid>", short:"Generate core dump", desc:"Generates a core dump of a running process without terminating it. Invaluable for capturing the exact memory state of malware or a crashing application for later analysis.", ex:`sudo gcore 14502`, out:`[Thread debugging using libthread_db enabled]\nSaved corefile core.14502`},
+
+  // --- FORENSICS & RAW DATA ---
+  {cat:"Forensics", flag:"binwalk -Me", short:"Extract firmware/images", desc:"Scans a binary image (like a firmware dump) for known file signatures and recursively extracts (-Me) embedded files, filesystems, and compressed archives.", ex:`binwalk -Me firmware_v1.bin`, out:`DECIMAL       HEXADECIMAL     DESCRIPTION\n--------------------------------------------------------------------------------\n512           0x200           Squashfs filesystem, little endian, version 4.0\n34500         0x86C4          Zip archive data, at least v2.0 to extract`},
+  {cat:"Forensics", flag:"hexdump -C", short:"Canonical hex+ASCII display", desc:"Displays file contents in canonical hex+ASCII format. The absolute standard for manually inspecting corrupted files, raw disk sectors, or unknown binary blobs.", ex:`hexdump -C boot.img | head -n 3`, out:`00000000  eb 63 90 10 8e d0 bc 00  b0 b8 00 00 8e d8 8e c0  |.c..............|\n00000010  fb be 00 7c bf 00 06 b9  00 02 f3 a4 ea 21 06 00  |...|.........!..|\n00000020  00 be be 07 38 04 75 0b  83 c6 10 81 fe fe 07 73  |....8.u........s|`},
+  {cat:"Forensics", flag:"strings -t x", short:"Find text with offsets", desc:"Extracts readable strings from a binary and prints their exact hexadecimal offset (-t x). Useful for patching binaries via hex editors.", ex:`strings -t x ./malware | grep "http"`, out:`  4a3b0 http://c2-server.evil.net/drop\n  4b112 Mozilla/5.0 (Windows NT 10.0; Win64; x64)`},
+  {cat:"Forensics", flag:"exiftool", short:"Read/Write EXIF metadata", desc:"Reads, writes, and manipulates meta information across a massive variety of files (images, PDFs, videos). Crucial for OSINT and analyzing dropped files.", ex:`exiftool suspicious.pdf | grep "Creator Tool"`, out:`Creator Tool                    : Microsoft® Word for Office 365`},
+  {cat:"Forensics", flag:"shasum -a 256 -c", short:"Verify SHA256 checksums", desc:"Reads SHA256 sums from a file and checks them against the actual files on disk. Essential for verifying the integrity of downloaded ISOs or identifying tampered system binaries.", ex:`shasum -a 256 -c SHA256SUMS.txt`, out:`ubuntu-24.04-desktop-amd64.iso: OK\ninitrd.img: FAILED\nshasum: WARNING: 1 computed checksum did NOT match`},
+
+  // --- ADVANCED ROUTING & FIREWALLS ---
+  {cat:"Network", flag:"ip route get", short:"Simulate routing decision", desc:"Asks the kernel to simulate how it would route a packet to a specific destination IP, showing the exact interface, gateway, and source IP that would be used.", ex:`ip route get 8.8.8.8`, out:`8.8.8.8 via 192.168.1.1 dev eth0 src 192.168.1.5 uid 1000 \n    cache `},
+  {cat:"Network", flag:"ip rule show", short:"Policy routing rules", desc:"Displays the Policy Routing rules (RPDB). Used in advanced networking to route traffic based on source IP, TOS, or fwmark, rather than just destination IP.", ex:`ip rule show`, out:`0:      from all lookup local\n32765:  from 10.0.0.0/24 lookup vpn_table\n32766:  from all lookup main\n32767:  from all lookup default`},
+  {cat:"Network", flag:"conntrack -L", short:"List connection tracking", desc:"Dumps the netfilter connection tracking table. Shows the state of all connections (TCP established, UDP unreplied) bypassing the firewall. Crucial for debugging NAT/stateful drops.", ex:`sudo conntrack -L -p tcp --dport 443`, out:`tcp      6 431999 ESTABLISHED src=192.168.1.5 dst=104.18.32.47 sport=54321 dport=443 src=104.18.32.47 dst=192.168.1.5 sport=443 dport=54321 [ASSURED] mark=0 use=1`},
+  {cat:"Network", flag:"conntrack -D", short:"Flush connection states", desc:"Deletes entries from the connection tracking table. Necessary if you change a NAT rule or drop rule and need existing, established connections to be re-evaluated and dropped.", ex:`sudo conntrack -D -p udp`, out:`conntrack v1.4.6: 14 flow entries have been deleted.`},
+  {cat:"Network", flag:"iptables -t raw -I PREROUTING", short:"Drop packets pre-conntrack", desc:"Inserts a rule into the 'raw' table before connection tracking occurs. This is the absolute most CPU-efficient way to drop massive DDoS floods using traditional iptables.", ex:`sudo iptables -t raw -I PREROUTING -s 185.15.0.0/16 -j DROP`, out:`(All packets from 185.15.0.0/16 are dropped silently before the kernel spends resources tracking their state)`},
+
+  // --- eBPF & XDP (EXTREME PERFORMANCE) ---
+  {cat:"Tracing", flag:"bpftool prog show", short:"List loaded eBPF programs", desc:"Lists all active eBPF (Extended Berkeley Packet Filter) programs currently loaded into the kernel. The ultimate tool for modern observability and high-speed networking.", ex:`sudo bpftool prog show`, out:`14: cgroup_skb  name cil_sock_any  tag 1a2b3c4d5e6f  gpl\n        loaded_at 2026-04-12T10:15:00+0000  uid 0\n        xlated 296B  jited 184B  memlock 4096B\n        pids cilium-agent(4502)`},
+  {cat:"Tracing", flag:"bpftool map dump", short:"Read eBPF maps", desc:"Dumps the contents of an eBPF map. Maps are how eBPF programs store state and communicate with user-space applications.", ex:`sudo bpftool map dump id 42`, out:`key: 0a 00 00 05  value: 00 00 00 00 00 00 00 05\nkey: 0a 00 00 0a  value: 00 00 00 00 00 00 00 12\nFound 2 elements`},
+  {cat:"Tracing", flag:"ip link set dev eth0 xdp", short:"Attach XDP program", desc:"Attaches an eBPF program directly to the network interface driver (XDP). This allows packet processing/dropping at wire-speed, *before* the kernel even allocates memory for the packet (skb).", ex:`sudo ip link set dev eth0 xdp obj ddos_filter.o sec xdp_drop`, out:`(The compiled eBPF program ddos_filter.o is now filtering traffic on eth0 at NIC hardware speeds)`},
+
+  // --- SELINUX & APP ARMOR (MAC POLICIES) ---
+  {cat:"Security", flag:"sestatus -v", short:"SELinux status", desc:"Displays the detailed status of SELinux (Security-Enhanced Linux), including the current mode (Enforcing/Permissive) and mount point contexts.", ex:`sestatus -v`, out:`SELinux status:                 enabled\nSELinuxfs mount:                /sys/fs/selinux\nSELinux root directory:         /etc/selinux\nLoaded policy name:             targeted\nCurrent mode:                   enforcing`},
+  {cat:"Security", flag:"restorecon -Rv", short:"Restore SELinux contexts", desc:"Recursively (-R) restores the default SELinux security contexts on files and directories based on the master policy. Fixes 90% of 'Permission denied' errors on SELinux systems.", ex:`sudo restorecon -Rv /var/www/html/`, out:`Relabeled /var/www/html/index.php from unconfined_u:object_r:user_home_t:s0 to system_u:object_r:httpd_sys_content_t:s0`},
+  {cat:"Security", flag:"semanage port -a", short:"Modify SELinux port policy", desc:"Adds (-a) a custom port mapping to the SELinux policy. Required if you want a service (like SSH or Apache) to listen on a non-standard port under Enforcing mode.", ex:`sudo semanage port -a -t ssh_port_t -p tcp 2222`, out:`(SELinux now permits the SSH daemon to bind to TCP port 2222)`},
+  {cat:"Security", flag:"audit2allow -M", short:"Generate SELinux policy", desc:"Reads AVC denial messages from the audit log and automatically generates a custom SELinux policy module (.pp file) to allow the blocked actions.", ex:`grep httpd /var/log/audit/audit.log | audit2allow -M my_httpd_fix`, out:`******************** IMPORTANT ***********************\nTo make this policy package active, execute:\nsemodule -i my_httpd_fix.pp`},
+
+  // --- COMPRESSION & ARCHIVING (ADVANCED) ---
+  {cat:"Storage", flag:"tar --sparse -cvf", short:"Archive sparse files", desc:"Creates a tar archive while preserving sparse files (files that contain long sequences of zero bytes, like VM disk images), saving massive amounts of space.", ex:`tar --sparse -cvf vm_backup.tar disk.img`, out:`disk.img\n(A 50GB virtual disk that only has 5GB of real data is backed up as a ~5GB tar file)`},
+  {cat:"Storage", flag:"tar -I pigz", short:"Parallel gzip compression", desc:"Uses 'pigz' (Parallel Implementation of GZip) instead of the single-threaded standard gzip. Drastically reduces archive creation time on multi-core systems.", ex:`tar -I pigz -cvf backup.tar.gz /var/log/`, out:`(Compresses utilizing all available CPU cores)`},
+  {cat:"Storage", flag:"zstd -T0 -19", short:"Ultra-fast compression", desc:"Compresses a file using the Zstandard algorithm. '-T0' utilizes all CPU cores, and '-19' sets the compression ratio to maximum (approaching LZMA levels but much faster).", ex:`zstd -T0 -19 database.sql`, out:`database.sql         : 15.20%   (1.45 GB => 225 MB)`},
+
+  // --- /PROC & /SYS VIRTUAL FILESYSTEMS ---
+  {cat:"Process", flag:"cat /proc/<pid>/smaps", short:"Detailed memory mappings", desc:"Reads the /proc virtual filesystem to provide a highly detailed breakdown of memory consumption for a process, including shared pages, private dirty pages, and swap usage per library.", ex:`cat /proc/1450/smaps | grep -A 3 "libc"`, out:`7f8a9b000000-7f8a9b1f5000 r-xp 00000000 08:01 123456 /usr/lib/libc.so.6\nSize:               2004 kB\nKernelPageSize:        4 kB\nMMUPageSize:           4 kB\nRss:                1500 kB`},
+  {cat:"Kernel", flag:"cat /proc/sys/kernel/random/entropy_avail", short:"Check entropy pool", desc:"Checks how much high-quality cryptographic entropy is currently available in the kernel. If this runs low, generating SSL/GPG keys will block or become less secure.", ex:`cat /proc/sys/kernel/random/entropy_avail`, out:`3145`},
+  {cat:"Hardware", flag:"cat /sys/class/net/eth0/speed", short:"NIC link speed", desc:"Reads the negotiated link speed of a network interface directly from the sysfs hardware tree without requiring external tools like ethtool.", ex:`cat /sys/class/net/eth0/speed`, out:`1000  (Represents 1000 Mbit/s or 1 Gigabit)`},
+
+  // --- BINARY ANALYSIS & REVERSE ENGINEERING ---
+  {cat:"Binary", flag:"readelf -d", short:"Show dynamic dependencies", desc:"Displays the dynamic section of an ELF binary, revealing exactly which shared libraries it requires and its RPATH/RUNPATH. Crucial for debugging 'shared object not found' errors.", ex:`readelf -d /usr/bin/python3 | grep NEEDED`, out:` 0x0000000000000001 (NEEDED)                     Shared library: [libpthread.so.0]\n 0x0000000000000001 (NEEDED)                     Shared library: [libc.so.6]\n 0x0000000000000001 (NEEDED)                     Shared library: [libdl.so.2]`},
+  {cat:"Binary", flag:"objdump -d -M intel", short:"Disassemble binary", desc:"Disassembles the executable sections of an object file using Intel syntax (instead of AT&T). Essential for reverse engineering and exploit development.", ex:`objdump -d -M intel ./vulnerable.bin | head -n 10`, out:`0000000000401126 <main>:\n  401126:       55                      push   rbp\n  401127:       48 89 e5                mov    rbp,rsp\n  40112a:       48 83 ec 10             sub    rsp,0x10\n  40112e:       bf 04 20 40 00          mov    edi,0x402004`},
+  {cat:"Binary", flag:"nm -D", short:"List dynamic symbols", desc:"Lists the dynamic symbols of an object file. Used to see exactly what functions a compiled binary exports or imports from shared libraries.", ex:`nm -D /lib/x86_64-linux-gnu/libc.so.6 | grep ' malloc$'`, out:`000000000009d130 T malloc`},
+  {cat:"Binary", flag:"ldd -v", short:"Verbose library linking", desc:"Prints shared object dependencies along with detailed versioning information, showing exactly which version of a library satisfied the link requirement.", ex:`ldd -v /bin/ls | grep -A 2 "Version information"`, out:`Version information:\n        /bin/ls:\n                libc.so.6 (GLIBC_2.33) => /lib/x86_64-linux-gnu/libc.so.6\n                libc.so.6 (GLIBC_2.34) => /lib/x86_64-linux-gnu/libc.so.6`},
+  {cat:"Binary", flag:"gcore <pid>", short:"Generate core dump", desc:"Generates a core dump of a running process without terminating it. Invaluable for capturing the exact memory state of malware or a crashing application for later analysis.", ex:`sudo gcore 14502`, out:`[Thread debugging using libthread_db enabled]\nSaved corefile core.14502`},
+
+  // --- FORENSICS & RAW DATA ---
+  {cat:"Forensics", flag:"binwalk -Me", short:"Extract firmware/images", desc:"Scans a binary image (like a firmware dump) for known file signatures and recursively extracts (-Me) embedded files, filesystems, and compressed archives.", ex:`binwalk -Me firmware_v1.bin`, out:`DECIMAL       HEXADECIMAL     DESCRIPTION\n--------------------------------------------------------------------------------\n512           0x200           Squashfs filesystem, little endian, version 4.0\n34500         0x86C4          Zip archive data, at least v2.0 to extract`},
+  {cat:"Forensics", flag:"hexdump -C", short:"Canonical hex+ASCII display", desc:"Displays file contents in canonical hex+ASCII format. The absolute standard for manually inspecting corrupted files, raw disk sectors, or unknown binary blobs.", ex:`hexdump -C boot.img | head -n 3`, out:`00000000  eb 63 90 10 8e d0 bc 00  b0 b8 00 00 8e d8 8e c0  |.c..............|\n00000010  fb be 00 7c bf 00 06 b9  00 02 f3 a4 ea 21 06 00  |...|.........!..|\n00000020  00 be be 07 38 04 75 0b  83 c6 10 81 fe fe 07 73  |....8.u........s|`},
+  {cat:"Forensics", flag:"strings -t x", short:"Find text with offsets", desc:"Extracts readable strings from a binary and prints their exact hexadecimal offset (-t x). Useful for patching binaries via hex editors.", ex:`strings -t x ./malware | grep "http"`, out:`  4a3b0 http://c2-server.evil.net/drop\n  4b112 Mozilla/5.0 (Windows NT 10.0; Win64; x64)`},
+  {cat:"Forensics", flag:"exiftool", short:"Read/Write EXIF metadata", desc:"Reads, writes, and manipulates meta information across a massive variety of files (images, PDFs, videos). Crucial for OSINT and analyzing dropped files.", ex:`exiftool suspicious.pdf | grep "Creator Tool"`, out:`Creator Tool                    : Microsoft® Word for Office 365`},
+  {cat:"Forensics", flag:"shasum -a 256 -c", short:"Verify SHA256 checksums", desc:"Reads SHA256 sums from a file and checks them against the actual files on disk. Essential for verifying the integrity of downloaded ISOs or identifying tampered system binaries.", ex:`shasum -a 256 -c SHA256SUMS.txt`, out:`ubuntu-24.04-desktop-amd64.iso: OK\ninitrd.img: FAILED\nshasum: WARNING: 1 computed checksum did NOT match`},
+
+  // --- ADVANCED ROUTING & FIREWALLS ---
+  {cat:"Network", flag:"ip route get", short:"Simulate routing decision", desc:"Asks the kernel to simulate how it would route a packet to a specific destination IP, showing the exact interface, gateway, and source IP that would be used.", ex:`ip route get 8.8.8.8`, out:`8.8.8.8 via 192.168.1.1 dev eth0 src 192.168.1.5 uid 1000 \n    cache `},
+  {cat:"Network", flag:"ip rule show", short:"Policy routing rules", desc:"Displays the Policy Routing rules (RPDB). Used in advanced networking to route traffic based on source IP, TOS, or fwmark, rather than just destination IP.", ex:`ip rule show`, out:`0:      from all lookup local\n32765:  from 10.0.0.0/24 lookup vpn_table\n32766:  from all lookup main\n32767:  from all lookup default`},
+  {cat:"Network", flag:"conntrack -L", short:"List connection tracking", desc:"Dumps the netfilter connection tracking table. Shows the state of all connections (TCP established, UDP unreplied) bypassing the firewall. Crucial for debugging NAT/stateful drops.", ex:`sudo conntrack -L -p tcp --dport 443`, out:`tcp      6 431999 ESTABLISHED src=192.168.1.5 dst=104.18.32.47 sport=54321 dport=443 src=104.18.32.47 dst=192.168.1.5 sport=443 dport=54321 [ASSURED] mark=0 use=1`},
+  {cat:"Network", flag:"conntrack -D", short:"Flush connection states", desc:"Deletes entries from the connection tracking table. Necessary if you change a NAT rule or drop rule and need existing, established connections to be re-evaluated and dropped.", ex:`sudo conntrack -D -p udp`, out:`conntrack v1.4.6: 14 flow entries have been deleted.`},
+  {cat:"Network", flag:"iptables -t raw -I PREROUTING", short:"Drop packets pre-conntrack", desc:"Inserts a rule into the 'raw' table before connection tracking occurs. This is the absolute most CPU-efficient way to drop massive DDoS floods using traditional iptables.", ex:`sudo iptables -t raw -I PREROUTING -s 185.15.0.0/16 -j DROP`, out:`(All packets from 185.15.0.0/16 are dropped silently before the kernel spends resources tracking their state)`},
+
+  // --- eBPF & XDP (EXTREME PERFORMANCE) ---
+  {cat:"Tracing", flag:"bpftool prog show", short:"List loaded eBPF programs", desc:"Lists all active eBPF (Extended Berkeley Packet Filter) programs currently loaded into the kernel. The ultimate tool for modern observability and high-speed networking.", ex:`sudo bpftool prog show`, out:`14: cgroup_skb  name cil_sock_any  tag 1a2b3c4d5e6f  gpl\n        loaded_at 2026-04-12T10:15:00+0000  uid 0\n        xlated 296B  jited 184B  memlock 4096B\n        pids cilium-agent(4502)`},
+  {cat:"Tracing", flag:"bpftool map dump", short:"Read eBPF maps", desc:"Dumps the contents of an eBPF map. Maps are how eBPF programs store state and communicate with user-space applications.", ex:`sudo bpftool map dump id 42`, out:`key: 0a 00 00 05  value: 00 00 00 00 00 00 00 05\nkey: 0a 00 00 0a  value: 00 00 00 00 00 00 00 12\nFound 2 elements`},
+  {cat:"Tracing", flag:"ip link set dev eth0 xdp", short:"Attach XDP program", desc:"Attaches an eBPF program directly to the network interface driver (XDP). This allows packet processing/dropping at wire-speed, *before* the kernel even allocates memory for the packet (skb).", ex:`sudo ip link set dev eth0 xdp obj ddos_filter.o sec xdp_drop`, out:`(The compiled eBPF program ddos_filter.o is now filtering traffic on eth0 at NIC hardware speeds)`},
+
+  // --- SELINUX & APP ARMOR (MAC POLICIES) ---
+    // --- SELINUX & APP ARMOR (MAC POLICIES) ---
+  {
+    cat: "Security", 
+    flag: "sestatus -v", 
+    short: "SELinux status", 
+    desc: "Displays the detailed status of SELinux (Security-Enhanced Linux), including the current mode (Enforcing/Permissive) and policy version.", 
+    ex: `sestatus -v`, 
+    out: `SELinux status: enabled\nCurrent mode: enforcing\nMode from config file: enforcing`
+  }, 
+  {cat:"Security", flag:"restorecon -Rv", short:"Restore SELinux contexts", desc:"Recursively (-R) restores the default SELinux security contexts on files and directories based on the master policy. Fixes 90% of 'Permission denied' errors on SELinux systems.", ex:`sudo restorecon -Rv /var/www/html/`, out:`Relabeled /var/www/html/index.php from unconfined_u:object_r:user_home_t:s0 to system_u:object_r:httpd_sys_content_t:s0`},
+  {cat:"Security", flag:"semanage port -a", short:"Modify SELinux port policy", desc:"Adds (-a) a custom port mapping to the SELinux policy. Required if you want a service (like SSH or Apache) to listen on a non-standard port under Enforcing mode.", ex:`sudo semanage port -a -t ssh_port_t -p tcp 2222`, out:`(SELinux now permits the SSH daemon to bind to TCP port 2222)`},
+  {cat:"Security", flag:"audit2allow -M", short:"Generate SELinux policy", desc:"Reads AVC denial messages from the audit log and automatically generates a custom SELinux policy module (.pp file) to allow the blocked actions.", ex:`grep httpd /var/log/audit/audit.log | audit2allow -M my_httpd_fix`, out:`******************** IMPORTANT ***********************\nTo make this policy package active, execute:\nsemodule -i my_httpd_fix.pp`},
+
+  // --- COMPRESSION & ARCHIVING (ADVANCED) ---
+  {cat:"Storage", flag:"tar --sparse -cvf", short:"Archive sparse files", desc:"Creates a tar archive while preserving sparse files (files that contain long sequences of zero bytes, like VM disk images), saving massive amounts of space.", ex:`tar --sparse -cvf vm_backup.tar disk.img`, out:`disk.img\n(A 50GB virtual disk that only has 5GB of real data is backed up as a ~5GB tar file)`},
+  {cat:"Storage", flag:"tar -I pigz", short:"Parallel gzip compression", desc:"Uses 'pigz' (Parallel Implementation of GZip) instead of the single-threaded standard gzip. Drastically reduces archive creation time on multi-core systems.", ex:`tar -I pigz -cvf backup.tar.gz /var/log/`, out:`(Compresses utilizing all available CPU cores)`},
+  {cat:"Storage", flag:"zstd -T0 -19", short:"Ultra-fast compression", desc:"Compresses a file using the Zstandard algorithm. '-T0' utilizes all CPU cores, and '-19' sets the compression ratio to maximum (approaching LZMA levels but much faster).", ex:`zstd -T0 -19 database.sql`, out:`database.sql         : 15.20%   (1.45 GB => 225 MB)`},
+
+  // --- /PROC & /SYS VIRTUAL FILESYSTEMS ---
+  {cat:"Process", flag:"cat /proc/<pid>/smaps", short:"Detailed memory mappings", desc:"Reads the /proc virtual filesystem to provide a highly detailed breakdown of memory consumption for a process, including shared pages, private dirty pages, and swap usage per library.", ex:`cat /proc/1450/smaps | grep -A 3 "libc"`, out:`7f8a9b000000-7f8a9b1f5000 r-xp 00000000 08:01 123456 /usr/lib/libc.so.6\nSize:               2004 kB\nKernelPageSize:        4 kB\nMMUPageSize:           4 kB\nRss:                1500 kB`},
+  {cat:"Kernel", flag:"cat /proc/sys/kernel/random/entropy_avail", short:"Check entropy pool", desc:"Checks how much high-quality cryptographic entropy is currently available in the kernel. If this runs low, generating SSL/GPG keys will block or become less secure.", ex:`cat /proc/sys/kernel/random/entropy_avail`, out:`3145`},
+  {cat:"Hardware", flag:"cat /sys/class/net/eth0/speed", short:"NIC link speed", desc:"Reads the negotiated link speed of a network interface directly from the sysfs hardware tree without requiring external tools like ethtool.", ex:`cat /sys/class/net/eth0/speed`, out:`1000  (Represents 1000 Mbit/s or 1 Gigabit)`},
+
+  
+
+];
+
+const catKeys = [...new Set(CMDS.map(c => c.cat))];
+let activeCat = "All";
+let searchVal = "";
+
+const CAT_COLORS = {
+  "Network":"#E24B4A", "Tracing":"#378ADD", "Memory":"#1D9E75",
+  "Isolation":"#D85A30", "Data Ops":"#7F77DD", "Storage":"#BA7517"
+};
+
+function catColor(c){ return CAT_COLORS[c] || "#888"; }
+
+function hexToRgba(hex, a){
+  const r=parseInt(hex.slice(1,3),16),g=parseInt(hex.slice(3,5),16),b=parseInt(hex.slice(5,7),16);
+  return `rgba(${r},${g},${b},${a})`;
+}
+
+function renderCats(){
+  const d = document.getElementById("cats");
+  d.innerHTML = "";
+  const all = document.createElement("button");
+  all.className = "cat-btn" + (activeCat==="All"?" active":"");
+  all.textContent = "All";
+  if(activeCat==="All"){ all.style.background="#333"; all.style.color="#fff"; all.style.borderColor="transparent"; }
+  all.onclick = ()=>{ activeCat="All"; render(); };
+  d.appendChild(all);
+  catKeys.forEach(c=>{
+    const btn = document.createElement("button");
+    btn.className = "cat-btn" + (activeCat===c?" active":"");
+    btn.textContent = c;
+    btn.style.borderColor = catColor(c);
+    btn.style.color = activeCat===c ? "#fff" : catColor(c);
+    if(activeCat===c) btn.style.background = catColor(c);
+    btn.onclick = ()=>{ activeCat=c; render(); };
+    d.appendChild(btn);
+  });
+}
+
+function render(){
+  const q = searchVal.toLowerCase();
+  const filtered = CMDS.filter(c=>{
+    const matchCat = activeCat==="All" || c.cat===activeCat;
+    const matchSearch = !q || c.flag.toLowerCase().includes(q) || c.short.toLowerCase().includes(q) || c.desc.toLowerCase().includes(q) || c.ex.toLowerCase().includes(q);
+    return matchCat && matchSearch;
+  });
+
+  renderCats();
+  document.getElementById("stats").textContent = `Showing ${filtered.length} of ${CMDS.length} advanced utilities`;
+
+  const list = document.getElementById("list");
+  list.innerHTML = "";
+
+  if(!filtered.length){
+    list.innerHTML = '<div class="empty">No commands match your search criteria.</div>';
+    return;
+  }
+
+  filtered.forEach((cmd, i)=>{
+    const card = document.createElement("div");
+    card.className = "cmd-card";
+    const col = catColor(cmd.cat);
+    card.style.borderLeft = `4px solid ${col}`;
+
+    const hdr = document.createElement("div");
+    hdr.className = "cmd-header";
+    hdr.innerHTML = `
+      <span class="cmd-badge" style="background:${hexToRgba(col,0.15)};color:${col}">${cmd.cat}</span>
+      <span class="cmd-flag">${cmd.flag}</span>
+      <span class="cmd-desc-short">${cmd.short}</span>
+      <span class="chevron" id="chev-${i}">&#9654;</span>
+    `;
+
+    const body = document.createElement("div");
+    body.className = "cmd-body";
+    body.id = "body-" + i;
+    body.innerHTML = `
+      <p>${cmd.desc}</p>
+      <div class="syntax-section">
+        <h4>Implementation Example</h4>
+        <div class="code-block">${cmd.ex}</div>
+      </div>
+      <div class="syntax-section">
+        <h4>Expected Output</h4>
+        <div class="output-block">${cmd.out}</div>
+      </div>
+    `;
+
+    hdr.onclick = ()=>{
+      const isOpen = body.classList.contains("open");
+      document.querySelectorAll(".cmd-body.open").forEach(b => b.classList.remove("open"));
+      document.querySelectorAll(".chevron").forEach(c => c.style.transform = "");
+      if(!isOpen){
+        body.classList.add("open");
+        document.getElementById("chev-" + i).style.transform = "rotate(90deg)";
+      }
+    };
+
+    card.appendChild(hdr);
+    card.appendChild(body);
+    list.appendChild(card);
+  });
+}
+
+document.getElementById("search").oninput = function(){
+  searchVal = this.value;
+  render();
+};
+
+render();
+</script>
+</body>
+</html>
