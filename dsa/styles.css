@@ -93,6 +93,7 @@
       position: sticky;
       top: 16px;
       z-index: 5;
+      flex-wrap: wrap;
     }
 
     .nav-toggle {
@@ -113,6 +114,8 @@
       display: flex;
       align-items: center;
       gap: 14px;
+      min-width: 0;
+      flex: 1 1 320px;
     }
 
     .brand-mark {
@@ -157,12 +160,18 @@
     .brand-copy span {
       color: var(--muted);
       font-size: 0.82rem;
+      display: block;
+      line-height: 1.45;
     }
 
     .nav-links {
       display: flex;
       gap: 10px;
       flex-wrap: wrap;
+      align-items: center;
+      justify-content: flex-end;
+      flex: 1 1 420px;
+      min-width: 0;
     }
 
     .nav-links a {
@@ -173,6 +182,7 @@
       background: rgba(255, 255, 255, 0.45);
       font-size: 0.84rem;
       transition: transform 180ms ease, background 180ms ease;
+      white-space: nowrap;
     }
 
     .nav-links a:hover {
@@ -395,6 +405,16 @@
       letter-spacing: 0.02em;
     }
 
+    .phase-item.is-active {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.2);
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+    }
+
+    .phase-item.is-active span {
+      background: rgba(255, 249, 238, 0.16);
+    }
+
     .phase-item small {
       display: block;
       color: rgba(226, 235, 236, 0.72);
@@ -527,7 +547,7 @@
 
     .roadmap-shell {
       display: grid;
-      grid-template-columns: 320px minmax(0, 1fr);
+      grid-template-columns: minmax(0, 1fr);
       gap: 20px;
       align-items: start;
     }
@@ -539,10 +559,10 @@
     }
 
     .roadmap-sidebar {
-      position: sticky;
-      top: 100px;
       display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 16px;
+      align-items: start;
     }
 
     .sidebar-card {
@@ -639,6 +659,75 @@
       color: var(--muted);
       font-size: 0.84rem;
       line-height: 1.55;
+    }
+
+    .week-detail-summary {
+      display: grid;
+      grid-template-columns: 1.15fr 1fr 0.95fr;
+      gap: 16px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .week-detail-stat-grid {
+      margin-top: 0;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .week-detail-nav {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .week-detail-nav .action-button {
+      text-align: center;
+      text-decoration: none;
+    }
+
+    .resource-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+      margin-top: 10px;
+    }
+
+    .resource-card {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding: 16px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.58);
+      border: 1px solid rgba(23, 20, 17, 0.08);
+      text-decoration: none;
+      transition: transform 180ms ease, background 180ms ease, border-color 180ms ease;
+    }
+
+    .resource-card:hover {
+      transform: translateY(-2px);
+      background: rgba(255, 255, 255, 0.86);
+      border-color: rgba(23, 20, 17, 0.16);
+    }
+
+    .resource-card strong {
+      font-size: 0.98rem;
+      line-height: 1.45;
+    }
+
+    .resource-card span {
+      color: var(--muted);
+      font-size: 0.88rem;
+      line-height: 1.65;
+    }
+
+    .resource-card small {
+      color: var(--blueprint);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.74rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
     }
 
     .calendar-shell {
@@ -1136,12 +1225,13 @@
 
     @media (max-width: 1180px) {
       .hero,
-      .roadmap-shell {
+      .roadmap-shell,
+      .week-detail-summary {
         grid-template-columns: 1fr;
       }
 
       .roadmap-sidebar {
-        position: static;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
     }
 
@@ -1149,19 +1239,23 @@
       .nav {
         border-radius: 24px;
         align-items: start;
-        flex-wrap: wrap;
+        padding: 16px;
       }
 
       .nav-toggle {
         display: inline-flex;
         align-items: center;
         justify-content: center;
+        flex: 0 0 auto;
       }
 
       .nav-links {
         display: none;
         width: 100%;
         flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+        padding-top: 8px;
       }
 
       .nav-links.is-open {
@@ -1171,6 +1265,7 @@
       .nav-links a {
         width: 100%;
         text-align: center;
+        white-space: normal;
       }
 
       .week-card {
@@ -1187,6 +1282,16 @@
 
       .week-status-note {
         text-align: left;
+      }
+
+      .roadmap-sidebar {
+        grid-template-columns: 1fr;
+      }
+
+      .week-detail-nav,
+      .week-detail-stat-grid,
+      .sidebar-actions {
+        grid-template-columns: 1fr;
       }
     }
 
@@ -1213,12 +1318,20 @@
         align-items: start;
       }
 
+      .brand-copy strong {
+        font-size: 0.86rem;
+        letter-spacing: 0.14em;
+      }
+
+      .brand-copy span {
+        font-size: 0.76rem;
+      }
+
       .section-head {
         align-items: start;
         flex-direction: column;
       }
 
-      .sidebar-actions,
       .progress-stats,
       .calendar-summary {
         grid-template-columns: 1fr;
@@ -1231,5 +1344,16 @@
       .complete-toggle {
         width: 100%;
         min-width: 0;
+      }
+
+      .topic-grid,
+      .resource-grid,
+      .recommendation-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .topic-topline {
+        flex-direction: column;
+        align-items: flex-start;
       }
     }
