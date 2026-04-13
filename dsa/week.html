@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DSA Atlas Week Guide</title>
+  <meta name="description" content="Focused weekly DSA guide with synced topic progress, sub-topics, import/export, and curated reading links.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="page">
+    <nav class="nav">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true"></div>
+        <div class="brand-copy">
+          <strong>DSA Atlas</strong>
+          <span>Focused week-by-week execution guide</span>
+        </div>
+      </div>
+      <button class="nav-toggle" id="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Toggle navigation menu">
+        <span class="nav-toggle-glyph" aria-hidden="true">☰</span>
+      </button>
+      <div class="nav-links" id="nav-links">
+        <a href="index.html#overview">Overview</a>
+        <a href="index.html#approach">Study Logic</a>
+        <a href="index.html#roadmap">Weekly Roadmap</a>
+      </div>
+    </nav>
+
+    <section class="hero week-hero" id="week-detail-page">
+      <article class="hero-copy week-hero-copy">
+        <div class="eyebrow">Week Detail</div>
+        <h1 id="week-detail-heading">Week Guide</h1>
+        <p id="week-detail-goal"></p>
+        <div class="hero-actions">
+          <a class="primary" href="index.html#roadmap">Back to roadmap</a>
+          <a class="secondary" id="week-cta-link" href="#week-detail-topics">Jump to topics</a>
+        </div>
+        <div class="hero-grid" id="week-detail-metrics"></div>
+      </article>
+
+      <aside class="hero-panel week-hero-panel">
+        <div class="kicker">Navigation</div>
+        <h2 id="week-detail-panel-title">Week navigation</h2>
+        <p id="week-detail-leetcode"></p>
+        <div class="week-detail-nav">
+          <a class="action-button" id="prev-week-link" href="week.html?week=1">Previous week</a>
+          <a class="action-button primary-action" id="next-week-link" href="week.html?week=2">Next week</a>
+        </div>
+        <div class="phase-list" id="week-detail-phase-list"></div>
+      </aside>
+    </section>
+
+    <section class="section-shell week-detail-shell">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">Week Dashboard</div>
+          <h2 id="week-detail-subheading">Study the right things in the right order</h2>
+          <p>This page mirrors your saved roadmap progress. Topic checks, sub-topic checks, import/export, and calendar activity all stay synced with the main roadmap.</p>
+        </div>
+      </div>
+
+      <div class="week-detail-summary">
+        <div class="sidebar-card">
+          <div class="kicker">Week Progress</div>
+          <div class="progress-stats week-detail-stat-grid">
+            <div class="stat-chip">
+              <strong id="week-topic-progress">0/0</strong>
+              <span>Topics completed</span>
+            </div>
+            <div class="stat-chip">
+              <strong id="week-bullet-progress">0/0</strong>
+              <span>Sub-topics completed</span>
+            </div>
+            <div class="stat-chip">
+              <strong id="week-hours-label">0h</strong>
+              <span>Focused study blocks</span>
+            </div>
+            <div class="stat-chip">
+              <strong id="week-phase-label">Foundation</strong>
+              <span>Current phase</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="sidebar-card">
+          <div class="kicker">Learning Articles</div>
+          <div class="resource-grid" id="week-resource-grid"></div>
+        </div>
+
+        <div class="sidebar-card">
+          <div class="kicker">Progress Tools</div>
+          <p>Use the same import and export file across the roadmap and all week pages. Checked topics and sub-topics will stay visible everywhere.</p>
+          <div class="sidebar-actions">
+            <button class="action-button primary-action" id="export-progress" type="button">Export JSON</button>
+            <button class="action-button" id="import-progress" type="button">Import JSON</button>
+          </div>
+          <input id="import-progress-input" type="file" accept="application/json,.json" hidden>
+        </div>
+      </div>
+
+      <div class="recommendation-shell week-recommendation-shell">
+        <h4>Recommended LeetCode Set</h4>
+        <div class="recommendation-grid" id="week-recommendation-grid"></div>
+      </div>
+
+      <div id="week-detail-topics" class="topic-grid week-detail-topic-grid"></div>
+    </section>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
