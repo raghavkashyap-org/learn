@@ -17,7 +17,7 @@
         <div class="brand-mark" aria-hidden="true"></div>
         <div class="brand-copy">
           <strong>DSA Atlas</strong>
-         <span>DSA Started Apr 13</span>
+          <span>Beginner to advanced C++ and LeetCode roadmap</span>
         </div>
       </div>
       <button class="nav-toggle" id="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Toggle navigation menu">
@@ -155,42 +155,6 @@
             </div>
           </div>
           <div class="sidebar-card">
-            <div class="kicker">Progress Calendar</div>
-            <h3>LeetCode and GitHub-style activity</h3>
-            <p class="calendar-meta">Each time you mark a topic or sub-topic complete, today gets a green square. Progress stays on this device with local storage and can be moved with JSON export.</p>
-            <div class="calendar-shell">
-              <div class="calendar-scroll">
-                <div class="calendar-grid" id="progress-calendar" aria-label="Completion activity calendar"></div>
-              </div>
-              <div class="calendar-legend">
-                <span>Less</span>
-                <div class="legend-scale" aria-hidden="true">
-                  <span class="legend-box"></span>
-                  <span class="legend-box level-1"></span>
-                  <span class="legend-box level-2"></span>
-                  <span class="legend-box level-3"></span>
-                  <span class="legend-box level-4"></span>
-                </div>
-                <span>More</span>
-              </div>
-              <div class="calendar-summary">
-                <div class="stat-chip">
-                  <strong id="calendar-active-days">0</strong>
-                  <span>Active days</span>
-                </div>
-                <div class="stat-chip">
-                  <strong id="calendar-last-saved">No data</strong>
-                  <span>Last completion</span>
-                </div>
-              </div>
-            </div>
-            <div class="sidebar-actions">
-              <button class="action-button primary-action" id="export-progress" type="button">Export JSON</button>
-              <button class="action-button" id="import-progress" type="button">Import JSON</button>
-            </div>
-            <input id="import-progress-input" type="file" accept="application/json,.json" hidden>
-          </div>
-          <div class="sidebar-card">
             <div class="kicker">By the end</div>
             <ul>
               <li>Recognize the most common interview patterns without starting from scratch every time.</li>
@@ -210,6 +174,71 @@
             </ul>
           </div>
         </aside>
+
+        <div class="sidebar-card roadmap-calendar-card">
+          <div class="kicker">Progress Calendar</div>
+          <h3>LeetCode and GitHub-style activity</h3>
+          <p class="calendar-meta">Each time you mark a topic or sub-topic complete, today gets a green square. Progress stays on this device with local storage and can be moved with JSON export.</p>
+          <div class="calendar-shell">
+            <div class="calendar-scroll">
+              <div class="calendar-grid" id="progress-calendar" aria-label="Completion activity calendar"></div>
+            </div>
+            <div class="calendar-legend">
+              <span>Less</span>
+              <div class="legend-scale" aria-hidden="true">
+                <span class="legend-box"></span>
+                <span class="legend-box level-1"></span>
+                <span class="legend-box level-2"></span>
+                <span class="legend-box level-3"></span>
+                <span class="legend-box level-4"></span>
+              </div>
+              <span>More</span>
+            </div>
+            <div class="calendar-summary">
+              <div class="stat-chip">
+                <strong id="calendar-active-days">0</strong>
+                <span>Active days</span>
+              </div>
+              <div class="stat-chip">
+                <strong id="calendar-last-saved">No data</strong>
+                <span>Last completion</span>
+              </div>
+              <div class="stat-chip">
+                <strong id="calendar-current-streak">0 days</strong>
+                <span>Current streak</span>
+              </div>
+              <div class="stat-chip">
+                <strong id="calendar-best-streak">0 days</strong>
+                <span>Best streak</span>
+              </div>
+            </div>
+            <div class="calendar-summary calendar-summary-secondary">
+              <div class="stat-chip">
+                <strong id="calendar-this-week">0</strong>
+                <span>Completions this week</span>
+              </div>
+              <div class="stat-chip">
+                <strong id="calendar-next-focus">Week 1</strong>
+                <span>Next focus week</span>
+              </div>
+            </div>
+            <div class="calendar-learn-grid">
+              <article class="calendar-learn-card">
+                <strong>Review cue</strong>
+                <p id="calendar-review-tip">Finish one topic, then revisit the same pattern within 48 hours so the invariant stays fresh.</p>
+              </article>
+              <article class="calendar-learn-card">
+                <strong>Consistency cue</strong>
+                <p id="calendar-consistency-tip">Short daily completions beat one heavy weekend session because pattern recall compounds faster.</p>
+              </article>
+            </div>
+          </div>
+          <div class="sidebar-actions">
+            <button class="action-button primary-action" id="export-progress" type="button">Export JSON</button>
+            <button class="action-button" id="import-progress" type="button">Import JSON</button>
+          </div>
+          <input id="import-progress-input" type="file" accept="application/json,.json" hidden>
+        </div>
 
         <div class="roadmap-main">
           <div class="week-grid" id="week-grid"></div>
