@@ -556,6 +556,182 @@
       margin: 10px 0 0;
     }
 
+    .sidebar-actions {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .action-button,
+    .complete-toggle {
+      appearance: none;
+      border: 1px solid rgba(23, 20, 17, 0.12);
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.72);
+      color: var(--ink);
+      font: inherit;
+      cursor: pointer;
+      transition: transform 180ms ease, background 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+    }
+
+    .action-button {
+      padding: 12px 14px;
+      font-size: 0.86rem;
+      font-weight: 700;
+    }
+
+    .action-button:hover,
+    .complete-toggle:hover {
+      transform: translateY(-1px);
+      background: rgba(255, 255, 255, 0.95);
+      border-color: rgba(23, 20, 17, 0.2);
+    }
+
+    .action-button:focus-visible,
+    .complete-toggle:focus-visible {
+      outline: 2px solid rgba(29, 85, 102, 0.4);
+      outline-offset: 2px;
+    }
+
+    .action-button.primary-action,
+    .complete-toggle.is-complete {
+      background: linear-gradient(135deg, rgba(29, 85, 102, 0.95), rgba(52, 126, 82, 0.95));
+      color: rgba(255, 249, 238, 0.98);
+      border-color: transparent;
+      box-shadow: 0 14px 30px rgba(29, 85, 102, 0.18);
+    }
+
+    .progress-stats {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .stat-chip {
+      padding: 12px 14px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.62);
+      border: 1px solid rgba(23, 20, 17, 0.08);
+    }
+
+    .stat-chip strong,
+    .calendar-summary strong {
+      display: block;
+      font-size: 1.15rem;
+      margin-bottom: 4px;
+    }
+
+    .stat-chip span,
+    .calendar-summary span,
+    .calendar-meta {
+      display: block;
+      color: var(--muted);
+      font-size: 0.84rem;
+      line-height: 1.55;
+    }
+
+    .calendar-shell {
+      margin-top: 16px;
+    }
+
+    .calendar-scroll {
+      overflow-x: auto;
+      padding-bottom: 6px;
+    }
+
+    .calendar-grid {
+      display: grid;
+      grid-template-rows: repeat(7, 12px);
+      grid-auto-flow: column;
+      grid-auto-columns: 12px;
+      gap: 4px;
+      min-width: max-content;
+      margin-top: 10px;
+    }
+
+    .calendar-day {
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
+      background: rgba(23, 20, 17, 0.08);
+      border: 1px solid rgba(23, 20, 17, 0.05);
+      transition: transform 180ms ease, border-color 180ms ease;
+    }
+
+    .calendar-day:hover {
+      transform: scale(1.08);
+      border-color: rgba(23, 20, 17, 0.18);
+    }
+
+    .calendar-day.level-1 {
+      background: #d8f0d2;
+      border-color: #c3e3bb;
+    }
+
+    .calendar-day.level-2 {
+      background: #8fd17d;
+      border-color: #70b760;
+    }
+
+    .calendar-day.level-3 {
+      background: #4fa15c;
+      border-color: #3f8851;
+    }
+
+    .calendar-day.level-4 {
+      background: #25663f;
+      border-color: #1f5234;
+    }
+
+    .calendar-legend {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: 0.78rem;
+    }
+
+    .legend-scale {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .legend-box {
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
+      border: 1px solid rgba(23, 20, 17, 0.06);
+      background: rgba(23, 20, 17, 0.08);
+    }
+
+    .legend-box.level-1 {
+      background: #d8f0d2;
+    }
+
+    .legend-box.level-2 {
+      background: #8fd17d;
+    }
+
+    .legend-box.level-3 {
+      background: #4fa15c;
+    }
+
+    .legend-box.level-4 {
+      background: #25663f;
+    }
+
+    .calendar-summary {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 12px;
+    }
+
     .progress-block {
       position: relative;
       padding-top: 18px;
@@ -683,6 +859,43 @@
       border: 1px solid rgba(23, 20, 17, 0.08);
       font-size: 0.8rem;
       font-weight: 700;
+    }
+
+    .week-status {
+      display: grid;
+      justify-items: end;
+      gap: 10px;
+      min-width: 168px;
+    }
+
+    .week-status-note {
+      text-align: right;
+      color: var(--muted);
+      font-size: 0.8rem;
+      line-height: 1.5;
+    }
+
+    .complete-toggle {
+      min-width: 168px;
+      padding: 12px 16px;
+      font-size: 0.88rem;
+      font-weight: 800;
+      letter-spacing: 0.01em;
+    }
+
+    .week-card.is-complete {
+      border-color: rgba(37, 102, 63, 0.22);
+      box-shadow: 0 24px 60px rgba(37, 102, 63, 0.12);
+    }
+
+    .week-card.is-complete .week-index strong {
+      background: linear-gradient(145deg, rgba(23, 78, 46, 0.96), rgba(79, 161, 92, 0.92));
+    }
+
+    .week-card.is-complete .tag-complete {
+      background: rgba(37, 102, 63, 0.12);
+      border-color: rgba(37, 102, 63, 0.18);
+      color: #1f5234;
     }
 
     .week-desc,
@@ -883,6 +1096,14 @@
       .week-head {
         grid-template-columns: 1fr;
       }
+
+      .week-status {
+        justify-items: start;
+      }
+
+      .week-status-note {
+        text-align: left;
+      }
     }
 
     @media (max-width: 640px) {
@@ -911,6 +1132,17 @@
       .section-head {
         align-items: start;
         flex-direction: column;
+      }
+
+      .sidebar-actions,
+      .progress-stats,
+      .calendar-summary {
+        grid-template-columns: 1fr;
+      }
+
+      .complete-toggle {
+        width: 100%;
+        min-width: 0;
       }
     }
   </style>
@@ -1038,13 +1270,59 @@
             <p id="sidebar-total-hours"></p>
             <div class="progress-block">
               <div class="progress-labels">
-                <span>Week 1</span>
-                <span>Week 20</span>
+                <span id="progress-label-start">0 done</span>
+                <span id="progress-label-end">20 total</span>
               </div>
               <div class="progress-track">
                 <div class="progress-fill" id="progress-fill"></div>
               </div>
             </div>
+            <div class="progress-stats">
+              <div class="stat-chip">
+                <strong id="completed-weeks-count">0/20</strong>
+                <span>Weeks completed</span>
+              </div>
+              <div class="stat-chip">
+                <strong id="completed-hours-count">0h</strong>
+                <span>Study hours unlocked</span>
+              </div>
+            </div>
+          </div>
+          <div class="sidebar-card">
+            <div class="kicker">Progress Calendar</div>
+            <h3>LeetCode and GitHub-style activity</h3>
+            <p class="calendar-meta">Each time you mark a week complete, today gets a green square. Progress stays on this device with local storage and can be moved with JSON export.</p>
+            <div class="calendar-shell">
+              <div class="calendar-scroll">
+                <div class="calendar-grid" id="progress-calendar" aria-label="Completion activity calendar"></div>
+              </div>
+              <div class="calendar-legend">
+                <span>Less</span>
+                <div class="legend-scale" aria-hidden="true">
+                  <span class="legend-box"></span>
+                  <span class="legend-box level-1"></span>
+                  <span class="legend-box level-2"></span>
+                  <span class="legend-box level-3"></span>
+                  <span class="legend-box level-4"></span>
+                </div>
+                <span>More</span>
+              </div>
+              <div class="calendar-summary">
+                <div class="stat-chip">
+                  <strong id="calendar-active-days">0</strong>
+                  <span>Active days</span>
+                </div>
+                <div class="stat-chip">
+                  <strong id="calendar-last-saved">No data</strong>
+                  <span>Last completion</span>
+                </div>
+              </div>
+            </div>
+            <div class="sidebar-actions">
+              <button class="action-button primary-action" id="export-progress" type="button">Export JSON</button>
+              <button class="action-button" id="import-progress" type="button">Import JSON</button>
+            </div>
+            <input id="import-progress-input" type="file" accept="application/json,.json" hidden>
           </div>
           <div class="sidebar-card">
             <div class="kicker">By the end</div>
@@ -2255,6 +2533,19 @@
     const totalHoursEl = document.getElementById("sidebar-total-hours");
     const totalWeeksEl = document.getElementById("sidebar-total-weeks");
     const masterPillsEl = document.getElementById("master-pills");
+    const progressLabelStartEl = document.getElementById("progress-label-start");
+    const progressLabelEndEl = document.getElementById("progress-label-end");
+    const completedWeeksCountEl = document.getElementById("completed-weeks-count");
+    const completedHoursCountEl = document.getElementById("completed-hours-count");
+    const progressCalendarEl = document.getElementById("progress-calendar");
+    const calendarActiveDaysEl = document.getElementById("calendar-active-days");
+    const calendarLastSavedEl = document.getElementById("calendar-last-saved");
+    const exportProgressBtn = document.getElementById("export-progress");
+    const importProgressBtn = document.getElementById("import-progress");
+    const importProgressInput = document.getElementById("import-progress-input");
+
+    const STORAGE_KEY = "dsa-atlas-progress-v1";
+    const CALENDAR_DAYS = 140;
 
     const totalHours = roadmap.reduce((sum, item) => sum + item.hours, 0);
     const totalTopics = roadmap.reduce((sum, item) => sum + item.topics.length, 0);
@@ -2319,8 +2610,153 @@
     totalWeeksEl.textContent = `${roadmap.length} weeks`;
     totalHoursEl.textContent = `${totalHours} hours of focused study blocks across concept learning, C++ implementation, and targeted practice.`;
 
+    const defaultProgressState = () => ({
+      completedWeeks: {},
+      activity: {},
+      updatedAt: null
+    });
+
+    const getTodayKey = () => {
+      const now = new Date();
+      const local = new Date(now.getTime() - now.getTimezoneOffset() * 60000);
+      return local.toISOString().slice(0, 10);
+    };
+
+    const formatDateLabel = (value) => {
+      if (!value) {
+        return "No data";
+      }
+
+      const date = new Date(`${value}T00:00:00`);
+      return new Intl.DateTimeFormat(undefined, {
+        month: "short",
+        day: "numeric",
+        year: "numeric"
+      }).format(date);
+    };
+
+    const normalizeProgressState = (raw) => {
+      const base = defaultProgressState();
+      const state = raw && typeof raw === "object" ? raw : {};
+      const completedWeeks = state.completedWeeks && typeof state.completedWeeks === "object" ? state.completedWeeks : {};
+      const activity = state.activity && typeof state.activity === "object" ? state.activity : {};
+
+      roadmap.forEach((item) => {
+        const entry = completedWeeks[item.week];
+        if (entry && typeof entry === "object" && entry.completed === true) {
+          base.completedWeeks[item.week] = {
+            completed: true,
+            date: typeof entry.date === "string" ? entry.date : getTodayKey()
+          };
+        }
+      });
+
+      Object.entries(activity).forEach(([date, count]) => {
+        if (/^\d{4}-\d{2}-\d{2}$/.test(date) && Number.isFinite(Number(count)) && Number(count) > 0) {
+          base.activity[date] = Math.max(1, Math.floor(Number(count)));
+        }
+      });
+
+      base.updatedAt = typeof state.updatedAt === "string" ? state.updatedAt : null;
+      return base;
+    };
+
+    const loadProgressState = () => {
+      try {
+        const saved = window.localStorage.getItem(STORAGE_KEY);
+        return saved ? normalizeProgressState(JSON.parse(saved)) : defaultProgressState();
+      } catch (error) {
+        return defaultProgressState();
+      }
+    };
+
+    let progressState = loadProgressState();
+
+    const saveProgressState = () => {
+      progressState.updatedAt = new Date().toISOString();
+      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(progressState));
+    };
+
+    const getCompletedWeekNumbers = () => roadmap
+      .map(item => item.week)
+      .filter(week => progressState.completedWeeks[week]?.completed);
+
+    const renderCalendar = () => {
+      const today = new Date();
+      const startDate = new Date(today);
+      startDate.setDate(today.getDate() - (CALENDAR_DAYS - 1));
+      const dayOffset = startDate.getDay();
+      const cells = [];
+
+      for (let i = 0; i < dayOffset; i += 1) {
+        cells.push(`<div class="calendar-day" aria-hidden="true"></div>`);
+      }
+
+      for (let i = 0; i < CALENDAR_DAYS; i += 1) {
+        const current = new Date(startDate);
+        current.setDate(startDate.getDate() + i);
+        const local = new Date(current.getTime() - current.getTimezoneOffset() * 60000);
+        const key = local.toISOString().slice(0, 10);
+        const count = progressState.activity[key] || 0;
+        const level = count >= 4 ? 4 : count;
+        const title = count > 0 ? `${count} completion${count > 1 ? "s" : ""} on ${formatDateLabel(key)}` : `No completions on ${formatDateLabel(key)}`;
+        cells.push(`<div class="calendar-day level-${level}" title="${title}" aria-label="${title}"></div>`);
+      }
+
+      progressCalendarEl.innerHTML = cells.join("");
+
+      const activityDates = Object.keys(progressState.activity).filter(date => progressState.activity[date] > 0);
+      calendarActiveDaysEl.textContent = `${activityDates.length}`;
+
+      const latestDate = activityDates.sort().at(-1);
+      calendarLastSavedEl.textContent = latestDate ? formatDateLabel(latestDate) : "No data";
+    };
+
+    const renderProgressSummary = () => {
+      const completedWeeks = getCompletedWeekNumbers();
+      const completedHours = roadmap
+        .filter(item => completedWeeks.includes(item.week))
+        .reduce((sum, item) => sum + item.hours, 0);
+      const percent = roadmap.length ? (completedWeeks.length / roadmap.length) * 100 : 0;
+
+      completedWeeksCountEl.textContent = `${completedWeeks.length}/${roadmap.length}`;
+      completedHoursCountEl.textContent = `${completedHours}h`;
+      progressLabelStartEl.textContent = `${completedWeeks.length} done`;
+      progressLabelEndEl.textContent = `${roadmap.length} total`;
+      progressFillEl.style.width = `${percent}%`;
+    };
+
+    const syncWeekCompletionUI = () => {
+      document.querySelectorAll(".week-card").forEach((card) => {
+        const week = Number(card.dataset.week);
+        const isComplete = Boolean(progressState.completedWeeks[week]?.completed);
+        const button = card.querySelector(".complete-toggle");
+        const note = card.querySelector(".week-status-note");
+        const completionDate = progressState.completedWeeks[week]?.date;
+
+        card.classList.toggle("is-complete", isComplete);
+        if (button) {
+          button.classList.toggle("is-complete", isComplete);
+          button.setAttribute("aria-pressed", String(isComplete));
+          button.textContent = isComplete ? "Completed" : "Mark as Complete";
+        }
+
+        if (note) {
+          note.textContent = isComplete && completionDate
+            ? `Saved on ${formatDateLabel(completionDate)}`
+            : "Stored locally and available for JSON export.";
+        }
+      });
+    };
+
+    const renderProgressState = () => {
+      renderProgressSummary();
+      renderCalendar();
+      syncWeekCompletionUI();
+    };
+
     weekGridEl.innerHTML = roadmap.map(item => `
-      <article class="week-card" id="week-${item.week}">
+      <article class="week-card" id="week-${item.week}" data-week="${item.week}">
         <div class="week-index">
           <strong>${item.week}</strong>
           <span>${item.phase}</span>
@@ -2333,8 +2769,13 @@
                 <span class="tag">${item.hours} hours</span>
                 <span class="tag">${item.topics.length} topic blocks</span>
                 <span class="tag">${item.phase}</span>
+                <span class="tag tag-complete">Trackable</span>
               </div>
               <p class="week-desc">${item.goal}</p>
+            </div>
+            <div class="week-status">
+              <button class="complete-toggle" type="button" data-week="${item.week}" aria-pressed="false">Mark as Complete</button>
+              <span class="week-status-note">Stored locally and available for JSON export.</span>
             </div>
           </div>
           <p class="leetcode-lens"><strong>LeetCode target:</strong> ${item.leetcode}</p>
@@ -2372,17 +2813,89 @@
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           entry.target.classList.add("is-visible");
-          const weekNum = Number(entry.target.id.replace("week-", ""));
-          const percent = (weekNum / roadmap.length) * 100;
-          progressFillEl.style.width = `${percent}%`;
         }
       });
     }, { threshold: 0.12 });
 
     cards.forEach(card => revealObserver.observe(card));
 
+    weekGridEl.addEventListener("click", (event) => {
+      const button = event.target.closest(".complete-toggle");
+      if (!button) {
+        return;
+      }
+
+      const week = Number(button.dataset.week);
+      const currentEntry = progressState.completedWeeks[week];
+      const todayKey = getTodayKey();
+
+      if (currentEntry?.completed) {
+        delete progressState.completedWeeks[week];
+
+        if (currentEntry.date && progressState.activity[currentEntry.date]) {
+          progressState.activity[currentEntry.date] -= 1;
+          if (progressState.activity[currentEntry.date] <= 0) {
+            delete progressState.activity[currentEntry.date];
+          }
+        }
+      } else {
+        progressState.completedWeeks[week] = {
+          completed: true,
+          date: todayKey
+        };
+
+        progressState.activity[todayKey] = (progressState.activity[todayKey] || 0) + 1;
+      }
+
+      saveProgressState();
+      renderProgressState();
+    });
+
+    exportProgressBtn.addEventListener("click", () => {
+      const payload = {
+        app: "DSA Atlas",
+        version: 1,
+        exportedAt: new Date().toISOString(),
+        progress: progressState
+      };
+      const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      const stamp = new Date().toISOString().slice(0, 10);
+      link.href = url;
+      link.download = `dsa-atlas-progress-${stamp}.json`;
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      URL.revokeObjectURL(url);
+    });
+
+    importProgressBtn.addEventListener("click", () => {
+      importProgressInput.click();
+    });
+
+    importProgressInput.addEventListener("change", async (event) => {
+      const [file] = event.target.files || [];
+      if (!file) {
+        return;
+      }
+
+      try {
+        const text = await file.text();
+        const parsed = JSON.parse(text);
+        const imported = normalizeProgressState(parsed.progress || parsed);
+        progressState = imported;
+        saveProgressState();
+        renderProgressState();
+      } catch (error) {
+        window.alert("Invalid progress file. Please import a JSON file exported from this page.");
+      } finally {
+        event.target.value = "";
+      }
+    });
+
     window.addEventListener("load", () => {
-      progressFillEl.style.width = `${100 / roadmap.length}%`;
+      renderProgressState();
     });
   </script>
 </body>
