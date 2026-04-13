@@ -106,6 +106,20 @@
       z-index: 5;
     }
 
+    .nav-toggle {
+      display: none;
+      appearance: none;
+      border: 1px solid rgba(23, 20, 17, 0.12);
+      background: rgba(255, 255, 255, 0.68);
+      color: var(--ink);
+      border-radius: 999px;
+      padding: 10px 14px;
+      font: inherit;
+      font-size: 0.84rem;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
     .brand {
       display: flex;
       align-items: center;
@@ -298,7 +312,7 @@
 
     .hero-grid {
       display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
       gap: 14px;
     }
 
@@ -401,7 +415,7 @@
 
     .summary {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
       gap: 18px;
       margin: 18px 0 30px;
     }
@@ -496,7 +510,7 @@
 
     .principles {
       display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 16px;
       position: relative;
       z-index: 1;
@@ -527,6 +541,12 @@
       grid-template-columns: 320px minmax(0, 1fr);
       gap: 20px;
       align-items: start;
+    }
+
+    .roadmap-main,
+    .week-grid,
+    .week-body {
+      min-width: 0;
     }
 
     .roadmap-sidebar {
@@ -835,7 +855,7 @@
 
     .week-head {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) auto;
+      grid-template-columns: minmax(0, 1fr) minmax(180px, 220px);
       gap: 18px;
       align-items: start;
     }
@@ -865,7 +885,7 @@
       display: grid;
       justify-items: end;
       gap: 10px;
-      min-width: 168px;
+      min-width: 0;
     }
 
     .week-status-note {
@@ -935,7 +955,7 @@
 
     .recommendation-grid {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 12px;
     }
 
@@ -962,27 +982,33 @@
 
     .topic-grid {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 16px;
       margin-top: 20px;
       position: relative;
       z-index: 1;
+      align-items: stretch;
     }
 
     .topic-card {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
       padding: 18px;
       border-radius: 20px;
       background: rgba(255, 255, 255, 0.54);
       border: 1px solid rgba(23, 20, 17, 0.08);
       min-height: 100%;
+      min-width: 0;
+      overflow-wrap: anywhere;
     }
 
     .topic-topline {
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       justify-content: space-between;
+      flex-wrap: wrap;
       gap: 12px;
-      margin-bottom: 10px;
     }
 
     .topic-card strong {
@@ -1000,26 +1026,82 @@
     }
 
     .topic-card p {
-      margin: 0 0 12px;
+      margin: 0;
       color: var(--muted);
       line-height: 1.75;
       font-size: 0.92rem;
     }
 
-    .topic-card ul {
-      padding-left: 18px;
-      margin: 0;
+    .topic-progress {
+      display: grid;
+      gap: 10px;
+      margin-top: auto;
     }
 
-    .topic-card li {
-      margin-bottom: 8px;
+    .topic-status-note {
+      color: var(--muted);
+      font-size: 0.8rem;
+      line-height: 1.5;
+    }
+
+    .bullet-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 10px;
+    }
+
+    .bullet-item {
+      display: grid;
+      grid-template-columns: 24px minmax(0, 1fr);
+      align-items: start;
+      gap: 10px;
       color: var(--ink);
       line-height: 1.65;
       font-size: 0.9rem;
+      min-width: 0;
     }
 
-    .topic-card li::marker {
-      color: var(--accent);
+    .bullet-toggle {
+      appearance: none;
+      width: 24px;
+      height: 24px;
+      margin-top: 1px;
+      border-radius: 8px;
+      border: 1px solid rgba(23, 20, 17, 0.14);
+      background: rgba(255, 255, 255, 0.9);
+      cursor: pointer;
+      position: relative;
+      transition: transform 180ms ease, background 180ms ease, border-color 180ms ease;
+    }
+
+    .bullet-toggle:hover {
+      transform: translateY(-1px);
+      border-color: rgba(23, 20, 17, 0.24);
+    }
+
+    .bullet-toggle::after {
+      content: "";
+      position: absolute;
+      inset: 6px;
+      border-radius: 4px;
+      background: transparent;
+      transition: background 180ms ease;
+    }
+
+    .bullet-item.is-complete .bullet-toggle {
+      background: rgba(37, 102, 63, 0.12);
+      border-color: rgba(37, 102, 63, 0.24);
+    }
+
+    .bullet-item.is-complete .bullet-toggle::after {
+      background: linear-gradient(135deg, rgba(29, 85, 102, 0.95), rgba(52, 126, 82, 0.95));
+    }
+
+    .bullet-item.is-complete span {
+      color: #1f5234;
+      text-decoration: line-through;
     }
 
     .footer {
@@ -1065,9 +1147,7 @@
 
     @media (max-width: 1180px) {
       .hero,
-      .roadmap-shell,
-      .summary,
-      .principles {
+      .roadmap-shell {
         grid-template-columns: 1fr;
       }
 
@@ -1080,13 +1160,28 @@
       .nav {
         border-radius: 24px;
         align-items: start;
+        flex-wrap: wrap;
+      }
+
+      .nav-toggle {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .nav-links {
+        display: none;
+        width: 100%;
         flex-direction: column;
       }
 
-      .hero-grid,
-      .topic-grid,
-      .recommendation-grid {
-        grid-template-columns: 1fr;
+      .nav-links.is-open {
+        display: flex;
+      }
+
+      .nav-links a {
+        width: 100%;
+        text-align: center;
       }
 
       .week-card {
@@ -1140,6 +1235,10 @@
         grid-template-columns: 1fr;
       }
 
+      .sidebar-card {
+        padding: 18px;
+      }
+
       .complete-toggle {
         width: 100%;
         min-width: 0;
@@ -1157,7 +1256,8 @@
           <span>Beginner to advanced C++ and LeetCode roadmap</span>
         </div>
       </div>
-      <div class="nav-links">
+      <button class="nav-toggle" id="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links">Menu</button>
+      <div class="nav-links" id="nav-links">
         <a href="#overview">Overview</a>
         <a href="#approach">Study Logic</a>
         <a href="#roadmap">Weekly Roadmap</a>
@@ -1271,7 +1371,7 @@
             <div class="progress-block">
               <div class="progress-labels">
                 <span id="progress-label-start">0 done</span>
-                <span id="progress-label-end">20 total</span>
+                <span id="progress-label-end">0 total</span>
               </div>
               <div class="progress-track">
                 <div class="progress-fill" id="progress-fill"></div>
@@ -1279,19 +1379,19 @@
             </div>
             <div class="progress-stats">
               <div class="stat-chip">
-                <strong id="completed-weeks-count">0/20</strong>
-                <span>Weeks completed</span>
+                <strong id="completed-weeks-count">0/0</strong>
+                <span>Topics completed</span>
               </div>
               <div class="stat-chip">
-                <strong id="completed-hours-count">0h</strong>
-                <span>Study hours unlocked</span>
+                <strong id="completed-hours-count">0/0</strong>
+                <span>Sub-topics completed</span>
               </div>
             </div>
           </div>
           <div class="sidebar-card">
             <div class="kicker">Progress Calendar</div>
             <h3>LeetCode and GitHub-style activity</h3>
-            <p class="calendar-meta">Each time you mark a week complete, today gets a green square. Progress stays on this device with local storage and can be moved with JSON export.</p>
+            <p class="calendar-meta">Each time you mark a topic or sub-topic complete, today gets a green square. Progress stays on this device with local storage and can be moved with JSON export.</p>
             <div class="calendar-shell">
               <div class="calendar-scroll">
                 <div class="calendar-grid" id="progress-calendar" aria-label="Completion activity calendar"></div>
@@ -1345,7 +1445,9 @@
           </div>
         </aside>
 
-        <div class="week-grid" id="week-grid"></div>
+        <div class="roadmap-main">
+          <div class="week-grid" id="week-grid"></div>
+        </div>
       </div>
     </section>
 
@@ -2529,6 +2631,8 @@
     const heroMetricsEl = document.getElementById("hero-metrics");
     const phaseListEl = document.getElementById("phase-list");
     const weekGridEl = document.getElementById("week-grid");
+    const navToggleEl = document.getElementById("nav-toggle");
+    const navLinksEl = document.getElementById("nav-links");
     const progressFillEl = document.getElementById("progress-fill");
     const totalHoursEl = document.getElementById("sidebar-total-hours");
     const totalWeeksEl = document.getElementById("sidebar-total-weeks");
@@ -2544,11 +2648,15 @@
     const importProgressBtn = document.getElementById("import-progress");
     const importProgressInput = document.getElementById("import-progress-input");
 
-    const STORAGE_KEY = "dsa-atlas-progress-v1";
+    const STORAGE_KEY = "dsa-atlas-progress-v2";
     const CALENDAR_DAYS = 140;
 
     const totalHours = roadmap.reduce((sum, item) => sum + item.hours, 0);
     const totalTopics = roadmap.reduce((sum, item) => sum + item.topics.length, 0);
+    const totalSubtopics = roadmap.reduce((sum, item) => (
+      sum + item.topics.reduce((topicSum, topic) => topicSum + topic.bullets.length, 0)
+    ), 0);
+    const totalTrackableItems = totalTopics + totalSubtopics;
 
     const heroMetrics = [
       {
@@ -2611,10 +2719,14 @@
     totalHoursEl.textContent = `${totalHours} hours of focused study blocks across concept learning, C++ implementation, and targeted practice.`;
 
     const defaultProgressState = () => ({
-      completedWeeks: {},
+      completedTopics: {},
+      completedBullets: {},
       activity: {},
       updatedAt: null
     });
+
+    const getTopicKey = (week, topicIndex) => `${week}-${topicIndex}`;
+    const getBulletKey = (week, topicIndex, bulletIndex) => `${week}-${topicIndex}-${bulletIndex}`;
 
     const getTodayKey = () => {
       const now = new Date();
@@ -2638,16 +2750,47 @@
     const normalizeProgressState = (raw) => {
       const base = defaultProgressState();
       const state = raw && typeof raw === "object" ? raw : {};
+      const completedTopics = state.completedTopics && typeof state.completedTopics === "object" ? state.completedTopics : {};
+      const completedBullets = state.completedBullets && typeof state.completedBullets === "object" ? state.completedBullets : {};
       const completedWeeks = state.completedWeeks && typeof state.completedWeeks === "object" ? state.completedWeeks : {};
       const activity = state.activity && typeof state.activity === "object" ? state.activity : {};
 
       roadmap.forEach((item) => {
-        const entry = completedWeeks[item.week];
-        if (entry && typeof entry === "object" && entry.completed === true) {
-          base.completedWeeks[item.week] = {
-            completed: true,
-            date: typeof entry.date === "string" ? entry.date : getTodayKey()
-          };
+        item.topics.forEach((topic, topicIndex) => {
+          const topicKey = getTopicKey(item.week, topicIndex);
+          const topicEntry = completedTopics[topicKey];
+
+          if (topicEntry && typeof topicEntry === "object" && topicEntry.completed === true) {
+            base.completedTopics[topicKey] = {
+              completed: true,
+              date: typeof topicEntry.date === "string" ? topicEntry.date : getTodayKey()
+            };
+          }
+
+          topic.bullets.forEach((_, bulletIndex) => {
+            const bulletKey = getBulletKey(item.week, topicIndex, bulletIndex);
+            const bulletEntry = completedBullets[bulletKey];
+
+            if (bulletEntry && typeof bulletEntry === "object" && bulletEntry.completed === true) {
+              base.completedBullets[bulletKey] = {
+                completed: true,
+                date: typeof bulletEntry.date === "string" ? bulletEntry.date : getTodayKey()
+              };
+            }
+          });
+        });
+
+        const legacyWeekEntry = completedWeeks[item.week];
+        if (legacyWeekEntry && typeof legacyWeekEntry === "object" && legacyWeekEntry.completed === true) {
+          const legacyDate = typeof legacyWeekEntry.date === "string" ? legacyWeekEntry.date : getTodayKey();
+          item.topics.forEach((topic, topicIndex) => {
+            const topicKey = getTopicKey(item.week, topicIndex);
+            base.completedTopics[topicKey] = base.completedTopics[topicKey] || { completed: true, date: legacyDate };
+            topic.bullets.forEach((_, bulletIndex) => {
+              const bulletKey = getBulletKey(item.week, topicIndex, bulletIndex);
+              base.completedBullets[bulletKey] = base.completedBullets[bulletKey] || { completed: true, date: legacyDate };
+            });
+          });
         }
       });
 
@@ -2677,9 +2820,67 @@
       window.localStorage.setItem(STORAGE_KEY, JSON.stringify(progressState));
     };
 
-    const getCompletedWeekNumbers = () => roadmap
-      .map(item => item.week)
-      .filter(week => progressState.completedWeeks[week]?.completed);
+    const isTopicComplete = (week, topicIndex) => Boolean(progressState.completedTopics[getTopicKey(week, topicIndex)]?.completed);
+    const isBulletComplete = (week, topicIndex, bulletIndex) => Boolean(progressState.completedBullets[getBulletKey(week, topicIndex, bulletIndex)]?.completed);
+    const getCompletedTopicCount = () => Object.keys(progressState.completedTopics).length;
+    const getCompletedSubtopicCount = () => Object.keys(progressState.completedBullets).length;
+    const getWeekTopicCount = (week) => roadmap.find(item => item.week === week)?.topics.length || 0;
+    const getWeekCompletedTopicCount = (week) => {
+      const item = roadmap.find(entry => entry.week === week);
+      return item ? item.topics.filter((_, topicIndex) => isTopicComplete(week, topicIndex)).length : 0;
+    };
+    const getWeekSubtopicStats = (week) => {
+      const item = roadmap.find(entry => entry.week === week);
+      if (!item) {
+        return { done: 0, total: 0 };
+      }
+
+      const total = item.topics.reduce((sum, topic) => sum + topic.bullets.length, 0);
+      const done = item.topics.reduce((sum, topic, topicIndex) => (
+        sum + topic.bullets.filter((_, bulletIndex) => isBulletComplete(week, topicIndex, bulletIndex)).length
+      ), 0);
+
+      return { done, total };
+    };
+
+    const changeActivityCount = (date, delta) => {
+      if (!date || !delta) {
+        return;
+      }
+
+      const next = (progressState.activity[date] || 0) + delta;
+      if (next > 0) {
+        progressState.activity[date] = next;
+      } else {
+        delete progressState.activity[date];
+      }
+    };
+
+    const setCompletionState = (collectionName, key, nextCompleted) => {
+      const collection = progressState[collectionName];
+      const currentEntry = collection[key];
+
+      if (nextCompleted) {
+        if (currentEntry?.completed) {
+          return;
+        }
+
+        const todayKey = getTodayKey();
+        collection[key] = {
+          completed: true,
+          date: todayKey
+        };
+        changeActivityCount(todayKey, 1);
+        return;
+      }
+
+      if (!currentEntry?.completed) {
+        return;
+      }
+
+      delete collection[key];
+      changeActivityCount(currentEntry.date, -1);
+    };
 
     const renderCalendar = () => {
       const today = new Date();
@@ -2713,38 +2914,71 @@
     };
 
     const renderProgressSummary = () => {
-      const completedWeeks = getCompletedWeekNumbers();
-      const completedHours = roadmap
-        .filter(item => completedWeeks.includes(item.week))
-        .reduce((sum, item) => sum + item.hours, 0);
-      const percent = roadmap.length ? (completedWeeks.length / roadmap.length) * 100 : 0;
+      const completedTopicsCount = getCompletedTopicCount();
+      const completedSubtopicsCount = getCompletedSubtopicCount();
+      const completedItems = completedTopicsCount + completedSubtopicsCount;
+      const percent = totalTrackableItems ? (completedItems / totalTrackableItems) * 100 : 0;
 
-      completedWeeksCountEl.textContent = `${completedWeeks.length}/${roadmap.length}`;
-      completedHoursCountEl.textContent = `${completedHours}h`;
-      progressLabelStartEl.textContent = `${completedWeeks.length} done`;
-      progressLabelEndEl.textContent = `${roadmap.length} total`;
+      completedWeeksCountEl.textContent = `${completedTopicsCount}/${totalTopics}`;
+      completedHoursCountEl.textContent = `${completedSubtopicsCount}/${totalSubtopics}`;
+      progressLabelStartEl.textContent = `${completedItems} done`;
+      progressLabelEndEl.textContent = `${totalTrackableItems} total`;
       progressFillEl.style.width = `${percent}%`;
     };
 
-    const syncWeekCompletionUI = () => {
+    const syncProgressUI = () => {
       document.querySelectorAll(".week-card").forEach((card) => {
         const week = Number(card.dataset.week);
-        const isComplete = Boolean(progressState.completedWeeks[week]?.completed);
-        const button = card.querySelector(".complete-toggle");
         const note = card.querySelector(".week-status-note");
-        const completionDate = progressState.completedWeeks[week]?.date;
+        const completedTopics = getWeekCompletedTopicCount(week);
+        const totalWeekTopics = getWeekTopicCount(week);
+        const subtopicStats = getWeekSubtopicStats(week);
+        const isComplete = totalWeekTopics > 0 && completedTopics === totalWeekTopics;
+
+        card.classList.toggle("is-complete", isComplete);
+        if (note) {
+          note.textContent = `${completedTopics}/${totalWeekTopics} topics complete • ${subtopicStats.done}/${subtopicStats.total} sub-topics complete`;
+        }
+      });
+
+      document.querySelectorAll(".topic-card").forEach((card) => {
+        const week = Number(card.dataset.week);
+        const topicIndex = Number(card.dataset.topicIndex);
+        const topicKey = getTopicKey(week, topicIndex);
+        const isComplete = Boolean(progressState.completedTopics[topicKey]?.completed);
+        const button = card.querySelector(".topic-complete-toggle");
+        const note = card.querySelector(".topic-status-note");
+        const totalBullets = Number(card.dataset.totalBullets);
+        const doneBullets = roadmap[week - 1].topics[topicIndex].bullets.filter((_, bulletIndex) => (
+          isBulletComplete(week, topicIndex, bulletIndex)
+        )).length;
+        const completionDate = progressState.completedTopics[topicKey]?.date;
 
         card.classList.toggle("is-complete", isComplete);
         if (button) {
           button.classList.toggle("is-complete", isComplete);
           button.setAttribute("aria-pressed", String(isComplete));
-          button.textContent = isComplete ? "Completed" : "Mark as Complete";
+          button.textContent = isComplete ? "Topic completed" : "Mark topic complete";
         }
 
         if (note) {
           note.textContent = isComplete && completionDate
-            ? `Saved on ${formatDateLabel(completionDate)}`
-            : "Stored locally and available for JSON export.";
+            ? `Saved on ${formatDateLabel(completionDate)} • ${doneBullets}/${totalBullets} sub-topics done`
+            : `${doneBullets}/${totalBullets} sub-topics done`;
+        }
+      });
+
+      document.querySelectorAll(".bullet-item").forEach((item) => {
+        const week = Number(item.dataset.week);
+        const topicIndex = Number(item.dataset.topicIndex);
+        const bulletIndex = Number(item.dataset.bulletIndex);
+        const isComplete = isBulletComplete(week, topicIndex, bulletIndex);
+        const button = item.querySelector(".bullet-toggle");
+
+        item.classList.toggle("is-complete", isComplete);
+        if (button) {
+          button.setAttribute("aria-pressed", String(isComplete));
+          button.setAttribute("aria-label", isComplete ? "Mark sub-topic incomplete" : "Mark sub-topic complete");
         }
       });
     };
@@ -2752,7 +2986,7 @@
     const renderProgressState = () => {
       renderProgressSummary();
       renderCalendar();
-      syncWeekCompletionUI();
+      syncProgressUI();
     };
 
     weekGridEl.innerHTML = roadmap.map(item => `
@@ -2774,8 +3008,7 @@
               <p class="week-desc">${item.goal}</p>
             </div>
             <div class="week-status">
-              <button class="complete-toggle" type="button" data-week="${item.week}" aria-pressed="false">Mark as Complete</button>
-              <span class="week-status-note">Stored locally and available for JSON export.</span>
+              <span class="week-status-note">0/${item.topics.length} topics complete</span>
             </div>
           </div>
           <p class="leetcode-lens"><strong>LeetCode target:</strong> ${item.leetcode}</p>
@@ -2791,16 +3024,25 @@
             </div>
           </div>
           <div class="topic-grid">
-            ${item.topics.map(topic => `
-              <article class="topic-card">
+            ${item.topics.map((topic, topicIndex) => `
+              <article class="topic-card" data-week="${item.week}" data-topic-index="${topicIndex}" data-total-bullets="${topic.bullets.length}">
                 <div class="topic-topline">
                   <strong>${topic.title}</strong>
                   <span class="topic-time">${topic.time}</span>
                 </div>
                 <p>${topic.detail}</p>
-                <ul>
-                  ${topic.bullets.map(point => `<li>${point}</li>`).join("")}
+                <ul class="bullet-list">
+                  ${topic.bullets.map((point, bulletIndex) => `
+                    <li class="bullet-item" data-week="${item.week}" data-topic-index="${topicIndex}" data-bullet-index="${bulletIndex}">
+                      <button class="bullet-toggle" type="button" data-bullet-key="${getBulletKey(item.week, topicIndex, bulletIndex)}" aria-pressed="false" aria-label="Mark sub-topic complete"></button>
+                      <span>${point}</span>
+                    </li>
+                  `).join("")}
                 </ul>
+                <div class="topic-progress">
+                  <button class="complete-toggle topic-complete-toggle" type="button" data-topic-key="${getTopicKey(item.week, topicIndex)}" aria-pressed="false">Mark topic complete</button>
+                  <span class="topic-status-note">0/${topic.bullets.length} sub-topics done</span>
+                </div>
               </article>
             `).join("")}
           </div>
@@ -2820,33 +3062,24 @@
     cards.forEach(card => revealObserver.observe(card));
 
     weekGridEl.addEventListener("click", (event) => {
-      const button = event.target.closest(".complete-toggle");
-      if (!button) {
+      const topicButton = event.target.closest(".topic-complete-toggle");
+      if (topicButton) {
+        const topicKey = topicButton.dataset.topicKey;
+        const isComplete = Boolean(progressState.completedTopics[topicKey]?.completed);
+        setCompletionState("completedTopics", topicKey, !isComplete);
+        saveProgressState();
+        renderProgressState();
         return;
       }
 
-      const week = Number(button.dataset.week);
-      const currentEntry = progressState.completedWeeks[week];
-      const todayKey = getTodayKey();
-
-      if (currentEntry?.completed) {
-        delete progressState.completedWeeks[week];
-
-        if (currentEntry.date && progressState.activity[currentEntry.date]) {
-          progressState.activity[currentEntry.date] -= 1;
-          if (progressState.activity[currentEntry.date] <= 0) {
-            delete progressState.activity[currentEntry.date];
-          }
-        }
-      } else {
-        progressState.completedWeeks[week] = {
-          completed: true,
-          date: todayKey
-        };
-
-        progressState.activity[todayKey] = (progressState.activity[todayKey] || 0) + 1;
+      const bulletButton = event.target.closest(".bullet-toggle");
+      if (!bulletButton) {
+        return;
       }
 
+      const bulletKey = bulletButton.dataset.bulletKey;
+      const isComplete = Boolean(progressState.completedBullets[bulletKey]?.completed);
+      setCompletionState("completedBullets", bulletKey, !isComplete);
       saveProgressState();
       renderProgressState();
     });
@@ -2854,7 +3087,7 @@
     exportProgressBtn.addEventListener("click", () => {
       const payload = {
         app: "DSA Atlas",
-        version: 1,
+        version: 2,
         exportedAt: new Date().toISOString(),
         progress: progressState
       };
@@ -2891,6 +3124,27 @@
         window.alert("Invalid progress file. Please import a JSON file exported from this page.");
       } finally {
         event.target.value = "";
+      }
+    });
+
+    navToggleEl.addEventListener("click", () => {
+      const isOpen = navLinksEl.classList.toggle("is-open");
+      navToggleEl.setAttribute("aria-expanded", String(isOpen));
+    });
+
+    navLinksEl.addEventListener("click", (event) => {
+      if (window.innerWidth > 900 || !event.target.closest("a")) {
+        return;
+      }
+
+      navLinksEl.classList.remove("is-open");
+      navToggleEl.setAttribute("aria-expanded", "false");
+    });
+
+    window.addEventListener("resize", () => {
+      if (window.innerWidth > 900) {
+        navLinksEl.classList.remove("is-open");
+        navToggleEl.setAttribute("aria-expanded", "false");
       }
     });
 
