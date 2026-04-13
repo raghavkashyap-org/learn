@@ -1,0 +1,2389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DSA Mastery Roadmap</title>
+  <meta name="description" content="A detailed beginner-to-advanced DSA roadmap with weekly sequencing, topic breakdowns, sub-topics, and estimated study time for C++ and LeetCode preparation.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #efe5d1;
+      --bg-deep: #d8c5a2;
+      --panel: rgba(248, 240, 224, 0.78);
+      --panel-strong: rgba(255, 249, 238, 0.88);
+      --ink: #171411;
+      --muted: #5c5146;
+      --accent: #9b2d1f;
+      --accent-soft: rgba(155, 45, 31, 0.12);
+      --line: rgba(23, 20, 17, 0.12);
+      --glow: rgba(28, 108, 155, 0.18);
+      --blueprint: #1d5566;
+      --gold: #8a6b23;
+      --shadow: 0 24px 80px rgba(54, 33, 11, 0.14);
+      --radius-lg: 28px;
+      --radius-md: 20px;
+      --radius-sm: 14px;
+      --container: 1280px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      font-family: "Manrope", sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(29, 85, 102, 0.18), transparent 28%),
+        radial-gradient(circle at 82% 18%, rgba(155, 45, 31, 0.18), transparent 24%),
+        linear-gradient(180deg, rgba(255, 249, 238, 0.7), rgba(216, 197, 162, 0.84)),
+        var(--bg);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(rgba(29, 85, 102, 0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(29, 85, 102, 0.06) 1px, transparent 1px);
+      background-size: 52px 52px;
+      mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.72), transparent 94%);
+      opacity: 0.6;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.14;
+      background-image:
+        radial-gradient(circle at 20% 30%, #000 0.6px, transparent 0.8px),
+        radial-gradient(circle at 75% 42%, #000 0.6px, transparent 0.8px),
+        radial-gradient(circle at 60% 78%, #000 0.7px, transparent 0.9px);
+      background-size: 170px 170px;
+      mix-blend-mode: multiply;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .page {
+      width: min(100% - 32px, var(--container));
+      margin: 0 auto;
+      padding: 28px 0 80px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 28px;
+      padding: 14px 18px;
+      background: rgba(255, 249, 238, 0.58);
+      border: 1px solid rgba(23, 20, 17, 0.1);
+      border-radius: 999px;
+      backdrop-filter: blur(20px);
+      box-shadow: 0 8px 30px rgba(88, 57, 20, 0.08);
+      position: sticky;
+      top: 16px;
+      z-index: 5;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .brand-mark {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      background:
+        linear-gradient(135deg, rgba(29, 85, 102, 0.9), rgba(155, 45, 31, 0.92));
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.35),
+        0 12px 25px rgba(34, 35, 21, 0.18);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .brand-mark::before,
+    .brand-mark::after {
+      content: "";
+      position: absolute;
+      background: rgba(255, 249, 238, 0.88);
+    }
+
+    .brand-mark::before {
+      inset: 8px 19px;
+      transform: rotate(24deg);
+      border-radius: 999px;
+    }
+
+    .brand-mark::after {
+      inset: 19px 8px;
+      transform: rotate(-24deg);
+      border-radius: 999px;
+    }
+
+    .brand-copy strong {
+      display: block;
+      font-size: 0.95rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+
+    .brand-copy span {
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(23, 20, 17, 0.1);
+      background: rgba(255, 255, 255, 0.45);
+      font-size: 0.84rem;
+      transition: transform 180ms ease, background 180ms ease;
+    }
+
+    .nav-links a:hover {
+      transform: translateY(-2px);
+      background: rgba(255, 255, 255, 0.78);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(300px, 0.8fr);
+      gap: 24px;
+      align-items: stretch;
+      margin-bottom: 24px;
+    }
+
+    .hero-copy,
+    .hero-panel,
+    .summary-card,
+    .section-shell,
+    .week-card {
+      border: 1px solid rgba(23, 20, 17, 0.1);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-copy {
+      position: relative;
+      overflow: hidden;
+      padding: 34px;
+      border-radius: var(--radius-lg);
+      background:
+        linear-gradient(155deg, rgba(255, 249, 238, 0.95), rgba(244, 233, 213, 0.72)),
+        var(--panel-strong);
+      animation: rise 700ms ease both;
+    }
+
+    .hero-copy::before {
+      content: "DSA PLAYBOOK";
+      position: absolute;
+      top: 18px;
+      right: -18px;
+      transform: rotate(8deg);
+      padding: 8px 18px;
+      font-size: 0.72rem;
+      letter-spacing: 0.28em;
+      color: rgba(255, 249, 238, 0.96);
+      background: var(--accent);
+      border-radius: 999px;
+      box-shadow: 0 16px 32px rgba(155, 45, 31, 0.22);
+    }
+
+    .eyebrow,
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 16px;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.78rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--blueprint);
+    }
+
+    .eyebrow::before,
+    .kicker::before {
+      content: "";
+      width: 38px;
+      height: 1px;
+      background: currentColor;
+    }
+
+    h1,
+    h2,
+    h3 {
+      margin: 0;
+      font-family: "Cormorant Garamond", serif;
+      line-height: 0.96;
+      letter-spacing: -0.03em;
+      font-weight: 700;
+    }
+
+    h1 {
+      max-width: 12ch;
+      font-size: clamp(3.5rem, 9vw, 6.8rem);
+      margin-bottom: 18px;
+    }
+
+    .hero-copy p {
+      max-width: 68ch;
+      margin: 0 0 18px;
+      font-size: 1.04rem;
+      line-height: 1.8;
+      color: var(--muted);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin: 24px 0 28px;
+    }
+
+    .hero-actions a {
+      text-decoration: none;
+      padding: 13px 18px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 0.92rem;
+      transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
+    }
+
+    .hero-actions a:hover {
+      transform: translateY(-2px);
+    }
+
+    .hero-actions .primary {
+      background: linear-gradient(135deg, var(--accent), #6d1f14);
+      color: rgba(255, 249, 238, 0.96);
+      box-shadow: 0 16px 30px rgba(109, 31, 20, 0.28);
+    }
+
+    .hero-actions .secondary {
+      background: rgba(255, 255, 255, 0.54);
+      border: 1px solid rgba(23, 20, 17, 0.12);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .metric {
+      padding: 16px;
+      border-radius: var(--radius-md);
+      background: rgba(255, 249, 238, 0.66);
+      border: 1px solid rgba(23, 20, 17, 0.08);
+    }
+
+    .metric strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 1.7rem;
+      line-height: 1;
+      font-family: "Cormorant Garamond", serif;
+    }
+
+    .metric span {
+      display: block;
+      color: var(--muted);
+      font-size: 0.87rem;
+      line-height: 1.55;
+    }
+
+    .hero-panel {
+      border-radius: var(--radius-lg);
+      padding: 26px;
+      background:
+        linear-gradient(180deg, rgba(17, 37, 43, 0.93), rgba(17, 37, 43, 0.82)),
+        radial-gradient(circle at top right, rgba(255, 255, 255, 0.18), transparent 32%);
+      color: rgba(255, 249, 238, 0.93);
+      position: relative;
+      overflow: hidden;
+      animation: rise 860ms ease both;
+    }
+
+    .hero-panel::before {
+      content: "";
+      position: absolute;
+      inset: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 22px;
+      pointer-events: none;
+    }
+
+    .hero-panel .kicker {
+      color: rgba(206, 227, 233, 0.9);
+    }
+
+    .hero-panel p {
+      color: rgba(226, 235, 236, 0.76);
+      line-height: 1.8;
+      margin: 16px 0 0;
+    }
+
+    .phase-list {
+      display: grid;
+      gap: 14px;
+      margin-top: 26px;
+    }
+
+    .phase-item {
+      display: grid;
+      grid-template-columns: 76px 1fr;
+      gap: 14px;
+      align-items: start;
+      padding: 14px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 18px;
+    }
+
+    .phase-item span {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 8px;
+      border-radius: 16px;
+      background: rgba(255, 249, 238, 0.08);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.74rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .phase-item strong {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 1rem;
+      letter-spacing: 0.02em;
+    }
+
+    .phase-item small {
+      display: block;
+      color: rgba(226, 235, 236, 0.72);
+      line-height: 1.6;
+      font-size: 0.84rem;
+    }
+
+    .summary {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+      margin: 18px 0 30px;
+    }
+
+    .summary-card {
+      padding: 24px;
+      border-radius: var(--radius-lg);
+      background: rgba(255, 249, 238, 0.66);
+      position: relative;
+      overflow: hidden;
+      animation: rise 960ms ease both;
+    }
+
+    .summary-card:nth-child(2) {
+      animation-delay: 120ms;
+    }
+
+    .summary-card:nth-child(3) {
+      animation-delay: 240ms;
+    }
+
+    .summary-card::before {
+      content: "";
+      position: absolute;
+      inset: auto -30px -30px auto;
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(29, 85, 102, 0.16), transparent 64%);
+    }
+
+    .summary-card p {
+      margin: 12px 0 0;
+      color: var(--muted);
+      line-height: 1.75;
+      font-size: 0.95rem;
+    }
+
+    .section-shell {
+      padding: 30px;
+      border-radius: var(--radius-lg);
+      background: rgba(255, 249, 238, 0.58);
+      margin-bottom: 30px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .section-shell::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg, transparent, rgba(29, 85, 102, 0.06), transparent);
+      transform: translateX(-100%);
+      animation: sweep 9s linear infinite;
+      pointer-events: none;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: 22px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .section-head p {
+      max-width: 66ch;
+      margin: 12px 0 0;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .pill {
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(23, 20, 17, 0.08);
+      background: rgba(255, 255, 255, 0.52);
+      font-size: 0.84rem;
+      line-height: 1.4;
+    }
+
+    .principles {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 16px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .principle {
+      padding: 20px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.52);
+      border: 1px solid rgba(23, 20, 17, 0.08);
+    }
+
+    .principle strong {
+      display: block;
+      margin-bottom: 10px;
+      font-size: 0.96rem;
+    }
+
+    .principle p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 0.92rem;
+    }
+
+    .roadmap-shell {
+      display: grid;
+      grid-template-columns: 320px minmax(0, 1fr);
+      gap: 20px;
+      align-items: start;
+    }
+
+    .roadmap-sidebar {
+      position: sticky;
+      top: 100px;
+      display: grid;
+      gap: 16px;
+    }
+
+    .sidebar-card {
+      padding: 22px;
+      border-radius: 24px;
+      background: rgba(255, 249, 238, 0.76);
+      border: 1px solid rgba(23, 20, 17, 0.08);
+      box-shadow: 0 18px 40px rgba(71, 47, 16, 0.08);
+    }
+
+    .sidebar-card p,
+    .sidebar-card li {
+      color: var(--muted);
+      line-height: 1.75;
+      font-size: 0.93rem;
+    }
+
+    .sidebar-card ul {
+      padding-left: 18px;
+      margin: 10px 0 0;
+    }
+
+    .progress-block {
+      position: relative;
+      padding-top: 18px;
+    }
+
+    .progress-labels {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      font-size: 0.78rem;
+      color: var(--muted);
+      font-family: "IBM Plex Mono", monospace;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .progress-track {
+      width: 100%;
+      height: 14px;
+      background: rgba(23, 20, 17, 0.08);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0;
+      background: linear-gradient(90deg, var(--blueprint), var(--accent), var(--gold));
+      border-radius: inherit;
+      transition: width 600ms cubic-bezier(.2, .8, .2, 1);
+    }
+
+    .week-grid {
+      display: grid;
+      gap: 18px;
+    }
+
+    .week-card {
+      display: grid;
+      grid-template-columns: 110px minmax(0, 1fr);
+      gap: 22px;
+      padding: 24px;
+      border-radius: 28px;
+      background:
+        linear-gradient(180deg, rgba(255, 249, 238, 0.88), rgba(245, 235, 217, 0.74));
+      position: relative;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(26px);
+      transition: transform 350ms ease, box-shadow 350ms ease, opacity 500ms ease;
+    }
+
+    .week-card.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .week-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 30px 70px rgba(65, 42, 14, 0.16);
+    }
+
+    .week-card::before {
+      content: "";
+      position: absolute;
+      inset: auto -50px -60px auto;
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(29, 85, 102, 0.14), transparent 65%);
+    }
+
+    .week-index {
+      display: flex;
+      flex-direction: column;
+      align-items: start;
+      gap: 8px;
+    }
+
+    .week-index strong {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 84px;
+      height: 84px;
+      border-radius: 24px;
+      background: linear-gradient(145deg, rgba(23, 20, 17, 0.94), rgba(29, 85, 102, 0.88));
+      color: rgba(255, 249, 238, 0.95);
+      font-family: "Cormorant Garamond", serif;
+      font-size: 2rem;
+      box-shadow: 0 18px 32px rgba(23, 20, 17, 0.18);
+    }
+
+    .week-index span {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--blueprint);
+    }
+
+    .week-head {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 18px;
+      align-items: start;
+    }
+
+    .week-head h3 {
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      margin-bottom: 10px;
+    }
+
+    .week-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 10px 0 16px;
+    }
+
+    .tag {
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(23, 20, 17, 0.06);
+      border: 1px solid rgba(23, 20, 17, 0.08);
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+
+    .week-desc,
+    .leetcode-lens {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.8;
+      font-size: 0.98rem;
+    }
+
+    .leetcode-lens {
+      margin-top: 14px;
+      padding: 16px 18px;
+      border-left: 3px solid var(--accent);
+      background: rgba(155, 45, 31, 0.06);
+      border-radius: 0 18px 18px 0;
+    }
+
+    .recommendation-shell {
+      margin-top: 18px;
+      padding: 18px;
+      border-radius: 20px;
+      background: rgba(29, 85, 102, 0.07);
+      border: 1px solid rgba(29, 85, 102, 0.12);
+      position: relative;
+      z-index: 1;
+    }
+
+    .recommendation-shell h4 {
+      margin: 0 0 12px;
+      font-size: 0.95rem;
+      font-family: "IBM Plex Mono", monospace;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--blueprint);
+    }
+
+    .recommendation-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .recommendation-item {
+      padding: 14px 15px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.55);
+      border: 1px solid rgba(23, 20, 17, 0.08);
+    }
+
+    .recommendation-item strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 0.95rem;
+      line-height: 1.45;
+    }
+
+    .recommendation-item span {
+      display: block;
+      color: var(--muted);
+      font-size: 0.87rem;
+      line-height: 1.65;
+    }
+
+    .topic-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .topic-card {
+      padding: 18px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.54);
+      border: 1px solid rgba(23, 20, 17, 0.08);
+      min-height: 100%;
+    }
+
+    .topic-topline {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+
+    .topic-card strong {
+      display: block;
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+
+    .topic-time {
+      white-space: nowrap;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      color: var(--blueprint);
+    }
+
+    .topic-card p {
+      margin: 0 0 12px;
+      color: var(--muted);
+      line-height: 1.75;
+      font-size: 0.92rem;
+    }
+
+    .topic-card ul {
+      padding-left: 18px;
+      margin: 0;
+    }
+
+    .topic-card li {
+      margin-bottom: 8px;
+      color: var(--ink);
+      line-height: 1.65;
+      font-size: 0.9rem;
+    }
+
+    .topic-card li::marker {
+      color: var(--accent);
+    }
+
+    .footer {
+      margin-top: 28px;
+      padding: 24px 28px;
+      border-radius: 28px;
+      background: linear-gradient(180deg, rgba(17, 37, 43, 0.92), rgba(17, 37, 43, 0.82));
+      color: rgba(255, 249, 238, 0.92);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 20px 50px rgba(23, 20, 17, 0.2);
+    }
+
+    .footer p {
+      margin: 0;
+      line-height: 1.8;
+      color: rgba(226, 235, 236, 0.82);
+    }
+
+    .footer strong {
+      color: rgba(255, 249, 238, 0.98);
+    }
+
+    @keyframes rise {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes sweep {
+      0% {
+        transform: translateX(-100%);
+      }
+      60%,
+      100% {
+        transform: translateX(130%);
+      }
+    }
+
+    @media (max-width: 1180px) {
+      .hero,
+      .roadmap-shell,
+      .summary,
+      .principles {
+        grid-template-columns: 1fr;
+      }
+
+      .roadmap-sidebar {
+        position: static;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .nav {
+        border-radius: 24px;
+        align-items: start;
+        flex-direction: column;
+      }
+
+      .hero-grid,
+      .topic-grid,
+      .recommendation-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .week-card {
+        grid-template-columns: 1fr;
+      }
+
+      .week-head {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .page {
+        width: min(100% - 18px, var(--container));
+        padding-top: 14px;
+      }
+
+      .hero-copy,
+      .hero-panel,
+      .section-shell,
+      .summary-card,
+      .week-card,
+      .footer {
+        padding: 20px;
+      }
+
+      h1 {
+        font-size: clamp(2.8rem, 16vw, 4.2rem);
+      }
+
+      .brand {
+        align-items: start;
+      }
+
+      .section-head {
+        align-items: start;
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <nav class="nav">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true"></div>
+        <div class="brand-copy">
+          <strong>DSA Atlas</strong>
+          <span>Beginner to advanced C++ and LeetCode roadmap</span>
+        </div>
+      </div>
+      <div class="nav-links">
+        <a href="#overview">Overview</a>
+        <a href="#approach">Study Logic</a>
+        <a href="#roadmap">Weekly Roadmap</a>
+      </div>
+    </nav>
+
+    <section class="hero" id="overview">
+      <article class="hero-copy">
+        <div class="eyebrow">Detailed Structure</div>
+        <h1>Build DSA the way interviews actually test it.</h1>
+        <p>
+          This roadmap is designed to move you from zero confidence to strong problem-solving range in C++. It does not only list topics. It sequences the mental models, the data structures, the algorithms, the common patterns, and the weekly LeetCode expectations so you know exactly what to learn, how long to spend, and what problem types you should be able to solve by the nth week.
+        </p>
+        <p>
+          The plan assumes steady work, not random bursts. Every week combines concept study, implementation in C++, pattern drills, and problem application so you learn how to recognize the correct approach under interview pressure.
+        </p>
+        <div class="hero-actions">
+          <a class="primary" href="#roadmap">Open 20-Week Roadmap</a>
+          <a class="secondary" href="#approach">See Study Logic</a>
+        </div>
+        <div class="hero-grid" id="hero-metrics"></div>
+      </article>
+
+      <aside class="hero-panel">
+        <div class="kicker">Execution Order</div>
+        <h2>What this page optimizes for</h2>
+        <p>
+          The sequence is built so each week unlocks the next one. You first learn to observe time and space tradeoffs, then the core linear structures, then recursion and trees, then graphs and dynamic programming, and finally the advanced structures and mixed interview patterns that make medium and hard LeetCode questions feel structured instead of chaotic.
+        </p>
+        <div class="phase-list" id="phase-list"></div>
+      </aside>
+    </section>
+
+    <section class="summary">
+      <article class="summary-card">
+        <div class="kicker">Skill Outcome</div>
+        <h2>From syntax to strategy</h2>
+        <p>
+          You are not just memorizing topics. You are learning how to detect patterns like two pointers, BFS, DFS, greedy choice, state transition, union-find grouping, or segment tree range maintenance from the wording of a problem.
+        </p>
+      </article>
+      <article class="summary-card">
+        <div class="kicker">C++ Angle</div>
+        <h2>Implementation-first practice</h2>
+        <p>
+          Every stage should be coded in C++ with STL fluency: vectors, strings, maps, unordered maps, sets, stacks, queues, priority queues, recursion, templates of DFS and BFS, and clean helper functions for state management.
+        </p>
+      </article>
+      <article class="summary-card">
+        <div class="kicker">Interview Angle</div>
+        <h2>Pattern recall under pressure</h2>
+        <p>
+          Each week includes what you should already be able to solve on LeetCode. That creates a practical benchmark instead of a vague feeling of progress.
+        </p>
+      </article>
+    </section>
+
+    <section class="section-shell" id="approach">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">Study Logic</div>
+          <h2>How to make the roadmap stick</h2>
+          <p>
+            DSA becomes usable only when concepts, templates, and pattern recognition are trained together. Read a topic, implement it in C++, solve focused problems, review mistakes, then revisit the same pattern with slightly harder constraints.
+          </p>
+        </div>
+        <div class="pills">
+          <div class="pill">Concept → code → dry run → problems → review</div>
+          <div class="pill">6 study days + 1 review day each week</div>
+          <div class="pill">Use C++ STL from week 1</div>
+        </div>
+      </div>
+      <div class="principles">
+        <article class="principle">
+          <strong>1. Learn the invariant</strong>
+          <p>The key question is not “what is this topic?” but “what must remain true while my algorithm runs?” Sliding windows maintain a valid range. BFS maintains frontier levels. DP maintains optimal substructure state.</p>
+        </article>
+        <article class="principle">
+          <strong>2. Write templates early</strong>
+          <p>Write your own binary search, DFS, BFS, linked-list reversal, heap pattern, and DP transition templates. Repetition turns panic into recognition.</p>
+        </article>
+        <article class="principle">
+          <strong>3. Solve by category</strong>
+          <p>Do not jump randomly across LeetCode. Batch problems by topic so your brain learns the shape of a solution family.</p>
+        </article>
+        <article class="principle">
+          <strong>4. Review failed attempts</strong>
+          <p>The fastest progress comes from comparing your wrong model with the right one. Keep notes on why your first approach failed.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section-shell" id="roadmap">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">20-Week Roadmap</div>
+          <h2>Detailed DSA plan from beginner to advanced</h2>
+          <p>
+            Each week below includes the main focus, estimated study time, detailed sub-topics, and the LeetCode range you should be ready for by the end of that week. The estimated time assumes disciplined study and problem-solving, not passive watching.
+          </p>
+        </div>
+        <div class="pills" id="master-pills"></div>
+      </div>
+
+      <div class="roadmap-shell">
+        <aside class="roadmap-sidebar">
+          <div class="sidebar-card">
+            <div class="kicker">Roadmap Totals</div>
+            <h3 id="sidebar-total-weeks">20 weeks</h3>
+            <p id="sidebar-total-hours"></p>
+            <div class="progress-block">
+              <div class="progress-labels">
+                <span>Week 1</span>
+                <span>Week 20</span>
+              </div>
+              <div class="progress-track">
+                <div class="progress-fill" id="progress-fill"></div>
+              </div>
+            </div>
+          </div>
+          <div class="sidebar-card">
+            <div class="kicker">By the end</div>
+            <ul>
+              <li>Recognize the most common interview patterns without starting from scratch every time.</li>
+              <li>Implement standard DSA templates in C++ quickly and correctly.</li>
+              <li>Handle Easy problems comfortably and a large range of Medium problems with structure.</li>
+              <li>Have exposure to advanced topics needed for tougher graph, range query, and string problems.</li>
+            </ul>
+          </div>
+          <div class="sidebar-card">
+            <div class="kicker">Weekly Rhythm</div>
+            <ul>
+              <li>Day 1: theory and notation</li>
+              <li>Day 2: C++ implementation and dry runs</li>
+              <li>Day 3-5: focused problem sets</li>
+              <li>Day 6: mixed timed practice</li>
+              <li>Day 7: review, notes, remake weak problems</li>
+            </ul>
+          </div>
+        </aside>
+
+        <div class="week-grid" id="week-grid"></div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <p>
+        <strong>Use this page as a working syllabus, not a poster.</strong> For each week, finish the listed sub-topics, write the core templates in C++, and solve enough problems from that category until your first instinct becomes reliable. That is the difference between “I know this topic” and “I can solve the interview problem in front of me.”
+      </p>
+    </footer>
+  </div>
+
+  <script>
+    const phases = [
+      {
+        label: "Phase 1",
+        title: "Foundation and linear thinking",
+        detail: "Complexity, arrays, strings, two pointers, sliding windows, sorting, binary search, and STL fluency."
+      },
+      {
+        label: "Phase 2",
+        title: "Core data structures",
+        detail: "Recursion, linked lists, stacks, queues, hashing, monotonic structures, heaps, intervals, and greedy basics."
+      },
+      {
+        label: "Phase 3",
+        title: "Trees, graphs, and dynamic programming",
+        detail: "Tree traversals, BST logic, graph traversal, shortest paths, union-find, topological sort, and multi-dimensional DP."
+      },
+      {
+        label: "Phase 4",
+        title: "Advanced problem-solving",
+        detail: "Tries, string algorithms, range query structures, bit manipulation, number theory, advanced greedy, and mixed hard patterns."
+      }
+    ];
+
+    const roadmap = [
+      {
+        week: 1,
+        phase: "Foundation",
+        title: "Problem Solving Basics, C++ STL, Arrays, Strings",
+        hours: 15,
+        goal: "Build your base language and analytical habits so you can read a problem, estimate complexity, and write clean array and string code without hesitation.",
+        leetcode: "By the end of week 1, you should solve very basic array and string Easy problems: linear search style tasks, max/min scans, frequency counting with small alphabets, palindrome checks, and simple string traversal.",
+        topics: [
+          {
+            title: "Asymptotic analysis and constraints reading",
+            time: "3h",
+            detail: "Learn how input size determines the valid time complexity range before you even start coding.",
+            bullets: [
+              "Big-O, Big-Theta, amortized intuition, constant factor awareness",
+              "Estimating whether O(n), O(n log n), O(n^2), or exponential is acceptable",
+              "Space complexity, in-place thinking, and tradeoff between time and memory"
+            ]
+          },
+          {
+            title: "C++ STL for DSA work",
+            time: "4h",
+            detail: "Set up the standard tools you will use in almost every interview solution.",
+            bullets: [
+              "vector, string, pair, auto, references, iterators, range-based loops",
+              "sort, reverse, min, max, accumulate, lower_bound, upper_bound basics",
+              "Writing helper functions, passing by reference, and avoiding unnecessary copies"
+            ]
+          },
+          {
+            title: "Array fundamentals",
+            time: "4h",
+            detail: "Understand contiguous memory style thinking and index-based traversal patterns.",
+            bullets: [
+              "Forward and backward traversal, prefix and suffix intuition",
+              "Subarray concept versus subset concept",
+              "Running sum, max scan, count scan, and update-in-place patterns"
+            ]
+          },
+          {
+            title: "String fundamentals",
+            time: "4h",
+            detail: "Treat strings as indexed arrays with character-specific operations.",
+            bullets: [
+              "Character frequency, vowel or digit checks, lowercase or uppercase conversion",
+              "Comparing strings, building strings, and reverse traversal",
+              "Simple palindrome and anagram reasoning"
+            ]
+          }
+        ]
+      },
+      {
+        week: 2,
+        phase: "Foundation",
+        title: "Prefix Sums, Two Pointers, Sliding Window",
+        hours: 16,
+        goal: "Learn the first three pattern families that repeatedly appear in array and string medium problems.",
+        leetcode: "By the end of week 2, you should solve Easy and lower-Medium problems involving fixed-window sums, longest valid window, pair finding in sorted arrays, and basic prefix-sum range queries.",
+        topics: [
+          {
+            title: "Prefix sums and range logic",
+            time: "4h",
+            detail: "Use precomputed partial sums to answer repeated range queries efficiently.",
+            bullets: [
+              "1D prefix sums and inclusive or exclusive indexing",
+              "Transforming subarray sum questions using prefix differences",
+              "When prefix sums work and when ordering or negative values complicate the pattern"
+            ]
+          },
+          {
+            title: "Two pointers",
+            time: "4h",
+            detail: "Move two indices under a maintained relationship rather than restarting scans.",
+            bullets: [
+              "Opposite-end pointers for sorted arrays and palindrome-style checks",
+              "Same-direction pointers for compaction, duplicate removal, partition logic",
+              "Reasoning about why pointer movement does not miss answers"
+            ]
+          },
+          {
+            title: "Fixed-size sliding window",
+            time: "4h",
+            detail: "Maintain a running answer over a window of exact size k.",
+            bullets: [
+              "Window add and remove operations",
+              "Moving average, max sum, count in a window, and rolling character counts",
+              "Difference between recomputing and incremental updates"
+            ]
+          },
+          {
+            title: "Variable-size sliding window",
+            time: "4h",
+            detail: "Maintain a valid range and shrink only when the constraint is violated.",
+            bullets: [
+              "Longest substring or subarray under a constraint",
+              "Frequency maps, distinct counts, and character replacement patterns",
+              "Choosing when to expand, shrink, or record the answer"
+            ]
+          }
+        ]
+      },
+      {
+        week: 3,
+        phase: "Foundation",
+        title: "Sorting, Searching, Binary Search Patterns",
+        hours: 15,
+        goal: "Understand how ordering changes a problem and when binary search is valid on value space or answer space.",
+        leetcode: "By the end of week 3, you should solve sorted-array search tasks, insertion position, first or last occurrence, rotated-array basics, and answer-space binary search for simple monotonic conditions.",
+        topics: [
+          {
+            title: "Sorting as a preprocessing step",
+            time: "4h",
+            detail: "Learn when sorting reveals structure and makes brute force unnecessary.",
+            bullets: [
+              "sort on primitives and pairs with custom comparators",
+              "How sorting enables two pointers, interval merging, and greedy selection",
+              "Tradeoff: O(n log n) preprocessing for simpler later logic"
+            ]
+          },
+          {
+            title: "Classic binary search",
+            time: "4h",
+            detail: "Search for a target in monotonic indexed data.",
+            bullets: [
+              "Mid computation, boundaries, and loop invariants",
+              "First true, last true, lower_bound and upper_bound style searches",
+              "Common off-by-one mistakes and how to avoid them"
+            ]
+          },
+          {
+            title: "Binary search on answer",
+            time: "4h",
+            detail: "Search over a numerical answer range when a feasibility check is monotonic.",
+            bullets: [
+              "Turning optimization questions into yes or no checks",
+              "Capacity, speed, distance, partition, and threshold style problems",
+              "Writing a good check function in C++"
+            ]
+          },
+          {
+            title: "Searching in modified arrays",
+            time: "3h",
+            detail: "Apply binary search to non-plain sorted structures.",
+            bullets: [
+              "Rotated sorted arrays, mountain arrays conceptually, nearly sorted search ideas",
+              "Handling duplicates carefully",
+              "Knowing when binary search no longer applies cleanly"
+            ]
+          }
+        ]
+      },
+      {
+        week: 4,
+        phase: "Core DS",
+        title: "Recursion, Call Stack, Backtracking Basics",
+        hours: 16,
+        goal: "Develop recursive thinking so you can express repeated decision-making cleanly and understand the call stack instead of fearing it.",
+        leetcode: "By the end of week 4, you should solve recursion-based Easy and Medium tasks like factorial or power variants, subsets, simple permutations, and path-building backtracking problems with clear choices.",
+        topics: [
+          {
+            title: "Recursion fundamentals",
+            time: "4h",
+            detail: "Model a problem as the same problem on a smaller state.",
+            bullets: [
+              "Base case, recursive hypothesis, progress toward termination",
+              "Stack frames, return values, and state restoration",
+              "Tracing recursion trees by hand"
+            ]
+          },
+          {
+            title: "Recursive array and string problems",
+            time: "3h",
+            detail: "Use recursion for reversal, palindrome, subset choice, and divide-style traversal.",
+            bullets: [
+              "Index-driven recursion",
+              "Choice-based recursion with include or exclude branching",
+              "Comparing recursive and iterative versions"
+            ]
+          },
+          {
+            title: "Backtracking template",
+            time: "5h",
+            detail: "Build and undo decisions while exploring a search tree.",
+            bullets: [
+              "Path vector, current state, choose-explore-unchoose pattern",
+              "Generating subsets, permutations, combinations",
+              "Pruning invalid states early to reduce branching"
+            ]
+          },
+          {
+            title: "Complexity of recursive search",
+            time: "4h",
+            detail: "Estimate branching factor and depth so you know when recursion is still feasible.",
+            bullets: [
+              "Recursion tree size intuition",
+              "Why backtracking can be exponential",
+              "When memoization will later convert recursion to DP"
+            ]
+          }
+        ]
+      },
+      {
+        week: 5,
+        phase: "Core DS",
+        title: "Linked Lists, Stacks, Queues, Deques",
+        hours: 16,
+        goal: "Learn pointer-based structures and order-constrained containers that drive many interview simulations and traversal algorithms.",
+        leetcode: "By the end of week 5, you should solve reverse linked list, middle node, cycle detection, stack validation, parentheses matching, queue simulation, and basic deque window tasks.",
+        topics: [
+          {
+            title: "Singly and doubly linked lists",
+            time: "5h",
+            detail: "Stop treating linked lists as magical pointer puzzles and reduce them to careful next-pointer updates.",
+            bullets: [
+              "Traversal, insertion, deletion, head changes",
+              "Fast and slow pointers, cycle detection, list midpoint",
+              "In-place reversal and dummy-node techniques"
+            ]
+          },
+          {
+            title: "Stacks",
+            time: "3h",
+            detail: "Use LIFO structure for reversal, validation, parsing, and monotonic reasoning.",
+            bullets: [
+              "Parentheses and bracket matching",
+              "Undo-style processing and expression traversal intuition",
+              "Recognizing stack-friendly nearest-greater or nearest-smaller patterns"
+            ]
+          },
+          {
+            title: "Queues and BFS mindset",
+            time: "4h",
+            detail: "Use FIFO order for level-by-level processing and sequential scheduling.",
+            bullets: [
+              "Standard queue operations and simulation problems",
+              "Queue as a frontier concept that will later power graph BFS",
+              "Circular queue intuition and buffering logic"
+            ]
+          },
+          {
+            title: "Deque patterns",
+            time: "4h",
+            detail: "Use both ends efficiently when order and monotonicity matter.",
+            bullets: [
+              "Sliding window max or min intuition",
+              "Pop from back to maintain decreasing or increasing candidates",
+              "Why deque beats brute force for window extrema"
+            ]
+          }
+        ]
+      },
+      {
+        week: 6,
+        phase: "Core DS",
+        title: "Hashing, Sets, Maps, Frequency Tables, Monotonic Structures",
+        hours: 17,
+        goal: "Master constant-average-time lookup and the habit of storing just enough state to avoid repeated work.",
+        leetcode: "By the end of week 6, you should solve two-sum variants, duplicate detection, grouping anagrams, longest consecutive sequence, frequency-based windows, and monotonic stack problems like next greater element or daily temperatures.",
+        topics: [
+          {
+            title: "unordered_map and unordered_set",
+            time: "4h",
+            detail: "Use hashing to convert repeated searching into direct lookup.",
+            bullets: [
+              "Frequency counting, seen-state tracking, complement lookup",
+              "Key design, collisions conceptually, and average-case thinking",
+              "When ordered map versus unordered map matters"
+            ]
+          },
+          {
+            title: "Frequency-based problem design",
+            time: "4h",
+            detail: "Model the problem around counts rather than raw positions.",
+            bullets: [
+              "Anagrams, multisets, top frequencies, and mode-style reasoning",
+              "Combining frequency maps with windows or prefix ideas",
+              "Tracking distinct counts efficiently"
+            ]
+          },
+          {
+            title: "Monotonic stack",
+            time: "5h",
+            detail: "Maintain a stack that stays sorted by value so each element is pushed and popped at most once.",
+            bullets: [
+              "Next greater, next smaller, previous greater, previous smaller",
+              "Stock span, histogram, temperature waiting time patterns",
+              "Why the total complexity stays linear"
+            ]
+          },
+          {
+            title: "Monotonic queue and optimization windows",
+            time: "4h",
+            detail: "Maintain candidate answers for ranges without recomputing all elements.",
+            bullets: [
+              "Window max and min",
+              "Range feasibility and DP optimization intuition",
+              "Choosing between deque, heap, and balanced tree style solutions"
+            ]
+          }
+        ]
+      },
+      {
+        week: 7,
+        phase: "Core DS",
+        title: "Heaps, Priority Queues, Intervals, Greedy Introduction",
+        hours: 16,
+        goal: "Learn how to repeatedly extract the best candidate and how to reason about interval ordering and local optimal choices.",
+        leetcode: "By the end of week 7, you should solve kth largest, top k frequent, merge intervals, meeting rooms, task scheduling basics, and simple greedy selection problems with sorted order.",
+        topics: [
+          {
+            title: "priority_queue in C++",
+            time: "4h",
+            detail: "Use heaps for repeated min or max extraction and streaming problems.",
+            bullets: [
+              "Max heap versus min heap with custom comparator",
+              "Top k elements, median intuition, running priorities",
+              "When heap is better than sorting the entire input"
+            ]
+          },
+          {
+            title: "Interval patterns",
+            time: "4h",
+            detail: "Treat intervals as ordered segments that often require sort plus merge or sort plus scan.",
+            bullets: [
+              "Merge intervals, overlap detection, insertion, gap finding",
+              "Open versus closed interval reasoning",
+              "Room allocation and sweep-line intuition"
+            ]
+          },
+          {
+            title: "Greedy foundations",
+            time: "4h",
+            detail: "Make the best local choice only when you can justify that it preserves global optimality.",
+            bullets: [
+              "Earliest finish time, smallest feasible resource, or best ratio ideas",
+              "Exchange argument intuition",
+              "How to detect when greedy is unsafe"
+            ]
+          },
+          {
+            title: "Heap plus greedy combinations",
+            time: "4h",
+            detail: "Combine ordering and dynamic best-choice extraction.",
+            bullets: [
+              "Meeting rooms, CPU scheduling, task ordering, interval assignment",
+              "Sort first, then process active candidates in a heap",
+              "Recognizing event-driven processing"
+            ]
+          }
+        ]
+      },
+      {
+        week: 8,
+        phase: "Trees",
+        title: "Binary Trees, Traversals, BST Fundamentals",
+        hours: 17,
+        goal: "Shift from linear reasoning to hierarchical state propagation through recursive tree processing.",
+        leetcode: "By the end of week 8, you should solve inorder, preorder, postorder traversal, tree height, tree equality, subtree basics, BST search, BST validation, and level order traversal problems.",
+        topics: [
+          {
+            title: "Tree terminology and construction",
+            time: "3h",
+            detail: "Understand nodes, edges, height, depth, leaf, root, and parent-child relationships.",
+            bullets: [
+              "Representing trees with node pointers",
+              "Recursive structure of binary trees",
+              "Why trees often simplify to solving left and right subproblems"
+            ]
+          },
+          {
+            title: "Depth-first traversals",
+            time: "5h",
+            detail: "Use preorder, inorder, and postorder as different moments to process a node.",
+            bullets: [
+              "Recursive traversal templates",
+              "Iterative traversal using stacks",
+              "Which traversal exposes which property, especially for BSTs"
+            ]
+          },
+          {
+            title: "Breadth-first traversal",
+            time: "4h",
+            detail: "Process trees level by level using queues.",
+            bullets: [
+              "Level order traversal and level-size loops",
+              "Left view, right view, and level aggregates",
+              "Connecting BFS mindset from queue problems"
+            ]
+          },
+          {
+            title: "BST logic",
+            time: "5h",
+            detail: "Use ordered tree structure to search, insert, validate, and reason with ranges.",
+            bullets: [
+              "Search and insertion paths",
+              "Inorder traversal gives sorted order",
+              "Validation using low-high bounds or inorder monotonicity"
+            ]
+          }
+        ]
+      },
+      {
+        week: 9,
+        phase: "Trees",
+        title: "Advanced Tree Patterns, LCA, Tree DP Intuition",
+        hours: 17,
+        goal: "Learn to return richer information from subtrees and solve nontrivial tree questions with one DFS.",
+        leetcode: "By the end of week 9, you should solve diameter, balanced tree, max path style reasoning, lowest common ancestor, path sum variations, and serialize-style conceptual tree tasks.",
+        topics: [
+          {
+            title: "Postorder problem solving",
+            time: "4h",
+            detail: "Compute answers from children upward when parent logic depends on subtree information.",
+            bullets: [
+              "Height-balanced checks",
+              "Diameter through a node",
+              "Returning compound state from recursion"
+            ]
+          },
+          {
+            title: "Path-based tree questions",
+            time: "4h",
+            detail: "Track path sums, ancestor relationships, and path existence conditions.",
+            bullets: [
+              "Root-to-leaf versus any-to-any path distinctions",
+              "Prefix sum on trees intuition",
+              "Backtracking state in tree DFS"
+            ]
+          },
+          {
+            title: "Lowest common ancestor",
+            time: "4h",
+            detail: "Identify shared ancestry through recursive search or BST ordering.",
+            bullets: [
+              "General binary tree LCA",
+              "BST-optimized LCA",
+              "Why LCA logic mirrors search convergence"
+            ]
+          },
+          {
+            title: "Tree DP introduction",
+            time: "5h",
+            detail: "Model each node with states that depend on its children.",
+            bullets: [
+              "Include or exclude node patterns",
+              "Robber-on-tree style state design",
+              "Thinking in per-node states without cycles"
+            ]
+          }
+        ]
+      },
+      {
+        week: 10,
+        phase: "Graphs",
+        title: "Graphs, Representation, DFS, BFS, Connected Components",
+        hours: 18,
+        goal: "Extend traversal thinking from trees to general graphs with cycles, visited state, and disconnected components.",
+        leetcode: "By the end of week 10, you should solve number of islands, flood fill, graph traversal, connected components, shortest path in unweighted grids, and BFS level distance problems.",
+        topics: [
+          {
+            title: "Graph representation",
+            time: "4h",
+            detail: "Build adjacency lists and understand directed, undirected, weighted, and unweighted graphs.",
+            bullets: [
+              "Edge list, adjacency matrix, adjacency list tradeoffs",
+              "Node indexing and visited arrays",
+              "Grid as an implicit graph"
+            ]
+          },
+          {
+            title: "DFS on graphs",
+            time: "5h",
+            detail: "Traverse deeply while guarding against revisits and cycles.",
+            bullets: [
+              "Connected components",
+              "Cycle detection basics in undirected graphs",
+              "Recursive versus iterative DFS"
+            ]
+          },
+          {
+            title: "BFS on graphs and grids",
+            time: "5h",
+            detail: "Use BFS when the problem asks for minimum steps in an unweighted setting.",
+            bullets: [
+              "Multi-source BFS",
+              "Level-order distance calculation",
+              "Grid neighbors, bounds checking, and visited timing"
+            ]
+          },
+          {
+            title: "Traversal patterns in interviews",
+            time: "4h",
+            detail: "Recognize when a question is secretly graph traversal under different words.",
+            bullets: [
+              "Rooms, courses, islands, states, transformations, dependencies",
+              "Explicit graph versus implicit state graph",
+              "Choosing DFS or BFS based on output requirement"
+            ]
+          }
+        ]
+      },
+      {
+        week: 11,
+        phase: "Graphs",
+        title: "Topological Sort, Union-Find, Shortest Paths, MST",
+        hours: 19,
+        goal: "Handle graph problems that go beyond plain traversal and require ordering, merging, or weighted path logic.",
+        leetcode: "By the end of week 11, you should solve course schedule, redundant connection, number of provinces, network delay style questions, and minimum spanning tree basics.",
+        topics: [
+          {
+            title: "Topological sorting",
+            time: "4h",
+            detail: "Order directed acyclic graph nodes so dependencies appear before dependents.",
+            bullets: [
+              "Indegree and Kahn's algorithm",
+              "DFS topological sort conceptually",
+              "Cycle detection in directed graphs"
+            ]
+          },
+          {
+            title: "Disjoint Set Union (Union-Find)",
+            time: "5h",
+            detail: "Efficiently merge components and query whether nodes belong to the same group.",
+            bullets: [
+              "Parent array, path compression, union by rank or size",
+              "Dynamic connectivity and edge processing",
+              "Grouping accounts, provinces, redundant edges"
+            ]
+          },
+          {
+            title: "Shortest path algorithms",
+            time: "5h",
+            detail: "Choose the right method depending on weight rules.",
+            bullets: [
+              "BFS for unweighted shortest path",
+              "Dijkstra for non-negative weighted graphs using a min heap",
+              "Why Bellman-Ford exists conceptually and when negatives matter"
+            ]
+          },
+          {
+            title: "Minimum spanning tree",
+            time: "5h",
+            detail: "Connect all nodes with minimum total cost.",
+            bullets: [
+              "Kruskal with DSU",
+              "Prim with min heap intuition",
+              "Difference between shortest path tree and MST"
+            ]
+          }
+        ]
+      },
+      {
+        week: 12,
+        phase: "Advanced Search",
+        title: "Backtracking Advanced, State Space Search, Bitmasking Intro",
+        hours: 17,
+        goal: "Push recursive search into harder combinatorial problems and begin reducing state with bit representations.",
+        leetcode: "By the end of week 12, you should solve combination sum style problems, N-Queens style backtracking intuition, subset-state generation, and basic bitmask enumeration tasks.",
+        topics: [
+          {
+            title: "Constraint-heavy backtracking",
+            time: "5h",
+            detail: "Layer validity rules into your recursive search so the tree prunes early.",
+            bullets: [
+              "Combinations with duplicates",
+              "Board search and row-column-diagonal constraints",
+              "Ordering candidates to reduce branching"
+            ]
+          },
+          {
+            title: "State encoding",
+            time: "4h",
+            detail: "Compact problem state into arrays, sets, or integers for faster checks.",
+            bullets: [
+              "Visited arrays versus hash sets",
+              "Encoding selections as bitmasks",
+              "Memoization key design intuition"
+            ]
+          },
+          {
+            title: "Bitmask basics",
+            time: "4h",
+            detail: "Represent subsets and toggles using bits.",
+            bullets: [
+              "Set, clear, toggle, test bits",
+              "Enumerating all subsets",
+              "Using masks for chosen-element states"
+            ]
+          },
+          {
+            title: "BFS on abstract state spaces",
+            time: "4h",
+            detail: "Treat game, lock, word transformation, or move systems as implicit graphs.",
+            bullets: [
+              "State generation and transition edges",
+              "Visited-state deduplication",
+              "Shortest moves in configuration spaces"
+            ]
+          }
+        ]
+      },
+      {
+        week: 13,
+        phase: "DP",
+        title: "Dynamic Programming Foundations",
+        hours: 18,
+        goal: "Learn to convert repeated subproblems into stored results instead of recomputing them recursively.",
+        leetcode: "By the end of week 13, you should solve climbing stairs, house robber, coin change basics, decode ways style tasks, and standard 1D DP problems with memoization and tabulation.",
+        topics: [
+          {
+            title: "DP mindset",
+            time: "4h",
+            detail: "Recognize overlapping subproblems and optimal substructure rather than memorizing random formulas.",
+            bullets: [
+              "State definition: what exactly does dp[i] or dp[i][j] mean?",
+              "Transition relation and base cases",
+              "Memoization versus bottom-up tabulation"
+            ]
+          },
+          {
+            title: "1D DP",
+            time: "5h",
+            detail: "Start with linear sequences where each state depends on a small previous neighborhood.",
+            bullets: [
+              "Fibonacci family, climbing stairs, min cost climb",
+              "House robber and take-or-skip transitions",
+              "Space optimization with rolling variables"
+            ]
+          },
+          {
+            title: "Decision DP",
+            time: "4h",
+            detail: "Solve by choosing between options at each step.",
+            bullets: [
+              "Include or exclude element patterns",
+              "Coin change count or min problems",
+              "Ways versus minimum versus maximum objective types"
+            ]
+          },
+          {
+            title: "DP debugging practice",
+            time: "5h",
+            detail: "Learn how to inspect wrong transitions and invalid state meanings.",
+            bullets: [
+              "Printing states on small examples",
+              "Checking base cases and index shifts",
+              "Comparing recursive thinking with table filling"
+            ]
+          }
+        ]
+      },
+      {
+        week: 14,
+        phase: "DP",
+        title: "2D DP, Knapsack, LIS, LCS, Grid DP",
+        hours: 19,
+        goal: "Handle multi-parameter state and sequence alignment patterns that dominate many classic interview DP questions.",
+        leetcode: "By the end of week 14, you should solve unique paths, minimum path sum, 0-1 knapsack style questions, longest common subsequence, partition equal subset sum, and LIS core problems.",
+        topics: [
+          {
+            title: "Grid DP",
+            time: "4h",
+            detail: "Move through grids where each cell depends on previous reachable cells.",
+            bullets: [
+              "Unique paths and obstacles",
+              "Minimum path cost",
+              "Transition choices and boundary initialization"
+            ]
+          },
+          {
+            title: "Knapsack family",
+            time: "5h",
+            detail: "Model capacity-constrained choosing problems.",
+            bullets: [
+              "0-1 knapsack state and transition",
+              "Subset sum and partition-style transformations",
+              "Difference between 0-1 and unbounded variants"
+            ]
+          },
+          {
+            title: "Sequence DP",
+            time: "5h",
+            detail: "Compare or build sequences based on previous prefixes.",
+            bullets: [
+              "Longest common subsequence",
+              "Edit distance intuition",
+              "Longest increasing subsequence using DP and binary-search optimization conceptually"
+            ]
+          },
+          {
+            title: "State dimension design",
+            time: "5h",
+            detail: "Choose the smallest state that still contains enough information.",
+            bullets: [
+              "Index plus capacity, index plus previous choice, row plus column style states",
+              "Avoiding redundant dimensions",
+              "When memoization tables become too large"
+            ]
+          }
+        ]
+      },
+      {
+        week: 15,
+        phase: "DP",
+        title: "Advanced DP, Interval DP, Tree DP, Digit DP Awareness",
+        hours: 18,
+        goal: "Expose yourself to harder state design so tough DP questions stop feeling alien.",
+        leetcode: "By the end of week 15, you should handle more difficult DP mediums and understand the structure of interval merge-cost problems, tree-based include-exclude DP, and constrained counting DP.",
+        topics: [
+          {
+            title: "Interval DP",
+            time: "4h",
+            detail: "Solve subarray or substring ranges where dp[l][r] depends on smaller intervals.",
+            bullets: [
+              "Burst balloons style reasoning",
+              "Palindromic subsequence and partition perspectives",
+              "Choosing the last operation rather than the first"
+            ]
+          },
+          {
+            title: "Tree DP refinement",
+            time: "4h",
+            detail: "Return multiple states from each node and combine children carefully.",
+            bullets: [
+              "Rob tree and independent-set style logic",
+              "Subtree aggregation and rerooting awareness",
+              "How acyclic structure simplifies dependencies"
+            ]
+          },
+          {
+            title: "DP optimization awareness",
+            time: "5h",
+            detail: "Know that some problems can be improved but do not force every optimization immediately.",
+            bullets: [
+              "Rolling arrays, monotonic queue optimization, bitset hints",
+              "LIS O(n log n) improvement idea",
+              "Tradeoff between clarity and optimized complexity"
+            ]
+          },
+          {
+            title: "Digit DP and constrained counting awareness",
+            time: "5h",
+            detail: "Understand the shape of DP over digits, tight bounds, and leading zero state even if you do not master it immediately.",
+            bullets: [
+              "Position, tight, started, and aggregate state design",
+              "Counting numbers under constraints",
+              "Why these problems are advanced but still systematic"
+            ]
+          }
+        ]
+      },
+      {
+        week: 16,
+        phase: "Strings",
+        title: "Tries, String Hashing, Pattern Matching, Advanced String Work",
+        hours: 17,
+        goal: "Move beyond plain strings and learn indexed prefix structures and string comparison accelerators.",
+        leetcode: "By the end of week 16, you should solve prefix dictionary problems, wildcard or word search style trie tasks, substring grouping tasks, and some advanced string processing questions with structured preprocessing.",
+        topics: [
+          {
+            title: "Trie data structure",
+            time: "5h",
+            detail: "Use prefix trees when repeated prefix matching dominates the problem.",
+            bullets: [
+              "Node structure, insert, search, startsWith",
+              "Word dictionary and search variants",
+              "Memory tradeoffs and alphabet assumptions"
+            ]
+          },
+          {
+            title: "String hashing awareness",
+            time: "4h",
+            detail: "Speed up substring comparison using rolling hash concepts.",
+            bullets: [
+              "Prefix hashes and substring hash extraction",
+              "Collision awareness",
+              "When hashing is practical in contests and advanced interviews"
+            ]
+          },
+          {
+            title: "Pattern matching concepts",
+            time: "4h",
+            detail: "Understand efficient string search rather than only brute-force matching.",
+            bullets: [
+              "KMP prefix function concept",
+              "Why failure links help avoid rechecking",
+              "Z-function awareness for pattern and prefix tasks"
+            ]
+          },
+          {
+            title: "Palindrome and substring patterns",
+            time: "4h",
+            detail: "Handle center expansion and substring structure efficiently.",
+            bullets: [
+              "Longest palindromic substring intuition",
+              "Center expansion versus DP",
+              "Distinct substring and repeated pattern awareness"
+            ]
+          }
+        ]
+      },
+      {
+        week: 17,
+        phase: "Range Structures",
+        title: "Fenwick Tree, Segment Tree, Sparse Table, Range Queries",
+        hours: 18,
+        goal: "Learn data structures that maintain or query aggregate information on intervals efficiently.",
+        leetcode: "By the end of week 17, you should understand and implement range sum update/query structures, solve mutable range-sum problems, and recognize when offline or tree-based range techniques are needed.",
+        topics: [
+          {
+            title: "Range query problem framing",
+            time: "3h",
+            detail: "Decide whether queries are static, dynamic, point update, or range update problems.",
+            bullets: [
+              "Prefix sum versus Fenwick versus segment tree",
+              "Online versus offline processing",
+              "Update frequency as the deciding factor"
+            ]
+          },
+          {
+            title: "Fenwick tree (Binary Indexed Tree)",
+            time: "4h",
+            detail: "Use bit-based indexing to support prefix sums and point updates efficiently.",
+            bullets: [
+              "Lowbit operation and tree structure intuition",
+              "Prefix sum query and point update",
+              "Coordinate compression awareness for large values"
+            ]
+          },
+          {
+            title: "Segment tree",
+            time: "7h",
+            detail: "Store aggregate information for intervals in a divide-and-conquer tree.",
+            bullets: [
+              "Build, query, and update operations",
+              "Range minimum, maximum, sum, and custom merge logic",
+              "Lazy propagation awareness for range updates"
+            ]
+          },
+          {
+            title: "Sparse table awareness",
+            time: "4h",
+            detail: "Use preprocessing for immutable range idempotent queries.",
+            bullets: [
+              "Range minimum query concept",
+              "Powers-of-two decomposition",
+              "Why immutable arrays make stronger preprocessing possible"
+            ]
+          }
+        ]
+      },
+      {
+        week: 18,
+        phase: "Advanced Logic",
+        title: "Bit Manipulation, Math, Number Theory, Combinatorics",
+        hours: 16,
+        goal: "Sharpen the low-level logic and mathematical shortcuts that make many tricky interview questions shorter and faster.",
+        leetcode: "By the end of week 18, you should solve XOR questions, power-of-two checks, subset parity problems, gcd or lcm tasks, modular arithmetic basics, and common combinatorial counting setups.",
+        topics: [
+          {
+            title: "Bit manipulation patterns",
+            time: "5h",
+            detail: "Use bits as compressed state and for arithmetic properties.",
+            bullets: [
+              "XOR identities, single number, missing number, parity",
+              "Masks, shifts, subset iteration, and bit count",
+              "Why bit tricks often replace extra memory"
+            ]
+          },
+          {
+            title: "GCD, LCM, primes, factorization",
+            time: "4h",
+            detail: "Use fundamental number theory tools that appear surprisingly often.",
+            bullets: [
+              "Euclidean algorithm",
+              "Prime testing and sieve awareness",
+              "Divisor counting and factor decomposition basics"
+            ]
+          },
+          {
+            title: "Modular arithmetic",
+            time: "3h",
+            detail: "Work safely with large numbers in counting problems.",
+            bullets: [
+              "Modulo properties for add, subtract, multiply",
+              "Fast exponentiation concept",
+              "Mod inverse awareness for advanced counting"
+            ]
+          },
+          {
+            title: "Combinatorics intuition",
+            time: "4h",
+            detail: "Count arrangements and choices without brute force.",
+            bullets: [
+              "Permutations versus combinations",
+              "Stars and bars awareness",
+              "Counting by complement and inclusion-exclusion intuition"
+            ]
+          }
+        ]
+      },
+      {
+        week: 19,
+        phase: "Advanced Logic",
+        title: "Greedy Advanced, Sweep Line, Ordered Sets, Offline Techniques",
+        hours: 17,
+        goal: "Handle problems where the answer emerges from ordered events, local irreversible decisions, or preprocessing plus deferred query handling.",
+        leetcode: "By the end of week 19, you should solve advanced interval scheduling, skyline-style event sweeps conceptually, ordered-set window problems, and some offline query or sorting-based optimizations.",
+        topics: [
+          {
+            title: "Advanced greedy reasoning",
+            time: "5h",
+            detail: "Justify local choices with stronger arguments rather than intuition alone.",
+            bullets: [
+              "Exchange arguments and invariant maintenance",
+              "Minimizing removals, maximizing disjoint selections, resource allocation",
+              "When sorting order determines correctness"
+            ]
+          },
+          {
+            title: "Sweep line",
+            time: "4h",
+            detail: "Convert geometry or interval overlap problems into ordered event processing.",
+            bullets: [
+              "Start and end events",
+              "Maintaining active sets or counts",
+              "Skyline, overlap counts, meeting room style extensions"
+            ]
+          },
+          {
+            title: "Ordered containers and balanced structure awareness",
+            time: "4h",
+            detail: "Use ordered state when relative position matters more than plain presence.",
+            bullets: [
+              "set, multiset, map and order statistics awareness",
+              "Sliding window median intuition",
+              "Nearest value and predecessor-successor queries"
+            ]
+          },
+          {
+            title: "Offline processing",
+            time: "4h",
+            detail: "Reorder work to make hard online tasks simpler.",
+            bullets: [
+              "Sort queries by threshold or endpoint",
+              "Mo's algorithm awareness",
+              "Combining DSU, Fenwick, or sorting with deferred answers"
+            ]
+          }
+        ]
+      },
+      {
+        week: 20,
+        phase: "Integration",
+        title: "Mixed Revision, Timed Practice, Hard Pattern Recognition",
+        hours: 18,
+        goal: "Integrate the full syllabus into interview performance: faster pattern recognition, cleaner explanations, and better time management.",
+        leetcode: "By the end of week 20, you should be comfortable across most Easy problems and a wide set of Medium problems, with structured exposure to Hard patterns in graphs, DP, strings, and range-query questions.",
+        topics: [
+          {
+            title: "Mixed-set diagnosis",
+            time: "4h",
+            detail: "Train the skill of identifying the dominant pattern within the first few minutes.",
+            bullets: [
+              "Ask: array, graph, tree, DP, greedy, or data structure maintenance?",
+              "Map problem statements to known templates quickly",
+              "Distinguish between brute force baseline and interview-grade solution"
+            ]
+          },
+          {
+            title: "Timed interview simulation",
+            time: "5h",
+            detail: "Practice under realistic time pressure with explanation included.",
+            bullets: [
+              "5-minute analysis, 20-minute coding, 5-minute testing rhythm",
+              "Explain invariant, data structure choice, and complexity clearly",
+              "Recover when the first approach fails"
+            ]
+          },
+          {
+            title: "Weak-area loops",
+            time: "4h",
+            detail: "Use your error log to revisit the patterns that still feel unstable.",
+            bullets: [
+              "Re-solve failed problems without notes",
+              "Rewrite templates from memory",
+              "Create a one-page cheat sheet of recurring cues"
+            ]
+          },
+          {
+            title: "Stretch topics and hard exposure",
+            time: "5h",
+            detail: "Touch harder patterns so future growth is incremental, not intimidating.",
+            bullets: [
+              "Advanced graph plus DP combinations",
+              "Segment tree plus lazy propagation practice",
+              "String algorithms, bitmask DP, and state compression review"
+            ]
+          }
+        ]
+      }
+    ];
+
+    const recommendations = {
+      1: [
+        { name: "Find Numbers with Even Number of Digits", note: "Warm-up traversal and counting logic." },
+        { name: "Maximum Subarray", note: "Basic scan intuition and running answer tracking." },
+        { name: "Valid Palindrome", note: "String traversal and cleanup logic." },
+        { name: "Valid Anagram", note: "Frequency counting on strings." },
+        { name: "Longest Common Prefix", note: "Simple string comparison across a list." }
+      ],
+      2: [
+        { name: "Running Sum of 1d Array", note: "Direct prefix-sum warm-up." },
+        { name: "Range Sum Query - Immutable", note: "Classic prefix sum application." },
+        { name: "Two Sum II - Input Array Is Sorted", note: "Opposite-end two pointers." },
+        { name: "Best Time to Buy and Sell Stock", note: "Prefix-min style and scan reasoning." },
+        { name: "Longest Substring Without Repeating Characters", note: "Variable-size sliding window core pattern." }
+      ],
+      3: [
+        { name: "Binary Search", note: "Pure binary search template." },
+        { name: "Search Insert Position", note: "Boundary handling and insertion index." },
+        { name: "First Bad Version", note: "First true binary search pattern." },
+        { name: "Search in Rotated Sorted Array", note: "Modified array binary search." },
+        { name: "Koko Eating Bananas", note: "Binary search on answer space." }
+      ],
+      4: [
+        { name: "Subsets", note: "Include-exclude recursion template." },
+        { name: "Permutations", note: "Choice tree with visited state." },
+        { name: "Combination Sum", note: "Backtracking with sum constraints." },
+        { name: "Generate Parentheses", note: "State validity pruning." },
+        { name: "Letter Combinations of a Phone Number", note: "Backtracking over branching choices." }
+      ],
+      5: [
+        { name: "Reverse Linked List", note: "Core pointer update exercise." },
+        { name: "Linked List Cycle", note: "Fast and slow pointer pattern." },
+        { name: "Middle of the Linked List", note: "Pointer speed reasoning." },
+        { name: "Valid Parentheses", note: "Canonical stack problem." },
+        { name: "Implement Queue using Stacks", note: "Order simulation with basic structures." }
+      ],
+      6: [
+        { name: "Two Sum", note: "Hash map complement lookup." },
+        { name: "Group Anagrams", note: "Frequency or sorted-key grouping." },
+        { name: "Contains Duplicate", note: "Set-based existence check." },
+        { name: "Daily Temperatures", note: "Monotonic stack pattern." },
+        { name: "Longest Consecutive Sequence", note: "Hash set and sequence-start logic." }
+      ],
+      7: [
+        { name: "Kth Largest Element in an Array", note: "Heap selection pattern." },
+        { name: "Top K Frequent Elements", note: "Heap plus frequency map." },
+        { name: "Merge Intervals", note: "Sort and merge interval family." },
+        { name: "Meeting Rooms II", note: "Intervals with heap of active rooms." },
+        { name: "Task Scheduler", note: "Greedy scheduling with frequencies." }
+      ],
+      8: [
+        { name: "Binary Tree Inorder Traversal", note: "DFS traversal foundation." },
+        { name: "Maximum Depth of Binary Tree", note: "Classic height recursion." },
+        { name: "Same Tree", note: "Recursive structure matching." },
+        { name: "Binary Tree Level Order Traversal", note: "Queue-based BFS on trees." },
+        { name: "Validate Binary Search Tree", note: "BST range or inorder property." }
+      ],
+      9: [
+        { name: "Diameter of Binary Tree", note: "Postorder aggregation." },
+        { name: "Balanced Binary Tree", note: "Return state from children." },
+        { name: "Path Sum II", note: "Path construction with backtracking." },
+        { name: "Lowest Common Ancestor of a Binary Tree", note: "Classic recursive convergence." },
+        { name: "Binary Tree Maximum Path Sum", note: "Advanced subtree contribution logic." }
+      ],
+      10: [
+        { name: "Number of Islands", note: "DFS or BFS connected components." },
+        { name: "Flood Fill", note: "Grid traversal basics." },
+        { name: "Rotting Oranges", note: "Multi-source BFS." },
+        { name: "Clone Graph", note: "Graph traversal plus visited mapping." },
+        { name: "Walls and Gates", note: "Distance propagation by BFS." }
+      ],
+      11: [
+        { name: "Course Schedule", note: "Cycle detection and topological sort." },
+        { name: "Course Schedule II", note: "Constructing topo order." },
+        { name: "Redundant Connection", note: "Union-Find application." },
+        { name: "Network Delay Time", note: "Dijkstra on weighted graph." },
+        { name: "Min Cost to Connect All Points", note: "Minimum spanning tree practice." }
+      ],
+      12: [
+        { name: "Combination Sum II", note: "Backtracking with duplicates and pruning." },
+        { name: "N-Queens", note: "Constraint-heavy search tree." },
+        { name: "Word Search", note: "DFS state-space search on a board." },
+        { name: "Open the Lock", note: "BFS on implicit states." },
+        { name: "Subsets II", note: "Bitmask or duplicate-aware backtracking." }
+      ],
+      13: [
+        { name: "Climbing Stairs", note: "Starter 1D DP state." },
+        { name: "Min Cost Climbing Stairs", note: "Transition cost accumulation." },
+        { name: "House Robber", note: "Take-or-skip DP." },
+        { name: "Coin Change", note: "Minimum count DP." },
+        { name: "Decode Ways", note: "State validity in string DP." }
+      ],
+      14: [
+        { name: "Unique Paths", note: "Grid DP base problem." },
+        { name: "Minimum Path Sum", note: "Optimization over grid states." },
+        { name: "Partition Equal Subset Sum", note: "Knapsack transformation." },
+        { name: "Longest Common Subsequence", note: "Classic 2D sequence DP." },
+        { name: "Longest Increasing Subsequence", note: "Sequence DP with advanced optimization awareness." }
+      ],
+      15: [
+        { name: "Burst Balloons", note: "Interval DP structure." },
+        { name: "House Robber III", note: "Tree DP states." },
+        { name: "Palindromic Substrings", note: "Substring state reasoning." },
+        { name: "Palindrome Partitioning II", note: "Partition plus DP." },
+        { name: "Count Number of Special Integers", note: "Digit DP exposure." }
+      ],
+      16: [
+        { name: "Implement Trie (Prefix Tree)", note: "Trie insert and search template." },
+        { name: "Design Add and Search Words Data Structure", note: "Trie with branching search." },
+        { name: "Word Search II", note: "Trie plus DFS on board." },
+        { name: "Longest Palindromic Substring", note: "String center-expansion classic." },
+        { name: "Find the Index of the First Occurrence in a String", note: "Pattern matching entry point." }
+      ],
+      17: [
+        { name: "Range Sum Query - Mutable", note: "Segment tree or Fenwick tree core use case." },
+        { name: "Count of Smaller Numbers After Self", note: "Fenwick or segment tree with compression." },
+        { name: "The Skyline Problem", note: "Advanced sweep and ordered structure exposure." },
+        { name: "My Calendar I", note: "Ordered interval maintenance awareness." },
+        { name: "Queries on a Permutation With Key", note: "Fenwick tree style thinking." }
+      ],
+      18: [
+        { name: "Single Number", note: "XOR identity basics." },
+        { name: "Number of 1 Bits", note: "Bit counting and masks." },
+        { name: "Power of Two", note: "Bitwise property check." },
+        { name: "Greatest Common Divisor of Strings", note: "GCD-style reasoning in a string setting." },
+        { name: "Pow(x, n)", note: "Fast exponentiation and recursion." }
+      ],
+      19: [
+        { name: "Non-overlapping Intervals", note: "Greedy interval removal logic." },
+        { name: "Insert Interval", note: "Ordered interval processing." },
+        { name: "Minimum Number of Arrows to Burst Balloons", note: "Greedy by finishing point." },
+        { name: "Car Pooling", note: "Sweep line and event accumulation." },
+        { name: "Sliding Window Median", note: "Ordered maintenance with balanced structure awareness." }
+      ],
+      20: [
+        { name: "Word Ladder", note: "Mixed BFS pattern with transformation graph." },
+        { name: "Cheapest Flights Within K Stops", note: "Graph shortest path with constraint reasoning." },
+        { name: "Regular Expression Matching", note: "Hard DP pattern recognition." },
+        { name: "Trapping Rain Water", note: "Integrated pattern recall: pointers, prefix, or stack." },
+        { name: "Largest Rectangle in Histogram", note: "Monotonic stack mastery check." }
+      ]
+    };
+
+    const heroMetricsEl = document.getElementById("hero-metrics");
+    const phaseListEl = document.getElementById("phase-list");
+    const weekGridEl = document.getElementById("week-grid");
+    const progressFillEl = document.getElementById("progress-fill");
+    const totalHoursEl = document.getElementById("sidebar-total-hours");
+    const totalWeeksEl = document.getElementById("sidebar-total-weeks");
+    const masterPillsEl = document.getElementById("master-pills");
+
+    const totalHours = roadmap.reduce((sum, item) => sum + item.hours, 0);
+    const totalTopics = roadmap.reduce((sum, item) => sum + item.topics.length, 0);
+
+    const heroMetrics = [
+      {
+        value: `${roadmap.length}`,
+        label: "Weeks",
+        copy: "A full beginner-to-advanced path, paced for consistency."
+      },
+      {
+        value: `${totalHours}h`,
+        label: "Estimated Study",
+        copy: "Planned concept time, implementation time, and problem-solving time."
+      },
+      {
+        value: `${totalTopics}+`,
+        label: "Detailed Blocks",
+        copy: "Every week is broken into study units with sub-topics."
+      },
+      {
+        value: "C++",
+        label: "Primary Language",
+        copy: "Templates, STL, recursion, graphs, DP, and range structures."
+      }
+    ];
+
+    heroMetricsEl.innerHTML = heroMetrics.map(metric => `
+      <article class="metric">
+        <strong>${metric.value}</strong>
+        <span><b>${metric.label}</b><br>${metric.copy}</span>
+      </article>
+    `).join("");
+
+    phaseListEl.innerHTML = phases.map(phase => `
+      <article class="phase-item">
+        <span>${phase.label}</span>
+        <div>
+          <strong>${phase.title}</strong>
+          <small>${phase.detail}</small>
+        </div>
+      </article>
+    `).join("");
+
+    const masterTopics = [
+      "Arrays & Strings",
+      "Pointers & Windows",
+      "Linked Lists",
+      "Stacks & Queues",
+      "Hashing",
+      "Trees",
+      "Graphs",
+      "Heaps",
+      "Greedy",
+      "Dynamic Programming",
+      "Tries",
+      "Segment Trees"
+    ];
+
+    masterPillsEl.innerHTML = masterTopics.map(topic => `<div class="pill">${topic}</div>`).join("");
+
+    totalWeeksEl.textContent = `${roadmap.length} weeks`;
+    totalHoursEl.textContent = `${totalHours} hours of focused study blocks across concept learning, C++ implementation, and targeted practice.`;
+
+    weekGridEl.innerHTML = roadmap.map(item => `
+      <article class="week-card" id="week-${item.week}">
+        <div class="week-index">
+          <strong>${item.week}</strong>
+          <span>${item.phase}</span>
+        </div>
+        <div class="week-body">
+          <div class="week-head">
+            <div>
+              <h3>Week ${item.week} · ${item.title}</h3>
+              <div class="week-meta">
+                <span class="tag">${item.hours} hours</span>
+                <span class="tag">${item.topics.length} topic blocks</span>
+                <span class="tag">${item.phase}</span>
+              </div>
+              <p class="week-desc">${item.goal}</p>
+            </div>
+          </div>
+          <p class="leetcode-lens"><strong>LeetCode target:</strong> ${item.leetcode}</p>
+          <div class="recommendation-shell">
+            <h4>Recommended LeetCode Set</h4>
+            <div class="recommendation-grid">
+              ${(recommendations[item.week] || []).map(problem => `
+                <article class="recommendation-item">
+                  <strong>${problem.name}</strong>
+                  <span>${problem.note}</span>
+                </article>
+              `).join("")}
+            </div>
+          </div>
+          <div class="topic-grid">
+            ${item.topics.map(topic => `
+              <article class="topic-card">
+                <div class="topic-topline">
+                  <strong>${topic.title}</strong>
+                  <span class="topic-time">${topic.time}</span>
+                </div>
+                <p>${topic.detail}</p>
+                <ul>
+                  ${topic.bullets.map(point => `<li>${point}</li>`).join("")}
+                </ul>
+              </article>
+            `).join("")}
+          </div>
+        </div>
+      </article>
+    `).join("");
+
+    const cards = [...document.querySelectorAll(".week-card")];
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          const weekNum = Number(entry.target.id.replace("week-", ""));
+          const percent = (weekNum / roadmap.length) * 100;
+          progressFillEl.style.width = `${percent}%`;
+        }
+      });
+    }, { threshold: 0.12 });
+
+    cards.forEach(card => revealObserver.observe(card));
+
+    window.addEventListener("load", () => {
+      progressFillEl.style.width = `${100 / roadmap.length}%`;
+    });
+  </script>
+</body>
+</html>
