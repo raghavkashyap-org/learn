@@ -1186,6 +1186,22 @@
     const exportProgressBtn = document.getElementById("export-progress");
     const importProgressBtn = document.getElementById("import-progress");
     const importProgressInput = document.getElementById("import-progress-input");
+    const weekDetailHeadingEl = document.getElementById("week-detail-heading");
+    const weekDetailGoalEl = document.getElementById("week-detail-goal");
+    const weekDetailMetricsEl = document.getElementById("week-detail-metrics");
+    const weekDetailPanelTitleEl = document.getElementById("week-detail-panel-title");
+    const weekDetailLeetcodeEl = document.getElementById("week-detail-leetcode");
+    const weekDetailPhaseListEl = document.getElementById("week-detail-phase-list");
+    const prevWeekLinkEl = document.getElementById("prev-week-link");
+    const nextWeekLinkEl = document.getElementById("next-week-link");
+    const weekDetailSubheadingEl = document.getElementById("week-detail-subheading");
+    const weekTopicProgressEl = document.getElementById("week-topic-progress");
+    const weekBulletProgressEl = document.getElementById("week-bullet-progress");
+    const weekHoursLabelEl = document.getElementById("week-hours-label");
+    const weekPhaseLabelEl = document.getElementById("week-phase-label");
+    const weekResourceGridEl = document.getElementById("week-resource-grid");
+    const weekRecommendationGridEl = document.getElementById("week-recommendation-grid");
+    const weekDetailTopicsEl = document.getElementById("week-detail-topics");
 
     const STORAGE_KEY = "dsa-atlas-progress-v2";
     const CALENDAR_DAYS = 140;
