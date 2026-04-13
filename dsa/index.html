@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DSA Mastery Roadmap</title>
+  <meta name="description" content="A detailed beginner-to-advanced DSA roadmap with weekly sequencing, topic breakdowns, sub-topics, and estimated study time for C++ and LeetCode preparation.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="page">
+    <nav class="nav">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true"></div>
+        <div class="brand-copy">
+          <strong>DSA Atlas</strong>
+          <span>Beginner to advanced C++ and LeetCode roadmap</span>
+        </div>
+      </div>
+      <button class="nav-toggle" id="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links">Menu</button>
+      <div class="nav-links" id="nav-links">
+        <a href="#overview">Overview</a>
+        <a href="#approach">Study Logic</a>
+        <a href="#roadmap">Weekly Roadmap</a>
+      </div>
+    </nav>
+
+    <section class="hero" id="overview">
+      <article class="hero-copy">
+        <div class="eyebrow">Detailed Structure</div>
+        <h1>Build DSA the way interviews actually test it.</h1>
+        <p>
+          This roadmap is designed to move you from zero confidence to strong problem-solving range in C++. It does not only list topics. It sequences the mental models, the data structures, the algorithms, the common patterns, and the weekly LeetCode expectations so you know exactly what to learn, how long to spend, and what problem types you should be able to solve by the nth week.
+        </p>
+        <p>
+          The plan assumes steady work, not random bursts. Every week combines concept study, implementation in C++, pattern drills, and problem application so you learn how to recognize the correct approach under interview pressure.
+        </p>
+        <div class="hero-actions">
+          <a class="primary" href="#roadmap">Open 20-Week Roadmap</a>
+          <a class="secondary" href="#approach">See Study Logic</a>
+        </div>
+        <div class="hero-grid" id="hero-metrics"></div>
+      </article>
+
+      <aside class="hero-panel">
+        <div class="kicker">Execution Order</div>
+        <h2>What this page optimizes for</h2>
+        <p>
+          The sequence is built so each week unlocks the next one. You first learn to observe time and space tradeoffs, then the core linear structures, then recursion and trees, then graphs and dynamic programming, and finally the advanced structures and mixed interview patterns that make medium and hard LeetCode questions feel structured instead of chaotic.
+        </p>
+        <div class="phase-list" id="phase-list"></div>
+      </aside>
+    </section>
+
+    <section class="summary">
+      <article class="summary-card">
+        <div class="kicker">Skill Outcome</div>
+        <h2>From syntax to strategy</h2>
+        <p>
+          You are not just memorizing topics. You are learning how to detect patterns like two pointers, BFS, DFS, greedy choice, state transition, union-find grouping, or segment tree range maintenance from the wording of a problem.
+        </p>
+      </article>
+      <article class="summary-card">
+        <div class="kicker">C++ Angle</div>
+        <h2>Implementation-first practice</h2>
+        <p>
+          Every stage should be coded in C++ with STL fluency: vectors, strings, maps, unordered maps, sets, stacks, queues, priority queues, recursion, templates of DFS and BFS, and clean helper functions for state management.
+        </p>
+      </article>
+      <article class="summary-card">
+        <div class="kicker">Interview Angle</div>
+        <h2>Pattern recall under pressure</h2>
+        <p>
+          Each week includes what you should already be able to solve on LeetCode. That creates a practical benchmark instead of a vague feeling of progress.
+        </p>
+      </article>
+    </section>
+
+    <section class="section-shell" id="approach">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">Study Logic</div>
+          <h2>How to make the roadmap stick</h2>
+          <p>
+            DSA becomes usable only when concepts, templates, and pattern recognition are trained together. Read a topic, implement it in C++, solve focused problems, review mistakes, then revisit the same pattern with slightly harder constraints.
+          </p>
+        </div>
+        <div class="pills">
+          <div class="pill">Concept → code → dry run → problems → review</div>
+          <div class="pill">6 study days + 1 review day each week</div>
+          <div class="pill">Use C++ STL from week 1</div>
+        </div>
+      </div>
+      <div class="principles">
+        <article class="principle">
+          <strong>1. Learn the invariant</strong>
+          <p>The key question is not “what is this topic?” but “what must remain true while my algorithm runs?” Sliding windows maintain a valid range. BFS maintains frontier levels. DP maintains optimal substructure state.</p>
+        </article>
+        <article class="principle">
+          <strong>2. Write templates early</strong>
+          <p>Write your own binary search, DFS, BFS, linked-list reversal, heap pattern, and DP transition templates. Repetition turns panic into recognition.</p>
+        </article>
+        <article class="principle">
+          <strong>3. Solve by category</strong>
+          <p>Do not jump randomly across LeetCode. Batch problems by topic so your brain learns the shape of a solution family.</p>
+        </article>
+        <article class="principle">
+          <strong>4. Review failed attempts</strong>
+          <p>The fastest progress comes from comparing your wrong model with the right one. Keep notes on why your first approach failed.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section-shell" id="roadmap">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">20-Week Roadmap</div>
+          <h2>Detailed DSA plan from beginner to advanced</h2>
+          <p>
+            Each week below includes the main focus, estimated study time, detailed sub-topics, and the LeetCode range you should be ready for by the end of that week. The estimated time assumes disciplined study and problem-solving, not passive watching.
+          </p>
+        </div>
+        <div class="pills" id="master-pills"></div>
+      </div>
+
+      <div class="roadmap-shell">
+        <aside class="roadmap-sidebar">
+          <div class="sidebar-card">
+            <div class="kicker">Roadmap Totals</div>
+            <h3 id="sidebar-total-weeks">20 weeks</h3>
+            <p id="sidebar-total-hours"></p>
+            <div class="progress-block">
+              <div class="progress-labels">
+                <span id="progress-label-start">0 done</span>
+                <span id="progress-label-end">0 total</span>
+              </div>
+              <div class="progress-track">
+                <div class="progress-fill" id="progress-fill"></div>
+              </div>
+            </div>
+            <div class="progress-stats">
+              <div class="stat-chip">
+                <strong id="completed-weeks-count">0/0</strong>
+                <span>Topics completed</span>
+              </div>
+              <div class="stat-chip">
+                <strong id="completed-hours-count">0/0</strong>
+                <span>Sub-topics completed</span>
+              </div>
+            </div>
+          </div>
+          <div class="sidebar-card">
+            <div class="kicker">Progress Calendar</div>
+            <h3>LeetCode and GitHub-style activity</h3>
+            <p class="calendar-meta">Each time you mark a topic or sub-topic complete, today gets a green square. Progress stays on this device with local storage and can be moved with JSON export.</p>
+            <div class="calendar-shell">
+              <div class="calendar-scroll">
+                <div class="calendar-grid" id="progress-calendar" aria-label="Completion activity calendar"></div>
+              </div>
+              <div class="calendar-legend">
+                <span>Less</span>
+                <div class="legend-scale" aria-hidden="true">
+                  <span class="legend-box"></span>
+                  <span class="legend-box level-1"></span>
+                  <span class="legend-box level-2"></span>
+                  <span class="legend-box level-3"></span>
+                  <span class="legend-box level-4"></span>
+                </div>
+                <span>More</span>
+              </div>
+              <div class="calendar-summary">
+                <div class="stat-chip">
+                  <strong id="calendar-active-days">0</strong>
+                  <span>Active days</span>
+                </div>
+                <div class="stat-chip">
+                  <strong id="calendar-last-saved">No data</strong>
+                  <span>Last completion</span>
+                </div>
+              </div>
+            </div>
+            <div class="sidebar-actions">
+              <button class="action-button primary-action" id="export-progress" type="button">Export JSON</button>
+              <button class="action-button" id="import-progress" type="button">Import JSON</button>
+            </div>
+            <input id="import-progress-input" type="file" accept="application/json,.json" hidden>
+          </div>
+          <div class="sidebar-card">
+            <div class="kicker">By the end</div>
+            <ul>
+              <li>Recognize the most common interview patterns without starting from scratch every time.</li>
+              <li>Implement standard DSA templates in C++ quickly and correctly.</li>
+              <li>Handle Easy problems comfortably and a large range of Medium problems with structure.</li>
+              <li>Have exposure to advanced topics needed for tougher graph, range query, and string problems.</li>
+            </ul>
+          </div>
+          <div class="sidebar-card">
+            <div class="kicker">Weekly Rhythm</div>
+            <ul>
+              <li>Day 1: theory and notation</li>
+              <li>Day 2: C++ implementation and dry runs</li>
+              <li>Day 3-5: focused problem sets</li>
+              <li>Day 6: mixed timed practice</li>
+              <li>Day 7: review, notes, remake weak problems</li>
+            </ul>
+          </div>
+        </aside>
+
+        <div class="roadmap-main">
+          <div class="week-grid" id="week-grid"></div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <p>
+        <strong>Use this page as a working syllabus, not a poster.</strong> For each week, finish the listed sub-topics, write the core templates in C++, and solve enough problems from that category until your first instinct becomes reliable. That is the difference between “I know this topic” and “I can solve the interview problem in front of me.”
+      </p>
+    </footer>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
