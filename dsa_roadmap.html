@@ -1,0 +1,2098 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>DSA Mastery Roadmap — C++</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --surface: #111118;
+    --card: #16161f;
+    --border: #1e1e2e;
+    --accent: #7c3aed;
+    --accent2: #06b6d4;
+    --accent3: #f59e0b;
+    --accent4: #10b981;
+    --accent5: #ef4444;
+    --text: #e2e8f0;
+    --muted: #64748b;
+    --dim: #334155;
+    --white: #f8fafc;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'JetBrains Mono', monospace;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* NOISE OVERLAY */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.4;
+  }
+
+  /* HEADER */
+  header {
+    position: relative;
+    padding: 80px 40px 60px;
+    text-align: center;
+    border-bottom: 1px solid var(--border);
+    background: linear-gradient(180deg, #0d0d1a 0%, var(--bg) 100%);
+    overflow: hidden;
+  }
+
+  header::before {
+    content: '';
+    position: absolute;
+    top: -100px; left: 50%;
+    transform: translateX(-50%);
+    width: 600px; height: 400px;
+    background: radial-gradient(ellipse, rgba(124,58,237,0.18) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .header-tag {
+    display: inline-block;
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--accent2);
+    border: 1px solid rgba(6,182,212,0.3);
+    padding: 5px 16px;
+    border-radius: 100px;
+    margin-bottom: 24px;
+    animation: fadeDown 0.6s ease both;
+  }
+
+  h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(36px, 6vw, 72px);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -2px;
+    color: var(--white);
+    animation: fadeDown 0.7s ease both;
+    animation-delay: 0.1s;
+  }
+
+  h1 span {
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .subtitle {
+    margin-top: 16px;
+    font-size: 14px;
+    color: var(--muted);
+    letter-spacing: 0.5px;
+    animation: fadeDown 0.8s ease both;
+    animation-delay: 0.2s;
+  }
+
+  .stats-bar {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 40px;
+    flex-wrap: wrap;
+    animation: fadeDown 0.9s ease both;
+    animation-delay: 0.3s;
+  }
+
+  .stat {
+    text-align: center;
+  }
+
+  .stat-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--white);
+  }
+
+  .stat-num.purple { color: var(--accent); }
+  .stat-num.cyan { color: var(--accent2); }
+  .stat-num.amber { color: var(--accent3); }
+  .stat-num.green { color: var(--accent4); }
+
+  .stat-label {
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+
+  /* PROGRESS TRACKER */
+  .progress-section {
+    padding: 32px 40px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(20px);
+  }
+
+  .progress-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .progress-label {
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .progress-bar-wrap {
+    flex: 1;
+    min-width: 200px;
+    height: 6px;
+    background: var(--border);
+    border-radius: 100px;
+    overflow: hidden;
+  }
+
+  .progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    border-radius: 100px;
+    width: 0%;
+    transition: width 0.5s ease;
+  }
+
+  .progress-count {
+    font-size: 13px;
+    color: var(--accent2);
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  /* MAIN */
+  main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 48px 24px 80px;
+  }
+
+  /* WEEK BLOCK */
+  .week-block {
+    margin-bottom: 56px;
+    animation: fadeUp 0.5s ease both;
+  }
+
+  .week-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    margin-bottom: 24px;
+  }
+
+  .week-badge {
+    flex-shrink: 0;
+    width: 64px; height: 64px;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    line-height: 1.2;
+  }
+
+  .week-badge .wk-num {
+    font-size: 20px;
+    line-height: 1;
+  }
+
+  .week-info { flex: 1; }
+
+  .week-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 6px;
+  }
+
+  .week-meta {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .meta-pill {
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 100px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .meta-time { background: rgba(245,158,11,0.12); color: var(--accent3); border: 1px solid rgba(245,158,11,0.25); }
+  .meta-diff { background: rgba(16,185,129,0.1); color: var(--accent4); border: 1px solid rgba(16,185,129,0.2); }
+  .meta-diff.medium { background: rgba(245,158,11,0.1); color: var(--accent3); border: 1px solid rgba(245,158,11,0.2); }
+  .meta-diff.hard { background: rgba(239,68,68,0.1); color: var(--accent5); border: 1px solid rgba(239,68,68,0.2); }
+
+  /* TOPIC CARDS */
+  .topics-grid {
+    display: grid;
+    gap: 12px;
+  }
+
+  .topic-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: border-color 0.2s, transform 0.2s;
+    cursor: pointer;
+  }
+
+  .topic-card:hover {
+    border-color: var(--dim);
+    transform: translateY(-1px);
+  }
+
+  .topic-card.done {
+    border-color: rgba(16,185,129,0.3);
+    background: rgba(16,185,129,0.04);
+  }
+
+  .topic-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px 20px;
+    user-select: none;
+  }
+
+  .topic-check {
+    width: 22px; height: 22px;
+    border-radius: 6px;
+    border: 2px solid var(--dim);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: all 0.2s;
+    font-size: 13px;
+  }
+
+  .topic-card.done .topic-check {
+    background: var(--accent4);
+    border-color: var(--accent4);
+    color: #fff;
+  }
+
+  .topic-icon {
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+
+  .topic-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--white);
+    flex: 1;
+  }
+
+  .topic-card.done .topic-name {
+    color: var(--accent4);
+  }
+
+  .topic-time {
+    font-size: 11px;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+
+  .expand-arrow {
+    font-size: 11px;
+    color: var(--muted);
+    transition: transform 0.3s;
+    margin-left: 8px;
+  }
+
+  .topic-card.open .expand-arrow {
+    transform: rotate(180deg);
+  }
+
+  /* TOPIC BODY */
+  .topic-body {
+    display: none;
+    padding: 0 20px 20px 56px;
+    border-top: 1px solid var(--border);
+    animation: fadeDown 0.2s ease;
+  }
+
+  .topic-card.open .topic-body { display: block; }
+
+  .topic-desc {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.8;
+    margin: 14px 0 16px;
+    padding: 12px 16px;
+    background: rgba(255,255,255,0.02);
+    border-radius: 10px;
+    border-left: 3px solid var(--accent);
+  }
+
+  /* SUBTOPICS */
+  .subtopics-label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+
+  .subtopic-list {
+    list-style: none;
+    display: grid;
+    gap: 6px;
+  }
+
+  .subtopic-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 12px;
+    color: #94a3b8;
+    line-height: 1.6;
+    padding: 8px 12px;
+    border-radius: 8px;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .subtopic-item:hover {
+    background: rgba(255,255,255,0.04);
+    border-color: var(--border);
+  }
+
+  .subtopic-item.done-sub {
+    color: var(--accent4);
+    background: rgba(16,185,129,0.05);
+  }
+
+  .sub-check {
+    width: 16px; height: 16px;
+    border-radius: 4px;
+    border: 1.5px solid var(--dim);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 10px;
+    margin-top: 1px;
+    transition: all 0.2s;
+  }
+
+  .subtopic-item.done-sub .sub-check {
+    background: var(--accent4);
+    border-color: var(--accent4);
+    color: #fff;
+  }
+
+  .sub-dot { color: var(--accent2); flex-shrink: 0; margin-top: 2px; }
+
+  /* CODE EXAMPLE */
+  .code-block {
+    margin-top: 16px;
+    background: #0d0d14;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .code-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 14px;
+    background: rgba(255,255,255,0.03);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .code-lang {
+    font-size: 10px;
+    color: var(--accent2);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  pre {
+    padding: 16px;
+    font-size: 11.5px;
+    line-height: 1.8;
+    color: #a9b1d6;
+    overflow-x: auto;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .kw { color: #bb9af7; }
+  .fn { color: #7aa2f7; }
+  .cm { color: #565f89; font-style: italic; }
+  .str { color: #9ece6a; }
+  .num { color: #ff9e64; }
+  .type { color: #2ac3de; }
+
+  /* LEETCODE PROBLEMS */
+  .problems-section {
+    margin-top: 16px;
+  }
+
+  .problems-label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+
+  .problem-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .prob-tag {
+    font-size: 11px;
+    padding: 4px 10px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    background: rgba(255,255,255,0.02);
+  }
+
+  .prob-tag.easy { border-color: rgba(16,185,129,0.3); color: var(--accent4); }
+  .prob-tag.medium { border-color: rgba(245,158,11,0.3); color: var(--accent3); }
+  .prob-tag.hard { border-color: rgba(239,68,68,0.3); color: var(--accent5); }
+
+  /* DIVIDER */
+  .week-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border), transparent);
+    margin: 0 0 56px;
+  }
+
+  /* SECTION LABEL */
+  .phase-label {
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+
+  /* COLOR VARIANTS FOR WEEK BADGES */
+  .badge-purple { background: rgba(124,58,237,0.15); color: var(--accent); border: 1px solid rgba(124,58,237,0.3); }
+  .badge-cyan { background: rgba(6,182,212,0.12); color: var(--accent2); border: 1px solid rgba(6,182,212,0.25); }
+  .badge-amber { background: rgba(245,158,11,0.12); color: var(--accent3); border: 1px solid rgba(245,158,11,0.25); }
+  .badge-green { background: rgba(16,185,129,0.12); color: var(--accent4); border: 1px solid rgba(16,185,129,0.25); }
+  .badge-red { background: rgba(239,68,68,0.12); color: var(--accent5); border: 1px solid rgba(239,68,68,0.25); }
+  .badge-pink { background: rgba(236,72,153,0.12); color: #ec4899; border: 1px solid rgba(236,72,153,0.25); }
+
+  /* ANIMATIONS */
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* SCROLL BAR */
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--dim); border-radius: 100px; }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 40px;
+    border-top: 1px solid var(--border);
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 1px;
+  }
+
+  .tip-box {
+    background: linear-gradient(135deg, rgba(124,58,237,0.08), rgba(6,182,212,0.08));
+    border: 1px solid rgba(124,58,237,0.2);
+    border-radius: 14px;
+    padding: 18px 20px;
+    margin-bottom: 32px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+
+  .tip-icon { font-size: 18px; flex-shrink: 0; }
+  .tip-text { font-size: 12px; color: #94a3b8; line-height: 1.7; }
+  .tip-text strong { color: var(--white); }
+
+  /* EXPORT / IMPORT BUTTONS */
+  .progress-actions {
+    display: flex;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+
+  .btn-action {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 7px 14px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: rgba(255,255,255,0.03);
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+
+  .btn-action:hover { background: rgba(255,255,255,0.07); color: var(--white); border-color: var(--dim); }
+  .btn-export:hover { border-color: rgba(6,182,212,0.5); color: var(--accent2); }
+  .btn-import:hover { border-color: rgba(16,185,129,0.5); color: var(--accent4); }
+
+  /* TOAST NOTIFICATION */
+  .toast {
+    position: fixed;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 20px;
+    font-size: 12px;
+    color: var(--white);
+    z-index: 9999;
+    opacity: 0;
+    transition: all 0.3s ease;
+    pointer-events: none;
+    white-space: nowrap;
+  }
+
+  .toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  .toast.success { border-color: rgba(16,185,129,0.4); color: var(--accent4); }
+  .toast.error   { border-color: rgba(239,68,68,0.4);  color: var(--accent5); }
+
+  @media (max-width: 600px) {
+    header { padding: 48px 20px 40px; }
+    main { padding: 32px 16px 60px; }
+    .progress-section { padding: 20px; }
+    .stats-bar { gap: 24px; }
+    h1 { letter-spacing: -1px; }
+    .btn-action span { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-tag">C++ · LeetCode · Competitive Programming</div>
+  <h1>DSA <span>Mastery</span><br/>Roadmap</h1>
+  <p class="subtitle">Week-by-week structured plan · From zero to solving any LeetCode problem</p>
+  <div class="stats-bar">
+    <div class="stat"><div class="stat-num purple">16</div><div class="stat-label">Weeks</div></div>
+    <div class="stat"><div class="stat-num cyan">40+</div><div class="stat-label">Topics</div></div>
+    <div class="stat"><div class="stat-num amber">150+</div><div class="stat-label">Subtopics</div></div>
+    <div class="stat"><div class="stat-num green">200+</div><div class="stat-label">Problems</div></div>
+  </div>
+</header>
+
+<div class="progress-section">
+  <div class="progress-inner">
+    <span class="progress-label">Progress</span>
+    <div class="progress-bar-wrap">
+      <div class="progress-bar-fill" id="progressFill"></div>
+    </div>
+    <span class="progress-count" id="progressCount">0 / 0 done</span>
+    <div class="progress-actions">
+      <button class="btn-action btn-export" onclick="exportProgress()">⬇ <span>Export</span></button>
+      <button class="btn-action btn-import" onclick="document.getElementById('importFile').click()">⬆ <span>Import</span></button>
+      <input type="file" id="importFile" accept=".json" style="display:none" onchange="importProgress(event)"/>
+    </div>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<main id="mainContent">
+
+  <!-- ====== PHASE 1 ====== -->
+  <div class="phase-label">📦 Phase 1 — C++ Foundations</div>
+
+  <!-- WEEK 1 -->
+  <div class="week-block">
+    <div class="week-header">
+      <div class="week-badge badge-purple"><span>WK</span><span class="wk-num">1</span></div>
+      <div class="week-info">
+        <div class="week-title">C++ Basics & Syntax</div>
+        <div class="week-meta">
+          <span class="meta-pill meta-time">⏱ 7–10 hrs</span>
+          <span class="meta-pill meta-diff">Beginner</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="tip-box">
+      <span class="tip-icon">💡</span>
+      <div class="tip-text"><strong>Goal:</strong> Get comfortable writing and running C++ code. Don't memorize — type everything by hand. Make mistakes. Fix them.</div>
+    </div>
+
+    <div class="topics-grid">
+
+      <!-- TOPIC: Variables & I/O -->
+      <div class="topic-card" onclick="toggleCard(this)">
+        <div class="topic-header">
+          <div class="topic-check">✓</div>
+          <span class="topic-icon">📝</span>
+          <span class="topic-name">Variables, Data Types & I/O</span>
+          <span class="topic-time">~2 hrs</span>
+          <span class="expand-arrow">▼</span>
+        </div>
+        <div class="topic-body">
+          <div class="topic-desc">The building blocks of every program. C++ is statically typed — you must declare types. Understanding how data flows in and out is essential for every single problem you'll ever solve.</div>
+          <div class="subtopics-label">Subtopics</div>
+          <ul class="subtopic-list">
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> int, float, double, char, bool, long long — when to use which</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> cin and cout — reading and printing to console</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Variables: declaration, initialization, naming rules</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Constants: const and #define</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Type casting: implicit vs explicit (int)x, static_cast</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Arithmetic operators: +, -, *, /, % and integer division trap</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Overflow: INT_MAX, LLONG_MAX and why it matters in DSA</li>
+          </ul>
+          <div class="code-block">
+            <div class="code-header"><span class="code-lang">C++</span></div>
+            <pre><span class="cm">// Your very first C++ program</span>
+<span class="kw">#include</span> <span class="str">&lt;iostream&gt;</span>
+<span class="kw">using namespace</span> <span class="type">std</span>;
+
+<span class="type">int</span> <span class="fn">main</span>() {
+    <span class="type">int</span> n;
+    <span class="fn">cin</span> >> n;           <span class="cm">// read input</span>
+    <span class="type">long long</span> big = <span class="num">2e18</span>;  <span class="cm">// large numbers</span>
+    <span class="fn">cout</span> &lt;&lt; n &lt;&lt; <span class="str">"\n"</span>;   <span class="cm">// print output</span>
+    <span class="kw">return</span> <span class="num">0</span>;
+}</pre>
+          </div>
+          <div class="problems-section">
+            <div class="problems-label">Practice Problems</div>
+            <div class="problem-tags">
+              <span class="prob-tag easy">Print Hello World</span>
+              <span class="prob-tag easy">Sum of Two Numbers</span>
+              <span class="prob-tag easy">Swap Two Variables</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TOPIC: Control Flow -->
+      <div class="topic-card" onclick="toggleCard(this)">
+        <div class="topic-header">
+          <div class="topic-check">✓</div>
+          <span class="topic-icon">🔀</span>
+          <span class="topic-name">Control Flow — if/else, switch, loops</span>
+          <span class="topic-time">~2 hrs</span>
+          <span class="expand-arrow">▼</span>
+        </div>
+        <div class="topic-body">
+          <div class="topic-desc">Loops and conditionals are inside literally every DSA solution. You must write these without thinking. Master the for loop — it's used in 80% of array problems.</div>
+          <div class="subtopics-label">Subtopics</div>
+          <ul class="subtopic-list">
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> if / else if / else — conditions and nesting</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Ternary operator: condition ? a : b</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> switch-case: when to use over if-else</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> for loop: index-based iteration</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> while loop: condition-based iteration</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> do-while loop: runs at least once</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> break and continue: controlling loop flow</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Nested loops: 2D patterns, matrix traversal</li>
+          </ul>
+          <div class="code-block">
+            <div class="code-header"><span class="code-lang">C++</span></div>
+            <pre><span class="cm">// Print all even numbers from 1 to N</span>
+<span class="kw">for</span> (<span class="type">int</span> i = <span class="num">1</span>; i &lt;= n; i++) {
+    <span class="kw">if</span> (i % <span class="num">2</span> == <span class="num">0</span>)
+        <span class="fn">cout</span> &lt;&lt; i &lt;&lt; <span class="str">" "</span>;
+}
+
+<span class="cm">// Star pattern (nested loops)</span>
+<span class="kw">for</span> (<span class="type">int</span> i = <span class="num">1</span>; i &lt;= n; i++) {
+    <span class="kw">for</span> (<span class="type">int</span> j = <span class="num">1</span>; j &lt;= i; j++)
+        <span class="fn">cout</span> &lt;&lt; <span class="str">"*"</span>;
+    <span class="fn">cout</span> &lt;&lt; <span class="str">"\n"</span>;
+}</pre>
+          </div>
+          <div class="problems-section">
+            <div class="problems-label">Practice Problems</div>
+            <div class="problem-tags">
+              <span class="prob-tag easy">Print 1 to N</span>
+              <span class="prob-tag easy">FizzBuzz</span>
+              <span class="prob-tag easy">Star Patterns (Triangle, Pyramid)</span>
+              <span class="prob-tag easy">Sum of digits of a number</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TOPIC: Functions -->
+      <div class="topic-card" onclick="toggleCard(this)">
+        <div class="topic-header">
+          <div class="topic-check">✓</div>
+          <span class="topic-icon">⚙️</span>
+          <span class="topic-name">Functions & Scope</span>
+          <span class="topic-time">~2 hrs</span>
+          <span class="expand-arrow">▼</span>
+        </div>
+        <div class="topic-body">
+          <div class="topic-desc">Functions are how you break big problems into small ones. Every LeetCode solution is a function. Understanding pass-by-value vs pass-by-reference is critical for efficiency.</div>
+          <div class="subtopics-label">Subtopics</div>
+          <ul class="subtopic-list">
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Function declaration, definition, calling</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Return types: void, int, bool, string</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Pass by value vs pass by reference (&)</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Default parameters</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Function overloading</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Scope: local vs global variables</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Inline functions</li>
+          </ul>
+          <div class="code-block">
+            <div class="code-header"><span class="code-lang">C++</span></div>
+            <pre><span class="cm">// Pass by reference — modifies original</span>
+<span class="type">void</span> <span class="fn">doubleIt</span>(<span class="type">int</span> &x) { x *= <span class="num">2</span>; }
+
+<span class="cm">// Returns value — doesn't modify original</span>
+<span class="type">int</span> <span class="fn">square</span>(<span class="type">int</span> x) { <span class="kw">return</span> x * x; }
+
+<span class="type">int</span> <span class="fn">main</span>() {
+    <span class="type">int</span> a = <span class="num">5</span>;
+    <span class="fn">doubleIt</span>(a);        <span class="cm">// a is now 10</span>
+    <span class="fn">cout</span> &lt;&lt; <span class="fn">square</span>(a); <span class="cm">// prints 100</span>
+}</pre>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- WEEK 2 -->
+  <div class="week-block">
+    <div class="week-header">
+      <div class="week-badge badge-purple"><span>WK</span><span class="wk-num">2</span></div>
+      <div class="week-info">
+        <div class="week-title">Arrays, Strings & STL Basics</div>
+        <div class="week-meta">
+          <span class="meta-pill meta-time">⏱ 10–12 hrs</span>
+          <span class="meta-pill meta-diff">Beginner</span>
+        </div>
+      </div>
+    </div>
+    <div class="topics-grid">
+
+      <div class="topic-card" onclick="toggleCard(this)">
+        <div class="topic-header">
+          <div class="topic-check">✓</div>
+          <span class="topic-icon">📋</span>
+          <span class="topic-name">Arrays (1D & 2D)</span>
+          <span class="topic-time">~3 hrs</span>
+          <span class="expand-arrow">▼</span>
+        </div>
+        <div class="topic-body">
+          <div class="topic-desc">Arrays are the most fundamental data structure. ~40% of all LeetCode problems involve arrays. You must be able to traverse, reverse, search, and manipulate arrays in your sleep.</div>
+          <div class="subtopics-label">Subtopics</div>
+          <ul class="subtopic-list">
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Declaration, initialization: int arr[5], vector&lt;int&gt; v</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Index-based access: arr[i], 0-indexed trap</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Traversal: for loop and range-based for</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Finding max, min, sum of array</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Reversing an array in-place</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Rotating array left/right by k positions</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> 2D arrays: row-major storage, matrix traversal</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Prefix sum: precompute cumulative sum for O(1) range queries</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Two-pointer technique on sorted arrays</li>
+          </ul>
+          <div class="code-block">
+            <div class="code-header"><span class="code-lang">C++</span></div>
+            <pre><span class="cm">// Prefix sum — O(n) build, O(1) query</span>
+<span class="type">vector</span>&lt;<span class="type">int</span>&gt; arr = {<span class="num">1</span>,<span class="num">2</span>,<span class="num">3</span>,<span class="num">4</span>,<span class="num">5</span>};
+<span class="type">vector</span>&lt;<span class="type">int</span>&gt; prefix(arr.size() + <span class="num">1</span>, <span class="num">0</span>);
+<span class="kw">for</span> (<span class="type">int</span> i = <span class="num">0</span>; i &lt; arr.size(); i++)
+    prefix[i+<span class="num">1</span>] = prefix[i] + arr[i];
+<span class="cm">// sum from index l to r (inclusive):</span>
+<span class="type">int</span> rangeSum = prefix[r+<span class="num">1</span>] - prefix[l];</pre>
+          </div>
+          <div class="problems-section">
+            <div class="problems-label">LeetCode Problems</div>
+            <div class="problem-tags">
+              <span class="prob-tag easy">LC#1 Two Sum</span>
+              <span class="prob-tag easy">LC#26 Remove Duplicates</span>
+              <span class="prob-tag easy">LC#189 Rotate Array</span>
+              <span class="prob-tag medium">LC#238 Product Except Self</span>
+              <span class="prob-tag medium">LC#53 Maximum Subarray</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="topic-card" onclick="toggleCard(this)">
+        <div class="topic-header">
+          <div class="topic-check">✓</div>
+          <span class="topic-icon">🔤</span>
+          <span class="topic-name">Strings</span>
+          <span class="topic-time">~3 hrs</span>
+          <span class="expand-arrow">▼</span>
+        </div>
+        <div class="topic-body">
+          <div class="topic-desc">Strings in C++ are arrays of characters. String manipulation problems are extremely common in LeetCode easy/medium. Master the std::string methods.</div>
+          <div class="subtopics-label">Subtopics</div>
+          <ul class="subtopic-list">
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> string vs char array: when to use which</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Length: s.length(), s.size()</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Accessing characters: s[i], s.at(i)</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Substring: s.substr(start, length)</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Find: s.find("abc") — returns npos if not found</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Concatenation: s1 + s2</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> String comparison: ==, &lt;, &gt;</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Reverse: reverse(s.begin(), s.end())</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> ASCII values and character arithmetic: 'a' + 1 = 'b'</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Palindrome check</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Anagram check using frequency array</li>
+          </ul>
+          <div class="problems-section">
+            <div class="problems-label">LeetCode Problems</div>
+            <div class="problem-tags">
+              <span class="prob-tag easy">LC#125 Valid Palindrome</span>
+              <span class="prob-tag easy">LC#242 Valid Anagram</span>
+              <span class="prob-tag easy">LC#344 Reverse String</span>
+              <span class="prob-tag medium">LC#3 Longest Substring No Repeat</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="week-divider"></div>
+
+  <!-- ====== PHASE 2 ====== -->
+  <div class="phase-label">🧠 Phase 2 — Core DSA Concepts</div>
+
+  <!-- WEEK 3 -->
+  <div class="week-block">
+    <div class="week-header">
+      <div class="week-badge badge-cyan"><span>WK</span><span class="wk-num">3</span></div>
+      <div class="week-info">
+        <div class="week-title">Recursion & Backtracking</div>
+        <div class="week-meta">
+          <span class="meta-pill meta-time">⏱ 12–15 hrs</span>
+          <span class="meta-pill meta-diff medium">Intermediate</span>
+        </div>
+      </div>
+    </div>
+    <div class="tip-box">
+      <span class="tip-icon">⚠️</span>
+      <div class="tip-text"><strong>Most important week.</strong> Do NOT skip or rush this. Recursion is the foundation of Trees, Graphs, DP, and Backtracking. If recursion clicks, everything else becomes easier.</div>
+    </div>
+    <div class="topics-grid">
+
+      <div class="topic-card" onclick="toggleCard(this)">
+        <div class="topic-header">
+          <div class="topic-check">✓</div>
+          <span class="topic-icon">🔄</span>
+          <span class="topic-name">Recursion — Base Case, Call Stack</span>
+          <span class="topic-time">~5 hrs</span>
+          <span class="expand-arrow">▼</span>
+        </div>
+        <div class="topic-body">
+          <div class="topic-desc">Recursion is a function calling itself. Every recursive solution has two parts: a base case (stop condition) and a recursive case (smaller problem). Trace through code on paper every time.</div>
+          <div class="subtopics-label">Subtopics</div>
+          <ul class="subtopic-list">
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> What is the call stack? How recursive calls are stored</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Base case: why it's mandatory (prevents infinite recursion)</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Factorial, Fibonacci via recursion</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Sum of array using recursion</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Print 1 to N and N to 1 without loop</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Reverse string using recursion</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Binary search using recursion</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Power function: x^n using fast exponentiation</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Head vs Tail recursion</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Stack overflow: what causes it, how to avoid</li>
+          </ul>
+          <div class="code-block">
+            <div class="code-header"><span class="code-lang">C++</span></div>
+            <pre><span class="cm">// Power: x^n in O(log n)</span>
+<span class="type">long long</span> <span class="fn">power</span>(<span class="type">long long</span> x, <span class="type">int</span> n) {
+    <span class="kw">if</span> (n == <span class="num">0</span>) <span class="kw">return</span> <span class="num">1</span>;      <span class="cm">// base case</span>
+    <span class="kw">if</span> (n % <span class="num">2</span> == <span class="num">0</span>)               <span class="cm">// even power</span>
+        <span class="kw">return</span> <span class="fn">power</span>(x*x, n/<span class="num">2</span>);
+    <span class="kw">return</span> x * <span class="fn">power</span>(x*x, n/<span class="num">2</span>); <span class="cm">// odd power</span>
+}</pre>
+          </div>
+          <div class="problems-section">
+            <div class="problems-label">LeetCode Problems</div>
+            <div class="problem-tags">
+              <span class="prob-tag easy">LC#344 Reverse String</span>
+              <span class="prob-tag medium">LC#50 Pow(x,n)</span>
+              <span class="prob-tag medium">LC#779 K-th Symbol in Grammar</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="topic-card" onclick="toggleCard(this)">
+        <div class="topic-header">
+          <div class="topic-check">✓</div>
+          <span class="topic-icon">🔙</span>
+          <span class="topic-name">Backtracking</span>
+          <span class="topic-time">~5 hrs</span>
+          <span class="expand-arrow">▼</span>
+        </div>
+        <div class="topic-body">
+          <div class="topic-desc">Backtracking = Recursion + Undo. You try a choice, go deeper, and if it doesn't work, you undo (backtrack) and try another. Used in N-Queens, Sudoku, Permutations, Subsets.</div>
+          <div class="subtopics-label">Subtopics</div>
+          <ul class="subtopic-list">
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Backtracking template: choose → explore → un-choose</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Generate all subsets of an array</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Generate all permutations of a string/array</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Combination Sum — pick elements to reach target</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> N-Queens problem</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Sudoku Solver</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Rat in a maze</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Pruning: how to optimize backtracking</li>
+          </ul>
+          <div class="code-block">
+            <div class="code-header"><span class="code-lang">C++</span></div>
+            <pre><span class="cm">// Generate all subsets</span>
+<span class="type">void</span> <span class="fn">subsets</span>(<span class="type">vector</span>&lt;<span class="type">int</span>&gt;&amp; nums, <span class="type">int</span> i,
+             <span class="type">vector</span>&lt;<span class="type">int</span>&gt;&amp; curr,
+             <span class="type">vector</span>&lt;<span class="type">vector</span>&lt;<span class="type">int</span>&gt;&gt;&amp; res) {
+    <span class="kw">if</span> (i == nums.size()) {
+        res.push_back(curr); <span class="kw">return</span>;
+    }
+    curr.push_back(nums[i]);   <span class="cm">// include</span>
+    <span class="fn">subsets</span>(nums, i+<span class="num">1</span>, curr, res);
+    curr.pop_back();           <span class="cm">// exclude (backtrack)</span>
+    <span class="fn">subsets</span>(nums, i+<span class="num">1</span>, curr, res);
+}</pre>
+          </div>
+          <div class="problems-section">
+            <div class="problems-label">LeetCode Problems</div>
+            <div class="problem-tags">
+              <span class="prob-tag medium">LC#78 Subsets</span>
+              <span class="prob-tag medium">LC#46 Permutations</span>
+              <span class="prob-tag medium">LC#39 Combination Sum</span>
+              <span class="prob-tag hard">LC#51 N-Queens</span>
+              <span class="prob-tag hard">LC#37 Sudoku Solver</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- WEEK 4 -->
+  <div class="week-block">
+    <div class="week-header">
+      <div class="week-badge badge-cyan"><span>WK</span><span class="wk-num">4</span></div>
+      <div class="week-info">
+        <div class="week-title">Sorting & Searching Algorithms</div>
+        <div class="week-meta">
+          <span class="meta-pill meta-time">⏱ 10–12 hrs</span>
+          <span class="meta-pill meta-diff medium">Intermediate</span>
+        </div>
+      </div>
+    </div>
+    <div class="topics-grid">
+
+      <div class="topic-card" onclick="toggleCard(this)">
+        <div class="topic-header">
+          <div class="topic-check">✓</div>
+          <span class="topic-icon">📊</span>
+          <span class="topic-name">Sorting Algorithms</span>
+          <span class="topic-time">~5 hrs</span>
+          <span class="expand-arrow">▼</span>
+        </div>
+        <div class="topic-body">
+          <div class="topic-desc">You must implement these from scratch to understand time/space complexity. In interviews and LeetCode, you'll use std::sort() but interviewers can ask you to implement any of these.</div>
+          <div class="subtopics-label">Subtopics</div>
+          <ul class="subtopic-list">
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Bubble Sort — O(n²), stable, in-place</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Selection Sort — O(n²), not stable</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Insertion Sort — O(n²) worst, O(n) best — good for nearly sorted</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Merge Sort — O(n log n), stable, uses extra space</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Quick Sort — O(n log n) avg, O(n²) worst, in-place</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Counting Sort — O(n+k), only for small integer ranges</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> std::sort() and custom comparator in C++</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Stability: why it matters, which sorts are stable</li>
+          </ul>
+          <div class="code-block">
+            <div class="code-header"><span class="code-lang">C++</span></div>
+            <pre><span class="cm">// Merge Sort — divide and conquer</span>
+<span class="type">void</span> <span class="fn">merge</span>(<span class="type">vector</span>&lt;<span class="type">int</span>&gt;&amp; a, <span class="type">int</span> l, <span class="type">int</span> m, <span class="type">int</span> r) {
+    <span class="type">vector</span>&lt;<span class="type">int</span>&gt; tmp;
+    <span class="type">int</span> i=l, j=m+<span class="num">1</span>;
+    <span class="kw">while</span>(i&lt;=m &amp;&amp; j&lt;=r)
+        tmp.push_back(a[i]&lt;=a[j] ? a[i++] : a[j++]);
+    <span class="kw">while</span>(i&lt;=m) tmp.push_back(a[i++]);
+    <span class="kw">while</span>(j&lt;=r) tmp.push_back(a[j++]);
+    <span class="kw">for</span>(<span class="type">int</span> k=l;k&lt;=r;k++) a[k]=tmp[k-l];
+}
+<span class="type">void</span> <span class="fn">mergeSort</span>(<span class="type">vector</span>&lt;<span class="type">int</span>&gt;&amp; a, <span class="type">int</span> l, <span class="type">int</span> r){
+    <span class="kw">if</span>(l&gt;=r) <span class="kw">return</span>;
+    <span class="type">int</span> m = (l+r)/<span class="num">2</span>;
+    <span class="fn">mergeSort</span>(a,l,m); <span class="fn">mergeSort</span>(a,m+<span class="num">1</span>,r);
+    <span class="fn">merge</span>(a,l,m,r);
+}</pre>
+          </div>
+          <div class="problems-section">
+            <div class="problems-label">LeetCode Problems</div>
+            <div class="problem-tags">
+              <span class="prob-tag medium">LC#912 Sort an Array</span>
+              <span class="prob-tag medium">LC#148 Sort List</span>
+              <span class="prob-tag hard">LC#315 Count of Smaller Numbers</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="topic-card" onclick="toggleCard(this)">
+        <div class="topic-header">
+          <div class="topic-check">✓</div>
+          <span class="topic-icon">🔍</span>
+          <span class="topic-name">Binary Search (Most Important Search)</span>
+          <span class="topic-time">~4 hrs</span>
+          <span class="expand-arrow">▼</span>
+        </div>
+        <div class="topic-body">
+          <div class="topic-desc">Binary Search reduces O(n) to O(log n). It's not just for sorted arrays — it's a thinking pattern used in dozens of problems. "If you can define a monotonic condition, binary search works."</div>
+          <div class="subtopics-label">Subtopics</div>
+          <ul class="subtopic-list">
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Classic binary search: find element in sorted array</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Find first and last occurrence of element</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Search in rotated sorted array</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Lower bound and upper bound</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Binary search on answer (search space is the answer range)</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Square root using binary search</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Peak element in an array</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Median of two sorted arrays</li>
+          </ul>
+          <div class="code-block">
+            <div class="code-header"><span class="code-lang">C++</span></div>
+            <pre><span class="cm">// Classic Binary Search</span>
+<span class="type">int</span> <span class="fn">binarySearch</span>(<span class="type">vector</span>&lt;<span class="type">int</span>&gt;&amp; arr, <span class="type">int</span> target) {
+    <span class="type">int</span> lo = <span class="num">0</span>, hi = arr.size() - <span class="num">1</span>;
+    <span class="kw">while</span> (lo &lt;= hi) {
+        <span class="type">int</span> mid = lo + (hi - lo) / <span class="num">2</span>; <span class="cm">// avoid overflow</span>
+        <span class="kw">if</span> (arr[mid] == target) <span class="kw">return</span> mid;
+        <span class="kw">else if</span> (arr[mid] &lt; target) lo = mid + <span class="num">1</span>;
+        <span class="kw">else</span> hi = mid - <span class="num">1</span>;
+    }
+    <span class="kw">return</span> -<span class="num">1</span>; <span class="cm">// not found</span>
+}</pre>
+          </div>
+          <div class="problems-section">
+            <div class="problems-label">LeetCode Problems</div>
+            <div class="problem-tags">
+              <span class="prob-tag easy">LC#704 Binary Search</span>
+              <span class="prob-tag medium">LC#33 Search Rotated Array</span>
+              <span class="prob-tag medium">LC#162 Find Peak Element</span>
+              <span class="prob-tag hard">LC#4 Median Two Sorted Arrays</span>
+              <span class="prob-tag hard">LC#410 Split Array Largest Sum</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- WEEK 5 -->
+  <div class="week-block">
+    <div class="week-header">
+      <div class="week-badge badge-cyan"><span>WK</span><span class="wk-num">5</span></div>
+      <div class="week-info">
+        <div class="week-title">Linked Lists</div>
+        <div class="week-meta">
+          <span class="meta-pill meta-time">⏱ 12–14 hrs</span>
+          <span class="meta-pill meta-diff medium">Intermediate</span>
+        </div>
+      </div>
+    </div>
+    <div class="topics-grid">
+
+      <div class="topic-card" onclick="toggleCard(this)">
+        <div class="topic-header">
+          <div class="topic-check">✓</div>
+          <span class="topic-icon">🔗</span>
+          <span class="topic-name">Singly & Doubly Linked Lists</span>
+          <span class="topic-time">~4 hrs</span>
+          <span class="expand-arrow">▼</span>
+        </div>
+        <div class="topic-body">
+          <div class="topic-desc">A linked list is a chain of nodes. Unlike arrays, elements are not contiguous in memory. You must understand pointers deeply here — this is where C++ pointer mastery pays off.</div>
+          <div class="subtopics-label">Subtopics</div>
+          <ul class="subtopic-list">
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Node structure: data + next pointer</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Create, insert at head, insert at tail, insert at position</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Delete a node: by value, by position</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Traverse and print a linked list</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Reverse a linked list (iterative + recursive)</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Find middle of linked list (slow-fast pointer)</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Doubly linked list: prev + next pointers</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Circular linked list</li>
+          </ul>
+          <div class="code-block">
+            <div class="code-header"><span class="code-lang">C++</span></div>
+            <pre><span class="kw">struct</span> <span class="type">ListNode</span> {
+    <span class="type">int</span> val;
+    <span class="type">ListNode</span>* next;
+    <span class="type">ListNode</span>(<span class="type">int</span> x) : val(x), next(<span class="kw">nullptr</span>) {}
+};
+
+<span class="cm">// Reverse linked list — iterative</span>
+<span class="type">ListNode</span>* <span class="fn">reverse</span>(<span class="type">ListNode</span>* head) {
+    <span class="type">ListNode</span>* prev = <span class="kw">nullptr</span>, *curr = head;
+    <span class="kw">while</span> (curr) {
+        <span class="type">ListNode</span>* nxt = curr->next;
+        curr->next = prev;
+        prev = curr; curr = nxt;
+    }
+    <span class="kw">return</span> prev;
+}</pre>
+          </div>
+          <div class="problems-section">
+            <div class="problems-label">LeetCode Problems</div>
+            <div class="problem-tags">
+              <span class="prob-tag easy">LC#206 Reverse Linked List</span>
+              <span class="prob-tag easy">LC#876 Middle of Linked List</span>
+              <span class="prob-tag medium">LC#19 Remove Nth from End</span>
+              <span class="prob-tag medium">LC#21 Merge Two Sorted Lists</span>
+              <span class="prob-tag hard">LC#25 Reverse Nodes in K-Group</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="topic-card" onclick="toggleCard(this)">
+        <div class="topic-header">
+          <div class="topic-check">✓</div>
+          <span class="topic-icon">🔁</span>
+          <span class="topic-name">Linked List — Advanced Problems</span>
+          <span class="topic-time">~5 hrs</span>
+          <span class="expand-arrow">▼</span>
+        </div>
+        <div class="topic-body">
+          <div class="topic-desc">These patterns appear repeatedly in LeetCode medium/hard. Floyd's cycle detection is a classic interview question. Master the slow-fast pointer — it solves 5+ different problems.</div>
+          <div class="subtopics-label">Subtopics</div>
+          <ul class="subtopic-list">
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Detect cycle: Floyd's slow-fast pointer algorithm</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Find start of cycle</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Merge K sorted linked lists</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> LRU Cache using doubly linked list + hashmap</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Intersection of two linked lists</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Palindrome linked list</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Flatten a multilevel doubly linked list</li>
+          </ul>
+          <div class="problems-section">
+            <div class="problems-label">LeetCode Problems</div>
+            <div class="problem-tags">
+              <span class="prob-tag easy">LC#141 Linked List Cycle</span>
+              <span class="prob-tag medium">LC#142 Cycle Detection II</span>
+              <span class="prob-tag hard">LC#23 Merge K Sorted Lists</span>
+              <span class="prob-tag hard">LC#146 LRU Cache</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- WEEK 6-7 -->
+  <div class="week-block">
+    <div class="week-header">
+      <div class="week-badge badge-amber"><span>WK</span><span class="wk-num">6–7</span></div>
+      <div class="week-info">
+        <div class="week-title">Stacks, Queues & Monotonic Stack</div>
+        <div class="week-meta">
+          <span class="meta-pill meta-time">⏱ 14–16 hrs</span>
+          <span class="meta-pill meta-diff medium">Intermediate</span>
+        </div>
+      </div>
+    </div>
+    <div class="topics-grid">
+
+      <div class="topic-card" onclick="toggleCard(this)">
+        <div class="topic-header">
+          <div class="topic-check">✓</div>
+          <span class="topic-icon">📚</span>
+          <span class="topic-name">Stack — LIFO Structure</span>
+          <span class="topic-time">~4 hrs</span>
+          <span class="expand-arrow">▼</span>
+        </div>
+        <div class="topic-body">
+          <div class="topic-desc">Stack = last in, first out. Perfect for problems involving "most recent" element, matching brackets, undo operations. Used heavily in DFS, expression evaluation, and monotonic stack patterns.</div>
+          <div class="subtopics-label">Subtopics</div>
+          <ul class="subtopic-list">
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Stack implementation using array and std::stack</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Push, pop, top, empty, size operations</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Valid parentheses / bracket matching</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Evaluate Reverse Polish Notation</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Min stack — get minimum in O(1)</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Next Greater Element using monotonic stack</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Largest rectangle in histogram</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Implement stack using queues and vice versa</li>
+          </ul>
+          <div class="problems-section">
+            <div class="problems-label">LeetCode Problems</div>
+            <div class="problem-tags">
+              <span class="prob-tag easy">LC#20 Valid Parentheses</span>
+              <span class="prob-tag medium">LC#155 Min Stack</span>
+              <span class="prob-tag medium">LC#496 Next Greater Element</span>
+              <span class="prob-tag hard">LC#84 Largest Rectangle Histogram</span>
+              <span class="prob-tag hard">LC#42 Trapping Rain Water</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="topic-card" onclick="toggleCard(this)">
+        <div class="topic-header">
+          <div class="topic-check">✓</div>
+          <span class="topic-icon">🚶</span>
+          <span class="topic-name">Queue & Deque</span>
+          <span class="topic-time">~3 hrs</span>
+          <span class="expand-arrow">▼</span>
+        </div>
+        <div class="topic-body">
+          <div class="topic-desc">Queue = first in, first out. Essential for BFS (graph traversal). Deque (double-ended queue) is used in sliding window maximum problems.</div>
+          <div class="subtopics-label">Subtopics</div>
+          <ul class="subtopic-list">
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Queue: push, pop, front, back using std::queue</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Circular queue implementation</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Priority Queue (Max Heap and Min Heap)</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Deque: push/pop from both ends</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Sliding window maximum using deque</li>
+          </ul>
+          <div class="problems-section">
+            <div class="problems-label">LeetCode Problems</div>
+            <div class="problem-tags">
+              <span class="prob-tag medium">LC#239 Sliding Window Maximum</span>
+              <span class="prob-tag medium">LC#622 Circular Queue Design</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="week-divider"></div>
+
+  <!-- ====== PHASE 3 ====== -->
+  <div class="phase-label">🌳 Phase 3 — Trees & Graphs</div>
+
+  <!-- WEEK 8-9 -->
+  <div class="week-block">
+    <div class="week-header">
+      <div class="week-badge badge-green"><span>WK</span><span class="wk-num">8–9</span></div>
+      <div class="week-info">
+        <div class="week-title">Trees & Binary Search Trees</div>
+        <div class="week-meta">
+          <span class="meta-pill meta-time">⏱ 16–20 hrs</span>
+          <span class="meta-pill meta-diff medium">Intermediate</span>
+        </div>
+      </div>
+    </div>
+    <div class="topics-grid">
+
+      <div class="topic-card" onclick="toggleCard(this)">
+        <div class="topic-header">
+          <div class="topic-check">✓</div>
+          <span class="topic-icon">🌲</span>
+          <span class="topic-name">Binary Tree — Traversals & Properties</span>
+          <span class="topic-time">~6 hrs</span>
+          <span class="expand-arrow">▼</span>
+        </div>
+        <div class="topic-body">
+          <div class="topic-desc">Trees are recursive by nature — most tree problems are solved with DFS (recursion). Master all 4 traversals first. Then height, diameter, and path problems follow naturally.</div>
+          <div class="subtopics-label">Subtopics</div>
+          <ul class="subtopic-list">
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Tree node structure: val, left, right</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Inorder traversal (Left → Root → Right) — gives sorted order in BST</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Preorder traversal (Root → Left → Right)</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Postorder traversal (Left → Right → Root)</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Level order traversal (BFS using queue)</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Height / depth of binary tree</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Diameter of binary tree</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Check if tree is balanced, symmetric, identical</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Left/Right view, Top view, Bottom view</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Root to leaf path sum</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Lowest Common Ancestor (LCA)</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Serialize and deserialize binary tree</li>
+          </ul>
+          <div class="code-block">
+            <div class="code-header"><span class="code-lang">C++</span></div>
+            <pre><span class="cm">// Height of binary tree</span>
+<span class="type">int</span> <span class="fn">height</span>(<span class="type">TreeNode</span>* root) {
+    <span class="kw">if</span> (!root) <span class="kw">return</span> <span class="num">0</span>;
+    <span class="kw">return</span> <span class="num">1</span> + max(<span class="fn">height</span>(root->left),
+                    <span class="fn">height</span>(root->right));
+}
+
+<span class="cm">// Level order using queue</span>
+<span class="type">vector</span>&lt;<span class="type">vector</span>&lt;<span class="type">int</span>&gt;&gt; <span class="fn">levelOrder</span>(<span class="type">TreeNode</span>* root) {
+    <span class="type">vector</span>&lt;<span class="type">vector</span>&lt;<span class="type">int</span>&gt;&gt; res;
+    <span class="kw">if</span>(!root) <span class="kw">return</span> res;
+    <span class="type">queue</span>&lt;<span class="type">TreeNode</span>*&gt; q;
+    q.push(root);
+    <span class="kw">while</span>(!q.empty()) {
+        <span class="type">int</span> sz = q.size();
+        <span class="type">vector</span>&lt;<span class="type">int</span>&gt; level;
+        <span class="kw">for</span>(<span class="type">int</span> i=<span class="num">0</span>;i&lt;sz;i++){
+            <span class="kw">auto</span> node=q.front();q.pop();
+            level.push_back(node->val);
+            <span class="kw">if</span>(node->left) q.push(node->left);
+            <span class="kw">if</span>(node->right) q.push(node->right);
+        }
+        res.push_back(level);
+    }
+    <span class="kw">return</span> res;
+}</pre>
+          </div>
+          <div class="problems-section">
+            <div class="problems-label">LeetCode Problems</div>
+            <div class="problem-tags">
+              <span class="prob-tag easy">LC#104 Max Depth of Tree</span>
+              <span class="prob-tag easy">LC#226 Invert Binary Tree</span>
+              <span class="prob-tag medium">LC#102 Level Order Traversal</span>
+              <span class="prob-tag medium">LC#543 Diameter of Binary Tree</span>
+              <span class="prob-tag medium">LC#236 LCA of Binary Tree</span>
+              <span class="prob-tag hard">LC#124 Max Path Sum</span>
+              <span class="prob-tag hard">LC#297 Serialize/Deserialize Tree</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="topic-card" onclick="toggleCard(this)">
+        <div class="topic-header">
+          <div class="topic-check">✓</div>
+          <span class="topic-icon">🌿</span>
+          <span class="topic-name">Binary Search Tree (BST)</span>
+          <span class="topic-time">~4 hrs</span>
+          <span class="expand-arrow">▼</span>
+        </div>
+        <div class="topic-body">
+          <div class="topic-desc">BST is a binary tree where left < root < right. This property allows O(log n) search, insert, delete on average. Inorder traversal of BST gives sorted output.</div>
+          <div class="subtopics-label">Subtopics</div>
+          <ul class="subtopic-list">
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> BST property: left &lt; node &lt; right</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Insert into BST</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Search in BST</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Delete from BST (3 cases)</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Floor and Ceil in BST</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Validate if a tree is BST</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Kth smallest/largest in BST</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Convert sorted array to balanced BST</li>
+          </ul>
+          <div class="problems-section">
+            <div class="problems-label">LeetCode Problems</div>
+            <div class="problem-tags">
+              <span class="prob-tag easy">LC#700 Search in BST</span>
+              <span class="prob-tag medium">LC#98 Validate BST</span>
+              <span class="prob-tag medium">LC#230 Kth Smallest in BST</span>
+              <span class="prob-tag medium">LC#450 Delete Node in BST</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- WEEK 10-11 -->
+  <div class="week-block">
+    <div class="week-header">
+      <div class="week-badge badge-green"><span>WK</span><span class="wk-num">10–11</span></div>
+      <div class="week-info">
+        <div class="week-title">Graphs — BFS, DFS & Shortest Path</div>
+        <div class="week-meta">
+          <span class="meta-pill meta-time">⏱ 18–22 hrs</span>
+          <span class="meta-pill meta-diff hard">Hard</span>
+        </div>
+      </div>
+    </div>
+    <div class="topics-grid">
+
+      <div class="topic-card" onclick="toggleCard(this)">
+        <div class="topic-header">
+          <div class="topic-check">✓</div>
+          <span class="topic-icon">🗺️</span>
+          <span class="topic-name">Graph Basics, BFS & DFS</span>
+          <span class="topic-time">~7 hrs</span>
+          <span class="expand-arrow">▼</span>
+        </div>
+        <div class="topic-body">
+          <div class="topic-desc">Graphs are networks of nodes connected by edges. BFS explores level by level (shortest path). DFS explores as deep as possible (cycle detection, topological sort). Most real-world problems are graph problems in disguise.</div>
+          <div class="subtopics-label">Subtopics</div>
+          <ul class="subtopic-list">
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Graph representations: adjacency list vs adjacency matrix</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Directed vs undirected, weighted vs unweighted</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> BFS: level-by-level traversal using queue</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> DFS: depth-first traversal using recursion/stack</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Cycle detection: undirected graph (DFS/Union Find)</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Cycle detection: directed graph (DFS coloring)</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Bipartite check (2-coloring with BFS)</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Number of connected components</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Flood fill / Island problems</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Topological sort: Kahn's algorithm (BFS) & DFS method</li>
+          </ul>
+          <div class="problems-section">
+            <div class="problems-label">LeetCode Problems</div>
+            <div class="problem-tags">
+              <span class="prob-tag medium">LC#200 Number of Islands</span>
+              <span class="prob-tag medium">LC#207 Course Schedule</span>
+              <span class="prob-tag medium">LC#133 Clone Graph</span>
+              <span class="prob-tag medium">LC#994 Rotting Oranges (BFS)</span>
+              <span class="prob-tag hard">LC#210 Course Schedule II</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="topic-card" onclick="toggleCard(this)">
+        <div class="topic-header">
+          <div class="topic-check">✓</div>
+          <span class="topic-icon">🛣️</span>
+          <span class="topic-name">Shortest Path Algorithms</span>
+          <span class="topic-time">~6 hrs</span>
+          <span class="expand-arrow">▼</span>
+        </div>
+        <div class="topic-body">
+          <div class="topic-desc">Shortest path is a fundamental graph problem. Dijkstra works for non-negative weights. Bellman-Ford handles negative weights. Floyd-Warshall finds all-pairs shortest paths.</div>
+          <div class="subtopics-label">Subtopics</div>
+          <ul class="subtopic-list">
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Dijkstra's algorithm — O((V+E) log V) using min-heap</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Bellman-Ford — handles negative weights, detects negative cycles</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Floyd-Warshall — all-pairs shortest path O(V³)</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> BFS for unweighted shortest path</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Minimum Spanning Tree: Kruskal's (Union Find) & Prim's</li>
+          </ul>
+          <div class="problems-section">
+            <div class="problems-label">LeetCode Problems</div>
+            <div class="problem-tags">
+              <span class="prob-tag medium">LC#743 Network Delay (Dijkstra)</span>
+              <span class="prob-tag hard">LC#787 Cheapest Flights Bellman-Ford</span>
+              <span class="prob-tag hard">LC#1514 Path with Max Probability</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="topic-card" onclick="toggleCard(this)">
+        <div class="topic-header">
+          <div class="topic-check">✓</div>
+          <span class="topic-icon">🤝</span>
+          <span class="topic-name">Union Find (Disjoint Set Union)</span>
+          <span class="topic-time">~3 hrs</span>
+          <span class="expand-arrow">▼</span>
+        </div>
+        <div class="topic-body">
+          <div class="topic-desc">DSU/Union Find is a data structure for grouping elements into components. Path compression + union by rank makes it nearly O(1) per operation. Essential for Kruskal's and connectivity problems.</div>
+          <div class="subtopics-label">Subtopics</div>
+          <ul class="subtopic-list">
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Find parent with path compression</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Union by rank</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Detecting cycle using DSU</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Number of connected components</li>
+          </ul>
+          <div class="problems-section">
+            <div class="problems-label">LeetCode Problems</div>
+            <div class="problem-tags">
+              <span class="prob-tag medium">LC#547 Number of Provinces</span>
+              <span class="prob-tag medium">LC#684 Redundant Connection</span>
+              <span class="prob-tag hard">LC#1202 Smallest String Swapping</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="week-divider"></div>
+
+  <!-- ====== PHASE 4 ====== -->
+  <div class="phase-label">⚡ Phase 4 — Advanced DSA</div>
+
+  <!-- WEEK 12 -->
+  <div class="week-block">
+    <div class="week-header">
+      <div class="week-badge badge-amber"><span>WK</span><span class="wk-num">12</span></div>
+      <div class="week-info">
+        <div class="week-title">Heaps & Hashing</div>
+        <div class="week-meta">
+          <span class="meta-pill meta-time">⏱ 10–12 hrs</span>
+          <span class="meta-pill meta-diff medium">Intermediate</span>
+        </div>
+      </div>
+    </div>
+    <div class="topics-grid">
+
+      <div class="topic-card" onclick="toggleCard(this)">
+        <div class="topic-header">
+          <div class="topic-check">✓</div>
+          <span class="topic-icon">🏔️</span>
+          <span class="topic-name">Heaps / Priority Queue</span>
+          <span class="topic-time">~4 hrs</span>
+          <span class="expand-arrow">▼</span>
+        </div>
+        <div class="topic-body">
+          <div class="topic-desc">Heap is a tree structure where parent is always greater (max-heap) or smaller (min-heap) than children. Used for: Kth largest/smallest, scheduling, Dijkstra's algorithm.</div>
+          <div class="subtopics-label">Subtopics</div>
+          <ul class="subtopic-list">
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Max heap vs Min heap concept</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> priority_queue in C++ (max heap by default)</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Custom comparator for min-heap</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Kth largest element in array</span></li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Top K frequent elements</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Merge K sorted arrays</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Median from data stream (two heaps)</li>
+          </ul>
+          <div class="problems-section">
+            <div class="problems-label">LeetCode Problems</div>
+            <div class="problem-tags">
+              <span class="prob-tag medium">LC#215 Kth Largest Element</span>
+              <span class="prob-tag medium">LC#347 Top K Frequent Elements</span>
+              <span class="prob-tag hard">LC#295 Find Median Data Stream</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="topic-card" onclick="toggleCard(this)">
+        <div class="topic-header">
+          <div class="topic-check">✓</div>
+          <span class="topic-icon">#️⃣</span>
+          <span class="topic-name">Hashing — HashMap & HashSet</span>
+          <span class="topic-time">~4 hrs</span>
+          <span class="expand-arrow">▼</span>
+        </div>
+        <div class="topic-body">
+          <div class="topic-desc">Hash maps give O(1) average for insert, delete, lookup. They're the most common tool to reduce O(n²) solutions to O(n). Used in almost every medium LeetCode problem.</div>
+          <div class="subtopics-label">Subtopics</div>
+          <ul class="subtopic-list">
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> unordered_map and unordered_set in C++</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> map and set (ordered, uses BST, O(log n))</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Frequency counting pattern</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Two Sum pattern using hashmap</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Subarray with given sum using prefix + hashmap</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Longest consecutive sequence</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Group anagrams</li>
+          </ul>
+          <div class="problems-section">
+            <div class="problems-label">LeetCode Problems</div>
+            <div class="problem-tags">
+              <span class="prob-tag easy">LC#1 Two Sum</span>
+              <span class="prob-tag medium">LC#49 Group Anagrams</span>
+              <span class="prob-tag medium">LC#128 Longest Consecutive Sequence</span>
+              <span class="prob-tag medium">LC#560 Subarray Sum Equals K</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- WEEK 13-14 -->
+  <div class="week-block">
+    <div class="week-header">
+      <div class="week-badge badge-red"><span>WK</span><span class="wk-num">13–14</span></div>
+      <div class="week-info">
+        <div class="week-title">Dynamic Programming (DP)</div>
+        <div class="week-meta">
+          <span class="meta-pill meta-time">⏱ 22–28 hrs</span>
+          <span class="meta-pill meta-diff hard">Hard</span>
+        </div>
+      </div>
+    </div>
+    <div class="tip-box">
+      <span class="tip-icon">🔥</span>
+      <div class="tip-text"><strong>The hardest and most rewarding topic.</strong> DP = Recursion + Memoization. Always start with recursion, add memoization, then convert to tabulation. Never start directly with DP table.</div>
+    </div>
+    <div class="topics-grid">
+
+      <div class="topic-card" onclick="toggleCard(this)">
+        <div class="topic-header">
+          <div class="topic-check">✓</div>
+          <span class="topic-icon">🧩</span>
+          <span class="topic-name">DP Fundamentals — 1D Problems</span>
+          <span class="topic-time">~6 hrs</span>
+          <span class="expand-arrow">▼</span>
+        </div>
+        <div class="topic-body">
+          <div class="topic-desc">DP solves problems by breaking them into overlapping subproblems and storing results (memoization). Two approaches: top-down (recursion + memo) and bottom-up (tabulation). Start with top-down always.</div>
+          <div class="subtopics-label">Subtopics</div>
+          <ul class="subtopic-list">
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Overlapping subproblems + optimal substructure</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Memoization (top-down DP): recursion + cache</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Tabulation (bottom-up DP): fill table iteratively</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Climbing stairs / Fibonacci DP</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> House robber — don't rob adjacent houses</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Minimum cost climbing stairs</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Jump game I and II</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Decode ways</li>
+          </ul>
+          <div class="code-block">
+            <div class="code-header"><span class="code-lang">C++</span></div>
+            <pre><span class="cm">// House Robber — top-down DP</span>
+<span class="type">int</span> memo[<span class="num">10001</span>];
+<span class="type">int</span> <span class="fn">rob</span>(<span class="type">vector</span>&lt;<span class="type">int</span>&gt;&amp; nums, <span class="type">int</span> i) {
+    <span class="kw">if</span> (i &gt;= nums.size()) <span class="kw">return</span> <span class="num">0</span>;
+    <span class="kw">if</span> (memo[i] != -<span class="num">1</span>) <span class="kw">return</span> memo[i];
+    <span class="cm">// rob this or skip</span>
+    <span class="kw">return</span> memo[i] = max(
+        nums[i] + <span class="fn">rob</span>(nums, i+<span class="num">2</span>),  <span class="cm">// rob</span>
+        <span class="fn">rob</span>(nums, i+<span class="num">1</span>)              <span class="cm">// skip</span>
+    );
+}</pre>
+          </div>
+          <div class="problems-section">
+            <div class="problems-label">LeetCode Problems</div>
+            <div class="problem-tags">
+              <span class="prob-tag easy">LC#70 Climbing Stairs</span>
+              <span class="prob-tag medium">LC#198 House Robber</span>
+              <span class="prob-tag medium">LC#55 Jump Game</span>
+              <span class="prob-tag medium">LC#91 Decode Ways</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="topic-card" onclick="toggleCard(this)">
+        <div class="topic-header">
+          <div class="topic-check">✓</div>
+          <span class="topic-icon">📦</span>
+          <span class="topic-name">DP — Knapsack & 2D Problems</span>
+          <span class="topic-time">~8 hrs</span>
+          <span class="expand-arrow">▼</span>
+        </div>
+        <div class="topic-body">
+          <div class="topic-desc">2D DP problems involve two variables — usually item + capacity, or two strings. Knapsack is the mother of all DP problems. Master it and 70% of DP problems become recognizable patterns.</div>
+          <div class="subtopics-label">Subtopics</div>
+          <ul class="subtopic-list">
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> 0/1 Knapsack: include or exclude each item</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Unbounded Knapsack: item can be used unlimited times</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Subset sum problem</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Partition equal subset sum</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Coin change — min coins to make amount</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Longest Common Subsequence (LCS)</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Longest Increasing Subsequence (LIS)</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Edit distance (Levenshtein)</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Matrix chain multiplication</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Unique paths in grid</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> DP on strings: palindromic subsequence</li>
+          </ul>
+          <div class="problems-section">
+            <div class="problems-label">LeetCode Problems</div>
+            <div class="problem-tags">
+              <span class="prob-tag medium">LC#322 Coin Change</span>
+              <span class="prob-tag medium">LC#1143 LCS</span>
+              <span class="prob-tag medium">LC#300 LIS</span>
+              <span class="prob-tag medium">LC#416 Partition Equal Subset</span>
+              <span class="prob-tag hard">LC#72 Edit Distance</span>
+              <span class="prob-tag hard">LC#312 Burst Balloons</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- WEEK 15 -->
+  <div class="week-block">
+    <div class="week-header">
+      <div class="week-badge badge-pink"><span>WK</span><span class="wk-num">15</span></div>
+      <div class="week-info">
+        <div class="week-title">Greedy Algorithms & Tries</div>
+        <div class="week-meta">
+          <span class="meta-pill meta-time">⏱ 12–14 hrs</span>
+          <span class="meta-pill meta-diff hard">Hard</span>
+        </div>
+      </div>
+    </div>
+    <div class="topics-grid">
+
+      <div class="topic-card" onclick="toggleCard(this)">
+        <div class="topic-header">
+          <div class="topic-check">✓</div>
+          <span class="topic-icon">💰</span>
+          <span class="topic-name">Greedy Algorithms</span>
+          <span class="topic-time">~5 hrs</span>
+          <span class="expand-arrow">▼</span>
+        </div>
+        <div class="topic-body">
+          <div class="topic-desc">Greedy = make locally optimal choice at each step hoping for global optimum. Greedy doesn't always work — you must prove the greedy choice property. When it does work, it's faster than DP.</div>
+          <div class="subtopics-label">Subtopics</div>
+          <ul class="subtopic-list">
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Activity selection / Interval scheduling</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Fractional Knapsack</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Huffman encoding (greedy + min heap)</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Job sequencing for maximum profit</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Merge intervals</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Gas station problem</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Minimum number of arrows to burst balloons</li>
+          </ul>
+          <div class="problems-section">
+            <div class="problems-label">LeetCode Problems</div>
+            <div class="problem-tags">
+              <span class="prob-tag medium">LC#56 Merge Intervals</span>
+              <span class="prob-tag medium">LC#134 Gas Station</span>
+              <span class="prob-tag medium">LC#435 Non-overlapping Intervals</span>
+              <span class="prob-tag medium">LC#452 Min Arrows Burst Balloons</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="topic-card" onclick="toggleCard(this)">
+        <div class="topic-header">
+          <div class="topic-check">✓</div>
+          <span class="topic-icon">📖</span>
+          <span class="topic-name">Tries (Prefix Trees)</span>
+          <span class="topic-time">~4 hrs</span>
+          <span class="expand-arrow">▼</span>
+        </div>
+        <div class="topic-body">
+          <div class="topic-desc">Trie is a tree where each node represents a character. Used for word search, autocomplete, and prefix matching. Efficient when you have a large set of strings with common prefixes.</div>
+          <div class="subtopics-label">Subtopics</div>
+          <ul class="subtopic-list">
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Trie node structure with children[26] and isEnd flag</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Insert a word into trie</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Search a word in trie</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Prefix search / startsWith</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Word search II — find words in board using trie</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> XOR Trie — maximum XOR of two numbers</li>
+          </ul>
+          <div class="problems-section">
+            <div class="problems-label">LeetCode Problems</div>
+            <div class="problem-tags">
+              <span class="prob-tag medium">LC#208 Implement Trie</span>
+              <span class="prob-tag medium">LC#211 Design Add Search Words</span>
+              <span class="prob-tag hard">LC#212 Word Search II</span>
+              <span class="prob-tag hard">LC#421 Maximum XOR</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- WEEK 16 -->
+  <div class="week-block">
+    <div class="week-header">
+      <div class="week-badge badge-red"><span>WK</span><span class="wk-num">16</span></div>
+      <div class="week-info">
+        <div class="week-title">Advanced — Segment Trees, Sliding Window & Bit Manipulation</div>
+        <div class="week-meta">
+          <span class="meta-pill meta-time">⏱ 14–18 hrs</span>
+          <span class="meta-pill meta-diff hard">Hard</span>
+        </div>
+      </div>
+    </div>
+    <div class="topics-grid">
+
+      <div class="topic-card" onclick="toggleCard(this)">
+        <div class="topic-header">
+          <div class="topic-check">✓</div>
+          <span class="topic-icon">🪟</span>
+          <span class="topic-name">Sliding Window & Two Pointers</span>
+          <span class="topic-time">~4 hrs</span>
+          <span class="expand-arrow">▼</span>
+        </div>
+        <div class="topic-body">
+          <div class="topic-desc">Sliding window converts O(n²) brute force to O(n). Expand right pointer to include elements, shrink left when condition is violated. One of the most common patterns in LeetCode mediums.</div>
+          <div class="subtopics-label">Subtopics</div>
+          <ul class="subtopic-list">
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Fixed-size sliding window: max sum subarray of size k</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Variable-size sliding window: longest substring with k distinct chars</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Two pointers on sorted array</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Three sum, four sum</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Minimum window substring</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Longest substring without repeating characters</li>
+          </ul>
+          <div class="problems-section">
+            <div class="problems-label">LeetCode Problems</div>
+            <div class="problem-tags">
+              <span class="prob-tag medium">LC#3 Longest Substring No Repeat</span>
+              <span class="prob-tag medium">LC#15 Three Sum</span>
+              <span class="prob-tag medium">LC#567 Permutation in String</span>
+              <span class="prob-tag hard">LC#76 Minimum Window Substring</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="topic-card" onclick="toggleCard(this)">
+        <div class="topic-header">
+          <div class="topic-check">✓</div>
+          <span class="topic-icon">⚡</span>
+          <span class="topic-name">Bit Manipulation</span>
+          <span class="topic-time">~3 hrs</span>
+          <span class="expand-arrow">▼</span>
+        </div>
+        <div class="topic-body">
+          <div class="topic-desc">Bit tricks can replace O(n) or O(log n) operations with O(1). Knowing these can unlock elegant solutions that no one else thinks of in an interview.</div>
+          <div class="subtopics-label">Subtopics</div>
+          <ul class="subtopic-list">
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> AND (&), OR (|), XOR (^), NOT (~), left shift (&lt;&lt;), right shift (&gt;&gt;)</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Check if ith bit is set: n & (1 &lt;&lt; i)</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Set/clear/toggle a bit</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Count set bits: __builtin_popcount(n)</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Check if power of 2: n & (n-1) == 0</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Find single number using XOR</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Generate all subsets using bitmask</li>
+          </ul>
+          <div class="problems-section">
+            <div class="problems-label">LeetCode Problems</div>
+            <div class="problem-tags">
+              <span class="prob-tag easy">LC#136 Single Number</span>
+              <span class="prob-tag easy">LC#191 Number of 1 Bits</span>
+              <span class="prob-tag medium">LC#137 Single Number II</span>
+              <span class="prob-tag medium">LC#260 Single Number III</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="topic-card" onclick="toggleCard(this)">
+        <div class="topic-header">
+          <div class="topic-check">✓</div>
+          <span class="topic-icon">📐</span>
+          <span class="topic-name">Segment Trees & Fenwick Tree (BIT)</span>
+          <span class="topic-time">~5 hrs</span>
+          <span class="expand-arrow">▼</span>
+        </div>
+        <div class="topic-body">
+          <div class="topic-desc">When you need range queries (sum, min, max) AND point updates efficiently. Segment tree: O(log n) for both. Fenwick tree: simpler code for prefix sums with updates.</div>
+          <div class="subtopics-label">Subtopics</div>
+          <ul class="subtopic-list">
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Segment tree build, query, update — O(log n)</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Lazy propagation for range updates</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Fenwick Tree (BIT) — prefix sum with point update</li>
+            <li class="subtopic-item" onclick="toggleSub(event, this)"><span class="sub-check">✓</span> Range sum query with mutable elements</li>
+          </ul>
+          <div class="problems-section">
+            <div class="problems-label">LeetCode Problems</div>
+            <div class="problem-tags">
+              <span class="prob-tag medium">LC#307 Range Sum Query Mutable</span>
+              <span class="prob-tag hard">LC#315 Count Smaller Numbers After</span>
+              <span class="prob-tag hard">LC#327 Count of Range Sum</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  Built for <span style="color: var(--accent2);">DSA Mastery</span> in C++ &nbsp;·&nbsp; Tick topics as you complete them &nbsp;·&nbsp; Progress saves automatically
+</footer>
+
+<script>
+  // TOGGLE CARD OPEN/CLOSE
+  function toggleCard(card) {
+    // Don't toggle when clicking checkboxes or subtopics
+    card.classList.toggle('open');
+  }
+
+  // TOGGLE TOPIC DONE
+  document.querySelectorAll('.topic-check').forEach(check => {
+    check.parentElement.parentElement.addEventListener('click', function(e) {
+      if (e.target.closest('.topic-check')) {
+        e.stopPropagation();
+        const card = e.target.closest('.topic-card');
+        card.classList.toggle('done');
+        updateProgress();
+        saveProgress();
+      }
+    });
+  });
+
+  // TOGGLE SUBTOPIC DONE
+  function toggleSub(e, item) {
+    e.stopPropagation();
+    item.classList.toggle('done-sub');
+    const check = item.querySelector('.sub-check');
+    if (item.classList.contains('done-sub')) {
+      check.textContent = '✓';
+    } else {
+      check.textContent = '✓';
+    }
+    updateProgress();
+    saveProgress();
+  }
+
+  // PROGRESS
+  function updateProgress() {
+    const topics = document.querySelectorAll('.topic-card');
+    const done = document.querySelectorAll('.topic-card.done');
+    const pct = topics.length ? (done.length / topics.length) * 100 : 0;
+    document.getElementById('progressFill').style.width = pct + '%';
+    document.getElementById('progressCount').textContent = done.length + ' / ' + topics.length + ' topics done';
+  }
+
+  // SAVE / LOAD PROGRESS (localStorage)
+  function saveProgress() {
+    const data = {};
+    document.querySelectorAll('.topic-card').forEach((card, i) => {
+      data['topic_' + i] = card.classList.contains('done');
+      const subs = card.querySelectorAll('.subtopic-item');
+      subs.forEach((sub, j) => {
+        data['sub_' + i + '_' + j] = sub.classList.contains('done-sub');
+      });
+    });
+    try { localStorage.setItem('dsa_progress', JSON.stringify(data)); } catch(e) {}
+  }
+
+  function loadProgress() {
+    let data;
+    try { data = JSON.parse(localStorage.getItem('dsa_progress') || '{}'); } catch(e) { return; }
+    document.querySelectorAll('.topic-card').forEach((card, i) => {
+      if (data['topic_' + i]) card.classList.add('done');
+      const subs = card.querySelectorAll('.subtopic-item');
+      subs.forEach((sub, j) => {
+        if (data['sub_' + i + '_' + j]) sub.classList.add('done-sub');
+      });
+    });
+    updateProgress();
+  }
+
+  // EXPORT progress as JSON file
+  function exportProgress() {
+    const data = {};
+    document.querySelectorAll('.topic-card').forEach((card, i) => {
+      data['topic_' + i] = card.classList.contains('done');
+      card.querySelectorAll('.subtopic-item').forEach((sub, j) => {
+        data['sub_' + i + '_' + j] = sub.classList.contains('done-sub');
+      });
+    });
+
+    const json = JSON.stringify({ version: 1, savedAt: new Date().toISOString(), progress: data }, null, 2);
+    const blob = new Blob([json], { type: 'application/json' });
+    const url  = URL.createObjectURL(blob);
+    const a    = document.createElement('a');
+    const date = new Date().toISOString().slice(0, 10); // YYYY-MM-DD
+    a.href     = url;
+    a.download = 'dsa_progress_' + date + '.json';
+    a.click();
+    URL.revokeObjectURL(url);
+    showToast('✅ Progress exported!', 'success');
+  }
+
+  // IMPORT progress from JSON file
+  function importProgress(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      try {
+        const parsed = JSON.parse(e.target.result);
+        const data   = parsed.progress || parsed; // support both formats
+
+        // Clear existing state
+        document.querySelectorAll('.topic-card').forEach(c => c.classList.remove('done'));
+        document.querySelectorAll('.subtopic-item').forEach(s => s.classList.remove('done-sub'));
+
+        // Apply imported state
+        document.querySelectorAll('.topic-card').forEach((card, i) => {
+          if (data['topic_' + i]) card.classList.add('done');
+          card.querySelectorAll('.subtopic-item').forEach((sub, j) => {
+            if (data['sub_' + i + '_' + j]) sub.classList.add('done-sub');
+          });
+        });
+
+        saveProgress();
+        updateProgress();
+        showToast('✅ Progress imported successfully!', 'success');
+      } catch(err) {
+        showToast('❌ Invalid file. Please use an exported JSON.', 'error');
+      }
+    };
+    reader.readAsText(file);
+    // Reset input so same file can be re-imported if needed
+    event.target.value = '';
+  }
+
+  // TOAST helper
+  function showToast(msg, type = 'success') {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.className   = 'toast ' + type;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 3000);
+  }
+
+  // INIT
+  loadProgress();
+  updateProgress();
+</script>
+</body>
+</html>
