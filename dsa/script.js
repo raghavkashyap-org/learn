@@ -1183,7 +1183,12 @@
     const progressCalendarEl = document.getElementById("progress-calendar");
     const calendarActiveDaysEl = document.getElementById("calendar-active-days");
     const calendarLastSavedEl = document.getElementById("calendar-last-saved");
+    const calendarCurrentStreakEl = document.getElementById("calendar-current-streak");
+    const calendarBestStreakEl = document.getElementById("calendar-best-streak");
+    const calendarThisWeekEl = document.getElementById("calendar-this-week");
+    const calendarNextFocusEl = document.getElementById("calendar-next-focus");
     const exportProgressBtn = document.getElementById("export-progress");
+    const exportProgressCsvBtn = document.getElementById("export-progress-csv");
     const importProgressBtn = document.getElementById("import-progress");
     const importProgressInput = document.getElementById("import-progress-input");
     const weekDetailHeadingEl = document.getElementById("week-detail-heading");
@@ -1236,22 +1241,37 @@
       }
     ];
 
-    heroMetricsEl.innerHTML = heroMetrics.map(metric => `
-      <article class="metric">
-        <strong>${metric.value}</strong>
-        <span><b>${metric.label}</b><br>${metric.copy}</span>
-      </article>
-    `).join("");
+    const renderMetricCards = (target, items) => {
+      if (!target) {
+        return;
+      }
 
-    phaseListEl.innerHTML = phases.map(phase => `
-      <article class="phase-item">
-        <span>${phase.label}</span>
-        <div>
-          <strong>${phase.title}</strong>
-          <small>${phase.detail}</small>
-        </div>
-      </article>
-    `).join("");
+      target.innerHTML = items.map(metric => `
+        <article class="metric">
+          <strong>${metric.value}</strong>
+          <span><b>${metric.label}</b><br>${metric.copy}</span>
+        </article>
+      `).join("");
+    };
+
+    const renderPhaseCards = (target, activePhaseTitle = "") => {
+      if (!target) {
+        return;
+      }
+
+      target.innerHTML = phases.map(phase => `
+        <article class="phase-item${activePhaseTitle && phase.title === activePhaseTitle ? " is-active" : ""}">
+          <span>${phase.label}</span>
+          <div>
+            <strong>${phase.title}</strong>
+            <small>${phase.detail}</small>
+          </div>
+        </article>
+      `).join("");
+    };
+
+    renderMetricCards(heroMetricsEl, heroMetrics);
+    renderPhaseCards(phaseListEl);
 
     const masterTopics = [
       "Arrays & Strings",
@@ -1268,10 +1288,17 @@
       "Segment Trees"
     ];
 
-    masterPillsEl.innerHTML = masterTopics.map(topic => `<div class="pill">${topic}</div>`).join("");
+    if (masterPillsEl) {
+      masterPillsEl.innerHTML = masterTopics.map(topic => `<div class="pill">${topic}</div>`).join("");
+    }
 
-    totalWeeksEl.textContent = `${roadmap.length} weeks`;
-    totalHoursEl.textContent = `${totalHours} hours of focused study blocks across concept learning, C++ implementation, and targeted practice.`;
+    if (totalWeeksEl) {
+      totalWeeksEl.textContent = `${roadmap.length} weeks`;
+    }
+
+    if (totalHoursEl) {
+      totalHoursEl.textContent = `${totalHours} hours of focused study blocks across concept learning, C++ implementation, and targeted practice.`;
+    }
 
     const defaultProgressState = () => ({
       completedTopics: {},
@@ -1318,7 +1345,8 @@
           if (topicEntry && typeof topicEntry === "object" && topicEntry.completed === true) {
             base.completedTopics[topicKey] = {
               completed: true,
-              date: typeof topicEntry.date === "string" ? topicEntry.date : getTodayKey()
+              date: typeof topicEntry.date === "string" ? topicEntry.date : getTodayKey(),
+              timestamp: typeof topicEntry.timestamp === "string" ? topicEntry.timestamp : new Date(`${typeof topicEntry.date === "string" ? topicEntry.date : getTodayKey()}T00:00:00`).toISOString()
             };
           }
 
@@ -1329,7 +1357,8 @@
             if (bulletEntry && typeof bulletEntry === "object" && bulletEntry.completed === true) {
               base.completedBullets[bulletKey] = {
                 completed: true,
-                date: typeof bulletEntry.date === "string" ? bulletEntry.date : getTodayKey()
+                date: typeof bulletEntry.date === "string" ? bulletEntry.date : getTodayKey(),
+                timestamp: typeof bulletEntry.timestamp === "string" ? bulletEntry.timestamp : new Date(`${typeof bulletEntry.date === "string" ? bulletEntry.date : getTodayKey()}T00:00:00`).toISOString()
               };
             }
           });
@@ -1340,10 +1369,10 @@
           const legacyDate = typeof legacyWeekEntry.date === "string" ? legacyWeekEntry.date : getTodayKey();
           item.topics.forEach((topic, topicIndex) => {
             const topicKey = getTopicKey(item.week, topicIndex);
-            base.completedTopics[topicKey] = base.completedTopics[topicKey] || { completed: true, date: legacyDate };
+            base.completedTopics[topicKey] = base.completedTopics[topicKey] || { completed: true, date: legacyDate, timestamp: new Date(`${legacyDate}T00:00:00`).toISOString() };
             topic.bullets.forEach((_, bulletIndex) => {
               const bulletKey = getBulletKey(item.week, topicIndex, bulletIndex);
-              base.completedBullets[bulletKey] = base.completedBullets[bulletKey] || { completed: true, date: legacyDate };
+              base.completedBullets[bulletKey] = base.completedBullets[bulletKey] || { completed: true, date: legacyDate, timestamp: new Date(`${legacyDate}T00:00:00`).toISOString() };
             });
           });
         }
@@ -1398,6 +1427,102 @@
       return { done, total };
     };
 
+    const getPhaseMetaForWeek = (week) => {
+      if (week <= 3) {
+        return phases[0];
+      }
+      if (week <= 7) {
+        return phases[1];
+      }
+      if (week <= 15) {
+        return phases[2];
+      }
+      return phases[3];
+    };
+
+    const getCurrentWeekItem = () => {
+      const params = new URLSearchParams(window.location.search);
+      const requestedWeek = Number(params.get("week"));
+      return roadmap.find(entry => entry.week === requestedWeek) || roadmap[0];
+    };
+
+    const getNextFocusWeek = () => roadmap.find((item) => (
+      item.topics.some((_, topicIndex) => !isTopicComplete(item.week, topicIndex))
+      || item.topics.some((topic, topicIndex) => topic.bullets.some((_, bulletIndex) => !isBulletComplete(item.week, topicIndex, bulletIndex)))
+    )) || roadmap[roadmap.length - 1];
+
+    const getCalendarStats = () => {
+      const activityDates = Object.keys(progressState.activity)
+        .filter(date => progressState.activity[date] > 0)
+        .sort();
+      const activeDays = activityDates.length;
+      const lastCompletion = activityDates.at(-1) || null;
+
+      let currentStreak = 0;
+      let bestStreak = 0;
+      let runningStreak = 0;
+      let previousDate = null;
+
+      activityDates.forEach((dateKey) => {
+        const currentDate = new Date(`${dateKey}T00:00:00`);
+        if (previousDate) {
+          const diffDays = Math.round((currentDate - previousDate) / 86400000);
+          runningStreak = diffDays === 1 ? runningStreak + 1 : 1;
+        } else {
+          runningStreak = 1;
+        }
+        bestStreak = Math.max(bestStreak, runningStreak);
+        previousDate = currentDate;
+      });
+
+      if (lastCompletion) {
+        const today = new Date(`${getTodayKey()}T00:00:00`);
+        const lastDate = new Date(`${lastCompletion}T00:00:00`);
+        const gapDays = Math.round((today - lastDate) / 86400000);
+        currentStreak = gapDays <= 1 ? runningStreak : 0;
+      }
+
+      const today = new Date(`${getTodayKey()}T00:00:00`);
+      const dayOfWeek = today.getDay();
+      const startOfWeek = new Date(today);
+      startOfWeek.setDate(today.getDate() - dayOfWeek);
+      const startWeekKey = new Date(startOfWeek.getTime() - startOfWeek.getTimezoneOffset() * 60000).toISOString().slice(0, 10);
+      const completionsThisWeek = Object.entries(progressState.activity).reduce((sum, [date, count]) => (
+        date >= startWeekKey ? sum + count : sum
+      ), 0);
+
+      return {
+        activeDays,
+        lastCompletion,
+        currentStreak,
+        bestStreak,
+        completionsThisWeek,
+        nextFocusWeek: getNextFocusWeek()
+      };
+    };
+
+    const createTopicCardsMarkup = (item) => item.topics.map((topic, topicIndex) => `
+      <article class="topic-card" data-week="${item.week}" data-topic-index="${topicIndex}" data-total-bullets="${topic.bullets.length}">
+        <div class="topic-topline">
+          <strong>${topic.title}</strong>
+          <span class="topic-time">${topic.time}</span>
+        </div>
+        <p>${topic.detail}</p>
+        <ul class="bullet-list">
+          ${topic.bullets.map((point, bulletIndex) => `
+            <li class="bullet-item" data-week="${item.week}" data-topic-index="${topicIndex}" data-bullet-index="${bulletIndex}">
+              <button class="bullet-toggle" type="button" data-bullet-key="${getBulletKey(item.week, topicIndex, bulletIndex)}" aria-pressed="false" aria-label="Mark sub-topic complete"></button>
+              <span>${point}</span>
+            </li>
+          `).join("")}
+        </ul>
+        <div class="topic-progress">
+          <button class="complete-toggle topic-complete-toggle" type="button" data-topic-key="${getTopicKey(item.week, topicIndex)}" aria-pressed="false">Mark topic complete</button>
+          <span class="topic-status-note">0/${topic.bullets.length} sub-topics done</span>
+        </div>
+      </article>
+    `).join("");
+
     const changeActivityCount = (date, delta) => {
       if (!date || !delta) {
         return;
@@ -1421,9 +1546,11 @@
         }
 
         const todayKey = getTodayKey();
+        const timestamp = new Date().toISOString();
         collection[key] = {
           completed: true,
-          date: todayKey
+          date: todayKey,
+          timestamp
         };
         changeActivityCount(todayKey, 1);
         return;
@@ -1438,6 +1565,10 @@
     };
 
     const renderCalendar = () => {
+      if (!progressCalendarEl || !calendarActiveDaysEl || !calendarLastSavedEl) {
+        return;
+      }
+
       const today = new Date();
       const startDate = new Date(today);
       startDate.setDate(today.getDate() - (CALENDAR_DAYS - 1));
@@ -1461,11 +1592,22 @@
 
       progressCalendarEl.innerHTML = cells.join("");
 
-      const activityDates = Object.keys(progressState.activity).filter(date => progressState.activity[date] > 0);
-      calendarActiveDaysEl.textContent = `${activityDates.length}`;
+      const stats = getCalendarStats();
+      calendarActiveDaysEl.textContent = `${stats.activeDays}`;
+      calendarLastSavedEl.textContent = stats.lastCompletion ? formatDateLabel(stats.lastCompletion) : "No data";
 
-      const latestDate = activityDates.sort().at(-1);
-      calendarLastSavedEl.textContent = latestDate ? formatDateLabel(latestDate) : "No data";
+      if (calendarCurrentStreakEl) {
+        calendarCurrentStreakEl.textContent = `${stats.currentStreak} day${stats.currentStreak === 1 ? "" : "s"}`;
+      }
+      if (calendarBestStreakEl) {
+        calendarBestStreakEl.textContent = `${stats.bestStreak} day${stats.bestStreak === 1 ? "" : "s"}`;
+      }
+      if (calendarThisWeekEl) {
+        calendarThisWeekEl.textContent = `${stats.completionsThisWeek}`;
+      }
+      if (calendarNextFocusEl) {
+        calendarNextFocusEl.textContent = `Week ${stats.nextFocusWeek.week}`;
+      }
     };
 
     const renderProgressSummary = () => {
@@ -1474,11 +1616,21 @@
       const completedItems = completedTopicsCount + completedSubtopicsCount;
       const percent = totalTrackableItems ? (completedItems / totalTrackableItems) * 100 : 0;
 
-      completedWeeksCountEl.textContent = `${completedTopicsCount}/${totalTopics}`;
-      completedHoursCountEl.textContent = `${completedSubtopicsCount}/${totalSubtopics}`;
-      progressLabelStartEl.textContent = `${completedItems} done`;
-      progressLabelEndEl.textContent = `${totalTrackableItems} total`;
-      progressFillEl.style.width = `${percent}%`;
+      if (completedWeeksCountEl) {
+        completedWeeksCountEl.textContent = `${completedTopicsCount}/${totalTopics}`;
+      }
+      if (completedHoursCountEl) {
+        completedHoursCountEl.textContent = `${completedSubtopicsCount}/${totalSubtopics}`;
+      }
+      if (progressLabelStartEl) {
+        progressLabelStartEl.textContent = `${completedItems} done`;
+      }
+      if (progressLabelEndEl) {
+        progressLabelEndEl.textContent = `${totalTrackableItems} total`;
+      }
+      if (progressFillEl) {
+        progressFillEl.style.width = `${percent}%`;
+      }
     };
 
     const syncProgressUI = () => {
@@ -1538,85 +1690,141 @@
       });
     };
 
+    const renderWeekDetailPage = () => {
+      if (!weekDetailHeadingEl || !weekDetailTopicsEl) {
+        return;
+      }
+
+      const item = getCurrentWeekItem();
+      const phaseMeta = getPhaseMetaForWeek(item.week);
+      const subtopicStats = getWeekSubtopicStats(item.week);
+      const completedTopics = getWeekCompletedTopicCount(item.week);
+
+      document.title = `Week ${item.week} · ${item.title} | DSA Atlas`;
+      weekDetailHeadingEl.textContent = `Week ${item.week} · ${item.title}`;
+      weekDetailGoalEl.textContent = item.goal;
+      weekDetailPanelTitleEl.textContent = `${phaseMeta.label} · ${phaseMeta.title}`;
+      weekDetailLeetcodeEl.textContent = item.leetcode;
+      weekDetailSubheadingEl.textContent = `Study the week in order, keep the completed checkpoints synced, and use the recommendations below as your focused practice set.`;
+      weekTopicProgressEl.textContent = `${completedTopics}/${item.topics.length}`;
+      weekBulletProgressEl.textContent = `${subtopicStats.done}/${subtopicStats.total}`;
+      weekHoursLabelEl.textContent = `${item.hours}h`;
+      weekPhaseLabelEl.textContent = item.phase;
+
+      renderMetricCards(weekDetailMetricsEl, [
+        { value: `${item.topics.length}`, label: "Topic Blocks", copy: "Core concepts to finish this week." },
+        { value: `${subtopicStats.total}`, label: "Sub-topics", copy: "Trackable detail points synced with your roadmap." },
+        { value: `${item.hours}h`, label: "Study Load", copy: "Focused concept, coding, and problem-solving time." }
+      ]);
+      renderPhaseCards(weekDetailPhaseListEl, phaseMeta.title);
+
+      if (prevWeekLinkEl) {
+        prevWeekLinkEl.href = `week.html?week=${Math.max(1, item.week - 1)}`;
+        prevWeekLinkEl.toggleAttribute("aria-disabled", item.week === 1);
+      }
+      if (nextWeekLinkEl) {
+        nextWeekLinkEl.href = `week.html?week=${Math.min(roadmap.length, item.week + 1)}`;
+        nextWeekLinkEl.toggleAttribute("aria-disabled", item.week === roadmap.length);
+      }
+
+      if (weekRecommendationGridEl) {
+        weekRecommendationGridEl.innerHTML = (recommendations[item.week] || []).map(problem => `
+          <article class="recommendation-item">
+            <strong>${problem.name}</strong>
+            <span>${problem.note}</span>
+          </article>
+        `).join("");
+      }
+
+      if (weekResourceGridEl) {
+        weekResourceGridEl.innerHTML = `
+          <article class="recommendation-item">
+            <strong>cppreference STL</strong>
+            <span>Use this for exact container behavior, iterators, and C++ method references.</span>
+          </article>
+          <article class="recommendation-item">
+            <strong>CP-Algorithms</strong>
+            <span>Use this for proofs, patterns, and standard competitive programming templates.</span>
+          </article>
+          <article class="recommendation-item">
+            <strong>Visualgo</strong>
+            <span>Use this when you want a visual explanation before writing the implementation.</span>
+          </article>
+        `;
+      }
+
+      weekDetailTopicsEl.innerHTML = createTopicCardsMarkup(item);
+    };
+
     const renderProgressState = () => {
       renderProgressSummary();
       renderCalendar();
       syncProgressUI();
+
+      if (weekTopicProgressEl && weekDetailTopicsEl) {
+        const item = getCurrentWeekItem();
+        const subtopicStats = getWeekSubtopicStats(item.week);
+        const completedTopics = getWeekCompletedTopicCount(item.week);
+        weekTopicProgressEl.textContent = `${completedTopics}/${item.topics.length}`;
+        weekBulletProgressEl.textContent = `${subtopicStats.done}/${subtopicStats.total}`;
+      }
     };
 
-    weekGridEl.innerHTML = roadmap.map(item => `
-      <article class="week-card" id="week-${item.week}" data-week="${item.week}">
-        <div class="week-index">
-          <strong>${item.week}</strong>
-          <span>${item.phase}</span>
-        </div>
-        <div class="week-body">
-          <div class="week-head">
-            <div>
-              <h3>Week ${item.week} · ${item.title}</h3>
-              <div class="week-meta">
-                <span class="tag">${item.hours} hours</span>
-                <span class="tag">${item.topics.length} topic blocks</span>
-                <span class="tag">${item.phase}</span>
-                <span class="tag tag-complete">Trackable</span>
+    if (weekGridEl) {
+      weekGridEl.innerHTML = roadmap.map(item => `
+        <article class="week-card" id="week-${item.week}" data-week="${item.week}">
+          <div class="week-index">
+            <strong>${item.week}</strong>
+            <span>${item.phase}</span>
+          </div>
+          <div class="week-body">
+            <div class="week-head">
+              <div>
+                <h3>Week ${item.week} · ${item.title}</h3>
+                <div class="week-meta">
+                  <span class="tag">${item.hours} hours</span>
+                  <span class="tag">${item.topics.length} topic blocks</span>
+                  <span class="tag">${item.phase}</span>
+                  <span class="tag tag-complete">Trackable</span>
+                </div>
+                <p class="week-desc">${item.goal}</p>
               </div>
-              <p class="week-desc">${item.goal}</p>
+              <div class="week-status">
+                <span class="week-status-note">0/${item.topics.length} topics complete</span>
+              </div>
             </div>
-            <div class="week-status">
-              <span class="week-status-note">0/${item.topics.length} topics complete</span>
+            <p class="leetcode-lens"><strong>LeetCode target:</strong> ${item.leetcode}</p>
+            <div class="recommendation-shell">
+              <h4>Recommended LeetCode Set</h4>
+              <div class="recommendation-grid">
+                ${(recommendations[item.week] || []).map(problem => `
+                  <article class="recommendation-item">
+                    <strong>${problem.name}</strong>
+                    <span>${problem.note}</span>
+                  </article>
+                `).join("")}
+              </div>
+            </div>
+            <div class="topic-grid">
+              ${createTopicCardsMarkup(item)}
             </div>
           </div>
-          <p class="leetcode-lens"><strong>LeetCode target:</strong> ${item.leetcode}</p>
-          <div class="recommendation-shell">
-            <h4>Recommended LeetCode Set</h4>
-            <div class="recommendation-grid">
-              ${(recommendations[item.week] || []).map(problem => `
-                <article class="recommendation-item">
-                  <strong>${problem.name}</strong>
-                  <span>${problem.note}</span>
-                </article>
-              `).join("")}
-            </div>
-          </div>
-          <div class="topic-grid">
-            ${item.topics.map((topic, topicIndex) => `
-              <article class="topic-card" data-week="${item.week}" data-topic-index="${topicIndex}" data-total-bullets="${topic.bullets.length}">
-                <div class="topic-topline">
-                  <strong>${topic.title}</strong>
-                  <span class="topic-time">${topic.time}</span>
-                </div>
-                <p>${topic.detail}</p>
-                <ul class="bullet-list">
-                  ${topic.bullets.map((point, bulletIndex) => `
-                    <li class="bullet-item" data-week="${item.week}" data-topic-index="${topicIndex}" data-bullet-index="${bulletIndex}">
-                      <button class="bullet-toggle" type="button" data-bullet-key="${getBulletKey(item.week, topicIndex, bulletIndex)}" aria-pressed="false" aria-label="Mark sub-topic complete"></button>
-                      <span>${point}</span>
-                    </li>
-                  `).join("")}
-                </ul>
-                <div class="topic-progress">
-                  <button class="complete-toggle topic-complete-toggle" type="button" data-topic-key="${getTopicKey(item.week, topicIndex)}" aria-pressed="false">Mark topic complete</button>
-                  <span class="topic-status-note">0/${topic.bullets.length} sub-topics done</span>
-                </div>
-              </article>
-            `).join("")}
-          </div>
-        </div>
-      </article>
-    `).join("");
+        </article>
+      `).join("");
 
-    const cards = [...document.querySelectorAll(".week-card")];
-    const revealObserver = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("is-visible");
-        }
-      });
-    }, { threshold: 0.12 });
+      const cards = [...document.querySelectorAll(".week-card")];
+      const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+          }
+        });
+      }, { threshold: 0.12 });
 
-    cards.forEach(card => revealObserver.observe(card));
+      cards.forEach(card => revealObserver.observe(card));
+    }
 
-    weekGridEl.addEventListener("click", (event) => {
+    document.addEventListener("click", (event) => {
       const topicButton = event.target.closest(".topic-complete-toggle");
       if (topicButton) {
         const topicKey = topicButton.dataset.topicKey;
@@ -1639,7 +1847,8 @@
       renderProgressState();
     });
 
-    exportProgressBtn.addEventListener("click", () => {
+    if (exportProgressBtn) {
+      exportProgressBtn.addEventListener("click", () => {
       const payload = {
         app: "DSA Atlas",
         version: 2,
@@ -1656,13 +1865,81 @@
       link.click();
       link.remove();
       URL.revokeObjectURL(url);
-    });
+      });
+    }
 
-    importProgressBtn.addEventListener("click", () => {
-      importProgressInput.click();
-    });
+    if (exportProgressCsvBtn) {
+      exportProgressCsvBtn.addEventListener("click", () => {
+        const stats = getCalendarStats();
+        const rows = [
+          ["section", "type", "week", "topic", "sub_topic", "completed", "date", "timestamp", "value"],
+          ["summary", "active_days", "", "", "", "", "", "", stats.activeDays],
+          ["summary", "last_completion", "", "", "", "", stats.lastCompletion || "", stats.lastCompletion ? new Date(`${stats.lastCompletion}T00:00:00`).toISOString() : "", stats.lastCompletion ? formatDateLabel(stats.lastCompletion) : "No data"],
+          ["summary", "current_streak", "", "", "", "", "", "", stats.currentStreak],
+          ["summary", "best_streak", "", "", "", "", "", "", stats.bestStreak],
+          ["summary", "completions_this_week", "", "", "", "", "", "", stats.completionsThisWeek],
+          ["summary", "next_focus_week", stats.nextFocusWeek.week, stats.nextFocusWeek.title, "", "", "", "", `Week ${stats.nextFocusWeek.week}`]
+        ];
 
-    importProgressInput.addEventListener("change", async (event) => {
+        roadmap.forEach((item) => {
+          item.topics.forEach((topic, topicIndex) => {
+            const topicKey = getTopicKey(item.week, topicIndex);
+            const topicEntry = progressState.completedTopics[topicKey];
+
+            if (topicEntry?.completed) {
+              rows.push([
+                "progress",
+                "topic",
+                item.week,
+                topic.title,
+                "",
+                "yes",
+                topicEntry.date || "",
+                topicEntry.timestamp || (topicEntry.date ? new Date(`${topicEntry.date}T00:00:00`).toISOString() : ""),
+                ""
+              ]);
+            }
+
+            topic.bullets.forEach((bullet, bulletIndex) => {
+              const bulletKey = getBulletKey(item.week, topicIndex, bulletIndex);
+              const bulletEntry = progressState.completedBullets[bulletKey];
+              if (bulletEntry?.completed) {
+                rows.push([
+                  "progress",
+                  "sub_topic",
+                  item.week,
+                  topic.title,
+                  bullet,
+                  "yes",
+                  bulletEntry.date || "",
+                  bulletEntry.timestamp || (bulletEntry.date ? new Date(`${bulletEntry.date}T00:00:00`).toISOString() : ""),
+                  ""
+                ]);
+              }
+            });
+          });
+        });
+
+        const csv = rows.map((row) => row.map((value) => `"${String(value).replace(/"/g, "\"\"")}"`).join(",")).join("\n");
+        const blob = new Blob([csv], { type: "text/csv;charset=utf-8" });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        const stamp = new Date().toISOString().slice(0, 10);
+        link.href = url;
+        link.download = `dsa-atlas-progress-${stamp}.csv`;
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+        URL.revokeObjectURL(url);
+      });
+    }
+
+    if (importProgressBtn && importProgressInput) {
+      importProgressBtn.addEventListener("click", () => {
+        importProgressInput.click();
+      });
+
+      importProgressInput.addEventListener("change", async (event) => {
       const [file] = event.target.files || [];
       if (!file) {
         return;
@@ -1680,29 +1957,33 @@
       } finally {
         event.target.value = "";
       }
-    });
+      });
+    }
 
-    navToggleEl.addEventListener("click", () => {
+    if (navToggleEl && navLinksEl) {
+      navToggleEl.addEventListener("click", () => {
       const isOpen = navLinksEl.classList.toggle("is-open");
       navToggleEl.setAttribute("aria-expanded", String(isOpen));
-    });
+      });
 
-    navLinksEl.addEventListener("click", (event) => {
+      navLinksEl.addEventListener("click", (event) => {
       if (window.innerWidth > 900 || !event.target.closest("a")) {
         return;
       }
 
       navLinksEl.classList.remove("is-open");
       navToggleEl.setAttribute("aria-expanded", "false");
-    });
+      });
 
-    window.addEventListener("resize", () => {
+      window.addEventListener("resize", () => {
       if (window.innerWidth > 900) {
         navLinksEl.classList.remove("is-open");
         navToggleEl.setAttribute("aria-expanded", "false");
       }
-    });
+      });
+    }
 
     window.addEventListener("load", () => {
+      renderWeekDetailPage();
       renderProgressState();
     });
