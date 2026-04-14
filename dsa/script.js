@@ -1,21 +1,21 @@
     const phases = [
       {
-        label: "Phase 1",
+        label: "span 1",
         title: "Foundation and linear thinking",
         detail: "Complexity, arrays, strings, two pointers, sliding windows, sorting, binary search, and STL fluency."
       },
       {
-        label: "Phase 2",
+        label: "span 2",
         title: "Core data structures",
         detail: "Recursion, linked lists, stacks, queues, hashing, monotonic structures, heaps, intervals, and greedy basics."
       },
       {
-        label: "Phase 3",
+        label: "span 3",
         title: "Trees, graphs, and dynamic programming",
         detail: "Tree traversals, BST logic, graph traversal, shortest paths, union-find, topological sort, and multi-dimensional DP."
       },
       {
-        label: "Phase 4",
+        label: "span 4",
         title: "Advanced problem-solving",
         detail: "Tries, string algorithms, range query structures, bit manipulation, number theory, advanced greedy, and mixed hard patterns."
       }
