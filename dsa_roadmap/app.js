@@ -279,6 +279,89 @@ function saveNote() {
   renderAll();
 }
 
+// ─── EXPORT / IMPORT ─────────────────────────────────────────────────────────
+function exportProgress() {
+  const payload = {
+    version: 2,
+    exportedAt: new Date().toISOString(),
+    appName: 'DSA Roadmap — Apna College',
+    totalVideos: VIDEOS.length,
+    completedCount: getCompletedCount(),
+    completed: state.completed,
+    notes: state.notes,
+  };
+  const json = JSON.stringify(payload, null, 2);
+  const blob = new Blob([json], { type: 'application/json' });
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement('a');
+  const date = new Date().toISOString().slice(0, 10);
+  a.href     = url;
+  a.download = `dsa_roadmap_progress_${date}.json`;
+  a.click();
+  URL.revokeObjectURL(url);
+  showToast('✅ Progress exported! Share this file across devices.', 'success');
+}
+
+function importProgress(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      const parsed = JSON.parse(e.target.result);
+      // Support both v1 (flat) and v2 (nested) formats
+      const imported = parsed.completed || parsed;
+      const importedNotes = parsed.notes || {};
+
+      if (typeof imported !== 'object') throw new Error('Invalid format');
+
+      state.completed = {};
+      state.notes = {};
+
+      // Apply imported completed state
+      Object.entries(imported).forEach(([k, v]) => {
+        const id = parseInt(k);
+        if (!isNaN(id) && id >= 0 && id < VIDEOS.length) {
+          state.completed[id] = !!v;
+        }
+      });
+
+      // Apply imported notes
+      Object.entries(importedNotes).forEach(([k, v]) => {
+        const id = parseInt(k);
+        if (!isNaN(id) && id >= 0 && id < VIDEOS.length && v) {
+          state.notes[id] = v;
+        }
+      });
+
+      saveState(state);
+      renderAll();
+
+      const doneCount = getCompletedCount();
+      showToast(`✅ Imported! ${doneCount} videos restored, ${Object.keys(state.notes).length} notes loaded.`, 'success');
+    } catch(err) {
+      showToast('❌ Invalid file. Please use an exported JSON from this app.', 'error');
+    }
+  };
+  reader.readAsText(file);
+  event.target.value = ''; // reset so same file can be re-imported
+}
+
+// ─── TOAST ────────────────────────────────────────────────────────────────────
+function showToast(msg, type = 'success') {
+  let toast = document.getElementById('app-toast');
+  if (!toast) {
+    toast = document.createElement('div');
+    toast.id = 'app-toast';
+    document.body.appendChild(toast);
+  }
+  toast.textContent = msg;
+  toast.className = 'app-toast ' + type;
+  toast.classList.add('show');
+  clearTimeout(toast._timer);
+  toast._timer = setTimeout(() => toast.classList.remove('show'), 3500);
+}
+
 // ─── SEARCH & FILTER ─────────────────────────────────────────────────────────
 document.getElementById('search-input').addEventListener('input', e => {
   searchQuery = e.target.value;
@@ -310,6 +393,13 @@ document.addEventListener('keydown', e => {
   if (e.key === 'Escape') closeNote();
   if (e.key === 'Enter' && e.ctrlKey && document.getElementById('note-modal').classList.contains('open')) saveNote();
 });
+
+// ─── EXPORT / IMPORT WIRING ───────────────────────────────────────────────────
+document.getElementById('btn-export').addEventListener('click', exportProgress);
+document.getElementById('btn-import').addEventListener('click', () => {
+  document.getElementById('import-file-input').click();
+});
+document.getElementById('import-file-input').addEventListener('change', importProgress);
 
 // ─── INIT ────────────────────────────────────────────────────────────────────
 renderAll();
