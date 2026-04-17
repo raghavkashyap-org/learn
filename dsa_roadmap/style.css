@@ -129,10 +129,11 @@ body {
 .progress-banner {
   background: linear-gradient(135deg, #0f1829 0%, #111c35 100%);
   border-bottom: 1px solid var(--border);
-  padding: 16px 24px;
+  padding: 14px 24px;
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 16px;
+  flex-wrap: wrap;
 }
 
 .progress-stats {
@@ -725,6 +726,89 @@ body {
 }
 .empty-icon { font-size: 3rem; }
 
+/* ─── PROGRESS ACTIONS ──────────────────────────────────────────────────────── */
+.progress-actions {
+  display: flex;
+  gap: 7px;
+  flex-shrink: 0;
+}
+
+.btn-progress-action {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 13px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--surface2);
+  color: var(--muted);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+  letter-spacing: 0.01em;
+}
+
+.btn-progress-action:hover {
+  color: var(--text);
+  border-color: rgba(255,255,255,0.18);
+  background: rgba(255,255,255,0.06);
+}
+
+.btn-export:hover {
+  border-color: rgba(72,219,251,0.5);
+  color: #48dbfb;
+  background: rgba(72,219,251,0.07);
+}
+
+.btn-import:hover {
+  border-color: rgba(29,209,161,0.5);
+  color: #1dd1a1;
+  background: rgba(29,209,161,0.07);
+}
+
+/* ─── TOAST NOTIFICATION ────────────────────────────────────────────────────── */
+.app-toast {
+  position: fixed;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%) translateY(16px);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 40px;
+  padding: 11px 22px;
+  font-size: 0.82rem;
+  color: var(--text);
+  z-index: 9999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s cubic-bezier(.17,.67,.35,1.2);
+  white-space: nowrap;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 500;
+}
+
+.app-toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+  pointer-events: all;
+}
+
+.app-toast.success {
+  border-color: rgba(29,209,161,0.45);
+  color: #1dd1a1;
+  background: color-mix(in srgb, var(--surface) 85%, #1dd1a1 15%);
+}
+
+.app-toast.error {
+  border-color: rgba(255,107,107,0.45);
+  color: #ff6b6b;
+  background: color-mix(in srgb, var(--surface) 85%, #ff6b6b 15%);
+}
+
 /* ─── SCROLLBAR ─────────────────────────────────────────────────────────────── */
 ::-webkit-scrollbar { width: 6px; height: 6px; }
 ::-webkit-scrollbar-track { background: transparent; }
@@ -743,10 +827,12 @@ body {
   #app-layout:not(.sidebar-closed) .sidebar { max-height: 400px; }
   .main-content { padding: 16px; }
   .topnav-logo span { display: none; }
-  .progress-banner { padding: 12px 16px; gap: 12px; }
+  .progress-banner { padding: 12px 16px; gap: 10px; }
   .progress-stats { gap: 16px; }
   .stat-value { font-size: 1.2rem; }
   .video-grid { grid-template-columns: 1fr 1fr; }
+  .btn-progress-action span { display: none; }
+  .btn-progress-action { padding: 7px 10px; }
 }
 
 @media (max-width: 440px) {
