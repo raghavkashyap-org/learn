@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DSA Roadmap — Apna College | Shradha Ma'am</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <nav class="topnav">
+    <button class="sidebar-toggle" id="sidebar-toggle" title="Toggle Sidebar">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="3" y1="6" x2="21" y2="6"/>
+        <line x1="3" y1="12" x2="21" y2="12"/>
+        <line x1="3" y1="18" x2="21" y2="18"/>
+      </svg>
+    </button>
+    <div class="topnav-logo">DSA<span> Roadmap</span> ·&nbsp;Apna College</div>
+    <div class="search-wrap">
+      <svg class="search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+      </svg>
+      <input type="text" id="search-input" placeholder="Search topics… ( / )" autocomplete="off" />
+    </div>
+    <div class="filter-row">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="completed">✅ Done</button>
+      <button class="filter-btn" data-filter="pending">⏳ Pending</button>
+      <button class="filter-btn" data-filter="bookmarked">🔖 Saved</button>
+    </div>
+    <div class="nav-icon-toolbar">
+      <button class="nav-icon-btn" onclick="openStats()"      title="Stats Dashboard (S)">📊</button>
+      <button class="nav-icon-btn" onclick="openAllNotes()"   title="My Notes (N)">📝</button>
+      <button class="nav-icon-btn" onclick="togglePomodoro()" title="Pomodoro Timer (T)">⏱️</button>
+      <button class="nav-icon-btn" id="zen-btn" onclick="toggleZenMode()" title="Focus Mode (Z)">🎯</button>
+      <button class="nav-icon-btn" onclick="openShortcuts()"  title="Shortcuts (?)">⌨️</button>
+    </div>
+  </nav>
+
+  <div class="progress-banner">
+    <div class="progress-stats">
+      <div class="stat">
+        <span class="stat-value" id="global-done">0</span>
+        <span class="stat-label">Done</span>
+      </div>
+      <div class="stat">
+        <span class="stat-value" id="global-total" style="color:var(--muted)">126</span>
+        <span class="stat-label">Total</span>
+      </div>
+    </div>
+    <div class="progress-bar-wrap">
+      <div class="progress-bar-fill" id="global-bar-fill" style="width:0%"></div>
+    </div>
+    <span class="progress-pct-badge" id="global-pct">0%</span>
+    <div id="streak-badge" class="streak-badge" title="Study streak">🔥 <strong>0</strong> days</div>
+    <div id="goal-display"></div>
+    <div class="progress-actions">
+      <button class="btn-progress-action btn-export" id="btn-export" title="Export as JSON">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        <span>Export</span>
+      </button>
+      <button class="btn-progress-action btn-import" id="btn-import" title="Import JSON">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        <span>Import</span>
+      </button>
+      <input type="file" id="import-file-input" accept=".json" style="display:none" />
+    </div>
+  </div>
+
+  <div id="app-layout">
+    <aside class="sidebar">
+      <div class="sidebar-header">📍 Jump to Section</div>
+      <ul id="sidebar-sections"></ul>
+    </aside>
+    <main class="main-content">
+      <div id="sections-container"></div>
+    </main>
+  </div>
+
+  <!-- NOTE MODAL -->
+  <div id="note-modal">
+    <div class="modal-box">
+      <button class="modal-close-btn" id="modal-close" title="Close">✕</button>
+      <div class="modal-check">🎉</div>
+      <div id="modal-section">Section</div>
+      <h2 id="modal-title">Video Title</h2>
+      <p id="modal-subtitle">Great job! Add a note about what you learned.</p>
+      <textarea id="note-textarea" placeholder="Key concepts, tricky parts, time complexities, approaches…"></textarea>
+      <p class="modal-hint">Ctrl + Enter to save</p>
+      <div class="modal-actions">
+        <button class="btn-modal-skip" id="modal-skip">Skip for now</button>
+        <button class="btn-modal-save" id="modal-save">💾 Save Note</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- STATS MODAL -->
+  <div id="stats-modal" class="overlay-modal">
+    <div class="big-modal-box">
+      <div class="big-modal-header">
+        <h2 class="big-modal-title">📊 Progress Dashboard</h2>
+        <button class="modal-close-btn" onclick="closeStats()">✕</button>
+      </div>
+      <div class="stats-top-row">
+        <div class="stats-donut-wrap">
+          <svg class="stats-donut" viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="36" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="8"/>
+            <circle id="donut-arc" cx="50" cy="50" r="36" fill="none" stroke="#f59e0b" stroke-width="8"
+              stroke-linecap="round" stroke-dasharray="0 226" transform="rotate(-90 50 50)"
+              style="transition:stroke-dasharray 0.8s ease"/>
+          </svg>
+          <div class="donut-center">
+            <span id="sstat-pct" class="donut-pct">0%</span>
+            <span class="donut-label">complete</span>
+          </div>
+        </div>
+        <div class="stat-pills-grid">
+          <div class="stat-pill"><span class="sp-icon">✅</span><span class="sp-val" id="sstat-done">0</span><span class="sp-label">Completed</span></div>
+          <div class="stat-pill"><span class="sp-icon">📝</span><span class="sp-val" id="sstat-notes">0</span><span class="sp-label">Notes written</span></div>
+          <div class="stat-pill"><span class="sp-icon">🔖</span><span class="sp-val" id="sstat-bk">0</span><span class="sp-label">Bookmarked</span></div>
+          <div class="stat-pill"><span class="sp-icon">🔥</span><span class="sp-val" id="sstat-streak">0 days</span><span class="sp-label">Streak</span></div>
+          <div class="stat-pill"><span class="sp-icon">⏱️</span><span class="sp-val" id="sstat-hours">0h</span><span class="sp-label">Watched</span></div>
+        </div>
+      </div>
+      <div class="hmap-section">
+        <div class="section-label-sm">📅 Activity — Last 70 Days</div>
+        <div id="hmap-months" class="hmap-months"></div>
+        <div id="heatmap-grid" class="hmap-grid"></div>
+        <div class="hmap-legend">
+          <span>Less</span>
+          <div class="hmap-cell" style="background:rgba(255,255,255,0.05)"></div>
+          <div class="hmap-cell" style="background:rgba(245,158,11,0.35)"></div>
+          <div class="hmap-cell" style="background:rgba(245,158,11,0.62)"></div>
+          <div class="hmap-cell" style="background:#f59e0b"></div>
+          <span>More</span>
+        </div>
+      </div>
+      <div class="section-label-sm" style="margin-top:24px">📈 Section Breakdown</div>
+      <div id="section-stats-list" class="section-stats-list"></div>
+    </div>
+  </div>
+
+  <!-- ALL NOTES MODAL -->
+  <div id="all-notes-modal" class="overlay-modal">
+    <div class="big-modal-box">
+      <div class="big-modal-header">
+        <h2 class="big-modal-title">📝 My Notes</h2>
+        <button class="modal-close-btn" onclick="closeAllNotes()">✕</button>
+      </div>
+      <div id="all-notes-list"></div>
+    </div>
+  </div>
+
+  <!-- GOAL MODAL -->
+  <div id="goal-modal" class="overlay-modal">
+    <div class="modal-box">
+      <button class="modal-close-btn" onclick="closeGoalModal()">✕</button>
+      <div style="font-size:2rem;margin-bottom:8px">🎯</div>
+      <h2 style="font-size:1rem;font-family:'Syne',sans-serif;margin-bottom:4px">Set Completion Goal</h2>
+      <p style="font-size:0.8rem;color:var(--muted);margin-bottom:18px">Pick a date — we'll calculate your daily video target.</p>
+      <label style="font-size:0.78rem;color:var(--muted);display:block;margin-bottom:6px">Target completion date</label>
+      <input type="date" id="goal-date-input" class="goal-date-input" />
+      <div class="modal-actions">
+        <button class="btn-modal-skip" onclick="clearGoal()">Clear Goal</button>
+        <button class="btn-modal-save" onclick="setGoal()">Set Goal 🎯</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SHORTCUTS MODAL -->
+  <div id="shortcuts-modal" class="overlay-modal">
+    <div class="modal-box" style="max-width:420px">
+      <button class="modal-close-btn" onclick="closeShortcuts()">✕</button>
+      <div style="font-size:2rem;margin-bottom:8px">⌨️</div>
+      <h2 style="font-size:1rem;font-family:'Syne',sans-serif;margin-bottom:18px">Keyboard Shortcuts</h2>
+      <div class="shortcuts-list">
+        <div class="shortcut-row"><kbd>/</kbd><span>Focus search bar</span></div>
+        <div class="shortcut-row"><kbd>S</kbd><span>Stats Dashboard</span></div>
+        <div class="shortcut-row"><kbd>N</kbd><span>All Notes</span></div>
+        <div class="shortcut-row"><kbd>T</kbd><span>Pomodoro Timer</span></div>
+        <div class="shortcut-row"><kbd>Z</kbd><span>Toggle Focus Mode</span></div>
+        <div class="shortcut-row"><kbd>E</kbd><span>Export progress</span></div>
+        <div class="shortcut-row"><kbd>?</kbd><span>This panel</span></div>
+        <div class="shortcut-row"><kbd>Esc</kbd><span>Close modal</span></div>
+        <div class="shortcut-row"><kbd>Ctrl</kbd><kbd>↵</kbd><span>Save note</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- POMODORO WIDGET -->
+  <div id="pomo-widget" class="pomo-widget">
+    <div class="pomo-header">
+      <span id="pomo-mode-label">🍅 Focus</span>
+      <div class="pomo-header-right">
+        <span class="pomo-sessions-badge" title="Sessions done">🍅 <span id="pomo-sessions">0</span></span>
+        <button class="pomo-close-btn" onclick="togglePomodoro()">✕</button>
+      </div>
+    </div>
+    <div class="pomo-ring-wrap">
+      <svg viewBox="0 0 100 100" class="pomo-ring-svg">
+        <circle cx="50" cy="50" r="38" fill="none" stroke="rgba(255,255,255,0.07)" stroke-width="5"/>
+        <circle id="pomo-arc" cx="50" cy="50" r="38" fill="none" stroke="#f59e0b" stroke-width="5"
+          stroke-linecap="round" stroke-dasharray="0 238.76" transform="rotate(-90 50 50)"
+          style="transition:stroke-dasharray 0.9s linear,stroke 0.4s"/>
+      </svg>
+      <span id="pomo-time" class="pomo-time">25:00</span>
+    </div>
+    <div class="pomo-btns">
+      <button id="pomo-start-btn" class="pomo-btn primary" onclick="startPomo()">▶ Start</button>
+      <button class="pomo-btn" onclick="resetPomo()">↺ Reset</button>
+    </div>
+    <div class="pomo-tip">25 min focus · 5 min break</div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
