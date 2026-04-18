@@ -22,8 +22,18 @@ const STORAGE_KEY = 'dsa_roadmap_v1';
 
 function loadState() {
   try {
-    return JSON.parse(localStorage.getItem(STORAGE_KEY)) || { completed: {}, notes: {} };
-  } catch { return { completed: {}, notes: {} }; }
+    const s = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
+    return {
+      completed:  s.completed  || {},
+      notes:      s.notes      || {},
+      bookmarks:  s.bookmarks  || {},
+      studyLog:   s.studyLog   || {},   // { 'YYYY-MM-DD': count }
+      streak:     s.streak     || { count: 0, lastDate: null },
+      goalDate:   s.goalDate   || null,
+    };
+  } catch {
+    return { completed: {}, notes: {}, bookmarks: {}, studyLog: {}, streak: { count: 0, lastDate: null }, goalDate: null };
+  }
 }
 
 function saveState(state) {
@@ -31,9 +41,10 @@ function saveState(state) {
 }
 
 let state = loadState();
-let activeFilter = 'all'; // 'all' | 'completed' | 'pending'
+let activeFilter = 'all'; // 'all' | 'completed' | 'pending' | 'bookmarked'
 let searchQuery = '';
 let currentNoteVideoId = null;
+let zenMode = false;
 
 // ─── HELPERS ─────────────────────────────────────────────────────────────────
 function formatViews(v) {
@@ -93,10 +104,15 @@ function renderMain() {
   SECTIONS.forEach((sec, secIdx) => {
     const filteredVideos = sec.indices.map(i => VIDEOS[i]).filter(v => {
       const matchSearch = v.title.toLowerCase().includes(searchQuery.toLowerCase());
-      const matchFilter = activeFilter === 'all' ||
-        (activeFilter === 'completed' && state.completed[v.id]) ||
-        (activeFilter === 'pending' && !state.completed[v.id]);
-      return matchSearch && matchFilter;
+      const isDone = !!state.completed[v.id];
+      const isBookmarked = !!state.bookmarks[v.id];
+      const matchFilter =
+        activeFilter === 'all'       ? true :
+        activeFilter === 'completed' ? isDone :
+        activeFilter === 'pending'   ? !isDone :
+        activeFilter === 'bookmarked'? isBookmarked : true;
+      const matchZen = zenMode ? !isDone : true;
+      return matchSearch && matchFilter && matchZen;
     });
 
     if (filteredVideos.length === 0) return;
@@ -151,10 +167,14 @@ function buildCard(v, sec) {
   card.dataset.id = v.id;
   card.style.setProperty('--card-accent', sec.color);
 
+  const isBookmarked = !!state.bookmarks[v.id];
   card.innerHTML = `
     <div class="card-thumb-wrap">
       <img class="card-thumb" src="${v.thumbnail}" alt="${v.title}" loading="lazy" onerror="this.src='https://i.ytimg.com/vi/default/maxresdefault.jpg'">
       <span class="card-duration">${v.duration}</span>
+      <button class="btn-bookmark ${isBookmarked ? 'bookmarked' : ''}" onclick="toggleBookmark(${v.id},event)" title="${isBookmarked ? 'Remove bookmark' : 'Bookmark'}">
+        ${isBookmarked ? '🔖' : '🏷️'}
+      </button>
       <div class="card-play-overlay">
         <svg viewBox="0 0 24 24" fill="white" width="32" height="32"><path d="M8 5v14l11-7z"/></svg>
       </div>
@@ -194,18 +214,16 @@ function buildCard(v, sec) {
 function handleComplete(id) {
   const wasComplete = !!state.completed[id];
   if (wasComplete) {
-    // Toggle off
     state.completed[id] = false;
     saveState(state);
     renderAll();
   } else {
-    // Mark complete → show note modal
     state.completed[id] = true;
+    recordActivity();
     saveState(state);
     renderAll();
     openNote(id, true);
   }
-  // Confetti burst
   if (!wasComplete) burst(id);
 }
 
@@ -241,6 +259,8 @@ function updateGlobalProgress() {
   document.getElementById('global-total').textContent = total;
   document.getElementById('global-pct').textContent = pct + '%';
   document.getElementById('global-bar-fill').style.width = pct + '%';
+  renderStreakBadge();
+  renderGoalProgress();
 }
 
 // ─── NOTE MODAL ──────────────────────────────────────────────────────────────
@@ -362,6 +382,332 @@ function showToast(msg, type = 'success') {
   toast._timer = setTimeout(() => toast.classList.remove('show'), 3500);
 }
 
+// ─── BOOKMARKS ────────────────────────────────────────────────────────────────
+function toggleBookmark(id, e) {
+  e.stopPropagation();
+  state.bookmarks[id] = !state.bookmarks[id];
+  if (!state.bookmarks[id]) delete state.bookmarks[id];
+  saveState(state);
+  const card = document.querySelector(`[data-id="${id}"]`);
+  if (card) {
+    const btn = card.querySelector('.btn-bookmark');
+    if (btn) {
+      const on = !!state.bookmarks[id];
+      btn.classList.toggle('bookmarked', on);
+      btn.textContent = on ? '🔖' : '🏷️';
+      btn.title = on ? 'Remove bookmark' : 'Bookmark';
+    }
+  }
+  updateGlobalProgress();
+}
+
+// ─── STREAK ───────────────────────────────────────────────────────────────────
+function getTodayStr()     { return new Date().toISOString().slice(0, 10); }
+function getYesterdayStr() { return new Date(Date.now() - 86400000).toISOString().slice(0, 10); }
+
+function recordActivity() {
+  const today = getTodayStr();
+  state.studyLog = state.studyLog || {};
+  state.studyLog[today] = (state.studyLog[today] || 0) + 1;
+  const str = state.streak || { count: 0, lastDate: null };
+  if (!str.lastDate) {
+    state.streak = { count: 1, lastDate: today };
+  } else if (str.lastDate !== today) {
+    state.streak = {
+      count: str.lastDate === getYesterdayStr() ? str.count + 1 : 1,
+      lastDate: today,
+    };
+  }
+}
+
+function renderStreakBadge() {
+  const el = document.getElementById('streak-badge');
+  if (!el) return;
+  const count = state.streak?.count || 0;
+  el.innerHTML = count > 0
+    ? `🔥 <strong>${count}</strong> day${count !== 1 ? 's' : ''}`
+    : `🔥 <strong>0</strong> days`;
+  el.title = count > 0 ? `${count}-day study streak! Keep it up!` : 'Start your streak by completing a video today';
+  el.className = 'streak-badge' + (count >= 7 ? ' hot' : '');
+}
+
+// ─── GOAL TRACKER ─────────────────────────────────────────────────────────────
+function openGoalModal() {
+  document.getElementById('goal-modal').classList.add('open');
+  const inp = document.getElementById('goal-date-input');
+  if (inp) {
+    inp.value = state.goalDate || '';
+    inp.min = new Date(Date.now() + 86400000).toISOString().slice(0, 10);
+  }
+}
+function closeGoalModal() { document.getElementById('goal-modal').classList.remove('open'); }
+
+function setGoal() {
+  const inp = document.getElementById('goal-date-input');
+  if (!inp?.value) return;
+  state.goalDate = inp.value;
+  saveState(state);
+  renderGoalProgress();
+  closeGoalModal();
+  showToast('🎯 Goal set! You\'ve got this.', 'success');
+}
+function clearGoal() {
+  state.goalDate = null;
+  saveState(state);
+  renderGoalProgress();
+  closeGoalModal();
+}
+
+function renderGoalProgress() {
+  const el = document.getElementById('goal-display');
+  if (!el) return;
+  if (!state.goalDate) {
+    el.innerHTML = `<button class="btn-set-goal" onclick="openGoalModal()">🎯 Set Goal</button>`;
+    return;
+  }
+  const today = new Date(); today.setHours(0,0,0,0);
+  const goal  = new Date(state.goalDate);
+  const daysLeft = Math.ceil((goal - today) / 86400000);
+  const remaining = VIDEOS.length - getCompletedCount();
+  const perDay = daysLeft > 0 ? Math.ceil(remaining / daysLeft) : remaining;
+  if (daysLeft < 0) {
+    el.innerHTML = `<div class="goal-chip overdue" onclick="openGoalModal()">⚠️ Goal overdue</div>`;
+  } else if (daysLeft === 0) {
+    el.innerHTML = `<div class="goal-chip today" onclick="openGoalModal()">🏁 Goal day!</div>`;
+  } else {
+    el.innerHTML = `<div class="goal-chip" onclick="openGoalModal()">🎯 ${daysLeft}d · ${perDay}/day</div>`;
+  }
+}
+
+// ─── STATS MODAL ─────────────────────────────────────────────────────────────
+function openStats() {
+  document.getElementById('stats-modal').classList.add('open');
+  renderStats();
+}
+function closeStats() { document.getElementById('stats-modal').classList.remove('open'); }
+
+function renderStats() {
+  const done      = getCompletedCount();
+  const total     = VIDEOS.length;
+  const pct       = Math.round(done / total * 100);
+  const noteCount = Object.values(state.notes).filter(Boolean).length;
+  const bkCount   = Object.values(state.bookmarks).filter(Boolean).length;
+  const streak    = state.streak?.count || 0;
+  // Estimate from actual duration strings in VIDEOS
+  let estMins = 0;
+  VIDEOS.forEach(v => {
+    if (!state.completed[v.id]) return;
+    const parts = v.duration.split(':').map(Number);
+    if (parts.length === 3) estMins += parts[0]*60 + parts[1] + parts[2]/60;
+    else if (parts.length === 2) estMins += parts[0] + parts[1]/60;
+  });
+  const estHours = (estMins / 60).toFixed(1);
+
+  document.getElementById('sstat-done').textContent    = done;
+  document.getElementById('sstat-pct').textContent     = pct + '%';
+  document.getElementById('sstat-notes').textContent   = noteCount;
+  document.getElementById('sstat-bk').textContent      = bkCount;
+  document.getElementById('sstat-streak').textContent  = streak + (streak === 1 ? ' day' : ' days');
+  document.getElementById('sstat-hours').textContent   = estHours + 'h';
+
+  // Donut arc
+  const circ = 2 * Math.PI * 36;
+  const arc  = document.getElementById('donut-arc');
+  if (arc) {
+    arc.style.strokeDasharray  = `${circ * pct / 100} ${circ}`;
+    arc.style.strokeDashoffset = '0';
+  }
+
+  renderSectionStats();
+  renderHeatmap();
+}
+
+function renderSectionStats() {
+  const c = document.getElementById('section-stats-list');
+  if (!c) return;
+  c.innerHTML = '';
+  SECTIONS.forEach(sec => {
+    const { done, total, pct } = getSectionProgress(sec);
+    const row = document.createElement('div');
+    row.className = 'ssec-row';
+    row.innerHTML = `
+      <div class="ssec-head">
+        <span>${sec.icon} ${sec.name}</span>
+        <span class="ssec-count" style="color:${sec.color}">${done}/${total}</span>
+      </div>
+      <div class="ssec-bar-bg"><div class="ssec-bar-fill" style="width:${pct}%;background:${sec.color}"></div></div>`;
+    c.appendChild(row);
+  });
+}
+
+function renderHeatmap() {
+  const c = document.getElementById('heatmap-grid');
+  if (!c) return;
+  c.innerHTML = '';
+  for (let i = 69; i >= 0; i--) {
+    const d     = new Date(Date.now() - i * 86400000).toISOString().slice(0,10);
+    const count = (state.studyLog || {})[d] || 0;
+    const cell  = document.createElement('div');
+    cell.className = 'hmap-cell';
+    cell.title = `${d}: ${count} video${count !== 1 ? 's' : ''}`;
+    cell.style.background =
+      count === 0 ? 'rgba(255,255,255,0.05)' :
+      count === 1 ? 'rgba(245,158,11,0.35)' :
+      count === 2 ? 'rgba(245,158,11,0.62)' : '#f59e0b';
+    c.appendChild(cell);
+  }
+  // Month labels
+  const ml = document.getElementById('hmap-months');
+  if (!ml) return;
+  ml.innerHTML = '';
+  let lastM = null;
+  for (let i = 69; i >= 0; i--) {
+    const d = new Date(Date.now() - i * 86400000);
+    const m = d.toLocaleString('default', { month: 'short' });
+    if (m !== lastM) {
+      const s = document.createElement('span');
+      s.textContent = m;
+      s.style.gridColumn = (70 - i) + '';
+      ml.appendChild(s);
+      lastM = m;
+    }
+  }
+}
+
+// ─── ALL NOTES MODAL ─────────────────────────────────────────────────────────
+function openAllNotes() {
+  document.getElementById('all-notes-modal').classList.add('open');
+  renderAllNotes();
+}
+function closeAllNotes() { document.getElementById('all-notes-modal').classList.remove('open'); }
+
+function renderAllNotes() {
+  const c = document.getElementById('all-notes-list');
+  if (!c) return;
+  c.innerHTML = '';
+  const entries = Object.entries(state.notes)
+    .filter(([, v]) => v)
+    .map(([k, v]) => ({ id: parseInt(k), note: v }));
+
+  if (!entries.length) {
+    c.innerHTML = `<div class="empty-notes"><div style="font-size:2.5rem">📝</div>
+      <p>No notes yet.<br>Complete a video and jot something down!</p></div>`;
+    return;
+  }
+  entries.forEach(({ id, note }) => {
+    const v = VIDEOS[id], sec = getSectionForVideo(id);
+    if (!v || !sec) return;
+    const item = document.createElement('div');
+    item.className = 'note-entry';
+    item.innerHTML = `
+      <div class="note-entry-header">
+        <div>
+          <span class="note-sec-tag" style="color:${sec.color}">${sec.icon} ${sec.name}</span>
+          <div class="note-vid-title">${v.title.replace(/\|.*$/, '').trim()}</div>
+        </div>
+        <div class="note-entry-btns">
+          <button onclick="copyNote(${id})" title="Copy">📋</button>
+          <button onclick="closeAllNotes();openNote(${id})" title="Edit">✏️</button>
+          <button onclick="deleteNote(${id})" title="Delete" class="del-btn">🗑️</button>
+        </div>
+      </div>
+      <div class="note-text">${note.replace(/\n/g, '<br>')}</div>`;
+    c.appendChild(item);
+  });
+}
+
+function copyNote(id) {
+  navigator.clipboard.writeText(state.notes[id] || '').then(() =>
+    showToast('📋 Note copied!', 'success'));
+}
+function deleteNote(id) {
+  delete state.notes[id];
+  saveState(state);
+  renderAllNotes();
+  renderAll();
+  showToast('🗑️ Note deleted.', 'success');
+}
+
+// ─── POMODORO TIMER ───────────────────────────────────────────────────────────
+const POMO = { WORK: 25*60, BREAK: 5*60 };
+let pomo = { mode: 'work', timeLeft: POMO.WORK, running: false, interval: null, sessions: 0 };
+
+function togglePomodoro() {
+  const w = document.getElementById('pomo-widget');
+  if (w) w.classList.toggle('open');
+}
+
+function startPomo() {
+  if (pomo.running) {
+    clearInterval(pomo.interval);
+    pomo.running = false;
+    updatePomoBtn();
+    return;
+  }
+  pomo.running = true;
+  pomo.interval = setInterval(() => {
+    pomo.timeLeft--;
+    if (pomo.timeLeft <= 0) {
+      clearInterval(pomo.interval);
+      pomo.running = false;
+      pomo.sessions++;
+      if (pomo.mode === 'work') {
+        pomo.mode = 'break'; pomo.timeLeft = POMO.BREAK;
+        showToast('☕ Break time! 5 minutes.', 'success');
+      } else {
+        pomo.mode = 'work'; pomo.timeLeft = POMO.WORK;
+        showToast('💪 Back to work! 25 minutes.', 'success');
+      }
+    }
+    updatePomoDisplay();
+    updatePomoBtn();
+  }, 1000);
+  updatePomoBtn();
+}
+
+function resetPomo() {
+  clearInterval(pomo.interval);
+  pomo.running = false; pomo.mode = 'work'; pomo.timeLeft = POMO.WORK;
+  updatePomoDisplay(); updatePomoBtn();
+}
+
+function updatePomoDisplay() {
+  const mm  = String(Math.floor(pomo.timeLeft/60)).padStart(2,'0');
+  const ss  = String(pomo.timeLeft%60).padStart(2,'0');
+  const el  = document.getElementById('pomo-time');
+  const ml  = document.getElementById('pomo-mode-label');
+  const arc = document.getElementById('pomo-arc');
+  const se  = document.getElementById('pomo-sessions');
+  if (el)  el.textContent = `${mm}:${ss}`;
+  if (ml)  ml.textContent = pomo.mode === 'work' ? '🍅 Focus' : '☕ Break';
+  if (se)  se.textContent = pomo.sessions;
+  if (arc) {
+    const total = pomo.mode === 'work' ? POMO.WORK : POMO.BREAK;
+    const prog  = 1 - pomo.timeLeft / total;
+    const circ  = 2 * Math.PI * 38;
+    arc.style.strokeDasharray  = `${circ * prog} ${circ}`;
+    arc.style.stroke = pomo.mode === 'work' ? '#f59e0b' : '#1dd1a1';
+  }
+}
+function updatePomoBtn() {
+  const b = document.getElementById('pomo-start-btn');
+  if (b) b.textContent = pomo.running ? '⏸ Pause' : '▶ Start';
+}
+
+// ─── ZEN / FOCUS MODE ────────────────────────────────────────────────────────
+function toggleZenMode() {
+  zenMode = !zenMode;
+  document.body.classList.toggle('zen-mode', zenMode);
+  const btn = document.getElementById('zen-btn');
+  if (btn) btn.classList.toggle('nav-icon-active', zenMode);
+  showToast(zenMode ? '🎯 Focus Mode ON — hiding completed' : '👁 Focus Mode OFF', 'success');
+  renderMain();
+}
+
+// ─── SHORTCUTS MODAL ─────────────────────────────────────────────────────────
+function openShortcuts() { document.getElementById('shortcuts-modal').classList.add('open'); }
+function closeShortcuts() { document.getElementById('shortcuts-modal').classList.remove('open'); }
+
 // ─── SEARCH & FILTER ─────────────────────────────────────────────────────────
 document.getElementById('search-input').addEventListener('input', e => {
   searchQuery = e.target.value;
@@ -390,8 +736,31 @@ document.getElementById('note-modal').addEventListener('click', e => {
   if (e.target === document.getElementById('note-modal')) closeNote();
 });
 document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') closeNote();
-  if (e.key === 'Enter' && e.ctrlKey && document.getElementById('note-modal').classList.contains('open')) saveNote();
+  const tag = document.activeElement?.tagName;
+  const inInput = tag === 'INPUT' || tag === 'TEXTAREA';
+
+  if (e.key === 'Escape') {
+    closeNote(); closeStats(); closeAllNotes(); closeShortcuts(); closeGoalModal();
+    document.getElementById('note-modal').classList.remove('open');
+    return;
+  }
+  if (e.key === 'Enter' && e.ctrlKey && document.getElementById('note-modal').classList.contains('open')) {
+    saveNote();
+    return;
+  }
+  if (inInput) return;
+
+  const keyMap = {
+    '/': () => { e.preventDefault(); document.getElementById('search-input').focus(); },
+    's': openStats,
+    'n': openAllNotes,
+    't': togglePomodoro,
+    'z': toggleZenMode,
+    'e': exportProgress,
+    '?': openShortcuts,
+    'h': openShortcuts,
+  };
+  if (keyMap[e.key]) keyMap[e.key]();
 });
 
 // ─── EXPORT / IMPORT WIRING ───────────────────────────────────────────────────
@@ -402,4 +771,5 @@ document.getElementById('btn-import').addEventListener('click', () => {
 document.getElementById('import-file-input').addEventListener('change', importProgress);
 
 // ─── INIT ────────────────────────────────────────────────────────────────────
+updatePomoDisplay();
 renderAll();
