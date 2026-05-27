@@ -893,6 +893,23 @@
     <a class="nav-link" href="#vimrc">The .vimrc File</a>
     <a class="nav-link" href="#plugins">Plugins</a>
 
+    <div class="nav-section-title">Expert Topics</div>
+    <a class="nav-link" href="#regex-deep">Regex Deep Dive</a>
+    <a class="nav-link" href="#quickfix">Quickfix & Location</a>
+    <a class="nav-link" href="#abbreviations">Abbreviations</a>
+    <a class="nav-link" href="#digraphs">Digraphs</a>
+    <a class="nav-link" href="#sessions">Sessions & Views</a>
+    <a class="nav-link" href="#autocmds">Autocommands</a>
+    <a class="nav-link" href="#vimscript">Vimscript Basics</a>
+    <a class="nav-link" href="#neovim-lua">Neovim & Lua</a>
+    <a class="nav-link" href="#lsp">LSP & Treesitter</a>
+    <a class="nav-link" href="#completion">Completion System</a>
+    <a class="nav-link" href="#spell">Spell Checking</a>
+    <a class="nav-link" href="#ctags">ctags & Tags</a>
+    <a class="nav-link" href="#advanced-motions">Advanced Motions</a>
+    <a class="nav-link" href="#operator-pending">Operator-Pending</a>
+    <a class="nav-link" href="#netrw">Netrw File Explorer</a>
+
     <div class="nav-section-title">Reference</div>
     <a class="nav-link" href="#errors">Vim Errors</a>
     <a class="nav-link" href="#shell-integration">Shell Integration</a>
@@ -2798,7 +2815,1079 @@ orange
   </div>
 </div>
 
-</div> <!-- end .content -->
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- NEW EXPERT SECTIONS START HERE                      -->
+<!-- ═══════════════════════════════════════════════════ -->
+<div class="content">
+
+<!-- ═══════════════ REGEX ═══════════════ -->
+<div class="section" id="regex-deep">
+  <div class="section-number">33 / Regex</div>
+  <h1>Vim Regex — Deep Dive <span class="badge expert">Expert</span></h1>
+  <p>Vim's regex engine differs from PCRE (Perl-Compatible Regular Expressions). Understanding its magic modes and unique syntax separates good Vim users from elite ones.</p>
+
+  <h2>Magic Modes</h2>
+  <p>Vim has four magic modes that control how much you need to escape characters:</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Mode</th><th>Prefix</th><th>Meaning</th></tr></thead>
+      <tbody>
+        <tr><td>\v (very magic)</td><td class="desc">most chars special</td><td class="desc">Closest to PCRE. Groups are <code>()</code> not <code>\(\)</code></td></tr>
+        <tr><td>\m (magic)</td><td class="desc">default</td><td class="desc">Some chars special. Groups need <code>\(\)</code></td></tr>
+        <tr><td>\M (nomagic)</td><td class="desc">few chars special</td><td class="desc">Only <code>^</code> and <code>$</code> special</td></tr>
+        <tr><td>\V (very nomagic)</td><td class="desc">nothing special</td><td class="desc">Literal search only. Fastest for exact strings.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <pre data-lang="vim"><code><span class="vim-comment">" Without \v — ugly escaping</span>
+<span class="vim-cmd">:%s/\(\w\+\) \(\w\+\)/\2 \1/g</span>
+
+<span class="vim-comment">" With \v — clean, PCRE-like</span>
+<span class="vim-cmd">:%s/\v(\w+) (\w+)/\2 \1/g</span>
+
+<span class="vim-comment">" Literal search (no regex at all)</span>
+<span class="vim-cmd">/\Vsome.literal.string</span>   <span class="vim-comment">" . is literal dot here</span></code></pre>
+
+  <h2>Character Classes</h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Pattern</th><th>Matches</th></tr></thead>
+      <tbody>
+        <tr><td>\w</td><td class="desc">Word character: [a-zA-Z0-9_]</td></tr>
+        <tr><td>\W</td><td class="desc">Non-word character</td></tr>
+        <tr><td>\d</td><td class="desc">Digit [0-9]</td></tr>
+        <tr><td>\D</td><td class="desc">Non-digit</td></tr>
+        <tr><td>\s</td><td class="desc">Whitespace (space, tab)</td></tr>
+        <tr><td>\S</td><td class="desc">Non-whitespace</td></tr>
+        <tr><td>\l</td><td class="desc">Lowercase letter</td></tr>
+        <tr><td>\u</td><td class="desc">Uppercase letter</td></tr>
+        <tr><td>\a</td><td class="desc">Alphabetic [a-zA-Z]</td></tr>
+        <tr><td>\n</td><td class="desc">Newline</td></tr>
+        <tr><td>\t</td><td class="desc">Tab character</td></tr>
+        <tr><td>.</td><td class="desc">Any character except newline</td></tr>
+        <tr><td>\_.</td><td class="desc">Any character including newline</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Anchors & Assertions</h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Pattern</th><th>Matches</th></tr></thead>
+      <tbody>
+        <tr><td>^</td><td class="desc">Start of line</td></tr>
+        <tr><td>$</td><td class="desc">End of line</td></tr>
+        <tr><td>\^</td><td class="desc">Literal ^ character</td></tr>
+        <tr><td>\&lt;</td><td class="desc">Start of word boundary</td></tr>
+        <tr><td>\&gt;</td><td class="desc">End of word boundary</td></tr>
+        <tr><td>\zs</td><td class="desc">Start match HERE (zero-width — sets match start)</td></tr>
+        <tr><td>\ze</td><td class="desc">End match HERE (zero-width — sets match end)</td></tr>
+        <tr><td>\@=</td><td class="desc">Positive lookahead (PCRE: (?=...))</td></tr>
+        <tr><td>\@!</td><td class="desc">Negative lookahead (PCRE: (?!...))</td></tr>
+        <tr><td>\@&lt;=</td><td class="desc">Positive lookbehind (PCRE: (?&lt;=...))</td></tr>
+        <tr><td>\@&lt;!</td><td class="desc">Negative lookbehind (PCRE: (?&lt;!...))</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>\zs and \ze — The Hidden Gems</h2>
+  <p>These let you match a broader context but only operate on a sub-part. No capture groups needed.</p>
+  <pre data-lang="vim"><code><span class="vim-comment">" Replace only the VALUE in key=value pairs</span>
+<span class="vim-cmd">:%s/\vkey=\zs\w+/newvalue/g</span>
+<span class="vim-comment">" key= is matched but NOT replaced — only the word after = is</span>
+
+<span class="vim-comment">" Extract just the filename from a path</span>
+<span class="vim-cmd">/\v\/\zs[^/]+$</span>
+<span class="vim-comment">" Jumps to and selects only the filename part</span>
+
+<span class="vim-comment">" Delete trailing whitespace only (not whole line)</span>
+<span class="vim-cmd">:%s/\s\+\ze$/</span></code></pre>
+
+  <h2>Quantifiers</h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Quantifier</th><th>Meaning (default/magic mode)</th></tr></thead>
+      <tbody>
+        <tr><td>*</td><td class="desc">0 or more (greedy)</td></tr>
+        <tr><td>\+</td><td class="desc">1 or more (greedy)</td></tr>
+        <tr><td>\?</td><td class="desc">0 or 1 (optional)</td></tr>
+        <tr><td>\{n}</td><td class="desc">Exactly n</td></tr>
+        <tr><td>\{n,m}</td><td class="desc">Between n and m</td></tr>
+        <tr><td>\{-}</td><td class="desc">0 or more (non-greedy/lazy)</td></tr>
+        <tr><td>\{-n,}</td><td class="desc">n or more (non-greedy)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Replacement Special Sequences</h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>In replacement</th><th>Meaning</th></tr></thead>
+      <tbody>
+        <tr><td>&amp;</td><td class="desc">Entire matched text</td></tr>
+        <tr><td>\1 … \9</td><td class="desc">Captured group 1–9</td></tr>
+        <tr><td>\u</td><td class="desc">Capitalize next character</td></tr>
+        <tr><td>\U</td><td class="desc">Uppercase everything until \E</td></tr>
+        <tr><td>\l</td><td class="desc">Lowercase next character</td></tr>
+        <tr><td>\L</td><td class="desc">Lowercase everything until \E</td></tr>
+        <tr><td>\E</td><td class="desc">End \U or \L</td></tr>
+        <tr><td>\n</td><td class="desc">Newline in replacement</td></tr>
+        <tr><td>\r</td><td class="desc">Carriage return (also inserts newline)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <pre data-lang="vim"><code><span class="vim-comment">" Title-case every word</span>
+<span class="vim-cmd">:%s/\v&lt;(\w)/\u\1/g</span>
+
+<span class="vim-comment">" Wrap all numbers in brackets</span>
+<span class="vim-cmd">:%s/\v\d+/[&amp;]/g</span>
+
+<span class="vim-comment">" Convert snake_case to CamelCase</span>
+<span class="vim-cmd">:%s/\v_(\l)/\u\1/g</span>
+
+<span class="vim-comment">" Add line numbers before each line</span>
+<span class="vim-cmd">:%s/^/\=line('.').' '/</span></code></pre>
+</div>
+
+<!-- ═══════════════ QUICKFIX ═══════════════ -->
+<div class="section" id="quickfix">
+  <div class="section-number">34 / Quickfix</div>
+  <h1>Quickfix & Location Lists <span class="badge advanced">Advanced</span></h1>
+  <p>The Quickfix list is one of Vim's most underused power features. It's a global list of positions (file + line + message) that you can jump through — used by compilers, grep, linters, and more.</p>
+
+  <h2>Quickfix vs Location List</h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Feature</th><th>Quickfix (:c…)</th><th>Location List (:l…)</th></tr></thead>
+      <tbody>
+        <tr><td>Scope</td><td class="desc">Global — one list per Vim session</td><td class="desc">Local — one list per window</td></tr>
+        <tr><td>Open</td><td class="desc">:copen</td><td class="desc">:lopen</td></tr>
+        <tr><td>Next/Prev</td><td class="desc">:cn / :cp</td><td class="desc">:ln / :lp</td></tr>
+        <tr><td>First/Last</td><td class="desc">:cfirst / :clast</td><td class="desc">:lfirst / :llast</td></tr>
+        <tr><td>Use case</td><td class="desc">Compiler errors, project-wide grep</td><td class="desc">Per-window diagnostics, linter errors</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Populating the Quickfix List</h2>
+  <pre data-lang="vim"><code><span class="vim-comment">" grep → quickfix</span>
+<span class="vim-cmd">:grep pattern **/*.py</span>          <span class="vim-comment">" Fill quickfix with grep results</span>
+<span class="vim-cmd">:vimgrep /pattern/gj **/*.js</span>   <span class="vim-comment">" Vim's built-in grep (works on all OS)</span>
+
+<span class="vim-comment">" Compile errors → quickfix</span>
+<span class="vim-cmd">:make</span>                          <span class="vim-comment">" Run make, populate quickfix with errors</span>
+<span class="vim-cmd">:compiler python</span>               <span class="vim-comment">" Set compiler for current filetype</span>
+
+<span class="vim-comment">" Manual navigation</span>
+<span class="vim-cmd">:copen</span>     <span class="vim-comment">" Open quickfix window</span>
+<span class="vim-cmd">:cclose</span>    <span class="vim-comment">" Close it</span>
+<span class="vim-cmd">:cc 5</span>      <span class="vim-comment">" Jump to item 5</span>
+<span class="vim-cmd">:cnewer</span>    <span class="vim-comment">" Go to newer quickfix list</span>
+<span class="vim-cmd">:colder</span>    <span class="vim-comment">" Go to older quickfix list (history!)</span></code></pre>
+
+  <h2>Do-Operations on Quickfix</h2>
+  <pre data-lang="vim"><code><span class="vim-comment">" Run a command on every quickfix entry</span>
+<span class="vim-cmd">:cdo s/old/new/g</span>    <span class="vim-comment">" Substitute in each quickfix file</span>
+<span class="vim-cmd">:cfdo update</span>        <span class="vim-comment">" Save each file in quickfix list</span>
+
+<span class="vim-comment">" Workflow: project-wide rename</span>
+<span class="vim-cmd">:grep old_func **/*.py</span>
+<span class="vim-cmd">:cdo s/old_func/new_func/g | update</span></code></pre>
+
+  <div class="callout tip">
+    <div class="callout-title">💡 Project-Wide Refactoring Pattern</div>
+    <p>The <code>:grep → :cdo s/old/new/g | update</code> combo is Vim's built-in project-wide find-and-replace across multiple files. No plugin needed.</p>
+  </div>
+</div>
+
+<!-- ═══════════════ ABBREVIATIONS ═══════════════ -->
+<div class="section" id="abbreviations">
+  <div class="section-number">35 / Abbreviations</div>
+  <h1>Abbreviations — Typing Shortcuts <span class="badge intermediate">Intermediate</span></h1>
+  <p>Abbreviations expand short text triggers into longer strings automatically while typing in Insert or Command-Line mode. Think: programmable autocorrect + snippets without a plugin.</p>
+
+  <h2>Insert Mode Abbreviations</h2>
+  <pre data-lang="vim"><code><span class="vim-comment">" Define: :iabbrev {trigger} {expansion}</span>
+<span class="vim-cmd">:iabbrev teh the</span>              <span class="vim-comment">" Autocorrect typo</span>
+<span class="vim-cmd">:iabbrev waht what</span>
+<span class="vim-cmd">:iabbrev @@ john@example.com</span>  <span class="vim-comment">" Expand email shortcut</span>
+<span class="vim-cmd">:iabbrev #! #!/usr/bin/env python3</span>
+
+<span class="vim-comment">" Trigger: type the word + space/Enter/punctuation</span>
+<span class="vim-comment">" "teh " → automatically becomes "the "</span></code></pre>
+
+  <h2>Abbreviation Types</h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Command</th><th>Mode</th></tr></thead>
+      <tbody>
+        <tr><td>:iabbrev</td><td class="desc">Insert Mode only</td></tr>
+        <tr><td>:cabbrev</td><td class="desc">Command-Line Mode only</td></tr>
+        <tr><td>:abbrev</td><td class="desc">Both Insert and Command-Line</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Command-Line Abbreviations</h2>
+  <pre data-lang="vim"><code><span class="vim-comment">" Remap :W to :w (common typo fix)</span>
+<span class="vim-cmd">:cabbrev W w</span>
+<span class="vim-cmd">:cabbrev Q q</span>
+<span class="vim-cmd">:cabbrev Wq wq</span>
+
+<span class="vim-comment">" Shortcut long commands</span>
+<span class="vim-cmd">:cabbrev te tabedit</span>
+<span class="vim-cmd">:cabbrev nt NERDTree</span></code></pre>
+
+  <h2>In .vimrc</h2>
+  <div class="vimrc-section">
+    <div class="vimrc-header">
+      <div class="vimrc-dot" style="background:#ff5f57"></div>
+      <div class="vimrc-dot" style="background:#febc2e"></div>
+      <div class="vimrc-dot" style="background:#28c840"></div>
+      <span style="margin-left:8px">~/.vimrc — abbreviations</span>
+    </div>
+    <div class="vimrc-body">
+<pre style="background:transparent;border:none;padding:0;margin:0;font-family:'JetBrains Mono',monospace;font-size:13px;line-height:1.8;"><code><span class="vim-comment">" Typo corrections</span>
+<span class="vim-key">iabbrev teh the</span>
+<span class="vim-key">iabbrev adn and</span>
+<span class="vim-key">iabbrev htis this</span>
+
+<span class="vim-comment">" Code snippets</span>
+<span class="vim-key">iabbrev pdb import pdb; pdb.set_trace()</span>
+<span class="vim-key">iabbrev lorem Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span>
+
+<span class="vim-comment">" Command shortcuts (prevent accidental expansion with &lt;c-r&gt;=)</span>
+<span class="vim-key">cnoreabbrev W w</span>
+<span class="vim-key">cnoreabbrev Q q</span>
+<span class="vim-key">cnoreabbrev WQ wq</span></code></pre>
+    </div>
+  </div>
+
+  <div class="callout">
+    <div class="callout-title">View / Remove Abbreviations</div>
+    <p><code>:abbreviate</code> lists all abbreviations. <code>:unabbreviate teh</code> removes one. <code>:abclear</code> clears all abbreviations.</p>
+  </div>
+</div>
+
+<!-- ═══════════════ DIGRAPHS ═══════════════ -->
+<div class="section" id="digraphs">
+  <div class="section-number">36 / Digraphs</div>
+  <h1>Digraphs — Special Characters <span class="badge intermediate">Intermediate</span></h1>
+  <p>Digraphs are two-character codes that produce special Unicode symbols while in Insert Mode. No copy-pasting from the web needed.</p>
+
+  <h2>How to Use</h2>
+  <pre data-lang="vim"><code><span class="vim-comment">" In Insert Mode:</span>
+<span class="vim-cmd">Ctrl+k {char1}{char2}</span>
+
+<span class="vim-comment">" Examples:</span>
+Ctrl+k <span class="vim-string">Co</span>  →  ©   (copyright)
+Ctrl+k <span class="vim-string">Rg</span>  →  ®   (registered)
+Ctrl+k <span class="vim-string">-&gt;</span>  →  →   (arrow)
+Ctrl+k <span class="vim-string">&lt;-</span>  →  ←   (left arrow)
+Ctrl+k <span class="vim-string">!=</span>  →  ≠   (not equal)
+Ctrl+k <span class="vim-string">&lt;=</span>  →  ≤   (less or equal)
+Ctrl+k <span class="vim-string">OK</span>  →  ✓   (check mark)
+Ctrl+k <span class="vim-string">XX</span>  →  ✗   (cross mark)
+Ctrl+k <span class="vim-string">DG</span>  →  °   (degree)
+Ctrl+k <span class="vim-string">+-</span>  →  ±   (plus-minus)
+Ctrl+k <span class="vim-string">12</span>  →  ½   (one-half fraction)
+Ctrl+k <span class="vim-string">13</span>  →  ⅓   (one-third)
+Ctrl+k <span class="vim-string">Eu</span>  →  €   (euro sign)</code></pre>
+
+  <h2>Viewing All Digraphs</h2>
+  <pre data-lang="vim"><code><span class="vim-cmd">:digraphs</span>       <span class="vim-comment">" List all built-in digraphs</span>
+<span class="vim-cmd">:dig</span>            <span class="vim-comment">" Shorthand</span></code></pre>
+
+  <h2>Defining Custom Digraphs</h2>
+  <pre data-lang="vim"><code><span class="vim-comment">" :digraph {two-chars} {unicode-decimal}</span>
+<span class="vim-cmd">:digraph sb 9733</span>   <span class="vim-comment">" sb → ★ (black star, U+2605)</span>
+<span class="vim-cmd">:digraph th 8594</span>   <span class="vim-comment">" th → → (rightwards arrow, U+2192)</span></code></pre>
+
+  <h2>Common Digraph Reference</h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Keys</th><th>Symbol</th><th>Name</th></tr></thead>
+      <tbody>
+        <tr><td>Ctrl+k Co</td><td class="desc">©</td><td class="desc">Copyright</td></tr>
+        <tr><td>Ctrl+k Rg</td><td class="desc">®</td><td class="desc">Registered</td></tr>
+        <tr><td>Ctrl+k TM</td><td class="desc">™</td><td class="desc">Trademark</td></tr>
+        <tr><td>Ctrl+k -&gt;</td><td class="desc">→</td><td class="desc">Right arrow</td></tr>
+        <tr><td>Ctrl+k &lt;-</td><td class="desc">←</td><td class="desc">Left arrow</td></tr>
+        <tr><td>Ctrl+k =&gt;</td><td class="desc">⇒</td><td class="desc">Double right arrow</td></tr>
+        <tr><td>Ctrl+k 14</td><td class="desc">¼</td><td class="desc">One quarter</td></tr>
+        <tr><td>Ctrl+k e'</td><td class="desc">é</td><td class="desc">e acute</td></tr>
+        <tr><td>Ctrl+k a`</td><td class="desc">à</td><td class="desc">a grave</td></tr>
+        <tr><td>Ctrl+k Pi</td><td class="desc">π</td><td class="desc">Pi (Greek)</td></tr>
+        <tr><td>Ctrl+k Om</td><td class="desc">ω</td><td class="desc">Omega (Greek)</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ═══════════════ SESSIONS ═══════════════ -->
+<div class="section" id="sessions">
+  <div class="section-number">37 / Sessions & Views</div>
+  <h1>Sessions & Views — Workspace Memory <span class="badge advanced">Advanced</span></h1>
+  <p>Sessions save your entire Vim workspace state: open files, window layout, folds, marks, and more. Views save the state of a single window. Both let you restore context across restarts.</p>
+
+  <h2>Sessions</h2>
+  <pre data-lang="vim"><code><span class="vim-comment">" Save session</span>
+<span class="vim-cmd">:mksession project.vim</span>         <span class="vim-comment">" Save to file</span>
+<span class="vim-cmd">:mksession! project.vim</span>        <span class="vim-comment">" Overwrite existing</span>
+<span class="vim-cmd">:mks</span>                           <span class="vim-comment">" Shorthand</span>
+
+<span class="vim-comment">" Restore session</span>
+<span class="vim-cmd">vim -S project.vim</span>             <span class="vim-comment">" From command line</span>
+<span class="vim-cmd">:source project.vim</span>           <span class="vim-comment">" From within Vim</span></code></pre>
+
+  <h2>What Sessions Save (controlled by 'sessionoptions')</h2>
+  <pre data-lang="vim"><code><span class="vim-cmd">set sessionoptions=blank,buffers,curdir,folds,help,tabpages,winsize,terminal</span>
+<span class="vim-comment">"   blank    → empty windows
+"   buffers  → all buffers (not just visible)
+"   curdir   → current directory
+"   folds    → fold state
+"   tabpages → all tabs
+"   winsize  → window sizes
+"   terminal → terminal windows (Neovim)</span></code></pre>
+
+  <h2>Views (Single Window State)</h2>
+  <pre data-lang="vim"><code><span class="vim-cmd">:mkview</span>           <span class="vim-comment">" Save current window's view (folds, cursor, etc)</span>
+<span class="vim-cmd">:mkview 2</span>         <span class="vim-comment">" Save to slot 2 (slots 1-9)</span>
+<span class="vim-cmd">:loadview</span>         <span class="vim-comment">" Restore view</span>
+<span class="vim-cmd">:loadview 2</span>       <span class="vim-comment">" Restore from slot 2</span></code></pre>
+
+  <h2>Auto-Save Views on Leave</h2>
+  <div class="vimrc-section">
+    <div class="vimrc-header">
+      <div class="vimrc-dot" style="background:#ff5f57"></div>
+      <div class="vimrc-dot" style="background:#febc2e"></div>
+      <div class="vimrc-dot" style="background:#28c840"></div>
+      <span style="margin-left:8px">~/.vimrc — auto views</span>
+    </div>
+    <div class="vimrc-body">
+<pre style="background:transparent;border:none;padding:0;margin:0;font-family:'JetBrains Mono',monospace;font-size:13px;line-height:1.8;"><code><span class="vim-comment">" Automatically save and restore folds per file</span>
+<span class="vim-key">autocmd BufWinLeave *.* mkview</span>
+<span class="vim-key">autocmd BufWinEnter *.* silent! loadview</span>
+
+<span class="vim-comment">" Set where views are stored</span>
+<span class="vim-key">set viewdir=~/.vim/views</span></code></pre>
+    </div>
+  </div>
+
+  <h2>:cd and :lcd — Directory Context</h2>
+  <pre data-lang="vim"><code><span class="vim-cmd">:cd /path/to/project</span>    <span class="vim-comment">" Change global working directory</span>
+<span class="vim-cmd">:lcd /path</span>              <span class="vim-comment">" Change directory for current window only</span>
+<span class="vim-cmd">:pwd</span>                    <span class="vim-comment">" Print current working directory</span></code></pre>
+</div>
+
+<!-- ═══════════════ AUTOCOMMANDS ═══════════════ -->
+<div class="section" id="autocmds">
+  <div class="section-number">38 / Autocommands</div>
+  <h1>Autocommands — Event-Driven Config <span class="badge advanced">Advanced</span></h1>
+  <p>Autocommands (autocmds) run Vimscript automatically when certain events occur. They're how you customize Vim behavior per-filetype, per-event, or per-file pattern.</p>
+
+  <h2>Syntax</h2>
+  <pre data-lang="vim"><code><span class="vim-cmd">autocmd {EventName} {pattern} {command}</span>
+
+<span class="vim-comment">" Examples:</span>
+<span class="vim-cmd">autocmd BufWritePre *.py :%s/\s\+$//e</span>        <span class="vim-comment">" Strip trailing whitespace on save</span>
+<span class="vim-cmd">autocmd FileType python setlocal expandtab</span>    <span class="vim-comment">" Python uses spaces</span>
+<span class="vim-cmd">autocmd BufEnter *.md set spell</span>               <span class="vim-comment">" Enable spell in Markdown</span>
+<span class="vim-cmd">autocmd VimResized * wincmd =</span>                 <span class="vim-comment">" Equalize windows on resize</span></code></pre>
+
+  <h2>Common Events</h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Event</th><th>When it fires</th></tr></thead>
+      <tbody>
+        <tr><td>BufNewFile</td><td class="desc">New file created</td></tr>
+        <tr><td>BufRead / BufReadPost</td><td class="desc">After reading file into buffer</td></tr>
+        <tr><td>BufWrite / BufWritePre</td><td class="desc">Before file is written to disk</td></tr>
+        <tr><td>BufWritePost</td><td class="desc">After file is written</td></tr>
+        <tr><td>BufEnter</td><td class="desc">When entering a buffer</td></tr>
+        <tr><td>BufLeave</td><td class="desc">When leaving a buffer</td></tr>
+        <tr><td>BufDelete</td><td class="desc">Before buffer is deleted</td></tr>
+        <tr><td>FileType</td><td class="desc">After filetype is set</td></tr>
+        <tr><td>InsertEnter</td><td class="desc">When entering Insert Mode</td></tr>
+        <tr><td>InsertLeave</td><td class="desc">When leaving Insert Mode</td></tr>
+        <tr><td>CursorHold</td><td class="desc">After cursor is still for 'updatetime' ms</td></tr>
+        <tr><td>CursorMoved</td><td class="desc">After cursor moves in Normal mode</td></tr>
+        <tr><td>WinEnter / WinLeave</td><td class="desc">Entering/leaving a window</td></tr>
+        <tr><td>VimEnter</td><td class="desc">After Vim starts completely</td></tr>
+        <tr><td>VimLeave</td><td class="desc">Before Vim exits</td></tr>
+        <tr><td>ColorScheme</td><td class="desc">After colorscheme changes</td></tr>
+        <tr><td>TextChanged</td><td class="desc">After text changes in Normal mode</td></tr>
+        <tr><td>TextChangedI</td><td class="desc">After text changes in Insert mode</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Augroups — The Right Way</h2>
+  <p>Always wrap autocmds in an augroup. Without it, reloading your .vimrc duplicates every autocmd, causing bugs.</p>
+  <div class="vimrc-section">
+    <div class="vimrc-header">
+      <div class="vimrc-dot" style="background:#ff5f57"></div>
+      <div class="vimrc-dot" style="background:#febc2e"></div>
+      <div class="vimrc-dot" style="background:#28c840"></div>
+      <span style="margin-left:8px">~/.vimrc — correct augroup pattern</span>
+    </div>
+    <div class="vimrc-body">
+<pre style="background:transparent;border:none;padding:0;margin:0;font-family:'JetBrains Mono',monospace;font-size:13px;line-height:1.8;"><code><span class="vim-key">augroup MyConfig</span>
+  <span class="vim-key">autocmd!</span>                           <span class="vim-comment">" Clear group first (prevent duplicates)</span>
+  <span class="vim-key">autocmd BufWritePre * :%s/\s\+$//e</span>
+  <span class="vim-key">autocmd FileType javascript setlocal shiftwidth=2</span>
+  <span class="vim-key">autocmd FileType markdown setlocal spell wrap linebreak</span>
+  <span class="vim-key">autocmd BufRead,BufNewFile *.tsx setfiletype typescriptreact</span>
+  <span class="vim-key">autocmd InsertLeave * set nopaste</span>   <span class="vim-comment">" Auto-disable paste mode</span>
+<span class="vim-key">augroup END</span></code></pre>
+    </div>
+  </div>
+
+  <h2>Useful Autocmd Patterns</h2>
+  <pre data-lang="vim"><code><span class="vim-comment">" Highlight yanked text briefly (Neovim 0.5+)</span>
+<span class="vim-cmd">autocmd TextYankPost * silent! lua vim.highlight.on_yank {timeout=200}</span>
+
+<span class="vim-comment">" Auto-create missing directories on save</span>
+<span class="vim-cmd">autocmd BufWritePre * call mkdir(expand('&lt;afile&gt;:p:h'), 'p')</span>
+
+<span class="vim-comment">" Jump to last cursor position when reopening file</span>
+<span class="vim-cmd">autocmd BufReadPost * if line("'\"") &gt; 1 &amp;&amp; line("'\"") &lt;= line("$") | exe "normal! g'\"" | endif</span>
+
+<span class="vim-comment">" Equalize window sizes when Vim is resized</span>
+<span class="vim-cmd">autocmd VimResized * tabdo wincmd =</span></code></pre>
+</div>
+
+<!-- ═══════════════ VIMSCRIPT ═══════════════ -->
+<div class="section" id="vimscript">
+  <div class="section-number">39 / Vimscript</div>
+  <h1>Vimscript Basics <span class="badge expert">Expert</span></h1>
+  <p>Vimscript (also called VimL) is Vim's built-in scripting language. You don't need to master it, but knowing the basics lets you write custom functions, fix edge cases, and understand plugins.</p>
+
+  <h2>Variables</h2>
+  <pre data-lang="vim"><code><span class="vim-comment">" Variable scopes (prefix matters)</span>
+<span class="vim-key">let g:name = "global"</span>       <span class="vim-comment">" g: global</span>
+<span class="vim-key">let l:name = "local"</span>        <span class="vim-comment">" l: function-local</span>
+<span class="vim-key">let s:name = "script"</span>       <span class="vim-comment">" s: script-local (private to file)</span>
+<span class="vim-key">let b:name = "buffer"</span>       <span class="vim-comment">" b: buffer-local</span>
+<span class="vim-key">let w:name = "window"</span>       <span class="vim-comment">" w: window-local</span>
+<span class="vim-key">let t:name = "tab"</span>          <span class="vim-comment">" t: tab-local</span>
+<span class="vim-key">let v:count</span>                 <span class="vim-comment">" v: Vim special variable (read-only)</span>
+<span class="vim-key">let &amp;textwidth = 80</span>         <span class="vim-comment">" &amp; prefix = Vim option</span>
+<span class="vim-key">let @a = "register text"</span>    <span class="vim-comment">" @  prefix = register</span></code></pre>
+
+  <h2>Conditionals & Loops</h2>
+  <pre data-lang="vim"><code><span class="vim-comment">" if/elseif/else/endif</span>
+<span class="vim-key">if condition</span>
+<span class="vim-key">  " commands</span>
+<span class="vim-key">elseif other</span>
+<span class="vim-key">  " commands</span>
+<span class="vim-key">else</span>
+<span class="vim-key">  " commands</span>
+<span class="vim-key">endif</span>
+
+<span class="vim-comment">" for loop</span>
+<span class="vim-key">for item in ['a', 'b', 'c']</span>
+<span class="vim-key">  echo item</span>
+<span class="vim-key">endfor</span>
+
+<span class="vim-comment">" while loop</span>
+<span class="vim-key">let i = 0</span>
+<span class="vim-key">while i &lt; 5</span>
+<span class="vim-key">  echo i</span>
+<span class="vim-key">  let i += 1</span>
+<span class="vim-key">endwhile</span></code></pre>
+
+  <h2>Functions</h2>
+  <pre data-lang="vim"><code><span class="vim-comment">" Define a function (uppercase first letter = convention)</span>
+<span class="vim-key">function! MyFunction(arg1, arg2)</span>
+  <span class="vim-key">let result = a:arg1 . " " . a:arg2</span>   <span class="vim-comment">" a: = function argument scope</span>
+  <span class="vim-key">return result</span>
+<span class="vim-key">endfunction</span>
+
+<span class="vim-comment">" Call it</span>
+<span class="vim-cmd">:call MyFunction("hello", "world")</span>
+<span class="vim-cmd">:echo MyFunction("hello", "world")</span>
+
+<span class="vim-comment">" Map to a key</span>
+<span class="vim-key">nnoremap &lt;leader&gt;f :call MyFunction("hello", "world")&lt;CR&gt;</span></code></pre>
+
+  <h2>Useful Built-in Functions</h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Function</th><th>Purpose</th></tr></thead>
+      <tbody>
+        <tr><td>expand('%')</td><td class="desc">Current filename</td></tr>
+        <tr><td>expand('%:p')</td><td class="desc">Absolute path</td></tr>
+        <tr><td>expand('%:h')</td><td class="desc">Directory of current file</td></tr>
+        <tr><td>expand('%:t')</td><td class="desc">Tail (filename only)</td></tr>
+        <tr><td>expand('%:r')</td><td class="desc">Root (no extension)</td></tr>
+        <tr><td>line('.')</td><td class="desc">Current line number</td></tr>
+        <tr><td>col('.')</td><td class="desc">Current column</td></tr>
+        <tr><td>getline('.')</td><td class="desc">Current line text</td></tr>
+        <tr><td>setline(n, txt)</td><td class="desc">Set line n to txt</td></tr>
+        <tr><td>execute('cmd')</td><td class="desc">Run a command string</td></tr>
+        <tr><td>system('cmd')</td><td class="desc">Run shell command, return output</td></tr>
+        <tr><td>exists('&opt')</td><td class="desc">Check if option exists</td></tr>
+        <tr><td>has('feature')</td><td class="desc">Check if Vim has a feature</td></tr>
+        <tr><td>len(list)</td><td class="desc">Length of list/string</td></tr>
+        <tr><td>join(list, sep)</td><td class="desc">Join list into string</td></tr>
+        <tr><td>split(str, pat)</td><td class="desc">Split string into list</td></tr>
+        <tr><td>substitute(s,p,r,f)</td><td class="desc">Regex substitute on string</td></tr>
+        <tr><td>printf(fmt, ...)</td><td class="desc">Formatted string</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Practical Example: Toggle Function</h2>
+  <pre data-lang="vim"><code><span class="vim-comment">" Toggle between relative and absolute line numbers</span>
+<span class="vim-key">function! ToggleNumbers()</span>
+  <span class="vim-key">if &relativenumber</span>
+    <span class="vim-key">set norelativenumber</span>
+    <span class="vim-key">set number</span>
+  <span class="vim-key">else</span>
+    <span class="vim-key">set relativenumber</span>
+  <span class="vim-key">endif</span>
+<span class="vim-key">endfunction</span>
+<span class="vim-key">nnoremap &lt;leader&gt;n :call ToggleNumbers()&lt;CR&gt;</span>
+
+<span class="vim-comment">" Dynamic statusline showing mode name</span>
+<span class="vim-key">function! StatuslineMode()</span>
+  <span class="vim-key">let modes = {'n':'NORMAL','i':'INSERT','v':'VISUAL','V':'V-LINE',"\&lt;C-v&gt;":'V-BLOCK','c':'COMMAND','R':'REPLACE'}</span>
+  <span class="vim-key">return get(modes, mode(), mode())</span>
+<span class="vim-key">endfunction</span></code></pre>
+</div>
+
+<!-- ═══════════════ NEOVIM LUA ═══════════════ -->
+<div class="section" id="neovim-lua">
+  <div class="section-number">40 / Neovim & Lua</div>
+  <h1>Neovim & Lua Configuration <span class="badge expert">Expert</span></h1>
+  <p>Neovim (nvim) supports Lua as a first-class configuration language. It's faster than Vimscript, has better tooling, and unlocks the modern Neovim ecosystem.</p>
+
+  <h2>init.lua Structure</h2>
+  <pre data-lang="lua"><code><span class="vim-comment">-- ~/.config/nvim/init.lua</span>
+
+<span class="vim-comment">-- Neovim options (vim.opt = set in .vimrc)</span>
+vim.opt.number = true
+vim.opt.relativenumber = true
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.expandtab = true
+vim.opt.smartindent = true
+vim.opt.hlsearch = true
+vim.opt.incsearch = true
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
+vim.opt.scrolloff = 8
+vim.opt.undofile = true
+vim.opt.hidden = true
+vim.opt.clipboard = "unnamedplus"
+vim.opt.updatetime = 300
+vim.opt.termguicolors = true    <span class="vim-comment">-- Enable true color</span>
+
+<span class="vim-comment">-- Leader key</span>
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "</code></pre>
+
+  <h2>Lua Keymaps</h2>
+  <pre data-lang="lua"><code><span class="vim-comment">-- vim.keymap.set(mode, lhs, rhs, opts)</span>
+local map = vim.keymap.set
+local opts = { noremap = true, silent = true }
+
+<span class="vim-comment">-- Window navigation</span>
+map("n", "&lt;C-h&gt;", "&lt;C-w&gt;h", opts)
+map("n", "&lt;C-j&gt;", "&lt;C-w&gt;j", opts)
+map("n", "&lt;C-k&gt;", "&lt;C-w&gt;k", opts)
+map("n", "&lt;C-l&gt;", "&lt;C-w&gt;l", opts)
+
+<span class="vim-comment">-- Better paste (don't lose register)</span>
+map("v", "p", '"_dP', opts)
+
+<span class="vim-comment">-- Move selected lines</span>
+map("v", "&lt;A-j&gt;", ":m '&gt;+1&lt;CR&gt;gv=gv", opts)
+map("v", "&lt;A-k&gt;", ":m '&lt;-2&lt;CR&gt;gv=gv", opts)
+
+<span class="vim-comment">-- Center search results</span>
+map("n", "n", "nzzzv", opts)
+map("n", "N", "Nzzzv", opts)
+
+<span class="vim-comment">-- Quick save</span>
+map("n", "&lt;leader&gt;w", ":w&lt;CR&gt;", { desc = "Save file" })</code></pre>
+
+  <h2>Lua Autocommands</h2>
+  <pre data-lang="lua"><code><span class="vim-comment">-- vim.api.nvim_create_autocmd(events, opts)</span>
+local augroup = vim.api.nvim_create_augroup("MyConfig", { clear = true })
+
+vim.api.nvim_create_autocmd("BufWritePre", {
+  group = augroup,
+  pattern = "*",
+  callback = function()
+    vim.cmd([[%s/\s\+$//e]])   <span class="vim-comment">-- strip trailing whitespace</span>
+  end,
+})
+
+vim.api.nvim_create_autocmd("TextYankPost", {
+  group = augroup,
+  callback = function()
+    vim.highlight.on_yank({ timeout = 200 })
+  end,
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+  group = augroup,
+  pattern = { "javascript", "typescript", "html", "css" },
+  callback = function()
+    vim.opt_local.shiftwidth = 2
+    vim.opt_local.tabstop = 2
+  end,
+})</code></pre>
+
+  <h2>lazy.nvim Bootstrap</h2>
+  <pre data-lang="lua"><code><span class="vim-comment">-- Bootstrap lazy.nvim (paste at top of init.lua)</span>
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({ "git", "clone", "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git", lazypath })
+end
+vim.opt.rtp:prepend(lazypath)
+
+require("lazy").setup({
+  <span class="vim-comment">-- Plugins listed here</span>
+  { "nvim-telescope/telescope.nvim", dependencies = { "nvim-lua/plenary.nvim" } },
+  { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
+  { "neovim/nvim-lspconfig" },
+  { "hrsh7th/nvim-cmp" },
+  { "tpope/vim-fugitive" },
+  { "lewis6991/gitsigns.nvim" },
+  { "folke/tokyonight.nvim", priority = 1000 },
+})</code></pre>
+
+  <h2>vim.opt vs vim.g vs vim.fn</h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Lua API</th><th>Vimscript equiv</th><th>Purpose</th></tr></thead>
+      <tbody>
+        <tr><td>vim.opt.number = true</td><td class="desc">set number</td><td class="desc">Set option</td></tr>
+        <tr><td>vim.opt_local.wrap = true</td><td class="desc">setlocal wrap</td><td class="desc">Set buffer-local option</td></tr>
+        <tr><td>vim.g.mapleader = " "</td><td class="desc">let g:mapleader = " "</td><td class="desc">Global variable</td></tr>
+        <tr><td>vim.b.variable = val</td><td class="desc">let b:variable = val</td><td class="desc">Buffer-local variable</td></tr>
+        <tr><td>vim.fn.expand('%')</td><td class="desc">expand('%')</td><td class="desc">Call Vim function</td></tr>
+        <tr><td>vim.cmd('set nu')</td><td class="desc">set nu</td><td class="desc">Run Vimscript string</td></tr>
+        <tr><td>vim.api.nvim_…</td><td class="desc">N/A</td><td class="desc">Neovim native API</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ═══════════════ LSP ═══════════════ -->
+<div class="section" id="lsp">
+  <div class="section-number">41 / LSP & Treesitter</div>
+  <h1>LSP & Treesitter <span class="badge expert">Expert</span></h1>
+  <p>Neovim has a built-in LSP client (Language Server Protocol). Combined with Treesitter for syntax, you get IDE-grade features inside Vim.</p>
+
+  <h2>What LSP Gives You</h2>
+  <div class="cmd-combo">
+    <div class="cmd-pill">Go to definition</div>
+    <div class="cmd-pill">Find references</div>
+    <div class="cmd-pill">Hover docs</div>
+    <div class="cmd-pill">Rename symbol</div>
+    <div class="cmd-pill">Auto-complete</div>
+    <div class="cmd-pill">Diagnostics/errors</div>
+    <div class="cmd-pill">Code actions</div>
+    <div class="cmd-pill">Format on save</div>
+  </div>
+
+  <h2>LSP Keymaps (Standard Pattern)</h2>
+  <pre data-lang="lua"><code><span class="vim-comment">-- Set these up in your on_attach callback</span>
+vim.api.nvim_create_autocmd("LspAttach", {
+  callback = function(ev)
+    local map = vim.keymap.set
+    local buf = ev.buf
+    local o = { buffer = buf, silent = true }
+
+    map("n", "gd",         vim.lsp.buf.definition,      o)    <span class="vim-comment">-- go to definition</span>
+    map("n", "gD",         vim.lsp.buf.declaration,     o)    <span class="vim-comment">-- go to declaration</span>
+    map("n", "gr",         vim.lsp.buf.references,      o)    <span class="vim-comment">-- find references</span>
+    map("n", "gi",         vim.lsp.buf.implementation,  o)    <span class="vim-comment">-- go to implementation</span>
+    map("n", "K",          vim.lsp.buf.hover,           o)    <span class="vim-comment">-- hover documentation</span>
+    map("n", "&lt;leader&gt;rn", vim.lsp.buf.rename,          o)    <span class="vim-comment">-- rename symbol</span>
+    map("n", "&lt;leader&gt;ca", vim.lsp.buf.code_action,    o)    <span class="vim-comment">-- code action</span>
+    map("n", "&lt;leader&gt;f",  vim.lsp.buf.format,          o)    <span class="vim-comment">-- format buffer</span>
+    map("n", "[d",         vim.diagnostic.goto_prev,    o)    <span class="vim-comment">-- prev diagnostic</span>
+    map("n", "]d",         vim.diagnostic.goto_next,    o)    <span class="vim-comment">-- next diagnostic</span>
+    map("n", "&lt;leader&gt;e",  vim.diagnostic.open_float,  o)    <span class="vim-comment">-- open diagnostic float</span>
+    map("n", "&lt;leader&gt;q",  vim.diagnostic.setloclist,  o)    <span class="vim-comment">-- list diagnostics</span>
+  end,
+})</code></pre>
+
+  <h2>Setting Up Language Servers</h2>
+  <pre data-lang="lua"><code><span class="vim-comment">-- With nvim-lspconfig</span>
+local lsp = require("lspconfig")
+
+lsp.pyright.setup({})         <span class="vim-comment">-- Python</span>
+lsp.ts_ls.setup({})           <span class="vim-comment">-- TypeScript/JavaScript</span>
+lsp.rust_analyzer.setup({})   <span class="vim-comment">-- Rust</span>
+lsp.lua_ls.setup({})          <span class="vim-comment">-- Lua</span>
+lsp.clangd.setup({})          <span class="vim-comment">-- C/C++</span>
+lsp.gopls.setup({})           <span class="vim-comment">-- Go</span></code></pre>
+
+  <h2>Treesitter</h2>
+  <p>Treesitter parses code into an AST, providing far more accurate syntax highlighting, folding, and indentation than regex-based approaches.</p>
+  <pre data-lang="lua"><code><span class="vim-comment">-- nvim-treesitter setup</span>
+require("nvim-treesitter.configs").setup({
+  ensure_installed = { "lua", "python", "javascript", "typescript", "rust", "go", "bash", "json", "yaml" },
+  highlight = { enable = true },
+  indent = { enable = true },
+  incremental_selection = {
+    enable = true,
+    keymaps = {
+      init_selection = "&lt;C-space&gt;",    <span class="vim-comment">-- Start selection</span>
+      node_incremental = "&lt;C-space&gt;",  <span class="vim-comment">-- Expand to parent node</span>
+      node_decremental = "&lt;bs&gt;",       <span class="vim-comment">-- Shrink back</span>
+    },
+  },
+})</code></pre>
+
+  <div class="callout tip">
+    <div class="callout-title">💡 Treesitter Text Objects</div>
+    <p>With <code>nvim-treesitter-textobjects</code> plugin, you get language-aware text objects: <code>af</code> (around function), <code>if</code> (inside function), <code>ac</code> (around class), etc. These understand your actual code structure.</p>
+  </div>
+</div>
+
+<!-- ═══════════════ COMPLETION ═══════════════ -->
+<div class="section" id="completion">
+  <div class="section-number">42 / Completion</div>
+  <h1>Completion System <span class="badge advanced">Advanced</span></h1>
+  <p>Vim has a built-in completion system accessible in Insert Mode. Neovim extends this with <code>nvim-cmp</code> for a richer experience.</p>
+
+  <h2>Built-in Completions (Insert Mode)</h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Shortcut</th><th>Completion Source</th></tr></thead>
+      <tbody>
+        <tr><td>Ctrl+n / Ctrl+p</td><td class="desc">Keyword completion (all open buffers)</td></tr>
+        <tr><td>Ctrl+x Ctrl+n</td><td class="desc">Keywords in current file</td></tr>
+        <tr><td>Ctrl+x Ctrl+i</td><td class="desc">Keywords from included files</td></tr>
+        <tr><td>Ctrl+x Ctrl+]</td><td class="desc">Tags completion (ctags)</td></tr>
+        <tr><td>Ctrl+x Ctrl+f</td><td class="desc">File path completion</td></tr>
+        <tr><td>Ctrl+x Ctrl+l</td><td class="desc">Whole-line completion</td></tr>
+        <tr><td>Ctrl+x Ctrl+o</td><td class="desc">Omni completion (LSP/filetype-aware)</td></tr>
+        <tr><td>Ctrl+x Ctrl+u</td><td class="desc">User-defined completion function</td></tr>
+        <tr><td>Ctrl+x Ctrl+s</td><td class="desc">Spell suggestion completion</td></tr>
+        <tr><td>Ctrl+x Ctrl+v</td><td class="desc">Vim command completion</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Completion Menu Navigation</h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Key</th><th>Action in popup menu</th></tr></thead>
+      <tbody>
+        <tr><td>Ctrl+n</td><td class="desc">Select next item</td></tr>
+        <tr><td>Ctrl+p</td><td class="desc">Select previous item</td></tr>
+        <tr><td>Ctrl+y</td><td class="desc">Confirm selection (yes)</td></tr>
+        <tr><td>Ctrl+e</td><td class="desc">Cancel menu (exit) — keep original text</td></tr>
+        <tr><td>Enter</td><td class="desc">Confirm (if configured)</td></tr>
+        <tr><td>Ctrl+h / Backspace</td><td class="desc">Delete and refresh results</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Completion Settings</h2>
+  <pre data-lang="vim"><code><span class="vim-comment">" Control what gets searched for completion</span>
+<span class="vim-cmd">set complete=.,b,u,]</span>
+<span class="vim-comment">"  .  = current buffer
+"  b  = other loaded buffers
+"  u  = unloaded buffers
+"  ]  = tag files</span>
+
+<span class="vim-comment">" Popup menu options</span>
+<span class="vim-cmd">set completeopt=menuone,noinsert,noselect</span>
+<span class="vim-comment">"  menuone  = show menu even for single match
+"  noinsert = don't auto-insert
+"  noselect = don't auto-select first item</span>
+
+<span class="vim-comment">" Show extra info in popup</span>
+<span class="vim-cmd">set completeopt+=popup</span>    <span class="vim-comment">" Neovim: floating preview</span></code></pre>
+</div>
+
+<!-- ═══════════════ SPELL ═══════════════ -->
+<div class="section" id="spell">
+  <div class="section-number">43 / Spell Checking</div>
+  <h1>Spell Checking — Full Reference <span class="badge intermediate">Intermediate</span></h1>
+  <p>Vim has built-in spell checking that integrates with Insert Mode completion and works across all file types.</p>
+
+  <h2>Enabling Spell Check</h2>
+  <pre data-lang="vim"><code><span class="vim-cmd">:set spell</span>               <span class="vim-comment">" Enable spell checking</span>
+<span class="vim-cmd">:set nospell</span>             <span class="vim-comment">" Disable</span>
+<span class="vim-cmd">:set spelllang=en_us</span>     <span class="vim-comment">" American English</span>
+<span class="vim-cmd">:set spelllang=en_gb</span>     <span class="vim-comment">" British English</span>
+<span class="vim-cmd">:set spelllang=en,de</span>     <span class="vim-comment">" Multiple languages</span>
+<span class="vim-cmd">:set spellfile=~/.vim/spell/en.utf-8.add</span>  <span class="vim-comment">" Custom word list</span></code></pre>
+
+  <h2>Spell Navigation & Actions</h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Command</th><th>Action</th></tr></thead>
+      <tbody>
+        <tr><td>]s</td><td class="desc">Next misspelled word</td></tr>
+        <tr><td>[s</td><td class="desc">Previous misspelled word</td></tr>
+        <tr><td>]S</td><td class="desc">Next wrong word (ignores rare words)</td></tr>
+        <tr><td>z=</td><td class="desc">Show correction suggestions</td></tr>
+        <tr><td>zg</td><td class="desc">Mark word as good (add to dictionary)</td></tr>
+        <tr><td>zug</td><td class="desc">Undo marking word as good</td></tr>
+        <tr><td>zw</td><td class="desc">Mark word as wrong (add to bad list)</td></tr>
+        <tr><td>zuw</td><td class="desc">Undo marking word as wrong</td></tr>
+        <tr><td>1z=</td><td class="desc">Auto-correct with first suggestion (no prompt)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Spell in Insert Mode</h2>
+  <pre data-lang="vim"><code><span class="vim-comment">" While typing in Insert Mode, complete a misspelled word</span>
+<span class="vim-cmd">Ctrl+x Ctrl+s</span>    <span class="vim-comment">" Open spell suggestions in completion menu</span>
+<span class="vim-cmd">Ctrl+x s</span>         <span class="vim-comment">" Shorthand</span></code></pre>
+
+  <h2>Auto-Enable Spell per Filetype</h2>
+  <pre data-lang="vim"><code><span class="vim-cmd">autocmd FileType markdown,text,gitcommit setlocal spell</span></code></pre>
+
+  <div class="callout tip">
+    <div class="callout-title">💡 Quick-Fix Misspelling</div>
+    <p>A common Vim idiom: <code>[s1z=``</code> — go to previous misspelling, pick the first suggestion, return to where you were. Bind it: <code>nnoremap &lt;leader&gt;s [s1z=``</code></p>
+  </div>
+</div>
+
+<!-- ═══════════════ CTAGS ═══════════════ -->
+<div class="section" id="ctags">
+  <div class="section-number">44 / Tags</div>
+  <h1>ctags & Tag Navigation <span class="badge advanced">Advanced</span></h1>
+  <p>Tags are an index of symbols (functions, classes, variables) in your codebase. With a tags file, Vim can jump to any definition in any file instantly — no LSP required.</p>
+
+  <h2>Generating Tags</h2>
+  <pre data-lang="bash"><code><span class="vim-comment"># Install Universal Ctags</span>
+sudo apt install universal-ctags   <span class="vim-comment"># Ubuntu</span>
+brew install universal-ctags       <span class="vim-comment"># macOS</span>
+
+<span class="vim-comment"># Generate tags for current project</span>
+ctags -R .                         <span class="vim-comment"># Recursive from current dir</span>
+ctags -R --exclude=.git .          <span class="vim-comment"># Skip .git</span>
+ctags -R --languages=Python .      <span class="vim-comment"># Python only</span></code></pre>
+
+  <h2>Tag Navigation in Vim</h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Command</th><th>Action</th></tr></thead>
+      <tbody>
+        <tr><td>Ctrl+]</td><td class="desc">Jump to tag under cursor (definition)</td></tr>
+        <tr><td>Ctrl+t</td><td class="desc">Jump back (tag stack)</td></tr>
+        <tr><td>Ctrl+w ]</td><td class="desc">Open definition in split window</td></tr>
+        <tr><td>g Ctrl+]</td><td class="desc">Show list if multiple matches</td></tr>
+        <tr><td>:tag name</td><td class="desc">Jump to named tag</td></tr>
+        <tr><td>:tags</td><td class="desc">Show tag stack</td></tr>
+        <tr><td>:tselect name</td><td class="desc">Show all matching tags</td></tr>
+        <tr><td>:tnext / :tprev</td><td class="desc">Navigate multiple matches</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Auto-Regenerate Tags</h2>
+  <pre data-lang="vim"><code><span class="vim-comment">" Regenerate tags on save (simple approach)</span>
+<span class="vim-cmd">autocmd BufWritePost *.py,*.js,*.ts silent! !ctags -R . 2&gt;/dev/null &amp;</span>
+
+<span class="vim-comment">" Tell Vim where to find tags (search upward)</span>
+<span class="vim-cmd">set tags=./tags,tags;/</span>
+<span class="vim-comment">" The ;/ means: search upward from current dir to root</span></code></pre>
+</div>
+
+<!-- ═══════════════ ADVANCED MOTIONS ═══════════════ -->
+<div class="section" id="advanced-motions">
+  <div class="section-number">45 / Advanced Motions</div>
+  <h1>Advanced Motions & g Commands <span class="badge expert">Expert</span></h1>
+  <p>The <code>g</code> prefix unlocks a large set of less-known but powerful commands that experienced Vimmers use constantly.</p>
+
+  <h2>The g Prefix Commands</h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Command</th><th>Action</th></tr></thead>
+      <tbody>
+        <tr><td>gg</td><td class="desc">Go to file start</td></tr>
+        <tr><td>ge</td><td class="desc">Move to end of previous word</td></tr>
+        <tr><td>gE</td><td class="desc">Move to end of previous WORD</td></tr>
+        <tr><td>gj</td><td class="desc">Move down by screen line (not file line — for wrapped text)</td></tr>
+        <tr><td>gk</td><td class="desc">Move up by screen line</td></tr>
+        <tr><td>g0</td><td class="desc">Start of screen line (in wrapped text)</td></tr>
+        <tr><td>g$</td><td class="desc">End of screen line</td></tr>
+        <tr><td>g_</td><td class="desc">Last non-blank char of line</td></tr>
+        <tr><td>g~</td><td class="desc">Toggle case (operator)</td></tr>
+        <tr><td>gU</td><td class="desc">Uppercase (operator)</td></tr>
+        <tr><td>gu</td><td class="desc">Lowercase (operator)</td></tr>
+        <tr><td>gq</td><td class="desc">Format text to 'textwidth' (operator)</td></tr>
+        <tr><td>gw</td><td class="desc">Format text and keep cursor position</td></tr>
+        <tr><td>gf</td><td class="desc">Go to file under cursor (open it)</td></tr>
+        <tr><td>gF</td><td class="desc">Go to file:line under cursor</td></tr>
+        <tr><td>gx</td><td class="desc">Open URL under cursor in browser</td></tr>
+        <tr><td>gd</td><td class="desc">Go to local definition of variable</td></tr>
+        <tr><td>gD</td><td class="desc">Go to global definition</td></tr>
+        <tr><td>gv</td><td class="desc">Re-select last Visual selection</td></tr>
+        <tr><td>gi</td><td class="desc">Return to last Insert Mode position</td></tr>
+        <tr><td>ga</td><td class="desc">Show ASCII value of character under cursor</td></tr>
+        <tr><td>g8</td><td class="desc">Show hex UTF-8 of character under cursor</td></tr>
+        <tr><td>g&lt;Ctrl+g&gt;</td><td class="desc">Word/char/byte/line count for buffer or selection</td></tr>
+        <tr><td>gn</td><td class="desc">Select next search match (visual)</td></tr>
+        <tr><td>gN</td><td class="desc">Select previous search match</td></tr>
+        <tr><td>gp</td><td class="desc">Paste and leave cursor after pasted text</td></tr>
+        <tr><td>gP</td><td class="desc">Paste before and leave cursor after</td></tr>
+        <tr><td>gJ</td><td class="desc">Join lines without inserting space</td></tr>
+        <tr><td>gI</td><td class="desc">Insert at column 1 (ignores indentation)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>gf — Open File Under Cursor</h2>
+  <pre data-lang="vim"><code><span class="vim-comment">" If cursor is on: import './utils/helpers'</span>
+<span class="vim-cmd">gf</span>           <span class="vim-comment">" Opens utils/helpers (Vim adds extensions via 'suffixesadd')</span>
+<span class="vim-cmd">Ctrl+w f</span>     <span class="vim-comment">" Open in horizontal split</span>
+<span class="vim-cmd">Ctrl+w gf</span>    <span class="vim-comment">" Open in new tab</span>
+
+<span class="vim-comment">" Help Vim find the file</span>
+<span class="vim-cmd">set path+=src/**</span>    <span class="vim-comment">" Search in src/ recursively</span>
+<span class="vim-cmd">set suffixesadd=.js,.ts,.py</span>  <span class="vim-comment">" Try these extensions</span></code></pre>
+
+  <h2>gq — Text Formatting (Wrap to textwidth)</h2>
+  <pre data-lang="vim"><code><span class="vim-cmd">set textwidth=80</span>     <span class="vim-comment">" Set line wrap column</span>
+<span class="vim-cmd">gqip</span>                 <span class="vim-comment">" Reformat inner paragraph to textwidth</span>
+<span class="vim-cmd">gqq</span>                  <span class="vim-comment">" Reformat current line</span>
+<span class="vim-cmd">gq}</span>                  <span class="vim-comment">" Reformat until end of paragraph</span>
+<span class="vim-cmd">Vgq</span>                  <span class="vim-comment">" Reformat visual selection</span></code></pre>
+
+  <h2>Ctrl+a / Ctrl+x — Number Arithmetic</h2>
+  <pre data-lang="vim"><code><span class="vim-cmd">Ctrl+a</span>          <span class="vim-comment">" Increment number under/after cursor by 1</span>
+<span class="vim-cmd">Ctrl+x</span>          <span class="vim-comment">" Decrement by 1</span>
+<span class="vim-cmd">5 Ctrl+a</span>        <span class="vim-comment">" Add 5</span>
+
+<span class="vim-comment">" Works on hex (0xFF), octal (010), binary (0b1010)</span>
+<span class="vim-cmd">set nrformats=hex,octal,bin,alpha</span>
+<span class="vim-comment">" alpha allows Ctrl+a/x on letters: a → b → c</span>
+
+<span class="vim-comment">" Block visual + Ctrl+a for sequential numbering!</span>
+<span class="vim-comment">" Select a column of 1s, then g Ctrl+a → 1,2,3,4,5...</span>
+<span class="vim-cmd">Ctrl+v 5j g Ctrl+a</span>   <span class="vim-comment">" Sequentially increment a column</span></code></pre>
+</div>
+
+<!-- ═══════════════ OPERATOR PENDING ═══════════════ -->
+<div class="section" id="operator-pending">
+  <div class="section-number">46 / Operator-Pending Mode</div>
+  <h1>Operator-Pending Mode <span class="badge expert">Expert</span></h1>
+  <p>Operator-Pending Mode is the hidden internal state Vim enters after you type an operator (<code>d</code>, <code>c</code>, <code>y</code>, etc.) and is waiting for you to specify the motion or text object. Understanding it lets you create powerful custom text objects and mappings.</p>
+
+  <h2>How It Works</h2>
+  <pre data-lang="text"><code>  Normal Mode → press d
+  Vim enters Operator-Pending Mode
+                    ↓ waiting for motion...
+  press w  → dw (delete word)
+  press iw → diw (delete inner word)
+  press /foo → d/foo (delete to "foo")
+  press Esc → cancel operation, back to Normal</code></pre>
+
+  <h2>Custom Operator-Pending Mappings</h2>
+  <p>You can map keys that are only active in Operator-Pending Mode using <code>onoremap</code>. This lets you invent your own text objects.</p>
+  <pre data-lang="vim"><code><span class="vim-comment">" 'in(' → operate on inside next parentheses (even if not inside one)</span>
+<span class="vim-key">onoremap in( :&lt;c-u&gt;normal! f(vi(&lt;cr&gt;</span>
+
+<span class="vim-comment">" 'il' → operate on inside current line (excluding indentation and newline)</span>
+<span class="vim-key">onoremap il :&lt;c-u&gt;normal! ^vg_&lt;cr&gt;</span>
+
+<span class="vim-comment">" 'al' → operate on around line (entire line including indent)</span>
+<span class="vim-key">onoremap al :&lt;c-u&gt;normal! 0v$&lt;cr&gt;</span>
+
+<span class="vim-comment">" Usage: dil (delete inside line), cil, yil, etc.</span></code></pre>
+
+  <h2>Why This Matters</h2>
+  <div class="callout tip">
+    <div class="callout-title">💡 Composability</div>
+    <p>Every custom <code>onoremap</code> you define works automatically with <em>all</em> operators: <code>d</code>, <code>c</code>, <code>y</code>, <code>&gt;</code>, <code>=</code>, <code>gU</code>, and any operator from plugins. You define the target once, every verb works with it. This is the deepest expression of Vim's composable design.</p>
+  </div>
+
+  <h2>Operator-Pending Mode Escape</h2>
+  <pre data-lang="vim"><code><span class="vim-comment">" In Operator-Pending Mode:</span>
+Esc          <span class="vim-comment">" Cancel the operator, return to Normal</span>
+Ctrl+c       <span class="vim-comment">" Also cancels</span>
+Ctrl+[       <span class="vim-comment">" Also cancels (same as Esc)</span></code></pre>
+</div>
+
+<!-- ═══════════════ NETRW ═══════════════ -->
+<div class="section" id="netrw">
+  <div class="section-number">47 / Netrw</div>
+  <h1>Netrw — Built-in File Explorer <span class="badge intermediate">Intermediate</span></h1>
+  <p>Netrw is Vim's built-in file explorer and remote file editing plugin. Many users install NERDTree or oil.nvim, but Netrw is available everywhere with zero config.</p>
+
+  <h2>Opening Netrw</h2>
+  <pre data-lang="vim"><code><span class="vim-cmd">:Ex</span>         <span class="vim-comment">" Open Netrw in current window (explore)</span>
+<span class="vim-cmd">:Vex</span>        <span class="vim-comment">" Open in vertical split</span>
+<span class="vim-cmd">:Sex</span>        <span class="vim-comment">" Open in horizontal split</span>
+<span class="vim-cmd">:Tex</span>        <span class="vim-comment">" Open in new tab</span>
+<span class="vim-cmd">:Ex /path</span>   <span class="vim-comment">" Open specific path</span>
+<span class="vim-cmd">:e .</span>        <span class="vim-comment">" Open netrw in current directory</span></code></pre>
+
+  <h2>Netrw Navigation</h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Key</th><th>Action</th></tr></thead>
+      <tbody>
+        <tr><td>Enter</td><td class="desc">Open file or directory</td></tr>
+        <tr><td>-</td><td class="desc">Go up to parent directory</td></tr>
+        <tr><td>%</td><td class="desc">Create new file</td></tr>
+        <tr><td>d</td><td class="desc">Create new directory</td></tr>
+        <tr><td>D</td><td class="desc">Delete file/directory</td></tr>
+        <tr><td>R</td><td class="desc">Rename file</td></tr>
+        <tr><td>i</td><td class="desc">Cycle view (thin, long, wide, tree)</td></tr>
+        <tr><td>s</td><td class="desc">Sort by name/time/size</td></tr>
+        <tr><td>r</td><td class="desc">Reverse sort</td></tr>
+        <tr><td>gh</td><td class="desc">Toggle hidden files</td></tr>
+        <tr><td>mf</td><td class="desc">Mark file</td></tr>
+        <tr><td>mc</td><td class="desc">Copy marked files</td></tr>
+        <tr><td>mm</td><td class="desc">Move marked files</td></tr>
+        <tr><td>v</td><td class="desc">Open in vertical split</td></tr>
+        <tr><td>o</td><td class="desc">Open in horizontal split</td></tr>
+        <tr><td>t</td><td class="desc">Open in new tab</td></tr>
+        <tr><td>qf</td><td class="desc">Display file info</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Netrw Settings</h2>
+  <pre data-lang="vim"><code><span class="vim-cmd">let g:netrw_banner = 0</span>        <span class="vim-comment">" Hide the top banner</span>
+<span class="vim-cmd">let g:netrw_liststyle = 3</span>     <span class="vim-comment">" Tree view by default</span>
+<span class="vim-cmd">let g:netrw_browse_split = 4</span>  <span class="vim-comment">" Open files in previous window</span>
+<span class="vim-cmd">let g:netrw_altv = 1</span>          <span class="vim-comment">" Split to right when netrw is left pane</span>
+<span class="vim-cmd">let g:netrw_winsize = 25</span>      <span class="vim-comment">" 25% width for netrw pane</span></code></pre>
+
+  <h2>Remote File Editing</h2>
+  <p>Netrw can open files over the network — a feature completely unique to Vim:</p>
+  <pre data-lang="vim"><code><span class="vim-cmd">:e scp://user@server/path/to/file.py</span>   <span class="vim-comment">" Edit remote file over SSH</span>
+<span class="vim-cmd">:e ftp://ftp.example.com/pub/file.txt</span>   <span class="vim-comment">" Edit FTP file</span>
+<span class="vim-cmd">:e http://example.com/file.txt</span>         <span class="vim-comment">" View HTTP file (read-only)</span>
+<span class="vim-cmd">:Ex scp://user@server/</span>                 <span class="vim-comment">" Browse remote directory</span></code></pre>
+
+  <div class="callout info">
+    <div class="callout-title">ℹ Netrw vs oil.nvim</div>
+    <p>Netrw can feel quirky. <strong>oil.nvim</strong> is a modern alternative that shows the directory as an editable buffer — you rename files by editing text, create them by adding lines, delete them by removing lines. Highly recommended for Neovim users.</p>
+  </div>
+</div>
+
+<!-- Footer for new sections -->
+  <div class="divider"></div>
+  <div style="text-align:center; padding: 20px 0 60px;">
+    <div style="font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--text3); letter-spacing:1px; line-height:2;">
+      Sections 33–47 added · Regex, Quickfix, Abbreviations, Digraphs, Sessions, Autocommands,<br>
+      Vimscript, Neovim/Lua, LSP, Completion, Spell, Tags, Advanced Motions, Op-Pending, Netrw
+      <br><span style="color:var(--green); margin-top:8px; display:inline-block">:wq</span>
+    </div>
+  </div>
+
+</div> <!-- end .content (new sections) -->
 </div> <!-- end #main -->
 
 <a href="#" id="back-top" title="Back to top">↑</a>
