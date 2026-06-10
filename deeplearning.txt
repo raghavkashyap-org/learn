@@ -1,0 +1,1071 @@
+ Deep Learning (BAI-701)
+
+
+    
+
+
+
+
+      Department of Computer Science & Engineering
+                     Deep Learning Notes
+
+
+                    November 20, 2025
+
+
+
+Deep Learning Notes , 28 November 2022   1/61
+␌Unit-1
+
+
+
+   Content
+         Introduction to machine learning
+         Linear models (SVMs and Perceptrons, logistic regression)
+         Intro to Neural Nets:
+         What a shallow network computes
+         Training a network: loss functions, back propagation and stochastic
+         gradient descent
+         Neural networks as universal function approximates
+
+
+
+
+              Deep Learning Notes , 28 November 2022     2/61
+␌Introduction to machine learning
+
+
+
+
+    Machine learning (ML) allows computers to learn and make decisions
+    without being explicitly programmed.
+    It involves feeding data into algorithms to identify patterns and make
+    predictions on new data.
+    It is used in various applications like image recognition, speech
+    processing, language translation, recommender systems, etc.
+
+
+
+
+              Deep Learning Notes , 28 November 2022   3/61
+␌Contd..
+
+
+
+
+          Deep Learning Notes , 28 November 2022   4/61
+␌Type of machine learning
+
+
+   Supervised Learning: The model learns from labeled data (input          ␙
+   correct output).
+   Examples:-
+   1. Predicting house prices (regression)
+   2. Classifying emails as spam/not spam (classification)
+   Unsupervised Learning: The model finds patterns in unlabeled data
+   (no correct output given).
+   Examples:-
+   1. Customer segmentation (clustering)
+   2. Dimensionality reduction (PCA)
+
+
+
+
+            Deep Learning Notes , 28 November 2022   5/61
+␌Contd...
+
+
+    Semi-Supervised Learning: Uses a small amount of labeled data +
+    a large amount of unlabeled data.
+    Examples:-
+    1. Speech recognition
+    2. Web page classification
+    Reinforcement Learning (RL): The model learns by interacting with
+    an environment and receiving rewards or penalties.
+    Examples:
+    1. Game-playing AI (Chess, Go)
+    2. Robotics control
+    3. Self-driving cars
+
+
+
+
+             Deep Learning Notes , 28 November 2022   6/61
+␌Contd...
+
+
+    Deep Learning: A subset of ML using neural networks with many
+    layers.
+    Examples:
+    1. Image recognition (CNNs)
+    2. Language models (RNNs, Transformers)
+    Transfer Learning: Using a pre-trained model and fine-tuning it for a
+    new task.
+    Examples:
+    1. Using BERT for text classification
+    2. Using ResNet for medical imaging
+
+
+
+
+              Deep Learning Notes , 28 November 2022   7/61
+␌Linear models
+
+
+Linear models are a group of algorithms that make predictions using a linear
+combination of input features.
+General Form
+For an input vector x = (x1 , x2 , x3 ......xn ) :
+f (x) = w1 x2 + w2 x2 + ......... + wn xn + b = w T x + b
+where:
+    w = weights (parameters the model learns)
+    b bias/intercept
+    f(x) = output (can be probability, class, or numeric value)
+Although the model is linear in the weights, it can still handle complex data
+using techniques like polynomial features or kernels.
+
+
+
+               Deep Learning Notes , 28 November 2022   8/61
+␌Perceptron
+
+
+
+
+    The Perceptron is the simplest and oldest neural network model.
+    It is a binary linear classifier that decides whether an input belongs to
+    one of two classes.
+    It was introduced by Frank Rosenblatt in 1957.
+A perceptron takes multiple input features, multiplies them by weights, adds
+a bias, and passes them through a step (threshold) activation function.
+
+
+
+
+               Deep Learning Notes , 28 November 2022   9/61
+␌Contd..
+
+Mathematical form
+f(x) = w T x + b
+where:
+    x = [x1 , x2 , x3 ......xn ] is the input
+    w = [w1 , w2 , w3 ......wn ] is the weight vector
+    b is the bias
+    Output is a binary class (+1 or -1)
+Activation function (hard threshold)
+                          (
+                           1,   if w T x + b ≥ 0,
+                     ŷ =
+                           −1, if w T x + b < 0.
+
+This creates a linear decision boundary.
+
+
+                Deep Learning Notes , 28 November 2022   10/61
+␌Perceptron Learning Rule (Training Algorithm)
+
+
+The perceptron updates weights only when it makes a mistake.
+Update Rule:
+If prediction ŷ ̸= y
+
+                                 w := w + η(y − ŷ )x
+
+
+                                   b := b + η(y − ŷ )
+where:
+    η= learning rate (typically small, like 0.1)
+    y = true label (must be +1 or -1)
+
+
+
+
+              Deep Learning Notes , 28 November 2022   11/61
+␌Contd..
+
+
+
+Algorithm Steps:
+ 1   Initialize weights (often zeros or small random values).
+ 2   For each training example:
+
+                   ␙
+          Compute prediction
+
+                   ␙
+          If correct  do nothing
+          If wrong   update w and b
+ 3   Repeat for many epochs or until no errors.
+
+
+
+
+               Deep Learning Notes , 28 November 2022   12/61
+␌Logistic Regression
+
+
+Logistic Regression is one of the most widely used classification algorithms
+in machine learning. Despite its name, it is used for classification, not
+regression.
+It predicts the probability that an input belongs to a certain class.
+    Linear Regression gives outputs from −∞ to + ∞
+    Classification requires outputs between 0 and 1.
+    So Logistic Regression applies a sigmoid function to convert any
+    linear output into a probability:
+
+                                     0 ≤ P(y = 1 | x) ≤ 1
+
+
+
+
+               Deep Learning Notes , 28 November 2022   13/61
+␌contd...
+
+
+Model Equation
+First compute a linear combination:
+f(x) = w T x + b
+Then pass it through the sigmoid activation function:
+                                         1
+                                      σ(z) =
+                                    1 + e −z
+Thus, the model predicts the probability of class 1 as:
+
+                            P(y = 1 | x) = σ(w T x + b)
+
+
+
+
+               Deep Learning Notes , 28 November 2022   14/61
+␌contd..
+
+
+
+Decision Rule
+Logistic Regression outputs a probability, not a hard class.
+To classify:
+                          (
+                            1, if P(y = 1 | x) ≥ .5,
+                     ŷ =
+                            0, Otherwise
+The threshold 0.5 can be changed based on the task (e.g., medical diagno-
+sis).
+
+
+
+
+               Deep Learning Notes , 28 November 2022   15/61
+␌Loss Function (Binary Cross-Entropy)
+
+Logistic Regression is trained by minimizing the log-loss:
+
+                L(w , b) = − [ y log(p̂) + (1 − y ) log(1 − p̂) ]
+For all data points:
+                     m
+                   1 X h (i) ␐ (i) ␑ ␐         ␑ ␐             ␑i
+      J(w , b) = −      y log p̂    + 1 − y (i) log 1 − p̂ (i)
+                   m
+                          i=1
+
+Where:
+                                          ␐              ␑
+                                p̂ (i) = P y = 1 | x (i)
+
+This loss is convex    ␙ no local minima.
+               Deep Learning Notes , 28 November 2022   16/61
+␌Parameter Optimization (Gradient Descent)
+
+Weights are updated by:
+
+                                                         ∂J
+                                     w := w − η
+                                                         ∂w
+                                                         ∂J
+                                       b := b − η
+                                                         ∂b
+The gradients are:
+                                           m
+                         ∂J   1 X ␐ (i)      ␑
+                            =      ŷ − y (i) x (i)
+                         ∂w   m
+                                          i=1
+                                               m
+                             ∂J   1 X ␐ (i)   (i)
+                                                  ␑
+                                =      ŷ − y
+                             ∂b   m
+                                            i=1
+
+
+
+              Deep Learning Notes , 28 November 2022   17/61
+␌SVM (Support Vector Machine)
+
+
+
+
+          Deep Learning Notes , 28 November 2022   18/61
+␌SVM (Support Vector Machine)
+
+
+
+
+          Deep Learning Notes , 28 November 2022   19/61
+␌SVM (key Concept)
+   Hyperplane: A decision boundary separating different classes in
+   feature space and is represented by the equation wx + b = 0 in linear
+   classification.
+   Support Vectors: The closest data points to the hyperplane, crucial
+   for determining the hyperplane and margin in SVM.
+   Margin: The distance between the hyperplane and the support
+   vectors. SVM aims to maximize this margin for better classification
+   performance.
+   Kernel: A function that maps data to a higher-dimensional space
+   enabling SVM to handle non-linearly separable data.
+   Hard Margin: A maximum-margin hyperplane that perfectly
+   separates the data without misclassifications.
+   Soft Margin: Allows some misclassifications by introducing slack
+   variables, balancing margin maximization and misclassification
+   penalties when data is not perfectly separable.
+             Deep Learning Notes , 28 November 2022   20/61
+␌Contd.. Explanation and Derivation
+SVM is a supervised binary classifier that finds the best separating hyper-
+plane between two classes by maximizing the margin (distance between the
+hyperplane and the nearest points).
+  1 The Intuition
+
+     Given labeled training data
+
+                                   (xi , yi ),     yi ∈ {−1, +1}
+    we want a hyperplane:
+                                            w ⊤x + b = 0
+    that separates the classes with maximum margin.
+    The margin is
+                                      2
+                                     ∥w ∥
+    So maximizing the margin is equivalent to minimizing
+                                                   ∥w ∥2
+    .          Deep Learning Notes , 28 November 2022   21/61
+␌Hard-Margin SVM (linearly separable case)
+
+
+
+We want all positive samples on one side, negatives on the other:
+                           ␐          ␑
+                        yi w ⊤ xi + b ≥ 1 ∀i
+
+Optimization Problem (Primal Form)
+
+                                    minw , b 12 ∥w ∥2
+                                   yi w ⊤ xi + b ≥ 1,
+                                                 ␁
+                          s.t.                                         ∀i
+
+This is a convex quadratic programming problem.
+
+
+
+
+              Deep Learning Notes , 28 November 2022   22/61
+␌Lagrangian Formulation
+
+We form the primal Lagrangian:
+                        1        X h ␐            ␑    i
+           L(w , b, α) = ∥w ∥2 −  αi yi w ⊤ xi + b − 1
+                        2
+                                                 i
+
+                       αi ≥ 0         are Lagrange multipliers.
+Stationary conditions
+Take derivative w.r.t w:
+
+                              ∂L     X
+                                 =w−   αi yi xi = 0
+                              ∂w
+                                                      i
+
+So:                                            X
+                                       w=                 αi y i x i
+                                                  i
+
+
+
+               Deep Learning Notes , 28 November 2022   23/61
+␌Contd..
+
+
+
+Derivative w.r.t. b:
+
+                                  ∂L    X
+                                     =−   αi yi = 0
+                                  ∂b
+                                                  i
+
+So:                                      X
+                                               αi y i = 0
+                                           i
+
+
+
+
+               Deep Learning Notes , 28 November 2022   24/61
+␌Dual Problem
+
+
+
+Substituting w into the Lagrangian gives the dual:
+                               X              1X
+                    max               αi −       αi αj yi yj ⟨xi , xj ⟩
+                      α                       2
+                                  i                i,j
+                               X
+                      s.t.            αi yi = 0,
+                                  i
+                               αi ≥ 0        ∀i
+
+This is solved by quadratic programming methods.
+
+
+
+
+              Deep Learning Notes , 28 November 2022   25/61
+␌Support Vectors
+
+
+
+
+Only data points with αi > 0 matter:
+                                              X
+                                     w=              αi y i x i
+                                             i∈SV
+
+These points lie on the margin and define the hyperplane.
+
+
+
+
+              Deep Learning Notes , 28 November 2022   26/61
+␌Decision Function
+
+
+
+
+Given the optimal αi , w, and b:
+                                                                            !
+                                            X
+                     f (x) = sign                  αi yi ⟨xi , x⟩ + b
+                                           i∈SV
+
+
+
+
+             Deep Learning Notes , 28 November 2022       27/61
+␌Kernel Trick (non-linear SVM)
+
+Replace dot product:
+                                  ⟨xi , xj ⟩ → K (xi , xj )
+Common kernels:
+    Polynomial
+    RBF (Gaussian)
+    Sigmoid
+Decision function becomes:
+                                                                              !
+                                            X
+                     f (x) = sign                  αi yi K (xi , x) + b
+                                           i∈SV
+
+This allows SVM to classify non-linear data in the original space.
+
+
+               Deep Learning Notes , 28 November 2022       28/61
+␌Intro to Neural Nets:
+
+
+A Neural Network (NN) is a computational model inspired by the structure
+of the human brain. It consists of interconnected units called called neurons
+that work together to learn patterns from data.
+Neural network are widely used in:
+    image classification
+    speech recongnition
+    machine translation
+    prediction and regression
+    reinforcement learning
+    many AI applications
+
+
+
+
+               Deep Learning Notes , 28 November 2022   29/61
+␌Neuron
+
+A neuron is a small mathematical function.
+For an input vector x = [x1 , x2 , x3 ......xn ]
+each neuron computes: z = w T x + b
+and then applies a non-linear function σ(z) (activation).
+So output: a = σ(w T x + b)
+Common activation functions:
+    Sigmoid:
+                                                          1
+                                          σ(z) =
+                                                       1 + e −z
+    ReLU: max(0,z)
+    Tanh
+    Softmax (for multi-class output)
+
+
+
+               Deep Learning Notes , 28 November 2022   30/61
+␌Neural Network Layers
+    A neural network is built by arranging many neurons into layers:
+
+
+
+
+   Input Layer: Takes raw data (e.g., pixels of an image)
+   Hidden Layers: Perform transformations,
+   The more hidden layers - the more complex patterns it can learn -
+   “Deep” Neural Network
+   Output Layer: Produces predictions (Probability, class label, etc.)
+
+             Deep Learning Notes , 28 November 2022   31/61
+␌How Neural Network Learns
+
+
+Learning means: findinds the best weights (w) and biases (b) that minimize
+error.
+This happens in two major steps:
+  1   Step 1: Forward Propagation
+      Data moves forward from input → output
+      At each layer:
+                                 ␐                     ␑
+                         a(l) = σ W (l) a(l−1) + b (l)
+
+      The output is compared to the target using a loss function, e.g:
+          Mean Squared Error (MSE)
+          Cross-entropy Loss
+
+
+
+
+                Deep Learning Notes , 28 November 2022   32/61
+␌Contd..
+
+    Step 2: Backpropagation + Gradient Descent
+    Backpropagation computes the gradient (slope) of the loss with
+    respect to each parameter.
+    Then gradient descent updates parameters:
+
+                                                              ∂L
+                                          w := w − η
+                                                              ∂w
+                                                             ∂L
+                                            b := b − η
+                                                             ∂b
+Where:
+L = loss
+η = learning rate
+This is repeated for many iterations (epochs) until the network learns.
+
+
+               Deep Learning Notes , 28 November 2022   33/61
+␌Types of Neural Networks
+
+
+ 1   Feedforward Networks (MLP): Basic model; used for tabular data.
+ 2   Convolutional Neural Networks (CNNs): Used for images; detect
+     patterns like edges, shapes.
+ 3   Recurrent Neural Networks (RNNs): Used for sequences (text,
+     speech). Includes LSTM, GRU.
+ 4    Transformers: State-of-the-art for NLP, vision, and multimodal
+     learning.
+ 5   Autoencoders: Used for compression and denoising.
+ 6   Generative Models: GANs, Diffusion Models — used for generating
+     images, text, etc.
+
+
+
+
+              Deep Learning Notes , 28 November 2022   34/61
+␌Simple NN Workflow
+
+
+
+ 1   Input image   ␙ flattened
+ 2   Pass through hidden layers (ReLU)
+ 3   Output layer uses Softmax
+ 4   Compute cross-entropy loss
+ 5   Backpropagate gradients
+ 6   Update weights using gradient descent
+ 7   Repeat until training accuracy is high
+
+
+
+
+               Deep Learning Notes , 28 November 2022   35/61
+␌What a shallow network computes
+A shallow neural network is a network with one hidden layer. Even though
+it looks simple, it computes a very important kind of function.
+A shallow neural network has: Mathematically:
+Hidden layer:
+                                   ␐          ␑
+                            hj = σ wj⊤ x + bj
+Output layer:
+                                              m
+                                              X
+                                       y=           vj hj + c
+                                              j=1
+where:
+    x ∈ Rd (input)
+    m =(number of hidden neurons)
+    wj , vj = (learned weights)
+    σ =(activation function)
+                Deep Learning Notes , 28 November 2022   36/61
+␌What Does a Shallow Network Compute?
+A shallow network computes a sum of nonlinear “features” of the input.
+                                    m
+                                    X          ␐          ␑
+                        f (x) =            vj σ wj⊤ x + bj + c
+                                     j=1
+
+This is a linear combination of nonlinear transformations of the input.
+A shallow network computes a piecewise linear function (if using ReLU)
+For ReLU activation:
+
+                                    σ(z) = max(0, z)
+Then:
+                                m
+                                X           ␐             ␑
+                   f (x) =            vj max 0, wj⊤ x + bj + c
+                                j=1
+
+This is a piecewise linear function, but it can have many linear regions,
+enabling it to approximate highly complex shapes.
+              Deep Learning Notes , 28 November 2022   37/61
+␌Training a network
+
+
+loss functions, backpropagation and stochastic gradient descent
+What does training a neural network mean?
+Goal: find the best set of weights so that the network makes accurate
+predictions.
+Training involves:
+    Forward pass
+    Loss computation
+    Backpropagation
+    Weight updates using Gradient Descent
+    Repeat for many epochs
+The network learns by reducing the loss over time.
+
+
+
+              Deep Learning Notes , 28 November 2022   38/61
+␌Contd..
+
+
+
+Forward Pass
+   Input is fed to the neural network.
+   Each layer computes:
+          z = Wx + b
+          a = σ(z)
+   Final output ŷ is produced.
+   No learning happens here; it’s just computation.
+
+
+
+
+               Deep Learning Notes , 28 November 2022   39/61
+␌Contd..
+
+
+
+
+A loss function measures how wrong the network’s prediction is.
+purpose:
+    Converts errors into a single numerical value.
+    Guides learning.
+    Helps decide if the network is improving.
+Loss ↓ → Performance ↑
+
+
+
+
+              Deep Learning Notes , 28 November 2022   40/61
+␌Contd..
+Common Loss Functions
+   Mean Squared Error (MSE)-Regression
+                                                     N
+                                               1 X
+                                 MSE =            (yi − ŷi )2
+                                               N
+                                                    i=1
+
+   Cross-Entropy Loss-classification
+   Binary:
+
+                       L = − [y log(ŷ ) + (1 − y ) log(1 − ŷ )]
+   Multi-class (softmax):
+                                               C
+                                               X
+                                    L=−               yc log(ŷc )
+                                                c=1
+
+
+             Deep Learning Notes , 28 November 2022   41/61
+␌Contd..
+Backpropagation — What Is It?
+Backpropagation is an algorithm to compute how much each weight con-
+tributed to the error.
+It uses:
+     The chain rule of calculus
+     Efficient reuse of intermediate values
+     Gradients to guide weight updates
+Steps:
+   1 Forward pass through the network
+
+   2 Compute loss
+
+   3 Compute error at output layer
+
+   4 Propagate error backward
+
+   5 Compute gradients for each weight
+
+   6 Use gradients to update the weights
+
+This process repeats for each batch.
+             Deep Learning Notes , 28 November 2022   42/61
+␌Contd..
+Backpropagation — Mathematics
+For a layer:
+
+                                z = Wx + b,               a = σ(z)
+Error signal:
+
+                                                ∂L ′
+                                        δ=         · σ (z)
+                                                ∂a
+Weight gradient:
+
+                                        ∂L
+                                           = δ · aprev
+                                        ∂W
+Error passed backward:
+
+                                         δprev = W T δ
+
+                Deep Learning Notes , 28 November 2022   43/61
+␌Contd..
+
+
+
+
+Why Backpropagation Works
+   Uses chain rule to link loss          ␙ each weight
+   Efficient (shares intermediate results)
+   Scales to deep networks
+   Provides direction and magnitude of updates
+
+
+
+
+             Deep Learning Notes , 28 November 2022   44/61
+␌Gradient Descent — Goal
+Gradient Descent updates weights to minimize loss.
+General update rule:
+
+                                                         ∂L
+                                    W =W −η
+                                                         ∂W
+Where:
+    w = weight
+    η = learning rate
+    Gradient shows increase direction (so we subtract)
+
+
+
+
+              Deep Learning Notes , 28 November 2022   45/61
+␌Contd..
+
+
+Types of Gradient Descent
+  1 Batch Gradient Descent
+
+          Uses entire dataset
+          Very accurate but slow
+ 2   Stochastic Gradient Descent (SGD)
+          Uses one training example at a time
+          Fast but noisy
+ 3   Mini-Batch SGD (most common)
+          Uses small batches (e.g., 32, 64, 128)
+          Best balance of speed & stability
+
+
+
+
+                Deep Learning Notes , 28 November 2022   46/61
+␌Contd..
+
+
+
+Stochastic Gradient Descent (SGD)
+SGD update rule:
+
+                                W = W − η∇L(xi , yi )
+Characteristics:
+    Fast Learning
+    Loss fluctuates but converges
+    Suitable for large datasets
+
+
+
+
+              Deep Learning Notes , 28 November 2022   47/61
+␌Contd..
+
+Training Loop Summary
+For each epoch:
+    Perform forward pass
+    Compute loss
+    Backpropagate gradients
+    Update weights via SGD
+    Repeat on all batches
+Training continues until the model converges.
+Summary:
+    Loss function␙ measures error
+    Backpropagation ␙ computes gradients
+    SGD ␙ updates weights
+Repeat until loss is minimized
+
+               Deep Learning Notes , 28 November 2022   48/61
+␌Example Neural Network
+
+
+We create a 1-neuron network
+y = σ(wx + b)
+Where:
+    Input x = 2
+    True output y = 1
+    Weight w = 0.5
+    Bias b = 0.0
+    Learning rate η = 0.1
+    Activation Sigmoid
+                                                         1
+                                         σ(z) =
+                                                      1 + e −z
+
+
+
+              Deep Learning Notes , 28 November 2022   49/61
+␌Contd...
+
+
+Step 1: Forward Pass
+Compute:
+z= wx+b = 0.5*2+0 = 1
+ŷ = σ(1) = .731
+Step 2: Compute Loss (Using MSE)
+L = 12 (y − ŷ )2
+L = 12 (1 − 0.731)2 = 0.0362
+So the error is 0.0362
+Step 3: Backpropagation(Find Gradients)
+           ∂L ∂L
+We need: ∂w     , ∂b
+
+
+
+
+            Deep Learning Notes , 28 November 2022   50/61
+␌Contd.
+
+(1) Gradient of loss wrt output: ∂∂Lŷ = ŷ − y
+∂L
+∂ ŷ = .731-1 = -0.269
+(2) Gradient of output wrt z (Sigmoid derivative):
+σ ′ (z) = ŷ (1 − ŷ )
+σ ′ (1) = 0.731(1-0.731) = 0.196
+(3) Error signal:
+δ = (ŷ − y )σ ′ (z)
+δ = -0.269 * 0.196 = -0.0527
+(4) Gradient wrt weight:
+ ∂L
+∂w = δ * x
+ ∂L
+∂w = -0.0527*2 = -0.1054
+(5) Gradient wrt bias:
+∂L
+∂b = δ = -0.0527
+
+
+
+               Deep Learning Notes , 28 November 2022   51/61
+␌Contd..
+
+Step 4: SGD Weight Update
+General rule:
+
+                                                        ∂L
+                                    w := w − η
+                                                        ∂w
+                                                        ∂L
+                                      b := b − η
+                                                        ∂b
+Update weight:
+wnew = 0.5-0.1(-0.1054)
+wnew = 0.5-0.01054 = .51054
+Update bias:
+bnew = 0-0.1(-0.0527)
+bnew = 0.00527
+
+
+             Deep Learning Notes , 28 November 2022   52/61
+␌Result after one training step
+
+
+
+
+          Parameter          Old value                    New Value
+          Weight w              0.5                         0.51054
+            Bias b              0.0                         0.00527
+             Loss             0.0362              will be lower next iteration
+
+Note: The network improved its parameters to reduce loss.
+
+
+
+
+              Deep Learning Notes , 28 November 2022       53/61
+␌Neural Network as Universal Function Approximates
+
+
+(1) What does “Universal Function Approximator” Mean?
+A nural network with at least:
+    One-hidden layer
+    Non-linear activation function
+can approximate any continuous function to any desired accuracy, given
+enough neurons.
+This is known as the:
+Universal Approximation Theorem (UAT)
+The theorem states that:
+A feedforward neural network with a single hidden layer containing a finite
+number of neurons can approximate any continuous function on a closed,
+bounded interval, provided it uses a non-linear activation function.
+
+
+
+               Deep Learning Notes , 28 November 2022   54/61
+␌Contd..
+
+
+(2) Why are Neural Networks able to approximate any function?
+A neural network is essentially a stack of simple mathematical units (neu-
+rons).
+Each neuron computes:
+z = w1 x2 + w2 x2 + ......... + wn xn + b
+Then passes it through a non-linear activation like:
+    ReLU
+    Sigmoid
+    tanh
+Without non-linearity, a neural network would just be a linear model.
+
+
+
+
+               Deep Learning Notes , 28 November 2022   55/61
+␌Contd..
+
+Key Insight
+Neural networks build complex functions by combining many simple func-
+tions together.
+    One neuron  ␙ simple curve
+    Many neurons ␙ complex curves
+    Many layers ␙ extremely complex functions
+This ability allows neural networks to approximate functions like:
+    A sine wave
+    A polynomial
+    A step function
+    Image recognition
+    Language translation
+
+
+               Deep Learning Notes , 28 November 2022   56/61
+␌Contd..
+
+
+3. Why Non-Linearity Is Important
+Suppose we use only linear activations:
+
+                            f (x) = W2 (W1 x + b1 ) + b2
+This collapses to:
+
+                                      f (x) = Wx + b
+Which is still just a line, no matter how many layers you add.
+Therefore, without non-linearity, a neural network cannot approximate com-
+plex functions.
+
+
+
+
+               Deep Learning Notes , 28 November 2022   57/61
+␌Contd..
+
+
+4. The Intuition Behind Approximation
+Think of a complicated function like:
+A curve with many ups and downs.
+A neural network approximates this by:
+Breaking it into many small straight or curved segments.
+Each neuron in the hidden layer produces a small “bump” or “step.”
+When you add many such bumps together:
+    You get any desired shape.
+    The more neurons you use, the smoother and more accurate the
+    approximation.
+This is why a single hidden layer with many neurons is powerful.
+
+
+
+               Deep Learning Notes , 28 November 2022   58/61
+␌Contd..
+
+What UAT Does NOT Mean
+The theorem does NOT say:
+    The network will find the approximation easily
+    Training will always converge
+    You need only one hidden layer
+Instead, it says:
+There exists some set of weights that can approximate the function.
+Finding those weights requires:
+    Optimization (SGD)
+    Good initialization
+    Sufficient data
+    Proper architecture
+
+
+              Deep Learning Notes , 28 November 2022   59/61
+␌Contd..
+Universal Approximation in Deep Networks
+Deep networks (many layers):
+    Require fewer neurons per layer
+    Learn hierarchical patterns
+    Are better at representing very complex functions
+Deep learning became powerful because:
+    They require fewer units than a gigantic single hidden layer
+    Deep networks approximate functions more efficiently
+Summary: Neural networks are universal function approximators because:
+  1 They combine many simple nonlinear units.
+
+  2 They can represent arbitrarily complex functions.
+
+  3 With enough neurons and correct activations, they can approximate
+
+    any continuous function.
+  4 Deep networks do this more efficiently.
+
+
+              Deep Learning Notes , 28 November 2022   60/61
+␌   Thank You
+
+
+Deep Learning Notes , 28 November 2022   61/61
