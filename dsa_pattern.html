@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>pattern.map // cs//type</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0b0d10;
+    --bg-raised:#12151a;
+    --bg-card:#15181e;
+    --border:#242832;
+    --border-soft:#1c1f26;
+    --text:#dfe3e8;
+    --text-dim:#8a92a0;
+    --text-faint:#565d6b;
+    --accent:#7fd8a6;      /* phosphor green - "solved" */
+    --accent-dim:#3d5c4b;
+    --warn:#e8b25c;        /* amber - caveats */
+    --warn-dim:#4a3d24;
+    --miss:#d97ba0;        /* rose - "missing from list" */
+    --miss-dim:#4a2c39;
+    --link:#7ba7d9;
+    --mono:'JetBrains Mono', monospace;
+    --sans:'Inter', sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--mono);
+    line-height:1.6;
+    padding:0 0 80px 0;
+  }
+  body::before{
+    content:'';
+    position:fixed; inset:0;
+    background:
+      repeating-linear-gradient(0deg, rgba(255,255,255,0.012) 0px, rgba(255,255,255,0.012) 1px, transparent 1px, transparent 3px);
+    pointer-events:none;
+    z-index:1000;
+  }
+  .wrap{max-width:920px; margin:0 auto; padding:0 24px;}
+
+  /* header */
+  header{
+    padding:56px 0 32px 0;
+    border-bottom:1px solid var(--border);
+  }
+  .kicker{
+    font-size:12px; letter-spacing:0.18em; text-transform:uppercase;
+    color:var(--accent); font-weight:600; margin-bottom:14px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .kicker::before{content:'●'; font-size:8px; animation:blink 1.6s steps(1) infinite;}
+  @keyframes blink{50%{opacity:0.15;}}
+  h1{
+    font-size:clamp(28px,4.5vw,42px); margin:0 0 12px 0; font-weight:700;
+    letter-spacing:-0.01em;
+  }
+  h1 .arrow{color:var(--text-faint); font-weight:400; margin:0 8px;}
+  .sub{color:var(--text-dim); font-size:14.5px; max-width:640px; font-family:var(--sans);}
+  .sub code{color:var(--accent); background:transparent; font-family:var(--mono);}
+
+  .meta-row{
+    display:flex; gap:24px; margin-top:22px; flex-wrap:wrap;
+    font-size:12px; color:var(--text-faint); text-transform:uppercase; letter-spacing:0.06em;
+  }
+  .meta-row span b{color:var(--text-dim); font-weight:600;}
+
+  /* search */
+  .search-bar{
+    margin:28px 0 0 0; position:sticky; top:16px; z-index:10;
+  }
+  .search-bar input{
+    width:100%; background:var(--bg-raised); border:1px solid var(--border);
+    color:var(--text); font-family:var(--mono); font-size:14px;
+    padding:13px 16px 13px 40px; border-radius:6px; outline:none;
+    transition:border-color .15s;
+  }
+  .search-bar input:focus{border-color:var(--accent);}
+  .search-bar input::placeholder{color:var(--text-faint);}
+  .search-wrap{position:relative;}
+  .search-wrap::before{
+    content:'/'; position:absolute; left:15px; top:50%; transform:translateY(-50%);
+    color:var(--text-faint); font-size:14px; pointer-events:none;
+  }
+  .filter-row{display:flex; gap:8px; margin-top:12px; flex-wrap:wrap;}
+  .filter-chip{
+    font-family:var(--mono); font-size:11.5px; padding:6px 12px; border-radius:100px;
+    border:1px solid var(--border); background:var(--bg-raised); color:var(--text-dim);
+    cursor:pointer; user-select:none; transition:all .12s;
+  }
+  .filter-chip:hover{border-color:var(--text-faint); color:var(--text);}
+  .filter-chip.active{background:var(--accent-dim); border-color:var(--accent); color:var(--accent);}
+
+  /* section labels */
+  .section-label{
+    margin:52px 0 18px 0; display:flex; align-items:baseline; gap:12px;
+  }
+  .section-label .n{color:var(--accent); font-size:13px; font-weight:600;}
+  .section-label h2{font-size:16px; margin:0; text-transform:uppercase; letter-spacing:0.08em; font-weight:600;}
+  .section-label .line{flex:1; height:1px; background:var(--border);}
+
+  /* pattern card */
+  .card{
+    background:var(--bg-card); border:1px solid var(--border-soft);
+    border-radius:8px; padding:22px 24px; margin-bottom:14px;
+    transition:border-color .15s;
+  }
+  .card:hover{border-color:var(--border);}
+  .card.missing{border-style:dashed; border-color:var(--miss-dim);}
+  .card-head{display:flex; align-items:flex-start; justify-content:space-between; gap:16px; flex-wrap:wrap;}
+  .trigger{
+    font-size:15.5px; font-weight:600; color:var(--text); font-family:var(--sans);
+    flex:1; min-width:220px;
+  }
+  .trigger .q{color:var(--text-faint); font-weight:400;}
+  .techniques{display:flex; gap:6px; flex-wrap:wrap;}
+  .tech-tag{
+    font-size:11px; padding:4px 9px; border-radius:4px; font-weight:600;
+    background:var(--accent-dim); color:var(--accent); white-space:nowrap;
+  }
+  .tech-tag.alt{background:#2a2440; color:#b39ddb;}
+  .tech-tag.alt2{background:#1f3347; color:#7ba7d9;}
+
+  .why{
+    color:var(--text-dim); font-size:13.5px; margin-top:12px; font-family:var(--sans);
+    line-height:1.65;
+  }
+  .why b{color:var(--text);}
+  .complexity{
+    margin-top:10px; font-size:12px; color:var(--text-faint);
+  }
+  .complexity b{color:var(--text-dim); font-weight:600;}
+
+  .caveat{
+    margin-top:14px; padding:12px 14px; border-radius:6px;
+    background:var(--warn-dim); border-left:3px solid var(--warn);
+    font-size:13px; color:#e8d4a8; font-family:var(--sans); line-height:1.6;
+  }
+  .caveat .tag{
+    display:inline-block; font-family:var(--mono); font-size:10.5px; font-weight:700;
+    color:var(--warn); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:6px;
+  }
+
+  .example{
+    margin-top:10px; font-size:12.5px; color:var(--text-faint); font-style:italic;
+    font-family:var(--sans);
+  }
+  .example b{color:var(--text-dim); font-style:normal;}
+
+  /* missing pattern card variant */
+  .card.missing .trigger{color:var(--miss);}
+  .miss-badge{
+    font-size:10.5px; font-weight:700; text-transform:uppercase; letter-spacing:0.06em;
+    color:var(--miss); background:var(--miss-dim); padding:3px 8px; border-radius:4px;
+  }
+
+  /* verdict box */
+  .verdict{
+    margin-top:48px; padding:24px 26px; border-radius:8px;
+    background:linear-gradient(135deg, rgba(127,216,166,0.06), rgba(127,216,166,0.01));
+    border:1px solid var(--accent-dim);
+  }
+  .verdict .kicker2{
+    font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--accent);
+    font-weight:700; margin-bottom:10px;
+  }
+  .verdict p{margin:0; color:var(--text-dim); font-size:14px; font-family:var(--sans); line-height:1.7;}
+  .verdict p + p{margin-top:10px;}
+  .verdict b{color:var(--text);}
+
+  footer{
+    margin-top:60px; padding-top:20px; border-top:1px solid var(--border);
+    color:var(--text-faint); font-size:12px; display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px;
+  }
+
+  .hidden{display:none !important;}
+  .no-results{
+    text-align:center; padding:40px 0; color:var(--text-faint); font-size:13px; display:none;
+  }
+
+  @media (max-width:640px){
+    header{padding:40px 0 24px 0;}
+    .card{padding:18px;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="kicker">cs//type · reference</div>
+    <h1>pattern<span class="arrow">→</span>technique</h1>
+    <p class="sub">A trigger-recognition map for array/string problems, extended with the caveats that decide which tool actually wins. Pattern-matching gets you to the right <i>family</i> — reading the caveat is what stops you from picking the wrong tool inside it.</p>
+    <div class="meta-row">
+      <span><b>12</b> triggers</span>
+      <span><b>5</b> flagged with caveats</span>
+      <span><b>5</b> commonly missing from this list</span>
+    </div>
+
+    <div class="search-bar">
+      <div class="search-wrap">
+        <input type="text" id="search" placeholder="search a trigger, technique, or keyword...">
+      </div>
+      <div class="filter-row" id="filters">
+        <div class="filter-chip active" data-filter="all">all</div>
+        <div class="filter-chip" data-filter="core">core 7</div>
+        <div class="filter-chip" data-filter="caveat">has caveat</div>
+        <div class="filter-chip" data-filter="missing">missing from original</div>
+      </div>
+    </div>
+  </header>
+
+  <div class="section-label" data-group="core"><span class="n">01</span><h2>the core seven</h2><div class="line"></div></div>
+  <div id="core-cards"></div>
+
+  <div class="section-label" data-group="missing"><span class="n">02</span><h2>not in the original list</h2><div class="line"></div></div>
+  <div id="missing-cards"></div>
+
+  <div class="no-results" id="noResults">nothing matches that.</div>
+
+  <div class="verdict">
+    <div class="kicker2">how to actually use this</div>
+    <p>Treat this as <b>triage, not diagnosis</b>. A trigger narrows you to a family of 1-3 techniques in seconds — that's the whole value. It cannot tell you <i>which</i> technique inside that family is correct; that still requires understanding the invariant each technique relies on (monotonicity for sliding window, the greedy-choice property for greedy, overlapping subproblems for DP).</p>
+    <p>The fastest way this table fails you: seeing "optimization problem" and reaching for DP by reflex when a two-line greedy argument would've solved it in O(n log n), or reaching for backtracking on a "how many ways" question that just wanted a formula. When a caveat is attached below, that's usually the exact spot people lose marks or minutes.</p>
+  </div>
+
+  <footer>
+    <span>pattern.map · v1</span>
+    <span id="visibleCount">12 shown</span>
+  </footer>
+</div>
+
+<script>
+const DATA = [
+  {
+    group:"core",
+    trigger:"Is the array sorted?",
+    tech:[["Binary Search","a"],["Two Pointers","a"],["Prefix Sums","b"]],
+    why:"Sortedness is one of the strongest structural signals in DSA — it turns O(n) or O(n²) search into O(log n), and lets two pointers converge from both ends without missing valid pairs.",
+    complexity:"Binary Search: O(log n) · Two Pointers: O(n) · Prefix Sums: O(1) query after O(n) build",
+    caveat:null,
+    example:"Find a pair summing to target in a sorted array → two pointers from both ends."
+  },
+  {
+    group:"core",
+    trigger:"Optimization problem (max / min / subarray)",
+    tech:[["Sliding Window","a"],["DP","alt"],["Greedy","alt2"]],
+    why:"These are three genuinely different tools bundled under one trigger, and choosing wrong is the single most common source of wasted time on this category.",
+    complexity:"Sliding Window: O(n) · Greedy: usually O(n log n) · DP: O(n) to O(n²) depending on state",
+    caveat:"Sliding window only works if growing/shrinking the window has a <b>monotonic</b> effect on the answer (e.g. max sum, size-k window). Greedy only works if you can prove the local-optimal choice is globally optimal (an exchange argument) — e.g. interval scheduling. If neither monotonicity nor a greedy-choice proof holds, and subproblems overlap, that's your DP signal. There's no shortcut past this reasoning — this is the actual hard part of the category.",
+    example:"Max subarray sum of size k → sliding window. Job scheduling to maximize count → greedy (sort by end time). Longest increasing subsequence → DP (no monotonic window, no valid greedy proof)."
+  },
+  {
+    group:"core",
+    trigger:"Duplicates / counts / frequencies",
+    tech:[["HashMap","a"],["HashSet","a"],["Counting Array","b"]],
+    why:"Constant-time lookup/insert makes hashing the default for 'have I seen this before' and 'how many times does this occur' questions.",
+    complexity:"HashMap/HashSet: O(1) average per op · Counting Array: O(1) per op, O(n) space bounded by range",
+    caveat:"Counting array beats HashMap specifically when the value range is small and known (e.g. lowercase letters, 0–255) — it avoids hashing overhead entirely. Once the range is large or unbounded, fall back to HashMap.",
+    example:"Anagram check → counting array of size 26. Longest consecutive sequence → HashSet."
+  },
+  {
+    group:"core",
+    trigger:"Substrings / fixed-size subarrays",
+    tech:[["Sliding Window","a"],["Two Pointers","a"]],
+    why:"Sliding window and two pointers are frequently the same technique described from two angles — one window boundary moving in, one moving out.",
+    complexity:"O(n) — each element enters and leaves the window at most once",
+    caveat:null,
+    example:"Longest substring without repeating characters → variable-size sliding window with a HashSet tracking window contents."
+  },
+  {
+    group:"core",
+    trigger:"Frequent min/max in a moving window",
+    tech:[["Monotonic Queue","a"],["Deque","a"],["Heap","alt2"]],
+    why:"A monotonic deque maintains window max/min in true O(n) by discarding elements that can never be the answer again. A heap is more general but pays a log-factor.",
+    complexity:"Monotonic Deque: O(n) total · Heap: O(n log k)",
+    caveat:"Monotonic deque only applies to pure sliding-window max/min. The moment you need arbitrary order statistics — k-th largest, running median, anything beyond min/max of a contiguous window — you need a heap instead, and the complexity changes from O(n) to O(n log k).",
+    example:"Sliding window maximum (LeetCode 239) → monotonic deque. Running median of a stream → two heaps."
+  },
+  {
+    group:"core",
+    trigger:"Generating subsets, permutations, combinations",
+    tech:[["Backtracking","a"]],
+    why:"Backtracking systematically explores the decision tree of include/exclude (or choose/don't-choose) and prunes branches early — the canonical tool for enumerating every valid configuration.",
+    complexity:"Exponential — O(2ⁿ) for subsets, O(n!) for permutations",
+    caveat:"If the question asks <b>how many</b> ways rather than to <b>list</b> them, backtracking is often the wrong, exponential choice — a DP or closed-form combinatorics formula (nCr, stars-and-bars) usually answers a counting question in polynomial time without ever constructing the sets.",
+    example:"List all subsets of a set → backtracking. Count subsets summing to target → DP (subset-sum), not backtracking."
+  },
+  {
+    group:"core",
+    trigger:"Matching / parsing characters",
+    tech:[["Stack","a"]],
+    why:"Anything with a nested, most-recent-first matching structure — opens and closes, operator precedence — maps directly onto LIFO behavior.",
+    complexity:"O(n)",
+    caveat:null,
+    example:"Balanced parentheses, infix→postfix conversion, next-greater-element, daily temperatures."
+  },
+
+  {
+    group:"missing",
+    trigger:"Structure is actually a graph/tree (even if given as array/grid)",
+    tech:[["BFS","a"],["DFS","a"],["Union-Find","alt"]],
+    why:"Grids, adjacency lists disguised as arrays, and 'connected group' problems are graph problems wearing an array costume — the giveaway is neighbor relationships, not element order.",
+    complexity:"BFS/DFS: O(V+E) · Union-Find: ~O(α(n)) per op, near-constant",
+    caveat:"BFS finds shortest paths in unweighted graphs; DFS is usually simpler to code for pure connectivity/existence questions. Union-Find wins when the question is 'are these connected' asked repeatedly, or when you're building connectivity incrementally (e.g. Kruskal's MST) rather than traversing a fixed structure once.",
+    example:"Number of islands (grid) → DFS/BFS flood fill. Redundant connection → Union-Find."
+  },
+  {
+    group:"missing",
+    trigger:"Range queries with updates in between",
+    tech:[["Segment Tree","a"],["Fenwick Tree","alt2"]],
+    why:"Plain prefix sums answer range-sum queries in O(1) — but break the moment a single element changes, since the whole prefix array must be rebuilt.",
+    complexity:"Build: O(n) · Query & Update: O(log n) — vs. prefix sum's O(n) update",
+    caveat:"Fenwick (Binary Indexed) Trees are simpler to implement and enough for range-sum queries. Segment Trees are more general — needed for range min/max/GCD or any non-invertible aggregate, and for range updates (with lazy propagation).",
+    example:"Sum of range [l,r] with frequent point updates → Fenwick Tree."
+  },
+  {
+    group:"missing",
+    trigger:"\"Kth\" something, without needing a full sort",
+    tech:[["Quickselect","a"],["Heap","alt2"]],
+    why:"Fully sorting for a single Kth-element query wastes O(n log n) when the answer only needs O(n) average work.",
+    complexity:"Quickselect: O(n) average, O(n²) worst case · Heap: O(n log k)",
+    caveat:"Quickselect is faster on average but has an O(n²) worst case (mitigate with random pivot). A heap of size k gives a guaranteed O(n log k) and is preferable when you need the top-k elements repeatedly, not just once.",
+    example:"Kth largest element, once → Quickselect. Top-k frequent elements → heap."
+  },
+  {
+    group:"missing",
+    trigger:"Overlapping intervals",
+    tech:[["Sort by start","a"],["Sweep Line","alt"]],
+    why:"Sorting collapses the interval-overlap problem into a single linear pass — merge, insert, or count overlaps by comparing each interval only to its immediate predecessor.",
+    complexity:"O(n log n) — dominated by the sort",
+    caveat:"Merge/insert problems usually sort by <b>start</b>. Meeting-room-style 'max overlaps at once' problems are better solved with a sweep line (or sort start/end times separately) rather than pairwise interval comparison.",
+    example:"Merge intervals → sort by start, linear merge. Minimum meeting rooms → sweep line over start/end events."
+  },
+  {
+    group:"missing",
+    trigger:"Subset sums / inclusion-exclusion cues, small value range",
+    tech:[["Bitmasking","a"]],
+    why:"When n is small (roughly ≤20) and you need to represent 'which subset of elements is included,' a bitmask turns set operations into O(1) integer operations.",
+    complexity:"O(2ⁿ · n) typical for bitmask DP",
+    caveat:"Only viable when n is small — 2ⁿ states become infeasible past ~20-25 elements. This is a strong signal specifically for DP-over-subsets problems (traveling salesman, assignment problems), not a general array technique.",
+    example:"Traveling Salesman Problem (DP) → dp[mask][i] = min cost to visit cities in mask, ending at i."
+  }
+];
+
+function tagClass(t){return t[1] === 'a' ? '' : t[1];}
+
+function renderCard(item){
+  const isMissing = item.group === 'missing';
+  const techTags = item.tech.map(t => `<span class="tech-tag ${tagClass(t)}">${t[0]}</span>`).join('');
+  return `
+  <div class="card ${isMissing ? 'missing' : ''}" data-group="${item.group}" data-search="${(item.trigger+' '+item.tech.map(t=>t[0]).join(' ')+' '+item.why+' '+(item.caveat||'')+' '+item.example).toLowerCase()}">
+    <div class="card-head">
+      <div class="trigger">${isMissing ? '<span class="miss-badge">not on list</span> ' : ''}${item.trigger}</div>
+      <div class="techniques">${techTags}</div>
+    </div>
+    <div class="why">${item.why}</div>
+    <div class="complexity"><b>complexity</b> — ${item.complexity}</div>
+    ${item.caveat ? `<div class="caveat"><span class="tag">caveat</span><br>${item.caveat}</div>` : ''}
+    <div class="example"><b>e.g.</b> ${item.example}</div>
+  </div>`;
+}
+
+const coreEl = document.getElementById('core-cards');
+const missEl = document.getElementById('missing-cards');
+DATA.forEach(item=>{
+  const html = renderCard(item);
+  if(item.group === 'core') coreEl.insertAdjacentHTML('beforeend', html);
+  else missEl.insertAdjacentHTML('beforeend', html);
+});
+
+const allCards = () => Array.from(document.querySelectorAll('.card'));
+const searchInput = document.getElementById('search');
+const chips = Array.from(document.querySelectorAll('.filter-chip'));
+const noResults = document.getElementById('noResults');
+const visibleCount = document.getElementById('visibleCount');
+const sectionLabels = Array.from(document.querySelectorAll('.section-label'));
+
+let activeFilter = 'all';
+
+function applyFilters(){
+  const q = searchInput.value.trim().toLowerCase();
+  let shown = 0;
+  allCards().forEach(card=>{
+    const group = card.dataset.group;
+    const hasCaveat = card.querySelector('.caveat') !== null;
+    let pass = true;
+
+    if(activeFilter === 'core' && group !== 'core') pass = false;
+    if(activeFilter === 'missing' && group !== 'missing') pass = false;
+    if(activeFilter === 'caveat' && !hasCaveat) pass = false;
+
+    if(pass && q){
+      pass = card.dataset.search.includes(q);
+    }
+
+    card.classList.toggle('hidden', !pass);
+    if(pass) shown++;
+  });
+
+  // toggle section labels if all their cards are hidden
+  sectionLabels.forEach(label=>{
+    const group = label.dataset.group;
+    const container = group === 'core' ? coreEl : missEl;
+    const anyVisible = Array.from(container.children).some(c => !c.classList.contains('hidden'));
+    label.classList.toggle('hidden', !anyVisible);
+    container.classList.toggle('hidden', !anyVisible);
+  });
+
+  noResults.style.display = shown === 0 ? 'block' : 'none';
+  visibleCount.textContent = shown + ' shown';
+}
+
+searchInput.addEventListener('input', applyFilters);
+chips.forEach(chip=>{
+  chip.addEventListener('click', ()=>{
+    chips.forEach(c=>c.classList.remove('active'));
+    chip.classList.add('active');
+    activeFilter = chip.dataset.filter;
+    applyFilters();
+  });
+});
+
+applyFilters();
+</script>
+</body>
+</html>
