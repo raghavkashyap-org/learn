@@ -1,0 +1,2630 @@
+{
+  "playlist_title": "Complete C++ DSA Course | Data Structures & Algorithms Playlist",
+  "playlist_id": "PLfqMhTWNBTe137I_EPQd34TsgV6IO55pt",
+  "playlist_url": "https://www.youtube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55pt",
+  "channel": "Apna College",
+  "channel_url": "https://www.youtube.com/channel/UCBwmMxybNva6P_5VmxjzwqA",
+  "video_count": 144,
+  "extracted_at": "2026-07-30T23:57:36",
+  "videos": [
+    {
+      "position": 1,
+      "id": "VTLCoHnyACE",
+      "title": "Lecture 1 : Flowchart & Pseudocode + Installation | DSA Series by Shradha Khapra Ma'am | C++",
+      "url": "https://www.youtube.com/watch?v=VTLCoHnyACE",
+      "channel": "Apna College",
+      "channel_url": "https://www.youtube.com/channel/UCBwmMxybNva6P_5VmxjzwqA",
+      "duration": "1:25:51",
+      "duration_seconds": 5151,
+      "views": 6881690,
+      "likes": 98969,
+      "upload_date": "2024-09-02",
+      "thumbnail": "https://i.ytimg.com/vi/VTLCoHnyACE/maxresdefault.jpg",
+      "description": "🚀 New DSA Sheet : https://bit.ly/dsa-sheet-apnacollege\nShare your DSA progress on LinkedIn : https://bit.ly/Ln-ac\n{\n#50Day DSA Challenge\n#No. of Problems
+ solved (eg: first 50 DSA problems , first 100 DSA problems)\n🚀 Students who will complete challenge will be reposted on Official Page 🏆\n}\nOR Share your DSA progress on Twitter :
+ https://bit.ly/ac-X\n\n-----------------------------------------------------------------------------------------------------------\nWant to study for Tech Placements/Internships
+ from us :\nOur Latest Placement Batches : https://linktr.ee/apnacollege.in\n\nDSA Series full playlist : https://www.youtube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55pt
+\n\n📌Installation Links : \nVisual Studio Code - https://www.youtube.com/watch?v=bN6DE-4uFNo\n\nSet up C++ for Mac - https://youtube.com/watch?v=varXreLWPRo\nSet up C++ for Window
+s - https://www.youtube.com/watch?v=0yn7irrHzM8\n\n\nTime Stamps : \n0:00 How to study this series?\n6:07 How to solve problems?\n09:09 Flowchart\n14:51 Pseudocode\n17:59 Practic
+e Qs1\n21:09 Practice Qs2\n27:55 Practice Qs3\n36:01 Practice Qs4\n54:39 Practice Qs5\n13:39 Homework Problems\n1:15:55 How code runs?\n1:19:05 What to Install?\n\nWant to study 
+for Tech Placements/Internships from us :\nOur Latest Placement Batches : https://linktr.ee/apnacollege.in\n\nShradha Ma'am community \nInstagram : https://www.instagram.com/shra
+dhakhapra\nLinkedIn : https://www.linkedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 2,
+      "id": "Dxu7GKtdbnA",
+      "title": "Lecture 2 : Variable, Data Types & Operators | DSA Series by Shradha Ma'am | C++",
+      "url": "https://www.youtube.com/watch?v=Dxu7GKtdbnA",
+      "channel": "Apna College",
+      "channel_url": "https://www.youtube.com/channel/UCBwmMxybNva6P_5VmxjzwqA",
+      "duration": "1:16:44",
+      "duration_seconds": 4604,
+      "views": 2350367,
+      "likes": 34145,
+      "upload_date": "2024-09-03",
+      "thumbnail": "https://i.ytimg.com/vi/Dxu7GKtdbnA/maxresdefault.jpg",
+      "description": "🚀 New DSA Sheet : https://bit.ly/dsa-sheet-apnacollege\nShare your DSA progress on LinkedIn : https://bit.ly/Ln-ac\n{\n#50Day DSA Challenge\n#No. of Problems
+ solved (eg: first 50 DSA problems , first 100 DSA problems)\n🚀 Students who will complete challenge will be reposted on Official Page 🏆\n}\nOR Share your DSA progress on Twitter :
+ https://bit.ly/ac-X\n\n-----------------------------------------------------------------------------------------------------------\nWant to study for Tech Placements/Internships
+ from us :\nOur Latest Placement Batches : https://linktr.ee/apnacollege.in\n\nDSA Series full playlist : https://www.youtube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55pt
+\n\n\nTime Stamps : \n0:00 Introduction\n0:48 Output in C++\n02:17 How does code run?\n19:57 Boilerplate Code\n20:19 Comments\n22:02 Variables\n26:18 Data Types\n37:50 Type Conve
+rsion & Type Casting\n42:45 Input in C++\n47:07 Operators\n1:4:27 Sum of 2 Numbers\n1:6:28 Unary Operators\n\nWant to study for Tech Placements/Internships from us :\nOur Latest 
+Placement Batches : https://linktr.ee/apnacollege.in\n\nShradha Ma'am community \nInstagram : https://www.instagram.com/shradhakhapra\nLinkedIn : https://www.linkedin.com/in/shra
+dha-khapra/"
+    },
+    {
+      "position": 3,
+      "id": "qR9U6bKxJ7g",
+      "title": "Lecture 3: Conditional Statements & Loops | DSA Series by Shradha Ma'am | C++",
+      "url": "https://www.youtube.com/watch?v=qR9U6bKxJ7g",
+      "channel": "Apna College",
+      "channel_url": "https://www.youtube.com/channel/UCBwmMxybNva6P_5VmxjzwqA",
+      "duration": "1:34:39",
+      "duration_seconds": 5679,
+      "views": 1656755,
+      "likes": 22662,
+      "upload_date": "2024-09-04",
+      "thumbnail": "https://i.ytimg.com/vi/qR9U6bKxJ7g/maxresdefault.jpg",
+      "description": "🚀 New DSA Sheet : https://bit.ly/dsa-sheet-apnacollege\nShare your DSA progress on LinkedIn : https://bit.ly/Ln-ac\n{\n#50Day DSA Challenge\n#No. of Problems
+ solved (eg: first 50 DSA problems , first 100 DSA problems)\n🚀 Students who will complete challenge will be reposted on Official Page 🏆\n}\nOR Share your DSA progress on Twitter :
+ https://bit.ly/ac-X\n\n-----------------------------------------------------------------------------------------------------------\nWant to study for Tech Placements/Internships
+ from us :\nOur Latest Placement Batches : https://linktr.ee/apnacollege.in\n\nDSA Series full playlist : https://www.youtube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55pt
+\n\n\nTime Stamps : \n0:00 Introduction\n0:55 Conditional Statements (if-else)\n12:57 else if\n18:11 Practice Qs\n25:56 Ternary Operator / Statement\n28:43 while Loops\n43:20 for
+ Loops\n49:26 Practice Qs\n56:53 Practice Qs\n1:3:35 do while Loop\n1:6:37 Practice Qs\n1:22:32 Nested loops\n1:31:47 Summary & Homework\n\nWant to study for Tech Placements/Inte
+rnships from us :\nOur Latest Placement Batches : https://linktr.ee/apnacollege.in\n\nShradha Ma'am community \nInstagram : https://www.instagram.com/shradhakhapra\nLinkedIn : ht
+tps://www.linkedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 4,
+      "id": "rga_q2N7vU8",
+      "title": "Lecture 4: Patterns | DSA Series by Shradha Khapra Ma'am | C++",
+      "url": "https://www.youtube.com/watch?v=rga_q2N7vU8",
+      "channel": "Apna College",
+      "channel_url": "https://www.youtube.com/channel/UCBwmMxybNva6P_5VmxjzwqA",
+      "duration": "1:31:06",
+      "duration_seconds": 5466,
+      "views": 1633901,
+      "likes": 22000,
+      "upload_date": "2024-09-05",
+      "thumbnail": "https://i.ytimg.com/vi/rga_q2N7vU8/maxresdefault.jpg",
+      "description": "🚀 New DSA Sheet : https://bit.ly/dsa-sheet-apnacollege\nShare your DSA progress on LinkedIn : https://bit.ly/Ln-ac\n{\n#50Day DSA Challenge\n#No. of Problems
+ solved (eg: first 50 DSA problems , first 100 DSA problems)\n🚀 Students who will complete challenge will be reposted on Official Page 🏆\n}\nOR Share your DSA progress on Twitter :
+ https://bit.ly/ac-X\n\n-------------------------------------------------------------------\n\nDSA Series full playlist : https://www.youtube.com/playlist?list=PLfqMhTWNBTe137I_E
+PQd34TsgV6IO55pt\n\nTime Stamps : \n00:00 Why we study Patterns ? \n02:56 : How to solve Pattern problems ? Problem 1,2,& 3\n21:42 Practice Problem 4 & 5\n35:01 Problem 6 : Trian
+gle Patterns\n42:18 Problem 7 & 8\n47:36 Problem 9\n49:48 Problem 10 : Reverse triangle pattern\n53:18 Problem 11 & 12 : Floyd's Triangle Pattern\n56:23 Problem 13 Inverted trian
+gle pattern\n1:03:21 Problem 14 : Pyramid pattern\n1:13:28 Problem 15 : Hollow Diamond Pattern\n1:29:14 Problem 16 : Butterly Pattern (h.w)\n\n\n\n\nWant to study for Tech Placem
+ents/Internships from us :\nOur Latest Placement Batches : https://linktr.ee/apnacollege.in\n\nShradha Ma'am community \nInstagram : https://www.instagram.com/shradhakhapra\nLink
+edIn : https://www.linkedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 5,
+      "id": "P08Z_NC8GuY",
+      "title": "Lecture 5: Functions | DSA Series by Shradha Khapra Ma'am | C++",
+      "url": "https://www.youtube.com/watch?v=P08Z_NC8GuY",
+      "channel": "Apna College",
+      "channel_url": "https://www.youtube.com/channel/UCBwmMxybNva6P_5VmxjzwqA",
+      "duration": "49:13",
+      "duration_seconds": 2953,
+      "views": 1140141,
+      "likes": 16315,
+      "upload_date": "2024-09-06",
+      "thumbnail": "https://i.ytimg.com/vi/P08Z_NC8GuY/maxresdefault.jpg",
+      "description": "🚀 New DSA Sheet : https://bit.ly/dsa-sheet-apnacollege\nShare your DSA progress on LinkedIn : https://bit.ly/Ln-ac\n{\n#50Day DSA Challenge\n#No. of Problems
+ solved (eg: first 50 DSA problems , first 100 DSA problems)\n🚀 Students who will complete challenge will be reposted on Official Page 🏆\n}\nOR Share your DSA progress on Twitter :
+ https://bit.ly/ac-X\n\n-------------------------------------------------------------------\n\nDSA Series full playlist : https://www.youtube.com/playlist?list=PLfqMhTWNBTe137I_E
+PQd34TsgV6IO55pt\n\nTime Stamps : \n00:00 Introduction\n00:26 What are Functions?\n16:16  Parameters & Arguments\n12:40  Practice Qs1\n14:30 Practice Qs2\n17:04 Functions in Memo
+ry\n26:37 Pass by Value\n33:13 Practice Qs3\n39:55 Practice Qs4\n44:59 Summary & Homework\n\n\nWant to study for Tech Placements/Internships from us :\nOur Latest Placement Batch
+es : https://linktr.ee/apnacollege.in\n\nShradha Ma'am community \nInstagram : https://www.instagram.com/shradhakhapra\nLinkedIn : https://www.linkedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 6,
+      "id": "xpy5NXiBFvA",
+      "title": "Binary Number System | DSA Series by Shradha Khapra Ma'am | C++",
+      "url": "https://www.youtube.com/watch?v=xpy5NXiBFvA",
+      "channel": "Apna College",
+      "channel_url": "https://www.youtube.com/channel/UCBwmMxybNva6P_5VmxjzwqA",
+      "duration": "37:19",
+      "duration_seconds": 2239,
+      "views": 1006871,
+      "likes": 18399,
+      "upload_date": "2024-09-08",
+      "thumbnail": "https://i.ytimg.com/vi/xpy5NXiBFvA/maxresdefault.jpg",
+      "description": "🚀 New DSA Sheet : https://bit.ly/dsa-sheet-apnacollege\nShare your DSA progress on LinkedIn : https://bit.ly/Ln-ac\n{\n#50Day DSA Challenge\n#No. of Problems
+ solved (eg: first 50 DSA problems , first 100 DSA problems)\n🚀 Students who will complete challenge will be reposted on Official Page 🏆\n}\nOR Share your DSA progress on Twitter :
+ https://bit.ly/ac-X\n\nDSA Series full playlist : https://www.youtube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55pt\n\nTime Stamps : \n00:00 What is Binary Number System?
+\n03:22 Decimal to Binary Conversion\n06:54 Code for Decimal to Binary conversion\n16:12 Binary to Decimal conversion\n18:23 Code for binary to decimal conversion\n22:15 Common n
+umbers & Short trick\n28:00 Two's compliment \n33:48 Practice Qs\n33:55 Summary & Homework\n\n\n\nWant to study for Tech Placements/Internships from us :\nOur Latest Placement Ba
+tches : https://linktr.ee/apnacollege.in\n\nShradha Ma'am community \nInstagram : https://www.instagram.com/shradhakhapra\nLinkedIn : https://www.linkedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 7,
+      "id": "r-u4uh3QvsQ",
+      "title": "Bitwise Operators, Data Type Modifiers & more | DSA Series by Shradha Khapra Ma'am | C++",
+      "url": "https://www.youtube.com/watch?v=r-u4uh3QvsQ",
+      "channel": "Apna College",
+      "channel_url": "https://www.youtube.com/channel/UCBwmMxybNva6P_5VmxjzwqA",
+      "duration": "38:33",
+      "duration_seconds": 2313,
+      "views": 619815,
+      "likes": 10827,
+      "upload_date": "2024-09-09",
+      "thumbnail": "https://i.ytimg.com/vi/r-u4uh3QvsQ/maxresdefault.jpg",
+      "description": "🚀 New DSA Sheet : https://bit.ly/dsa-sheet-apnacollege\nShare your DSA progress on LinkedIn : https://bit.ly/Ln-ac\n{\n#50Day DSA Challenge\n#No. of Problems
+ solved (eg: first 50 DSA problems , first 100 DSA problems)\n🚀 Students who will complete challenge will be reposted on Official Page 🏆\n}\nOR Share your DSA progress on Twitter :
+ https://bit.ly/ac-X\n\nDSA Series full playlist : https://www.youtube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55pt\n\nTime Stamps : \n00:00 Introduction\n00:39 Bitwise O
+perators\n12:07  Homework\n12:33 Operator Precedence\n18:03 Scope (Local vs Global)\n24:12 Data Type Modifiers\n35:45 Summary & Homework\n\n\nWant to study for Tech Placements/In
+ternships from us :\nOur Latest Placement Batches : https://linktr.ee/apnacollege.in\n\nShradha Ma'am community \nInstagram : https://www.instagram.com/shradhakhapra\nLinkedIn : 
+https://www.linkedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 8,
+      "id": "8wmn7k1TTcI",
+      "title": "Array Data Structure - Part1 | DSA Series by Shradha Khapra Ma'am | C++",
+      "url": "https://www.youtube.com/watch?v=8wmn7k1TTcI",
+      "channel": "Apna College",
+      "channel_url": "https://www.youtube.com/channel/UCBwmMxybNva6P_5VmxjzwqA",
+      "duration": "54:06",
+      "duration_seconds": 3246,
+      "views": 1670030,
+      "likes": 21848,
+      "upload_date": "2024-09-11",
+      "thumbnail": "https://i.ytimg.com/vi/8wmn7k1TTcI/maxresdefault.jpg",
+      "description": "🚀 New DSA Sheet : https://bit.ly/dsa-sheet-apnacollege\nShare your DSA progress on LinkedIn : https://bit.ly/Ln-ac\n{\n#50Day DSA Challenge\n#No. of Problems
+ solved (eg: first 50 DSA problems , first 100 DSA problems)\n🚀 Students who will complete challenge will be reposted on Official Page 🏆\n}\nOR Share your DSA progress on Twitter :
+ https://bit.ly/ac-X\n\n-----------------------------------------------------\n\nShare your progress on Twitter : https://x.com/ShradhaKhapra_\nDSA Series full playlist : https:/
+/www.youtube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55pt\n\nTime Stamps : \n00:00 What is Binary Number System?\n02:29 Array Syntax\n12:16 Loops on Arrays\n15:45 Smalles
+t/Largest in Array\n24:04 Pass by Reference\n30:09 Linear Search\n37:38 Reverse an Array (2 Pointer) \n49:27 Summary & Homework\n\n\nWant to study for Tech Placements/Internships
+ from us :\nOur Latest Placement Batches : https://linktr.ee/apnacollege.in\n\nShradha Ma'am community \nInstagram : https://www.instagram.com/shradhakhapra\nLinkedIn : https://w
+ww.linkedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 9,
+      "id": "NWg38xWYzEg",
+      "title": "Vectors in C++ | Arrays Part 2 | DSA Series by Shradha Ma'am | Lecture 9",
+      "url": "https://www.youtube.com/watch?v=NWg38xWYzEg",
+      "channel": "Apna College",
+      "channel_url": "https://www.youtube.com/channel/UCBwmMxybNva6P_5VmxjzwqA",
+      "duration": "40:05",
+      "duration_seconds": 2405,
+      "views": 857576,
+      "likes": 13696,
+      "upload_date": "2024-09-13",
+      "thumbnail": "https://i.ytimg.com/vi/NWg38xWYzEg/maxresdefault.jpg",
+      "description": "🚀 New DSA Sheet : https://bit.ly/dsa-sheet-apnacollege\nShare your DSA progress on LinkedIn : https://bit.ly/Ln-ac\n{\n#50Day DSA Challenge\n#No. of Problems
+ solved (eg: first 50 DSA problems , first 100 DSA problems)\n🚀 Students who will complete challenge will be reposted on Official Page 🏆\n}\nOR Share your DSA progress on Twitter :
+ https://bit.ly/ac-X\n\nShare your progress on Twitter : https://x.com/ShradhaKhapra_\n\nDSA Series full playlist : https://www.youtube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34T
+sgV6IO55pt\n\nTime Stamps : \n00:00 Introduction \n00:18 What are Vectors ?\n03:04 Vector Syntax\n10:04 Vector Functions\n15:03 Static vs Dynamic memory allocation\n23:13 Practic
+e Problem : Single number\n38:14 What did we learnt today \n\n\nWant to study for Tech Placements/Internships from us :\nOur Latest Placement Batches : https://linktr.ee/apnacoll
+ege.in\n\n\nShradha Ma'am community \nInstagram : https://www.instagram.com/shradhakhapra\nLinkedIn : https://www.linkedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 10,
+      "id": "9IZYqostl2M",
+      "title": "Kadane's Algorithm | Maximum Subarray Sum | DSA Series by Shradha Ma'am",
+      "url": "https://www.youtube.com/watch?v=9IZYqostl2M",
+      "channel": "Apna College",
+      "channel_url": "https://www.youtube.com/channel/UCBwmMxybNva6P_5VmxjzwqA",
+      "duration": "23:28",
+      "duration_seconds": 1408,
+      "views": 831722,
+      "likes": 13471,
+      "upload_date": "2024-09-15",
+      "thumbnail": "https://i.ytimg.com/vi/9IZYqostl2M/maxresdefault.jpg",
+      "description": "🚀 New DSA Sheet : https://bit.ly/dsa-sheet-apnacollege\nShare your DSA progress on LinkedIn : https://bit.ly/Ln-ac\n{\n#50Day DSA Challenge\n#No. of Problems
+ solved (eg: first 50 DSA problems , first 100 DSA problems)\n🚀 Students who will complete challenge will be reposted on Official Page 🏆\n}\nOR Share your DSA progress on Twitter :
+ https://bit.ly/ac-X\n\nLecture 10 of DSA Series : Kadan'e Algorithm | Maximum Subarray Sum\nShare your progress on Twitter : https://x.com/ShradhaKhapra_\n\nDSA Series full play
+list : https://www.youtube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55pt\n\nTime Stamps : \n00:00 Introduction\n00:35 IMPORTANT Note\n01:02 Basics of Subarray Concept\n06:
+18 Maximum Subarray Sum (Brute Force)\n12:40 Kadane's Algorithm\n22:06 SDE Sheet Explanation\n\nWant to study for Tech Placements/Internships from us :\nOur Latest Placement Batc
+hes : https://linktr.ee/apnacollege.in\n\nShradha Ma'am community \nInstagram : https://www.instagram.com/shradhakhapra\nLinkedIn : https://www.linkedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 11,
+      "id": "_xqIp2rj8bo",
+      "title": "Majority Element | Brute- Better-Best Approach | Moore's Voting Algorithm | & Pair Sum",
+      "url": "https://www.youtube.com/watch?v=_xqIp2rj8bo",
+      "channel": "Apna College",
+      "channel_url": "https://www.youtube.com/channel/UCBwmMxybNva6P_5VmxjzwqA",
+      "duration": "39:10",
+      "duration_seconds": 2350,
+      "views": 683611,
+      "likes": 10520,
+      "upload_date": "2024-09-16",
+      "thumbnail": "https://i.ytimg.com/vi/_xqIp2rj8bo/maxresdefault.jpg",
+      "description": "🚀 New DSA Sheet : https://bit.ly/dsa-sheet-apnacollege\nShare your DSA progress on LinkedIn : https://bit.ly/Ln-ac\n{\n#50Day DSA Challenge\n#No. of Problems
+ solved (eg: first 50 DSA problems , first 100 DSA problems)\n🚀 Students who will complete challenge will be reposted on Official Page 🏆\n}\nOR Share your DSA progress on Twitter :
+ https://bit.ly/ac-X\n\nLecture 11 of DSA Series : (Array Part 4)\n- Majority Element | Brute- Better-Best Approach | Moore's Voting Algorithm\n- Pair Sum Problem | Brute to Opti
+mal\n\nDSA Series full playlist : https://www.youtube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55pt\n\nTime Stamps : \n00:00 Introduction\n00:18 Pair Sum (Brute Force)\n06
+:40 Pair Sum (Optimal)\n14:42 Majority Element (Brute Force)\n21:48 Majority Element (Better Approach using Sorting)\n29:03 Majority Element (Moore's Voting Algorithm)\n34:44 Dry
+ Run of Moore's Voting Algorithm\n37:11 Majority Element Variation\n\n\n\nWant to study for Tech Placements/Internships from us :\nOur Latest Placement Batches : https://linktr.e
+e/apnacollege.in\n\nShradha Ma'am community \nInstagram : https://www.instagram.com/shradhakhapra\nLinkedIn : https://www.linkedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 12,
+      "id": "PwKv8fOcriM",
+      "title": "Time & Space Complexity - DSA Series by Shradha Ma'am",
+      "url": "https://www.youtube.com/watch?v=PwKv8fOcriM",
+      "channel": "Apna College",
+      "channel_url": "https://www.youtube.com/channel/UCBwmMxybNva6P_5VmxjzwqA",
+      "duration": "1:25:41",
+      "duration_seconds": 5141,
+      "views": 1085021,
+      "likes": 19683,
+      "upload_date": "2024-09-18",
+      "thumbnail": "https://i.ytimg.com/vi/PwKv8fOcriM/maxresdefault.jpg",
+      "description": "🚀 New DSA Sheet : https://bit.ly/dsa-sheet-apnacollege\nShare your DSA progress on LinkedIn : https://bit.ly/Ln-ac\n{\n#50Day DSA Challenge\n#No. of Problems
+ solved (eg: first 50 DSA problems , first 100 DSA problems)\n🚀 Students who will complete challenge will be reposted on Official Page 🏆\n}\nOR Share your DSA progress on Twitter :
+ https://bit.ly/ac-X\n\nLecture 12 of DSA Series : Time & Space Complexity in Detail\n\nDSA Series full playlist : https://www.youtube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34Ts
+gV6IO55pt\n\nTime Stamps : \n00:00 Introduction\n00:23 Disclaimer\n01:17 Why study these concepts? \n02:23 Time Complexity\n10:53 Big O Notation\n16:14 Space Complexity\n21:32 Co
+mmon Time Complexities\n23:15 Understanding O(1)\n26:35 Understanding O(n)\n29:06 Understanding O(n^2) & O(n^3)\n34:40 Understanding O(logn)\n39:39 O(nlogn)\n40:46 O(2^n) & O(n!)
+\n44:03 Solving for Prime Number \n45:56 Solving for Selection Sort\n48:59 Recursion (Time Complexity)\n55:50 Recursion (Space Complexity)\n59:28 Solving for Recursive Fibonacci\
+n1:05:43 Solving for Merge Sort\n1:16:41 Practical Usage\n\nWant to study for Tech Placements/Internships from us :\nOur Latest Placement Batches : https://linktr.ee/apnacollege.
+in\n\nShradha Ma'am community \nInstagram : https://www.instagram.com/shradhakhapra\nLinkedIn : https://www.linkedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 13,
+      "id": "WBzZCm46mFo",
+      "title": "Buy and Sell Stock Problem and Pow(X,N) Power exponential Problem - Leetcode | DSA Series",
+      "url": "https://www.youtube.com/watch?v=WBzZCm46mFo",
+      "channel": "Apna College",
+      "channel_url": "https://www.youtube.com/channel/UCBwmMxybNva6P_5VmxjzwqA",
+      "duration": "29:10",
+      "duration_seconds": 1750,
+      "views": 510369,
+      "likes": 8394,
+      "upload_date": "2024-09-20",
+      "thumbnail": "https://i.ytimg.com/vi/WBzZCm46mFo/maxresdefault.jpg",
+      "description": "🚀 New DSA Sheet : https://bit.ly/dsa-sheet-apnacollege\nShare your DSA progress on LinkedIn : https://bit.ly/Ln-ac\n{\n#50Day DSA Challenge\n#No. of Problems
+ solved (eg: first 50 DSA problems , first 100 DSA problems)\n🚀 Students who will complete challenge will be reposted on Official Page 🏆\n}\nOR Share your DSA progress on Twitter :
+ https://bit.ly/ac-X\n\nLecture 13  of DSA Series - Buy and Sell Stock Problem & X raised to the Power N Problem\nProblem : Leetcode 121, Leetcode 50 \nDSA Series Playlist : \n\n
+Time Stamps : \n00:00 Intro\n00:21 Logic : Compute (x^n) \n08:58 Code : Compute (x^n)\n10:11 For negative value of n\n13:55 Stock Buy & Sell Problem\n26:35 Code : Stock Buy & Sel
+l Problem\n28:32 Advanced versions of Stock Buy & Sell will be taught in DP\n\nWant to study for Tech Placements/Internships from us :\nOur Latest Placement Batches : https://lin
+ktr.ee/apnacollege.in\n\nShare your progress on Twitter : https://x.com/ShradhaKhapra_\nDSA Series full playlist : https://www.youtube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34Ts
+gV6IO55pt\n\n\nShradha Ma'am community \nInstagram : https://www.instagram.com/shradhakhapra\nLinkedIn : https://www.linkedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 14,
+      "id": "EbkMABpP52U",
+      "title": "Container with Most Water Problem | Brute & Optimal Solution | Two Pointer Approach - Leetcode 11",
+      "url": "https://www.youtube.com/watch?v=EbkMABpP52U",
+      "channel": "Apna College",
+      "channel_url": "https://www.youtube.com/channel/UCBwmMxybNva6P_5VmxjzwqA",
+      "duration": "32:00",
+      "duration_seconds": 1920,
+      "views": 368936,
+      "likes": 8164,
+      "upload_date": "2024-09-21",
+      "thumbnail": "https://i.ytimg.com/vi/EbkMABpP52U/maxresdefault.jpg",
+      "description": "🚀 New DSA Sheet : https://bit.ly/dsa-sheet-apnacollege\nShare your DSA progress on LinkedIn : https://bit.ly/Ln-ac\n{\n#50Day DSA Challenge\n#No. of Problems
+ solved (eg: first 50 DSA problems , first 100 DSA problems)\n🚀 Students who will complete challenge will be reposted on Official Page 🏆\n}\nOR Share your DSA progress on Twitter :
+ https://bit.ly/ac-X\n\nLecture 14 of DSA Series - Arrays Part 6 - Container with Most Water Problem | Leetcode 11\nShare your progress on Twitter : https://x.com/ShradhaKhapra_\
+n\nDSA Series full playlist : https://www.youtube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55pt\n\n00:00 Introduction\n00:18 Important NOTE\n00:37 Understanding Qs\n03:21 
+Brute Force Approach\n12:01 Code (Brute Approach)\n14:13 Optimal Approach (2 Pointer)\n25:30 Dry Run (for 2 Pointer Approach)\n29:43 Code (2 Pointer Approach)\n\nWant to study fo
+r Tech Placements/Internships from us :\nOur Latest Placement Batches : https://linktr.ee/apnacollege.in\n\nShare your progress on Twitter : https://x.com/ShradhaKhapra_\nDSA Ser
+ies full playlist : https://www.youtube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55pt\n\n\nShradha Ma'am community \nInstagram : https://www.instagram.com/shradhakhapra\nL
+inkedIn : https://www.linkedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 15,
+      "id": "TW2m8m_FNJE",
+      "title": "Product of Array Except Self | Brute to Optimal Solution | Leetcode 238",
+      "url": "https://www.youtube.com/watch?v=TW2m8m_FNJE",
+      "channel": "Apna College",
+      "channel_url": "https://www.youtube.com/channel/UCBwmMxybNva6P_5VmxjzwqA",
+      "duration": "29:29",
+      "duration_seconds": 1769,
+      "views": 346910,
+      "likes": 6622,
+      "upload_date": "2024-09-23",
+      "thumbnail": "https://i.ytimg.com/vi/TW2m8m_FNJE/maxresdefault.jpg",
+      "description": "🚀 New DSA Sheet : https://bit.ly/dsa-sheet-apnacollege\nShare your DSA progress on LinkedIn : https://bit.ly/Ln-ac\n{\n#50Day DSA Challenge\n#No. of Problems
+ solved (eg: first 50 DSA problems , first 100 DSA problems)\n🚀 Students who will complete challenge will be reposted on Official Page 🏆\n}\nOR Share your DSA progress on Twitter :
+ https://bit.ly/ac-X\n\nLecture 15 of DSA Series - Arrays Part 7 - Product of Array Except Self | Leetcode 238\nShare your progress on Twitter : https://x.com/ShradhaKhapra_\n\nD
+SA Series full playlist : https://www.youtube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55pt\n\n00:00 Introduction\n00:30 Important NOTE\n00:44 Brute Force Approach\n06:38 
+Code (Brute Approach)\n08:25 Optimal Approach for O(n) TC\n18:09 Code (Optimal Approach)\n20:01 Improve Space Complexity O(n) to O(1)\n\nWant to study for Tech Placements/Interns
+hips from us :\nOur Latest Placement Batches : https://linktr.ee/apnacollege.in\n\nShare your progress on Twitter : https://x.com/ShradhaKhapra_\nDSA Series full playlist : https
+://www.youtube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55pt\n\n\nShradha Ma'am community \nInstagram : https://www.instagram.com/shradhakhapra\nLinkedIn : https://www.lin
+kedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 16,
+      "id": "qYEjR6M0wSk",
+      "title": "Pointers in C++ | In Detail | DSA Series by Shradha Ma'am",
+      "url": "https://www.youtube.com/watch?v=qYEjR6M0wSk",
+      "channel": "Apna College",
+      "channel_url": "https://www.youtube.com/channel/UCBwmMxybNva6P_5VmxjzwqA",
+      "duration": "46:07",
+      "duration_seconds": 2767,
+      "views": 642943,
+      "likes": 11862,
+      "upload_date": "2024-09-24",
+      "thumbnail": "https://i.ytimg.com/vi/qYEjR6M0wSk/maxresdefault.jpg",
+      "description": "🚀 New DSA Sheet : https://bit.ly/dsa-sheet-apnacollege\nShare your DSA progress on LinkedIn : https://bit.ly/Ln-ac\n{\n#50Day DSA Challenge\n#No. of Problems
+ solved (eg: first 50 DSA problems , first 100 DSA problems)\n🚀 Students who will complete challenge will be reposted on Official Page 🏆\n}\nOR Share your DSA progress on Twitter :
+ https://bit.ly/ac-X\n\n-----------------------------------------------------------------------------------------------------------\n\nLecture 16 of DSA Series : Pointers in Deta
+il\n\nDSA Series full playlist : https://www.youtube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55pt\n\nTime Stamps : \n00:00 Introduction\n00:21 Memory Address\n4:10 Pointe
+rs\n08:32 Pointer to Pointer\n11:12 Dereference Operator\n16:22 NULL Pointer\n18:10 Output Qs\n21:45 Pass by Reference (pointers & alias)\n28:22 Array Pointer\n31:35 Pointer Arit
+hmetic\n42:14 Output Qs\n44:23 Summary\n\nWant to study for Tech Placements/Internships from us :\nOur Latest Placement Batches : https://linktr.ee/apnacollege.in\n\nShradha Ma'a
+m community \nInstagram : https://www.instagram.com/shradhakhapra\nLinkedIn : https://www.linkedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 17,
+      "id": "TbbSJrY5GqQ",
+      "title": "Binary Search Algorithm - Iterative and Recursive Method | [Theory + Code] with Example",
+      "url": "https://www.youtube.com/watch?v=TbbSJrY5GqQ",
+      "channel": "Apna College",
+      "channel_url": "https://www.youtube.com/channel/UCBwmMxybNva6P_5VmxjzwqA",
+      "duration": "44:16",
+      "duration_seconds": 2656,
+      "views": 561739,
+      "likes": 9694,
+      "upload_date": "2024-09-26",
+      "thumbnail": "https://i.ytimg.com/vi/TbbSJrY5GqQ/maxresdefault.jpg",
+      "description": "🚀 New DSA Sheet : https://bit.ly/dsa-sheet-apnacollege\nShare your DSA progress on LinkedIn : https://bit.ly/Ln-ac\n{\n#50Day DSA Challenge\n#No. of Problems
+ solved (eg: first 50 DSA problems , first 100 DSA problems)\n🚀 Students who will complete challenge will be reposted on Official Page 🏆\n}\nOR Share your DSA progress on Twitter :
+ https://bit.ly/ac-X\n\n-----------------------------------------------------------------------------------------------------------\n\nLecture 17 of DSA Series : Binary Search Al
+gorithm (Part 1)\n\nDSA Series full playlist : https://www.youtube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55pt\n\nTime Stamps : \n00:00 Introduction\n00:21 Binary Search
+ in real-life\n2:17 Where do we use Binary Search?\n04:40 Binary Search Approach\n17:49 Code for Binary Search (Iterative)\n20:28 Dry Run of Binary Search Code \n24:13 Optimizati
+on in Code\n26:34 Time Complexity of Binary Search\n31:52 Recursive Binary Search \n39:20 Code for Binary Search (Recursive)\n41:38 Summary\n\nWant to study for Tech Placements/I
+nternships from us :\nOur Latest Placement Batches : https://linktr.ee/apnacollege.in\n\nShradha Ma'am community \nInstagram : https://www.instagram.com/shradhakhapra\nLinkedIn :
+ https://www.linkedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 18,
+      "id": "6WNZQBHWQJs",
+      "title": "Search in Rotated Sorted Array | Binary Search | Leetcode 33",
+      "url": "https://www.youtube.com/watch?v=6WNZQBHWQJs",
+      "channel": "Apna College",
+      "channel_url": "https://www.youtube.com/channel/UCBwmMxybNva6P_5VmxjzwqA",
+      "duration": "19:29",
+      "duration_seconds": 1169,
+      "views": 299868,
+      "likes": 6290,
+      "upload_date": "2024-09-30",
+      "thumbnail": "https://i.ytimg.com/vi/6WNZQBHWQJs/maxresdefault.jpg",
+      "description": "🚀 New DSA Sheet : https://bit.ly/dsa-sheet-apnacollege\nShare your DSA progress on LinkedIn : https://bit.ly/Ln-ac\n{\n#50Day DSA Challenge\n#No. of Problems
+ solved (eg: first 50 DSA problems , first 100 DSA problems)\n🚀 Students who will complete challenge will be reposted on Official Page 🏆\n}\nOR Share your DSA progress on Twitter :
+ https://bit.ly/ac-X\n\n-----------------------------------------------------------------------------------------------------------\n\nLecture 18 of DSA Series - Binary Search Pa
+rt 2 - Search in Rotated Sorted Array | Leetcode 33\n\nDSA Series full playlist : https://www.youtube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55pt\n\n00:00 Introduction\n
+00:19 Approach\n14:42 Pseudocode\n17:15 Code\n\nWant to study for Tech Placements/Internships from us :\nOur Latest Placement Batches : https://linktr.ee/apnacollege.in\n\nShare 
+your progress on Twitter : https://x.com/ShradhaKhapra_\nDSA Series full playlist : https://www.youtube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55pt\n\n\nShradha Ma'am co
+mmunity \nInstagram : https://www.instagram.com/shradhakhapra\nLinkedIn : https://www.linkedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 19,
+      "id": "RjxD6UXGlhc",
+      "title": "Peak Index in Mountain Array | Binary Search | Leetcode 852",
+      "url": "https://www.youtube.com/watch?v=RjxD6UXGlhc",
+      "channel": "Apna College",
+      "channel_url": "https://www.youtube.com/channel/UCBwmMxybNva6P_5VmxjzwqA",
+      "duration": "23:34",
+      "duration_seconds": 1414,
+      "views": 211141,
+      "likes": 4998,
+      "upload_date": "2024-10-01",
+      "thumbnail": "https://i.ytimg.com/vi/RjxD6UXGlhc/maxresdefault.jpg",
+      "description": "🚀 New DSA Sheet : https://bit.ly/dsa-sheet-apnacollege\nShare your DSA progress on LinkedIn : https://bit.ly/Ln-ac\n{\n#50Day DSA Challenge\n#No. of Problems
+ solved (eg: first 50 DSA problems , first 100 DSA problems)\n🚀 Students who will complete challenge will be reposted on Official Page 🏆\n}\nOR Share your DSA progress on Twitter :
+ https://bit.ly/ac-X\n\n-----------------------------------------------------------------------------------------------------------\n\nLecture 19 of DSA Series - Binary Search Pa
+rt 3 - Peak Index in Mountain Array | Leetcode 852\n\nDSA Series full playlist : https://www.youtube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55pt\n\n00:00 Introduction\n0
+0:17 Approach\n14:09 Pseudocode\n16:08 Handling Edge Case\n19:22 Dry Run\n21:05 Code\n\nWant to study for Tech Placements/Internships from us :\nOur Latest Placement Batches : ht
+tps://linktr.ee/apnacollege.in\n\nShradha Ma'am community \nInstagram : https://www.instagram.com/shradhakhapra\nLinkedIn : https://www.linkedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 20,
+      "id": "qsbCBduIs40",
+      "title": "Single Element in Sorted Array | Binary Search | DSA Series Lecture 20",
+      "url": "https://www.youtube.com/watch?v=qsbCBduIs40",
+      "channel": "Apna College",
+      "channel_url": "https://www.youtube.com/channel/UCBwmMxybNva6P_5VmxjzwqA",
+      "duration": "27:32",
+      "duration_seconds": 1652,
+      "views": 214023,
+      "likes": 4849,
+      "upload_date": "2024-10-02",
+      "thumbnail": "https://i.ytimg.com/vi/qsbCBduIs40/maxresdefault.jpg",
+      "description": "Lecture 20 of DSA Series - Binary Search Part 4 - Single Element in Sorted Array | Leetcode 540\n🚀 New DSA Sheet : https://bit.ly/dsa-sheet-apnacollege\nShar
+e your DSA progress on LinkedIn : https://bit.ly/Ln-ac\n{\n#50Day DSA Challenge\n#No. of Problems solved (eg: first 50 DSA problems , first 100 DSA problems)\n🚀 Students who will 
+complete challenge will be reposted on Official Page 🏆\n}\nOR Share your DSA progress on Twitter : https://bit.ly/ac-X\n\n---------------------------------------------------------
+--------------------------------------------------\nWant to study for Tech Placements/Internships from us :\nOur Latest Placement Batches : https://linktr.ee/apnacollege.in\n\nDS
+A Series full playlist : https://www.youtube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55pt\n\n\nShradha Ma'am community \nInstagram : https://www.instagram.com/shradhakhap
+ra\nLinkedIn : https://www.linkedin.com/in/shradha-khapra/\nTwitter : https://x.com/ShradhaKhapra_\n\nTime Stamps : \n00:00 Introduction\n00:19 Approach\n16:25 Pseudocode\n18:50 
+Handling Edge Case\n22:10 Code\n25:36 Dry Run"
+    },
+    {
+      "position": 21,
+      "id": "JRAByolWqhw",
+      "title": "Book Allocation or Allocate Books Problem | DSA Series - Binary Search",
+      "url": "https://www.youtube.com/watch?v=JRAByolWqhw",
+      "channel": "Apna College",
+      "channel_url": "https://www.youtube.com/channel/UCBwmMxybNva6P_5VmxjzwqA",
+      "duration": "32:59",
+      "duration_seconds": 1979,
+      "views": 253095,
+      "likes": 5221,
+      "upload_date": "2024-10-04",
+      "thumbnail": "https://i.ytimg.com/vi/JRAByolWqhw/maxresdefault.jpg",
+      "description": "🚀 New DSA Sheet : https://bit.ly/dsa-sheet-apnacollege\nShare your DSA progress on LinkedIn : https://bit.ly/Ln-ac\n{\n#50Day DSA Challenge\n#No. of Problems
+ solved (eg: first 50 DSA problems , first 100 DSA problems)\n🚀 Students who will complete challenge will be reposted on Official Page 🏆\n}\nOR Share your DSA progress on Twitter :
+ https://bit.ly/ac-X\n\n-----------------------------------------------------------------------------------------------------------\nWant to study for Tech Placements/Internships
+ from us :\nOur Latest Placement Batches : https://linktr.ee/apnacollege.in\n\nDSA Series full playlist : https://www.youtube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55pt
+\n\n\nShradha Ma'am community \nInstagram : https://www.instagram.com/shradhakhapra\nLinkedIn : https://www.linkedin.com/in/shradha-khapra/\nTwitter : https://x.com/ShradhaKhapra
+_\n\nTime Stamps : \n00:00 Introduction\n00:30 Question\n02:53 Approach\n14:45 Pseudocode for Binary Search\n16:23 How to check mid valid or not?\n25:28 Code\n31:31 Homework"
+    },
+    {
+      "position": 22,
+      "id": "srsFN5OHBgw",
+      "title": "Painter's Partition Problem | DSA Placement Series - Binary Search | Lecture 22",
+      "url": "https://www.youtube.com/watch?v=srsFN5OHBgw",
+      "channel": "Apna College",
+      "channel_url": "https://www.youtube.com/channel/UCBwmMxybNva6P_5VmxjzwqA",
+      "duration": "27:44",
+      "duration_seconds": 1664,
+      "views": 164213,
+      "likes": 3555,
+      "upload_date": "2024-10-05",
+      "thumbnail": "https://i.ytimg.com/vi/srsFN5OHBgw/maxresdefault.jpg",
+      "description": "Lecture 22 of DSA Placement Series \n🚀 New DSA Sheet : https://bit.ly/dsa-sheet-apnacollege\nShare your DSA progress on LinkedIn : https://bit.ly/Ln-ac\n{\n#
+50Day DSA Challenge\n#No. of Problems solved (eg: first 50 DSA problems , first 100 DSA problems)\n🚀 Students who will complete challenge will be reposted on Official Page 🏆\n}\nOR
+ Share your DSA progress on Twitter : https://bit.ly/ac-X\n\n-----------------------------------------------------------------------------------------------------------\nWant to 
+study for Tech Placements/Internships from us :\nOur Latest Placement Batches : https://linktr.ee/apnacollege.in\n\nDSA Series full playlist : https://www.youtube.com/playlist?li
+st=PLfqMhTWNBTe137I_EPQd34TsgV6IO55pt\n\n\nShradha Ma'am community \nInstagram : https://www.instagram.com/shradhakhapra\nLinkedIn : https://www.linkedin.com/in/shradha-khapra/\n
+Twitter : https://x.com/ShradhaKhapra_\n\nTime Stamps : \n00:00 Introduction\n00:28 Question\n02:45 Approach\n14:16 Pseudocode for Binary Search\n15:41 How to check mid possible 
+or not?\n22:45 Code"
+    },
+    {
+      "position": 23,
+      "id": "7wOzDqsfXy0",
+      "title": "Aggressive Cows Problem | DSA Placement Series - Binary Search | Lecture 23",
+      "url": "https://www.youtube.com/watch?v=7wOzDqsfXy0",
+      "channel": "Apna College",
+      "channel_url": "https://www.youtube.com/channel/UCBwmMxybNva6P_5VmxjzwqA",
+      "duration": "30:12",
+      "duration_seconds": 1812,
+      "views": 188765,
+      "likes": 4093,
+      "upload_date": "2024-10-07",
+      "thumbnail": "https://i.ytimg.com/vi/7wOzDqsfXy0/maxresdefault.jpg",
+      "description": "Lecture 23 of DSA Placement Series \n🚀 New DSA Sheet : https://bit.ly/dsa-sheet-apnacollege\nShare your DSA progress on LinkedIn : https://bit.ly/Ln-ac\n{\n#
+50Day DSA Challenge\n#No. of Problems solved (eg: first 50 DSA problems , first 100 DSA problems)\n🚀 Students who will complete challenge will be reposted on Official Page 🏆\n}\nOR
+ Share your DSA progress on Twitter : https://bit.ly/ac-X\n\n-----------------------------------------------------------------------------------------------------------\nWant to 
+study for Tech Placements/Internships from us :\nOur Latest Placement Batches : https://linktr.ee/apnacollege.in\n\nDSA Series full playlist : https://www.youtube.com/playlist?li
+st=PLfqMhTWNBTe137I_EPQd34TsgV6IO55pt\n\n\nShradha Ma'am community \nInstagram : https://www.instagram.com/shradhakhapra\nLinkedIn : https://www.linkedin.com/in/shradha-khapra/\n
+Twitter : https://x.com/ShradhaKhapra_\n\nTime Stamps : \n00:00 Introduction\n00:27 Question\n03:44 Approach\n14:02 Pseudocode for Binary Search\n15:29 How to check mid possible 
+or not?\n22:52 Code"
+    },
+    {
+      "position": 24,
+      "id": "1jCFUv-Xlqo",
+      "title": "Sorting Algorithms | Bubble Sort, Selection Sort & Insertion Sort | DSA Series by Shradha Ma'am",
+      "url": "https://www.youtube.com/watch?v=1jCFUv-Xlqo",
+      "channel": "Apna College",
+      "channel_url": "https://www.youtube.com/channel/UCBwmMxybNva6P_5VmxjzwqA",
+      "duration": "34:33",
+      "duration_seconds": 2073,
+      "views": 1500545,
+      "likes": 23745,
+      "upload_date": "2024-10-09",
+      "thumbnail": "https://i.ytimg.com/vi/1jCFUv-Xlqo/maxresdefault.jpg",
+      "description": "Lecture 24 of DSA Placement Series \n🚀 New DSA Sheet : https://bit.ly/dsa-sheet-apnacollege\nShare your DSA progress on LinkedIn : https://bit.ly/Ln-ac\n{\n#
+50Day DSA Challenge\n#No. of Problems solved (eg: first 50 DSA problems , first 100 DSA problems)\n🚀 Students who will complete challenge will be reposted on Official Page 🏆\n}\nOR
+ Share your DSA progress on Twitter : https://bit.ly/ac-X\n\n-----------------------------------------------------------------------------------------------------------\nWant to 
+study for Tech Placements/Internships from us :\nOur Latest Placement Batches : https://linktr.ee/apnacollege.in\n\nDSA Series full playlist : https://www.youtube.com/playlist?li
+st=PLfqMhTWNBTe137I_EPQd34TsgV6IO55pt\n\n\nShradha Ma'am community \nInstagram : https://www.instagram.com/shradhakhapra\nLinkedIn : https://www.linkedin.com/in/shradha-khapra/\n
+Twitter : https://x.com/ShradhaKhapra_\n\nTime Stamps : \n00:00 Introduction\n00:36 Bubble Sort\n08:22 Bubble Sort Code\n11:43 Optimized Bubble Sort\n12:54 Selection Sort\n18:20 
+Selection Sort Code\n20:08 Insertion Sort\n30:10 Insertion Sort Code\n31:41 Algorithms for Descending Order\n32:53 Summary & Homework"
+    },
+    {
+      "position": 25,
+      "id": "J48aGjfjYTI",
+      "title": "Sort an Array of 0s, 1s & 2s | DNF Sorting Algorithm | Leetcode 75",
+      "url": "https://www.youtube.com/watch?v=J48aGjfjYTI",
+      "channel": "Apna College",
+      "channel_url": "https://www.youtube.com/channel/UCBwmMxybNva6P_5VmxjzwqA",
+      "duration": "33:39",
+      "duration_seconds": 2019,
+      "views": 221407,
+      "likes": 5002,
+      "upload_date": "2024-10-10",
+      "thumbnail": "https://i.ytimg.com/vi/J48aGjfjYTI/maxresdefault.jpg",
+      "description": "Lecture 25 of DSA Placement Series \n🚀 New DSA Sheet : https://bit.ly/dsa-sheet-apnacollege\nShare your DSA progress on LinkedIn : https://bit.ly/Ln-ac\n{\n#
+50Day DSA Challenge\n#No. of Problems solved (eg: first 50 DSA problems , first 100 DSA problems)\n🚀 Students who will complete challenge will be reposted on Official Page 🏆\n}\nOR
+ Share your DSA progress on Twitter : https://bit.ly/ac-X\n\n-----------------------------------------------------------------------------------------------------------\nWant to 
+study for Tech Placements/Internships from us :\nOur Latest Placement Batches : https://linktr.ee/apnacollege.in\n\nDSA Series full playlist : https://www.youtube.com/playlist?li
+st=PLfqMhTWNBTe137I_EPQd34TsgV6IO55pt\n\n\nShradha Ma'am community \nInstagram : https://www.instagram.com/shradhakhapra\nLinkedIn : https://www.linkedin.com/in/shradha-khapra/\n
+Twitter : https://x.com/ShradhaKhapra_\n\nTime Stamps : \n00:00 Introduction\n00:50 Question\n01:22 Important Note\n02:25 Approach1 (Brute Force)\n03:45 Approach2\n05:31 Approach
+2 (Code)\n07:56 DNF Algorithm (Approach3)\n23:00 Pseudocode\n24:10 Dry Run\n28:44 Code\n30:30 Time Complexity"
+    },
+    {
+      "position": 26,
+      "id": "-1cLK6PaLsQ",
+      "title": "Merge Sorted Arrays Problem and Next Permutation Problem | DSA Series",
+      "url": "https://www.youtube.com/watch?v=-1cLK6PaLsQ",
+      "channel": "Apna College",
+      "channel_url": "https://www.youtube.com/channel/UCBwmMxybNva6P_5VmxjzwqA",
+      "duration": "43:49",
+      "duration_seconds": 2629,
+      "views": 352726,
+      "likes": 5635,
+      "upload_date": "2024-10-14",
+      "thumbnail": "https://i.ytimg.com/vi/-1cLK6PaLsQ/maxresdefault.jpg",
+      "description": "🚀 New DSA Sheet : https://bit.ly/dsa-sheet-apnacollege\nShare your DSA progress on LinkedIn : https://bit.ly/Ln-ac\n{\n#50Day DSA Challenge\n#No. of Problems
+ solved (eg: first 50 DSA problems , first 100 DSA problems)\n🚀 Students who will complete challenge will be reposted on Official Page 🏆\n}\nOR Share your DSA progress on Twitter :
+ https://bit.ly/ac-X\n\n-----------------------------------------------------------------------------------------------------------\n\nLecture 26 (Arrays Part 8) of DSA Placement
+ Series \n\nOur Current Placement Batches : https://linktr.ee/apnacollege.in\n\nTimestamps\n00:00 Introduction\n00:30 Merge 2 Sorted Arrays\n13:51 Code (Problem1)\n16:14 Next Per
+mutation (BRUTE)\n20:14 Next Permutation (OPTIMAL)\n31:43 Pseudocode (Problem2)\n37:13 Code (Problem2)\n41:19 Dry Run (Problem2)\n\nShare your progress on Twitter : https://x.com
+/ShradhaKhapra_\nDSA Series full playlist : https://www.youtube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55pt\n\nShradha Ma'am community \nInstagram : https://www.instagra
+m.com/shradhakhapra\nLinkedIn : https://www.linkedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 27,
+      "id": "okhdtEk1iKk",
+      "title": "C++ STL Complete Tutorial | Standard Template Library - One Shot",
+      "url": "https://www.youtube.com/watch?v=okhdtEk1iKk",
+      "channel": "Apna College",
+      "channel_url": "https://www.youtube.com/channel/UCBwmMxybNva6P_5VmxjzwqA",
+      "duration": "1:27:19",
+      "duration_seconds": 5239,
+      "views": 646547,
+      "likes": 10983,
+      "upload_date": "2024-10-15",
+      "thumbnail": "https://i.ytimg.com/vi/okhdtEk1iKk/maxresdefault.jpg",
+      "description": "Lecture 27 of DSA Series \nWant to study for Tech Placements/Internships from us :\nOur Latest Placement Batches : https://linktr.ee/apnacollege.in\n\nTime 
+Stamps : \n00:00 Introduction\n01:16 What we'll cover?\n01:50 Vectors\n19:30 Iterators (in Vectors)\n26:58 List\n29:58 Deque\n32:34 Pair\n36:36 push vs emplace\n38:13 Stack\n43:1
+7 Queue\n45:22 Priority Queue\n49:50 Map\n57:11 MultiMap & Unordered Map\n01:01:12 Set\n01:03:25 lowerBound & upperBound\n01:07:14 MultiSet & Unordered Set\n01:08:48 Sorting\n01:
+13:57 Custom Comparators\n01:18:18 Other Algorithms\n\n\n\nShare your progress on Twitter : https://x.com/ShradhaKhapra_\nDSA Series full playlist : https://www.youtube.com/playl
+ist?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55pt\n\nCompany wise DSA Sheet Link : https://docs.google.com/spreadsheets/d/1mvlc8EYc3OVVU3X7NKoC0iZJr_45BL_pVxiJec0r94c/edit?usp=sharing\
+n\nShradha Ma'am community \nInstagram : https://www.instagram.com/shradhakhapra\nLinkedIn : https://www.linkedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 28,
+      "id": "varXreLWPRo",
+      "title": "How to setup C++ compiler on Mac ? | Software Installation for Mac users",
+      "url": "https://www.youtube.com/watch?v=varXreLWPRo",
+      "channel": "Shradha Khapra",
+      "channel_url": "https://www.youtube.com/channel/UC1XBh-m27kkgwLAwu_SRJBg",
+      "duration": "1:40",
+      "duration_seconds": 100,
+      "views": 181158,
+      "likes": 2049,
+      "upload_date": "2024-09-02",
+      "thumbnail": "https://i.ytimg.com/vi/varXreLWPRo/maxresdefault.jpg",
+      "description": "This lecture was made with a lot of love❤️\n\n✨ Instagram : https://www.instagram.com/shradhakhapra/\n✨ LinkedIn : https://www.linkedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 29,
+      "id": "MOSjYaVymcU",
+      "title": "Strings & Character Arrays in C++  -  Part 1 | DSA Placement Series",
+      "url": "https://www.youtube.com/watch?v=MOSjYaVymcU",
+      "channel": "Apna College",
+      "channel_url": "https://www.youtube.com/channel/UCBwmMxybNva6P_5VmxjzwqA",
+      "duration": "30:02",
+      "duration_seconds": 1802,
+      "views": 379671,
+      "likes": 7007,
+      "upload_date": "2024-10-18",
+      "thumbnail": "https://i.ytimg.com/vi/MOSjYaVymcU/maxresdefault.jpg",
+      "description": "Lecture 28 of DSA Placement Series\n🚀 New DSA Sheet : https://bit.ly/dsa-sheet-apnacollege\nShare your DSA progress on LinkedIn : https://bit.ly/Ln-ac\n{\n#5
+0Day DSA Challenge\n#No. of Problems solved (eg: first 50 DSA problems , first 100 DSA problems)\n🚀 Students who will complete challenge will be reposted on Official Page 🏆\n}\nOR 
+Share your DSA progress on Twitter : https://bit.ly/ac-X\n\n-----------------------------------------------------------------------------------------------------------\nWant to s
+tudy for Tech Placements/Internships from us :\nOur Latest Placement Batches : https://linktr.ee/apnacollege.in\n\nDSA Series full playlist : https://www.youtube.com/playlist?lis
+t=PLfqMhTWNBTe137I_EPQd34TsgV6IO55pt\n\n\nShradha Ma'am community \nInstagram : https://www.instagram.com/shradhakhapra\nLinkedIn : https://www.linkedin.com/in/shradha-khapra/\nT
+witter : https://x.com/ShradhaKhapra_"
+    },
+    {
+      "position": 30,
+      "id": "dSRFgEs3a6A",
+      "title": "Valid Palindrome & Remove all Occurrences | Strings Part 2 | DSA Placement Series",
+      "url": "https://www.youtube.com/watch?v=dSRFgEs3a6A",
+      "channel": "Apna College",
+      "channel_url": "https://www.youtube.com/channel/UCBwmMxybNva6P_5VmxjzwqA",
+      "duration": "24:02",
+      "duration_seconds": 1442,
+      "views": 247663,
+      "likes": 4869,
+      "upload_date": "2024-10-23",
+      "thumbnail": "https://i.ytimg.com/vi/dSRFgEs3a6A/maxresdefault.jpg",
+      "description": "Lecture 29 of DSA Placement Series\n🚀 New DSA Sheet : https://bit.ly/dsa-sheet-apnacollege\nShare your DSA progress on LinkedIn : https://bit.ly/Ln-ac\n{\n#5
+0Day DSA Challenge\n#No. of Problems solved (eg: first 50 DSA problems , first 100 DSA problems)\n🚀 Students who will complete challenge will be reposted on Official Page 🏆\n}\nOR 
+Share your DSA progress on Twitter : https://bit.ly/ac-X\n\n-----------------------------------------------------------------------------------------------------------\n\nWant to
+ study for Tech Placements/Internships from us :\nOur Latest Placement Batches : https://linktr.ee/apnacollege.in\n\nShare your progress on Twitter : https://x.com/ShradhaKhapra_
+\nDSA Series full playlist : https://www.youtube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55pt\n\n\nShradha Ma'am community \nInstagram : https://www.instagram.com/shradha
+khapra\nLinkedIn : https://www.linkedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 31,
+      "id": "VXewy91P0S4",
+      "title": "Strings - Part 3 | Permutation in String | DSA Placement Series",
+      "url": "https://www.youtube.com/watch?v=VXewy91P0S4",
+      "channel": "Apna College",
+      "channel_url": "https://www.youtube.com/channel/UCBwmMxybNva6P_5VmxjzwqA",
+      "duration": "21:41",
+      "duration_seconds": 1301,
+      "views": 198961,
+      "likes": 4021,
+      "upload_date": "2024-10-24",
+      "thumbnail": "https://i.ytimg.com/vi/VXewy91P0S4/maxresdefault.jpg",
+      "description": "Lecture 30 of DSA Placement Series\n🚀 New DSA Sheet : https://bit.ly/dsa-sheet-apnacollege\nShare your DSA progress on LinkedIn : https://bit.ly/Ln-ac\n{\n#5
+0Day DSA Challenge\n#No. of Problems solved (eg: first 50 DSA problems , first 100 DSA problems)\n🚀 Students who will complete challenge will be reposted on Official Page 🏆\n}\nOR 
+Share your DSA progress on Twitter : https://bit.ly/ac-X\n\n-----------------------------------------------------------------------------------------------------------\nWant to s
+tudy for Tech Placements/Internships from us :\nOur Latest Placement Batches : https://linktr.ee/apnacollege.in\n\nDSA Series full playlist : https://www.youtube.com/playlist?lis
+t=PLfqMhTWNBTe137I_EPQd34TsgV6IO55pt\n\n\nShradha Ma'am community \nInstagram : https://www.instagram.com/shradhakhapra\nLinkedIn : https://www.linkedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 32,
+      "id": "RitppzIdMCo",
+      "title": "Strings - Part 4 | Reverse Words in String | DSA Placement Series",
+      "url": "https://www.youtube.com/watch?v=RitppzIdMCo",
+      "channel": "Apna College",
+      "channel_url": "https://www.youtube.com/channel/UCBwmMxybNva6P_5VmxjzwqA",
+      "duration": "14:41",
+      "duration_seconds": 881,
+      "views": 251735,
+      "likes": 5339,
+      "upload_date": "2024-10-25",
+      "thumbnail": "https://i.ytimg.com/vi/RitppzIdMCo/maxresdefault.jpg",
+      "description": "Lecture 31 of DSA Placement Series\n🚀 New DSA Sheet : https://bit.ly/dsa-sheet-apnacollege\nShare your DSA progress on LinkedIn : https://bit.ly/Ln-ac\n{\n#5
+0Day DSA Challenge\n#No. of Problems solved (eg: first 50 DSA problems , first 100 DSA problems)\n🚀 Students who will complete challenge will be reposted on Official Page 🏆\n}\nOR 
+Share your DSA progress on Twitter : https://bit.ly/ac-X\n\n-----------------------------------------------------------------------------------------------------------\nWant to s
+tudy for Tech Placements/Internships from us :\nOur Latest Placement Batches : https://linktr.ee/apnacollege.in\n\nDSA Series full playlist : https://www.youtube.com/playlist?lis
+t=PLfqMhTWNBTe137I_EPQd34TsgV6IO55pt\n\n\nShradha Ma'am community \nInstagram : https://www.instagram.com/shradhakhapra\nLinkedIn : https://www.linkedin.com/in/shradha-khapra/\nT
+witter : https://x.com/ShradhaKhapra_"
+    },
+    {
+      "position": 33,
+      "id": "cAB15h6-sWA",
+      "title": "String Compression problem - Lecture 32 | Leetcode 443",
+      "url": "https://www.youtube.com/watch?v=cAB15h6-sWA",
+      "channel": "Apna College",
+      "channel_url": "https://www.youtube.com/channel/UCBwmMxybNva6P_5VmxjzwqA",
+      "duration": "19:29",
+      "duration_seconds": 1169,
+      "views": 153250,
+      "likes": 3559,
+      "upload_date": "2024-10-28",
+      "thumbnail": "https://i.ytimg.com/vi/cAB15h6-sWA/maxresdefault.jpg",
+      "description": "This is Lecture 32 of DSA Placement Series, in this we will solve the problem of String Compression - Leetcode 443\n🚀 New DSA Sheet : https://bit.ly/dsa-shee
+t-apnacollege\nShare your DSA progress on LinkedIn : https://bit.ly/Ln-ac\n{\n#50Day DSA Challenge\n#No. of Problems solved (eg: first 50 DSA problems , first 100 DSA problems)\n
+🚀 Students who will complete challenge will be reposted on Official Page 🏆\n}\nOR Share your DSA progress on Twitter : https://bit.ly/ac-X\n\n--------------------------------------
+---------------------------------------------------------------------\nWant to study for Tech Placements/Internships from us :\nOur Latest Placement Batches : https://linktr.ee/a
+pnacollege.in\n\nDSA Series full playlist : https://www.youtube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55pt\n\n\nShradha Ma'am community \nInstagram : https://www.instag
+ram.com/shradhakhapra\nLinkedIn : https://www.linkedin.com/in/shradha-khapra/\nTwitter : https://x.com/ShradhaKhapra_"
+    },
+    {
+      "position": 34,
+      "id": "Y4KdgqV1IqA",
+      "title": "Maths for DSA - One Shot | Euclid's Algorithm | Sieve of Eratosthenes | Modular Arithmetics",
+      "url": "https://www.youtube.com/watch?v=Y4KdgqV1IqA",
+      "channel": "Apna College",
+      "channel_url": "https://www.youtube.com/channel/UCBwmMxybNva6P_5VmxjzwqA",
+      "duration": "55:47",
+      "duration_seconds": 3347,
+      "views": 221853,
+      "likes": 5027,
+      "upload_date": "2024-10-30",
+      "thumbnail": "https://i.ytimg.com/vi/Y4KdgqV1IqA/maxresdefault.jpg",
+      "description": "This is Lecture 33 of DSA Placement Series\n🚀 New DSA Sheet : https://bit.ly/dsa-sheet-apnacollege\nShare your DSA progress on LinkedIn : https://bit.ly/Ln-a
+c\n{\n#50Day DSA Challenge\n#No. of Problems solved (eg: first 50 DSA problems , first 100 DSA problems)\n🚀 Students who will complete challenge will be reposted on Official Page 
+🏆\n}\nOR Share your DSA progress on Twitter : https://bit.ly/ac-X\n\n-----------------------------------------------------------------------------------------------------------\nW
+ant to study for Tech Placements/Internships from us :\nOur Latest Placement Batches : https://linktr.ee/apnacollege.in\n\nDSA Series full playlist : https://www.youtube.com/play
+list?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55pt\n\n\nShradha Ma'am community \nInstagram : https://www.instagram.com/shradhakhapra\nLinkedIn : https://www.linkedin.com/in/shradha-kh
+apra/\nTwitter : https://x.com/ShradhaKhapra_"
+    },
+    {
+      "position": 35,
+      "id": "lBL8327gq8I",
+      "title": "2D Arrays in C++ | Part 1 | DSA Series by Shradha Ma'am",
+      "url": "https://www.youtube.com/watch?v=lBL8327gq8I",
+      "channel": "Apna College",
+      "channel_url": "https://www.youtube.com/channel/UCBwmMxybNva6P_5VmxjzwqA",
+      "duration": "37:30",
+      "duration_seconds": 2250,
+      "views": 283809,
+      "likes": 5255,
+      "upload_date": "2024-11-03",
+      "thumbnail": "https://i.ytimg.com/vi/lBL8327gq8I/maxresdefault.jpg",
+      "description": "This is Lecture 34 of DSA Placement Series.\n🚀 New DSA Sheet : https://bit.ly/dsa-sheet-apnacollege\nShare your DSA progress on LinkedIn : https://bit.ly/Ln-
+ac\n{\n#50Day DSA Challenge\n#No. of Problems solved (eg: first 50 DSA problems , first 100 DSA problems)\n🚀 Students who will complete challenge will be reposted on Official Page
+ 🏆\n}\nOR Share your DSA progress on Twitter : https://bit.ly/ac-X\n\n-----------------------------------------------------------------------------------------------------------\n
+Want to study for Tech Placements/Internships from us :\nOur Latest Placement Batches : https://linktr.ee/apnacollege.in\n\nDSA Series full playlist : https://www.youtube.com/pla
+ylist?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55pt\n\n\nShradha Ma'am community \nInstagram : https://www.instagram.com/shradhakhapra\nLinkedIn : https://www.linkedin.com/in/shradha-k
+hapra/\nTwitter : https://x.com/ShradhaKhapra_\n\nTimestamps\n00:00 Introduction to 2D Arrays\n02:52 2D Array in C++\n04:35 Access Elements\n06:10 Loops on 2D Arrays\n10:39 2D Ar
+ray in Memory (Row Major & Column Major)\n13:09 Qs : Linear Search on Matrix\n16:21 Homework 1\n17:21 Qs : Maximum Row Sum\n20:38 Homework 2\n21:16 Qs : Diagonal Sum \n29:01 Diag
+onal Sum (Code1 - O(n^2))\n30:35 Diagonal Sum (Code2  - O(n))\n31:56 2D Vectors in C++\n36:30 Summary & Homework"
+    },
+    {
+      "position": 36,
+      "id": "LEFFjgt5i6w",
+      "title": "Search a 2D Matrix - Variation I & II | 2D Arrays - Part 2 | DSA Series by Shradha Ma'am",
+      "url": "https://www.youtube.com/watch?v=LEFFjgt5i6w",
+      "channel": "Apna College",
+      "channel_url": "https://www.youtube.com/channel/UCBwmMxybNva6P_5VmxjzwqA",
+      "duration": "37:43",
+      "duration_seconds": 2263,
+      "views": 153422,
+      "likes": 3252,
+      "upload_date": "2024-11-04",
+      "thumbnail": "https://i.ytimg.com/vi/LEFFjgt5i6w/maxresdefault.jpg",
+      "description": "This is Lecture 35 of DSA Placement Series.\n🚀 New DSA Sheet : https://bit.ly/dsa-sheet-apnacollege\nShare your DSA progress on LinkedIn : https://bit.ly/Ln-
+ac\n{\n#50Day DSA Challenge\n#No. of Problems solved (eg: first 50 DSA problems , first 100 DSA problems)\n🚀 Students who will complete challenge will be reposted on Official Page
+ 🏆\n}\nOR Share your DSA progress on Twitter : https://bit.ly/ac-X\n\n-----------------------------------------------------------------------------------------------------------\n
+Want to study for Tech Placements/Internships from us :\nOur Latest Placement Batches : https://linktr.ee/apnacollege.in\n\nDSA Series full playlist : https://www.youtube.com/pla
+ylist?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55pt\n\nShradha Ma'am community \nInstagram : https://www.instagram.com/shradhakhapra\nLinkedIn : https://www.linkedin.com/in/shradha-kha
+pra/\nTwitter : https://x.com/ShradhaKhapra_\n\nTimestamps\n00:00 Introduction\n00:35 Search in Matrix I (Approach)\n16:19 Code\n22:22 Time Complexity\n23:15 Search in Matrix II 
+(Approach)\n34:10 Code\n35:35 Time Complexity"
+    },
+    {
+      "position": 37,
+      "id": "XMpdvwUObho",
+      "title": "Spiral Matrix | 2D Arrays - Part 3 | Leetcode 54 | DSA Series by Shradha Ma'am",
+      "url": "https://www.youtube.com/watch?v=XMpdvwUObho",
+      "channel": "Apna College",
+      "channel_url": "https://www.youtube.com/channel/UCBwmMxybNva6P_5VmxjzwqA",
+      "duration": "24:33",
+      "duration_seconds": 1473,
+      "views": 157457,
+      "likes": 3730,
+      "upload_date": "2024-11-06",
+      "thumbnail": "https://i.ytimg.com/vi/XMpdvwUObho/maxresdefault.jpg",
+      "description": "This is Lecture 36 of DSA Placement Series.\n\nWant to study for Tech Placements/Internships from us :\nOur Latest Placement Batches : https://linktr.ee/apn
+acollege.in\n\nCompany wise DSA Sheet Link : https://docs.google.com/spreadsheets/d/1mvlc8EYc3OVVU3X7NKoC0iZJr_45BL_pVxiJec0r94c/edit?usp=sharing\n\nShare your progress on Twitte
+r : https://x.com/ShradhaKhapra_\nDSA Series full playlist : https://www.youtube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55pt\n\nTimestamps\n00:00 Introduction\n2:20 Appr
+oach\n10:31 Code\n13:35 Figuring out while condition\n18:29 Corner Case\n22:16 Time Complexity\n\nShradha Ma'am community \nInstagram : https://www.instagram.com/shradhakhapra\nL
+inkedIn : https://www.linkedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 38,
+      "id": "0Fxc_jKj2vo",
+      "title": "Two Sum | Find Duplicate | Find Repeating & Missing Values | Hashing Problems",
+      "url": "https://www.youtube.com/watch?v=0Fxc_jKj2vo",
+      "channel": "Apna College",
+      "channel_url": "https://www.youtube.com/channel/UCBwmMxybNva6P_5VmxjzwqA",
+      "duration": "53:30",
+      "duration_seconds": 3210,
+      "views": 322397,
+      "likes": 4813,
+      "upload_date": "2024-11-09",
+      "thumbnail": "https://i.ytimg.com/vi/0Fxc_jKj2vo/maxresdefault.jpg",
+      "description": "This is Lecture 37 of DSA Placement Series. Hashing Problems - Part 1.\n\nWant to study for Tech Placements/Internships from us :\nOur Latest Placement Batc
+hes : https://linktr.ee/apnacollege.in\n\nCompany wise DSA Sheet Link : https://docs.google.com/spreadsheets/d/1mvlc8EYc3OVVU3X7NKoC0iZJr_45BL_pVxiJec0r94c/edit?usp=sharing\n\nNe
+w DSA Sheet : coming soon!\n\nShare your progress on Twitter : https://x.com/ShradhaKhapra_\nDSA Series full playlist : https://www.youtube.com/playlist?list=PLfqMhTWNBTe137I_EPQ
+d34TsgV6IO55pt\n\nTimestamps\n00:00 Introduction\n00:32 Two Sum (BruteForce)\n05:35 Two Sum (Better Approach)\n09:55 Two Sum (Optimized)\n20:17 Two Sum (Code)\n22:01 Repeating & 
+Missing Values\n31:03 Repeating & Missing Values (Code)\n33:20 Find Duplicate (using Sets)\n37:12 Find Duplicate (using Slow Fast Approach)\n46:33 Find Duplicate : Pseudocode\n50
+:15 Find Duplicate : Code\n51:52 Summary\n\nShradha Ma'am community \nInstagram : https://www.instagram.com/shradhakhapra\nLinkedIn : https://www.linkedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 39,
+      "id": "K-RsltkN63w",
+      "title": "3 Sum | Brute, Better & Optimized Approach with Codes | Leetcode 15",
+      "url": "https://www.youtube.com/watch?v=K-RsltkN63w",
+      "channel": "Apna College",
+      "channel_url": "https://www.youtube.com/channel/UCBwmMxybNva6P_5VmxjzwqA",
+      "duration": "43:42",
+      "duration_seconds": 2622,
+      "views": 228048,
+      "likes": 4156,
+      "upload_date": "2024-11-12",
+      "thumbnail": "https://i.ytimg.com/vi/K-RsltkN63w/maxresdefault.jpg",
+      "description": "This is Lecture 38 of DSA Placement Series. Hashing Problems - Part 2.\n\nWant to study for Tech Placements/Internships from us :\nOur Latest Placement Batc
+hes : https://linktr.ee/apnacollege.in\n\nCompany wise DSA Sheet Link : https://docs.google.com/spreadsheets/d/1mvlc8EYc3OVVU3X7NKoC0iZJr_45BL_pVxiJec0r94c/edit?usp=sharing\n\nNe
+w DSA Sheet : coming soon!\n\nShare your progress on Twitter : https://x.com/ShradhaKhapra_\nDSA Series full playlist : https://www.youtube.com/playlist?list=PLfqMhTWNBTe137I_EPQ
+d34TsgV6IO55pt\n\nTimestamps\n00:00 Introduction\n00:21 3Sum Qs\n02:46 IMPORTANT\n03:11 BruteForce Solution\n7:55 Code\n14:05 Time & Space Complexity\n16:02 Better Solution : Has
+hing\n21:02 Code\n24:14 Dry Run\n27:13 Time & Space Complexity\n28:36 Optimal Solution : 2 Pointer Approach\n41:25 Code\n43:45 Time & Space Complexity\n\nShradha Ma'am community 
+\nInstagram : https://www.instagram.com/shradhakhapra\nLinkedIn : https://www.linkedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 40,
+      "id": "X6sL8JTROLY",
+      "title": "4 Sum Problem | Optimal Approach | DSA Series by Shradha Ma'am",
+      "url": "https://www.youtube.com/watch?v=X6sL8JTROLY",
+      "channel": "Apna College",
+      "channel_url": "https://www.youtube.com/channel/UCBwmMxybNva6P_5VmxjzwqA",
+      "duration": "23:01",
+      "duration_seconds": 1381,
+      "views": 110710,
+      "likes": 2790,
+      "upload_date": "2024-11-14",
+      "thumbnail": "https://i.ytimg.com/vi/X6sL8JTROLY/maxresdefault.jpg",
+      "description": "4 Sum Problem (Leet code 18) : This is Lecture 39 of DSA Placement Series. Hashing Problems - Part 3.\n\nWant to study for Tech Placements/Internships from 
+us :\nOur Latest Placement Batches : https://linktr.ee/apnacollege.in\n\nCompany wise DSA Sheet Link : https://docs.google.com/spreadsheets/d/1mvlc8EYc3OVVU3X7NKoC0iZJr_45BL_pVxi
+Jec0r94c/edit?usp=sharing\n\nNew DSA Sheet : coming soon!\n\nShare your progress on Twitter : https://x.com/ShradhaKhapra_\nDSA Series full playlist : https://www.youtube.com/pla
+ylist?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55pt\n\nTimestamps\n00:00 Introduction\n00:36 4Sum Problem\n02:28 Optimal Approach\n12:31 Code\n15:00 Optimizations to remove duplicates\
+n20:55 Time & Space Complexity\n\nShradha Ma'am community \nInstagram : https://www.instagram.com/shradhakhapra\nLinkedIn : https://www.linkedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 41,
+      "id": "KDH4mhFVvHw",
+      "title": "Subarray Sum Equals K | Brute-Better-Optimal approach",
+      "url": "https://www.youtube.com/watch?v=KDH4mhFVvHw",
+      "channel": "Apna College",
+      "channel_url": "https://www.youtube.com/channel/UCBwmMxybNva6P_5VmxjzwqA",
+      "duration": "34:44",
+      "duration_seconds": 2084,
+      "views": 235642,
+      "likes": 4491,
+      "upload_date": "2024-11-19",
+      "thumbnail": "https://i.ytimg.com/vi/KDH4mhFVvHw/maxresdefault.jpg",
+      "description": "Lecture 40  : DSA Placement Series\nTopic : Prefix Sum & Hashing\nProblem : Leetcode 560  \n\nCompany wise DSA Sheet Link : https://docs.google.com/spreadsh
+eets/d/1mvlc8EYc3OVVU3X7NKoC0iZJr_45BL_pVxiJec0r94c/edit?usp=sharing\n\nWant to study for Tech Placements/Internships from us :\nOur Latest Placement Batches : https://linktr.ee/
+apnacollege.in\n\nShare your progress on Twitter : https://x.com/ShradhaKhapra_\nDSA Series full playlist : https://www.youtube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55
+pt\n\n\nTimestamps:\n00:00 Introduction\n00:32 Question Explanation\n02:50 BRUTE Solution\n08:03 Code\n08:45 Time & Space Complexity\n09:14 OPTIMAL Solution\n29:40 Code\n32:35 Ti
+me & Space Complexity\n\nShradha Ma'am community \nInstagram : https://www.instagram.com/shradhakhapra\nLinkedIn : https://www.linkedin.com/in/shradha-khapra/\n\n#prefixsum #hash
+ing"
+    },
+    {
+      "position": 42,
+      "id": "9OsMG4fI4OY",
+      "title": "Recursion Tutorial - Basics to Advanced | Part 1",
+      "url": "https://www.youtube.com/watch?v=9OsMG4fI4OY",
+      "channel": "Apna College",
+      "channel_url": "https://www.youtube.com/channel/UCBwmMxybNva6P_5VmxjzwqA",
+      "duration": "46:21",
+      "duration_seconds": 2781,
+      "views": 458143,
+      "likes": 8032,
+      "upload_date": "2024-11-21",
+      "thumbnail": "https://i.ytimg.com/vi/9OsMG4fI4OY/maxresdefault.jpg",
+      "description": "Lecture 41 : Recursion (Part 1)\n\nCompany wise DSA Sheet Link : https://docs.google.com/spreadsheets/d/1mvlc8EYc3OVVU3X7NKoC0iZJr_45BL_pVxiJec0r94c/edit?us
+p=sharing\n\nWant to study for Tech Placements/Internships from us :\nOur Latest Placement Batches : https://linktr.ee/apnacollege.in\n\nShare your progress on Twitter : https://
+x.com/ShradhaKhapra_\nDSA Series full playlist : https://www.youtube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55pt\n\n\nTimestamps:\n00:00 Introduction\n00:50 What is Recu
+rsion?\n09:30 Recursive Function\n11:18 Call Stack & Recursion Tree\n18:44 Math of Recursion\n20:00 Recurrence Relation\n21:56 N factorial (Recursive)\n26:31 Code\n27:26 Time Com
+plexity in Recursion\n34:01 Space Complexity in Recursion\n37:36 Sum of N numbers (Recursive)\n42:40 Time & Space Complexity\n\nShradha Ma'am community \nInstagram : https://www.
+instagram.com/shradhakhapra\nLinkedIn : https://www.linkedin.com/in/shradha-khapra/\n\n#recursion #callstack #backtracking #dsa #cpp #programming"
+    },
+    {
+      "position": 43,
+      "id": "4iT-GhvSKzc",
+      "title": "Recursion Part 2 : Fibonacci numbers problem, Binary search problem, Find if array sorted problem",
+      "url": "https://www.youtube.com/watch?v=4iT-GhvSKzc",
+      "channel": "Apna College",
+      "channel_url": "https://www.youtube.com/channel/UCBwmMxybNva6P_5VmxjzwqA",
+      "duration": "41:30",
+      "duration_seconds": 2490,
+      "views": 208564,
+      "likes": 4000,
+      "upload_date": "2024-11-23",
+      "thumbnail": "https://i.ytimg.com/vi/4iT-GhvSKzc/maxresdefault.jpg",
+      "description": "Lecture 42 : Recursion (Part 2)\nWe will learn about more about recursion : \n-Fibonacci numbers\n-Binary search\n-Find if array sorted \n\nCompany wise DSA
+ Sheet Link : https://docs.google.com/spreadsheets/d/1mvlc8EYc3OVVU3X7NKoC0iZJr_45BL_pVxiJec0r94c/edit?usp=sharing\n\nWant to study for Tech Placements/Internships from us :\nOur
+ Latest Placement Batches : https://linktr.ee/apnacollege.in\n\nShare your progress on Twitter : https://x.com/ShradhaKhapra_\nDSA Series full playlist : https://www.youtube.com/
+playlist?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55pt\n\n\nTimestamps:\n00:00 Introduction\n00:33 Fibonacci\n06:50 Code\n07:41 Time & Space Complexity\n12:48 Is Array Sorted\n20:35 Co
+de\n23:28 Time & Space Complexity\n24:46 Binary Search\n34:01 Code\n36:55 Time & Space Complexity\n40:08 Summary\n\nShradha Ma'am community \nInstagram : https://www.instagram.co
+m/shradhakhapra\nLinkedIn : https://www.linkedin.com/in/shradha-khapra/\n\n#recursion #callstack #backtracking #dsa #cpp #programming"
+    },
+    {
+      "position": 44,
+      "id": "pNzljlzDCiI",
+      "title": "Recursion Part 3 : Backtracking in Detail | Print all Subsets | Subsets II",
+      "url": "https://www.youtube.com/watch?v=pNzljlzDCiI",
+      "channel": "Apna College",
+      "channel_url": "https://www.youtube.com/channel/UCBwmMxybNva6P_5VmxjzwqA",
+      "duration": "42:20",
+      "duration_seconds": 2540,
+      "views": 246851,
+      "likes": 4417,
+      "upload_date": "2024-11-27",
+      "thumbnail": "https://i.ytimg.com/vi/pNzljlzDCiI/maxresdefault.jpg",
+      "description": "Lecture 43 : Recursion (Part 3)\nWe will learn about more about recursion : \n-Backtracking\n-Print all Subsets\n-Subset Problem\n-Subset II Problem \n\nCom
+pany wise DSA Sheet Link : https://docs.google.com/spreadsheets/d/1mvlc8EYc3OVVU3X7NKoC0iZJr_45BL_pVxiJec0r94c/edit?usp=sharing\n\nWant to study for Tech Placements/Internships f
+rom us :\nOur Latest Placement Batches : https://linktr.ee/apnacollege.in\n\nShare your progress on Twitter : https://x.com/ShradhaKhapra_\nDSA Series full playlist : https://www
+.youtube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55pt\n\n\nTimestamps:\n00:00 Introduction\n00:26 Problem : Print all Subsets\n16:57 Code\n19:50 Time Complexity\n21:28 Pr
+oblem : Subsets\n22:14 Code & Complexity\n25:34 Problem : Subsets II\n33:28 Pseudocode\n37:38 Code\n40:33 Time Complexity\n41:03 Summary\n\nShradha Ma'am community \nInstagram : 
+https://www.instagram.com/shradhakhapra\nLinkedIn : https://www.linkedin.com/in/shradha-khapra/\n\n#recursion #callstack #backtracking #dsa #cpp #programming"
+    },
+    {
+      "position": 45,
+      "id": "N4gJDGdhpLw",
+      "title": "Permutations of an Array/String | Recursion & Backtracking",
+      "url": "https://www.youtube.com/watch?v=N4gJDGdhpLw",
+      "channel": "Apna College",
+      "channel_url": "https://www.youtube.com/channel/UCBwmMxybNva6P_5VmxjzwqA",
+      "duration": "22:54",
+      "duration_seconds": 1374,
+      "views": 196245,
+      "likes": 3739,
+      "upload_date": "2024-11-30",
+      "thumbnail": "https://i.ytimg.com/vi/N4gJDGdhpLw/maxresdefault.jpg",
+      "description": "Lecture 44 : Recursion (Part 4)\nWe will learn about more about recursion : Permutations of an Array\n\nCompany wise DSA Sheet Link : https://docs.google.co
+m/spreadsheets/d/1mvlc8EYc3OVVU3X7NKoC0iZJr_45BL_pVxiJec0r94c/edit?usp=sharing\n\nWant to study for Tech Placements/Internships from us :\nOur Latest Placement Batches : https://
+linktr.ee/apnacollege.in\n\nShare your progress on Twitter : https://x.com/ShradhaKhapra_\nDSA Series full playlist : https://www.youtube.com/playlist?list=PLfqMhTWNBTe137I_EPQd3
+4TsgV6IO55pt\n\n\nTimestamps:\n00:00 Introduction\n00:20 Problem : Permutations of an Array\n17:40 Code\n19:46 Time & Space Complexity\n21:17 Homework\n\nShradha Ma'am community 
+\nInstagram : https://www.instagram.com/shradhakhapra\nLinkedIn : https://www.linkedin.com/in/shradha-khapra/\n\n#recursion #callstack #backtracking #dsa #cpp #programming"
+    },
+    {
+      "position": 46,
+      "id": "BdSJnIdR-4s",
+      "title": "N-Queens Problem | using Backtracking | Leetcode Hard",
+      "url": "https://www.youtube.com/watch?v=BdSJnIdR-4s",
+      "channel": "Apna College",
+      "channel_url": "https://www.youtube.com/channel/UCBwmMxybNva6P_5VmxjzwqA",
+      "duration": "24:26",
+      "duration_seconds": 1466,
+      "views": 265746,
+      "likes": 5063,
+      "upload_date": "2024-12-04",
+      "thumbnail": "https://i.ytimg.com/vi/BdSJnIdR-4s/maxresdefault.jpg",
+      "description": "Lecture 45 of DSA Series : Recursion (Part 5)\nWe will learn about more about recursion : N-Queens Problem using backtracking\n\nCompany wise DSA Sheet Link
+ : https://docs.google.com/spreadsheets/d/1mvlc8EYc3OVVU3X7NKoC0iZJr_45BL_pVxiJec0r94c/edit?usp=sharing\n\nWant to study for Tech Placements/Internships from us :\nOur Latest Pla
+cement Batches : https://linktr.ee/apnacollege.in\n\nShare your progress on Twitter : https://x.com/ShradhaKhapra_\nDSA Series full playlist : https://www.youtube.com/playlist?li
+st=PLfqMhTWNBTe137I_EPQd34TsgV6IO55pt\n\n\nTimestamps:\n00:00 Introduction\n00:30 Problem : N Queens\n12:34 Step1 : Code\n14:57 Checking isSafe condition\n19:22 Step2 : Code\n21:
+35 Initialize Board\n22:57 Time Complexity\n\nShradha Ma'am community \nInstagram : https://www.instagram.com/shradhakhapra\nLinkedIn : https://www.linkedin.com/in/shradha-khapra
+/\n\n#recursion #callstack #backtracking #dsa #cpp #programming"
+    },
+    {
+      "position": 47,
+      "id": "70cP3qtJp-s",
+      "title": "Sudoku Solver Problem | using Backtracking | Leetcode Hard",
+      "url": "https://www.youtube.com/watch?v=70cP3qtJp-s",
+      "channel": "Apna College",
+      "channel_url": "https://www.youtube.com/channel/UCBwmMxybNva6P_5VmxjzwqA",
+      "duration": "26:57",
+      "duration_seconds": 1617,
+      "views": 158785,
+      "likes": 3544,
+      "upload_date": "2024-12-05",
+      "thumbnail": "https://i.ytimg.com/vi/70cP3qtJp-s/maxresdefault.jpg",
+      "description": "Lecture 46 of DSA Series : Recursion (Part 6)\nWe will learn about more about recursion : Sudoku Solver Problem using backtracking\n\nCompany wise DSA Sheet
+ Link : https://docs.google.com/spreadsheets/d/1mvlc8EYc3OVVU3X7NKoC0iZJr_45BL_pVxiJec0r94c/edit?usp=sharing\n\nWant to study for Tech Placements/Internships from us :\nOur Lates
+t Placement Batches : https://linktr.ee/apnacollege.in\n\nShare your progress on Twitter : https://x.com/ShradhaKhapra_\nDSA Series full playlist : https://www.youtube.com/playli
+st?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55pt\n\n\nTimestamps:\n00:00 Introduction\n00:24 Problem : N Queens\n13:48 Step1 : Code\n16:41 Checking isSafe condition\n25:40 Time Complex
+ity\n\nShradha Ma'am community \nInstagram : https://www.instagram.com/shradhakhapra\nLinkedIn : https://www.linkedin.com/in/shradha-khapra/\n\n#recursion #callstack #backtrackin
+g #dsa #cpp #programming"
+    },
+    {
+      "position": 48,
+      "id": "D8Yze9CDDAw",
+      "title": "Rat in a Maze Problem | Backtracking",
+      "url": "https://www.youtube.com/watch?v=D8Yze9CDDAw",
+      "channel": "Apna College",
+      "channel_url": "https://www.youtube.com/channel/UCBwmMxybNva6P_5VmxjzwqA",
+      "duration": "32:44",
+      "duration_seconds": 1964,
+      "views": 110909,
+      "likes": 2622,
+      "upload_date": "2024-12-06",
+      "thumbnail": "https://i.ytimg.com/vi/D8Yze9CDDAw/maxresdefault.jpg",
+      "description": "Lecture 47 of DSA Placement Series \nCompany wise DSA Sheet Link : https://docs.google.com/spreadsheets/d/1mvlc8EYc3OVVU3X7NKoC0iZJr_45BL_pVxiJec0r94c/edit?
+usp=sharing\n\nWant to study for Tech Placements/Internships from us :\nOur Latest Placement Batches : https://linktr.ee/apnacollege.in\n\nShare your progress on Twitter : https:
+//x.com/ShradhaKhapra_\nDSA Series full playlist : https://www.youtube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55pt\n\n\nShradha Ma'am community \nInstagram : https://www
+.instagram.com/shradhakhapra\nLinkedIn : https://www.linkedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 49,
+      "id": "jkgZw2WEaqA",
+      "title": "Combination Sum Problem | Recursion & Backtracking",
+      "url": "https://www.youtube.com/watch?v=jkgZw2WEaqA",
+      "channel": "Apna College",
+      "channel_url": "https://www.youtube.com/channel/UCBwmMxybNva6P_5VmxjzwqA",
+      "duration": "23:34",
+      "duration_seconds": 1414,
+      "views": 120562,
+      "likes": 2619,
+      "upload_date": "2024-12-12",
+      "thumbnail": "https://i.ytimg.com/vi/jkgZw2WEaqA/maxresdefault.jpg",
+      "description": "Lecture 48 of DSA Placement Series \n\nCompany wise DSA Sheet Link : https://docs.google.com/spreadsheets/d/1mvlc8EYc3OVVU3X7NKoC0iZJr_45BL_pVxiJec0r94c/edi
+t?usp=sharing\n\nWant to study for Tech Placements/Internships from us :\nOur Latest Placement Batches : https://linktr.ee/apnacollege.in\n\nShare your progress on Twitter : http
+s://x.com/ShradhaKhapra_\nDSA Series full playlist : https://www.youtube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55pt\n\n\nTimestamps:\n00:20 Question\n01:55 Approach\n18
+:32 Code\n\nShradha Ma'am community \nInstagram : https://www.instagram.com/shradhakhapra\nLinkedIn : https://www.linkedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 50,
+      "id": "aZ0B1eWkSVU",
+      "title": "Palindrome Partitioning Problem | Recursion & Backtracking",
+      "url": "https://www.youtube.com/watch?v=aZ0B1eWkSVU",
+      "channel": "Apna College",
+      "channel_url": "https://www.youtube.com/channel/UCBwmMxybNva6P_5VmxjzwqA",
+      "duration": "20:43",
+      "duration_seconds": 1243,
+      "views": 95668,
+      "likes": 2270,
+      "upload_date": "2024-12-14",
+      "thumbnail": "https://i.ytimg.com/vi/aZ0B1eWkSVU/maxresdefault.jpg",
+      "description": "Lecture 49 of DSA Placement Series \n\nCompany wise DSA Sheet Link : https://docs.google.com/spreadsheets/d/1mvlc8EYc3OVVU3X7NKoC0iZJr_45BL_pVxiJec0r94c/edi
+t?usp=sharing\n\nWant to study for Tech Placements/Internships from us :\nOur Latest Placement Batches : https://linktr.ee/apnacollege.in\n\nShare your progress on Twitter : http
+s://x.com/ShradhaKhapra_\nDSA Series full playlist : https://www.youtube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55pt\n\n\nTimestamps:\n00:21 Question\n01:12 Approach\n16
+:14 Code\n\nShradha Ma'am community \nInstagram : https://www.instagram.com/shradhakhapra\nLinkedIn : https://www.linkedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 51,
+      "id": "cQDtOBTy7_Y",
+      "title": "Merge Sort Algorithm | Recursion & Backtracking",
+      "url": "https://www.youtube.com/watch?v=cQDtOBTy7_Y",
+      "channel": "Apna College",
+      "channel_url": "https://www.youtube.com/channel/UCBwmMxybNva6P_5VmxjzwqA",
+      "duration": "32:04",
+      "duration_seconds": 1924,
+      "views": 433555,
+      "likes": 7941,
+      "upload_date": "2024-12-15",
+      "thumbnail": "https://i.ytimg.com/vi/cQDtOBTy7_Y/maxresdefault.jpg",
+      "description": "Lecture 50 of DSA Placement Series \n\nCompany wise DSA Sheet Link : https://docs.google.com/spreadsheets/d/1mvlc8EYc3OVVU3X7NKoC0iZJr_45BL_pVxiJec0r94c/edi
+t?usp=sharing\n\nWant to study for Tech Placements/Internships from us :\nOur Latest Placement Batches : https://linktr.ee/apnacollege.in\n\nShare your progress on Twitter : http
+s://x.com/ShradhaKhapra_\nDSA Series full playlist : https://www.youtube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55pt\n\n\nTimestamps:\n\n\nShradha Ma'am community \nInst
+agram : https://www.instagram.com/shradhakhapra\nLinkedIn : https://www.linkedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 52,
+      "id": "SBQfXK7q5K4",
+      "title": "One Major update & reaching 1000M views",
+      "url": "https://www.youtube.com/watch?v=SBQfXK7q5K4",
+      "channel": "Apna College",
+      "channel_url": "https://www.youtube.com/channel/UCBwmMxybNva6P_5VmxjzwqA",
+      "duration": "3:50",
+      "duration_seconds": 230,
+      "views": 131722,
+      "likes": 6584,
+      "upload_date": "2024-12-16",
+      "thumbnail": "https://i.ytimg.com/vi/SBQfXK7q5K4/maxresdefault.jpg",
+      "description": "All future lectures of DSA Series, i.e lecture 51 onwards will be uploaded on Shradha Khapra youtube channel. \n🚀Lecture 51 of DSA Series link : https://yout
+u.be/8MNB0Mba_Dc\n\n🚀DSA Series full playlist : https://www.youtube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55pt\n\nWant to study for Tech Placements/Internships from us :
+\nOur Latest Placement Batches : https://linktr.ee/apnacollege.in\n\nShradha Ma'am community \nInstagram : https://www.instagram.com/shradhakhapra\nLinkedIn : https://www.linkedi
+n.com/in/shradha-khapra/\nShare your progress on Twitter : https://x.com/ShradhaKhapra_"
+    },
+    {
+      "position": 53,
+      "id": "8MNB0Mba_Dc",
+      "title": "Quick Sort Algorithm - Lecture 51 of Complete DSA Placement Series",
+      "url": "https://www.youtube.com/watch?v=8MNB0Mba_Dc",
+      "channel": "Shradha Khapra",
+      "channel_url": "https://www.youtube.com/channel/UC1XBh-m27kkgwLAwu_SRJBg",
+      "duration": "26:23",
+      "duration_seconds": 1583,
+      "views": 421437,
+      "likes": 7643,
+      "upload_date": "2024-12-16",
+      "thumbnail": "https://i.ytimg.com/vi/8MNB0Mba_Dc/maxresdefault.jpg",
+      "description": "✨New DSA Sheet Link : https://dsa.apnacollege.in\nNow you can track your progress & do group study with the new DSA sheet & Codebuddy feature.\n\nLecture 51 
+onwards, DSA Series will now be uploaded on Shradha Khapra channel.\nThis lecture was made with a lot of love❤️\n\nWant to study for Tech Placements/Internships from us :\nOur Late
+st Placement Batches : https://linktr.ee/apnacollege.in\n\nShare your progress on Twitter : https://x.com/ShradhaKhapra_\nDSA Series full playlist : https://www.youtube.com/playl
+ist?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55pt\n\n✨ Instagram : https://www.instagram.com/shradhakhapra/\n✨ LinkedIn : https://www.linkedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 54,
+      "id": "ynnWDBTdVi0",
+      "title": "Count Inversions Problem | Brute and Optimal",
+      "url": "https://www.youtube.com/watch?v=ynnWDBTdVi0",
+      "channel": "Shradha Khapra",
+      "channel_url": "https://www.youtube.com/channel/UC1XBh-m27kkgwLAwu_SRJBg",
+      "duration": "24:33",
+      "duration_seconds": 1473,
+      "views": 84833,
+      "likes": 2003,
+      "upload_date": "2024-12-19",
+      "thumbnail": "https://i.ytimg.com/vi/ynnWDBTdVi0/maxresdefault.jpg",
+      "description": "Lecture 52 onwards, DSA Series will now be uploaded on Shradha Khapra channel.\nThis lecture was made with a lot of love❤️\n\nWant to study for Tech Placement
+s/Internships from us :\nOur Latest Placement Batches : https://linktr.ee/apnacollege.in\n\nCompany wise DSA Sheet Link : https://docs.google.com/spreadsheets/d/1mvlc8EYc3OVVU3X7
+NKoC0iZJr_45BL_pVxiJec0r94c/edit?usp=sharing\n\nShare your progress on Twitter : https://x.com/ShradhaKhapra_\nDSA Series full playlist : https://www.youtube.com/playlist?list=PL
+fqMhTWNBTe137I_EPQd34TsgV6IO55pt\n\n✨ Instagram : https://www.instagram.com/shradhakhapra/\n✨ LinkedIn : https://www.linkedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 55,
+      "id": "Sp1jzttFVdE",
+      "title": "KNIGHTS TOUR Problem - Backtracking | Leetcode 2596",
+      "url": "https://www.youtube.com/watch?v=Sp1jzttFVdE",
+      "channel": "Shradha Khapra",
+      "channel_url": "https://www.youtube.com/channel/UC1XBh-m27kkgwLAwu_SRJBg",
+      "duration": "22:32",
+      "duration_seconds": 1352,
+      "views": 72398,
+      "likes": 1767,
+      "upload_date": "2024-12-23",
+      "thumbnail": "https://i.ytimg.com/vi/Sp1jzttFVdE/maxresdefault.jpg",
+      "description": "Lecture 53 of DSA Placement Series \n\nCompany wise DSA Sheet Link : https://docs.google.com/spreadsheets/d/1mvlc8EYc3OVVU3X7NKoC0iZJr_45BL_pVxiJec0r94c/edi
+t?usp=sharing\n\nShare your progress on Twitter : https://x.com/ShradhaKhapra_\nDSA Series full playlist : https://www.youtube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55p
+t\n\nThis lecture was made with a lot of love❤️\n\n✨ Instagram : https://www.instagram.com/shradhakhapra/\n✨ LinkedIn : https://www.linkedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 56,
+      "id": "mlIUKyZIUUU",
+      "title": "OOPs Tutorial in One Shot | Object Oriented Programming | in C++ Language | for Placement Interviews",
+      "url": "https://www.youtube.com/watch?v=mlIUKyZIUUU",
+      "channel": "Apna College",
+      "channel_url": "https://www.youtube.com/channel/UCBwmMxybNva6P_5VmxjzwqA",
+      "duration": "2:04:22",
+      "duration_seconds": 7462,
+      "views": 4539268,
+      "likes": 71495,
+      "upload_date": "2024-06-14",
+      "thumbnail": "https://i.ytimg.com/vi/mlIUKyZIUUU/maxresdefault.jpg",
+      "description": "Hope this class helps you with your Placement & Internship Interviews❤️\n\nLink to Practice MCQs : https://drive.google.com/file/d/1-fSUUeI02QdHv5x7SJWVtrMId9
+BEeYXw/view?usp=sharing\n #oop  #objectorientedprogramming #placement \n----------------------------------------------------\n\nTimestamps : \n00:00 Introduction\n01:26 OOPS\n03:
+38 Class & Object\n17:05 Access Specifier\n23:48 Encapsulation\n29:10 Constructor\n41:08 this Pointer\n46:33 Copy Constructor\n51:56 Shallow vs Deep Copy\n1:09:07 Destructor\n1:1
+4:35 Inheritance\n1:24:45 Mode of Inheritance\n1:27:01 Types of Inheritance\n1:35:10 Polymorphism\n1:30:41 Function Overloading\n1:43:33 Function Overriding\n1:46:40 Virtual Func
+tion \n1:48:25 Abstraction\n1:49:58 Abstract Class\n1:55:15 Static Keyword\n\n\nJoin the Apni Community🔥 : https://telegram.me/+k4rdgTPwmm5kMGVl"
+    },
+    {
+      "position": 57,
+      "id": "LyuuqCVkP5I",
+      "title": "Introduction to Linked List | Data Structures & Algorithms",
+      "url": "https://www.youtube.com/watch?v=LyuuqCVkP5I",
+      "channel": "Shradha Khapra",
+      "channel_url": "https://www.youtube.com/channel/UC1XBh-m27kkgwLAwu_SRJBg",
+      "duration": "50:42",
+      "duration_seconds": 3042,
+      "views": 961435,
+      "likes": 12537,
+      "upload_date": "2024-12-27",
+      "thumbnail": "https://i.ytimg.com/vi/LyuuqCVkP5I/maxresdefault.jpg",
+      "description": "✨New DSA Sheet Link : https://dsa.apnacollege.in\nNow you can track your progress & do group study with the new DSA sheet & Codebuddy feature.\n\nLecture 55 
+of DSA Placement Series \nMake sure you have gone through OOPs lecture i.e previous lecture of this series \nLink to OOPs lecture : https://www.youtube.com/watch?v=mlIUKyZIUUU&li
+st=PLfqMhTWNBTe137I_EPQd34TsgV6IO55pt&index=56&t=1s\n\n\nShare your progress on Twitter : https://x.com/ShradhaKhapra_\nDSA Series full playlist : https://www.youtube.com/playlis
+t?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55pt\n\n✨ Instagram : https://www.instagram.com/shradhakhapra/\n✨ LinkedIn : https://www.linkedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 58,
+      "id": "R-CKBYnOv1U",
+      "title": "Reverse a Linked List | DSA Series by @shradhaKD",
+      "url": "https://www.youtube.com/watch?v=R-CKBYnOv1U",
+      "channel": "Shradha Khapra",
+      "channel_url": "https://www.youtube.com/channel/UC1XBh-m27kkgwLAwu_SRJBg",
+      "duration": "10:28",
+      "duration_seconds": 628,
+      "views": 204005,
+      "likes": 4072,
+      "upload_date": "2024-12-28",
+      "thumbnail": "https://i.ytimg.com/vi/R-CKBYnOv1U/maxresdefault.jpg",
+      "description": "Lecture 56 of DSA Placement Series \n\nCompany wise DSA Sheet Link : https://docs.google.com/spreadsheets/d/1mvlc8EYc3OVVU3X7NKoC0iZJr_45BL_pVxiJec0r94c/edi
+t?usp=sharing\n\nShare your progress on Twitter : https://x.com/ShradhaKhapra_\nDSA Series full playlist : https://www.youtube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55p
+t\n\n✨ Instagram : https://www.instagram.com/shradhakhapra/\n✨ LinkedIn : https://www.linkedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 59,
+      "id": "nzaHG0dme4g",
+      "title": "Middle of a Linked List | DSA Series by @shradhaKD",
+      "url": "https://www.youtube.com/watch?v=nzaHG0dme4g",
+      "channel": "Shradha Khapra",
+      "channel_url": "https://www.youtube.com/channel/UC1XBh-m27kkgwLAwu_SRJBg",
+      "duration": "10:31",
+      "duration_seconds": 631,
+      "views": 102061,
+      "likes": 2475,
+      "upload_date": "2024-12-30",
+      "thumbnail": "https://i.ytimg.com/vi/nzaHG0dme4g/maxresdefault.jpg",
+      "description": "Lecture 57 of DSA Placement Series \n\nCompany wise DSA Sheet Link : https://docs.google.com/spreadsheets/d/1mvlc8EYc3OVVU3X7NKoC0iZJr_45BL_pVxiJec0r94c/edi
+t?usp=sharing\n\nShare your progress on Twitter : https://x.com/ShradhaKhapra_\nDSA Series full playlist : https://www.youtube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55p
+t\n\n✨ Instagram : https://www.instagram.com/shradhakhapra/\n✨ LinkedIn : https://www.linkedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 60,
+      "id": "-1E8ZMS0gSs",
+      "title": "Detect & Remove Cycle in Linked List | DSA Series by @shradhaKD",
+      "url": "https://www.youtube.com/watch?v=-1E8ZMS0gSs",
+      "channel": "Shradha Khapra",
+      "channel_url": "https://www.youtube.com/channel/UC1XBh-m27kkgwLAwu_SRJBg",
+      "duration": "30:23",
+      "duration_seconds": 1823,
+      "views": 124638,
+      "likes": 2769,
+      "upload_date": "2025-01-02",
+      "thumbnail": "https://i.ytimg.com/vi/-1E8ZMS0gSs/maxresdefault.jpg",
+      "description": "Lecture 58 of DSA Placement Series \n\nCompany wise DSA Sheet Link : https://docs.google.com/spreadsheets/d/1mvlc8EYc3OVVU3X7NKoC0iZJr_45BL_pVxiJec0r94c/edi
+t?usp=sharing\n\nShare your progress on Twitter : https://x.com/ShradhaKhapra_\nDSA Series full playlist : https://www.youtube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55p
+t\n\n✨ Instagram : https://www.instagram.com/shradhakhapra/\n✨ LinkedIn : https://www.linkedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 61,
+      "id": "f8RPIb-0DDE",
+      "title": "Merge Two Sorted Lists | DSA Series by @shradhaKD",
+      "url": "https://www.youtube.com/watch?v=f8RPIb-0DDE",
+      "channel": "Shradha Khapra",
+      "channel_url": "https://www.youtube.com/channel/UC1XBh-m27kkgwLAwu_SRJBg",
+      "duration": "12:41",
+      "duration_seconds": 761,
+      "views": 122868,
+      "likes": 2594,
+      "upload_date": "2025-01-04",
+      "thumbnail": "https://i.ytimg.com/vi/f8RPIb-0DDE/maxresdefault.jpg",
+      "description": "Lecture 59 of DSA Placement Series \n\nCompany wise DSA Sheet Link : https://docs.google.com/spreadsheets/d/1mvlc8EYc3OVVU3X7NKoC0iZJr_45BL_pVxiJec0r94c/edi
+t?usp=sharing\n\nShare your progress on Twitter : https://x.com/ShradhaKhapra_\nDSA Series full playlist : https://www.youtube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55p
+t\n\n✨ Instagram : https://www.instagram.com/shradhakhapra/\n✨ LinkedIn : https://www.linkedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 62,
+      "id": "8ze7Zopdsaw",
+      "title": "Copy List with Random Pointer | DSA Series by @shradhaKD",
+      "url": "https://www.youtube.com/watch?v=8ze7Zopdsaw",
+      "channel": "Shradha Khapra",
+      "channel_url": "https://www.youtube.com/channel/UC1XBh-m27kkgwLAwu_SRJBg",
+      "duration": "20:51",
+      "duration_seconds": 1251,
+      "views": 87892,
+      "likes": 1966,
+      "upload_date": "2025-01-05",
+      "thumbnail": "https://i.ytimg.com/vi/8ze7Zopdsaw/maxresdefault.jpg",
+      "description": "Lecture 60 of DSA Placement Series \n\nCompany wise DSA Sheet Link : https://docs.google.com/spreadsheets/d/1mvlc8EYc3OVVU3X7NKoC0iZJr_45BL_pVxiJec0r94c/edi
+t?usp=sharing\n\nShare your progress on Twitter : https://x.com/ShradhaKhapra_\nDSA Series full playlist : https://www.youtube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55p
+t\n\n✨ Instagram : https://www.instagram.com/shradhakhapra/\n✨ LinkedIn : https://www.linkedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 63,
+      "id": "bO5DasTsaRQ",
+      "title": "Doubly Linked List Tutorial",
+      "url": "https://www.youtube.com/watch?v=bO5DasTsaRQ",
+      "channel": "Shradha Khapra",
+      "channel_url": "https://www.youtube.com/channel/UC1XBh-m27kkgwLAwu_SRJBg",
+      "duration": "32:15",
+      "duration_seconds": 1935,
+      "views": 178452,
+      "likes": 3682,
+      "upload_date": "2025-01-08",
+      "thumbnail": "https://i.ytimg.com/vi/bO5DasTsaRQ/maxresdefault.jpg",
+      "description": "This lecture was made with a lot of EFFORTS, now its your turn 🚀\nLecture 61 of DSA Series for Placements\n\n✨ Instagram : https://www.instagram.com/shradhakh
+apra/\n✨ LinkedIn : https://www.linkedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 64,
+      "id": "e6lZY5Yha8U",
+      "title": "Circular Linked List in Data Structures",
+      "url": "https://www.youtube.com/watch?v=e6lZY5Yha8U",
+      "channel": "Shradha Khapra",
+      "channel_url": "https://www.youtube.com/channel/UC1XBh-m27kkgwLAwu_SRJBg",
+      "duration": "33:55",
+      "duration_seconds": 2035,
+      "views": 127705,
+      "likes": 2715,
+      "upload_date": "2025-01-10",
+      "thumbnail": "https://i.ytimg.com/vi/e6lZY5Yha8U/maxresdefault.jpg",
+      "description": "Lecture 62 of DSA Placement Series \n\nCompany wise DSA Sheet Link : https://docs.google.com/spreadsheets/d/1mvlc8EYc3OVVU3X7NKoC0iZJr_45BL_pVxiJec0r94c/edi
+t?usp=sharing\n\nShare your progress on Twitter : https://x.com/ShradhaKhapra_\nDSA Series full playlist : https://www.youtube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55p
+t\n\n✨ Instagram : https://www.instagram.com/shradhakhapra/\n✨ LinkedIn : https://www.linkedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 65,
+      "id": "I8b0rff5F9M",
+      "title": "Flatten a Doubly Linked List | Leetcode 430 | DSA Series by @shradhaKD",
+      "url": "https://www.youtube.com/watch?v=I8b0rff5F9M",
+      "channel": "Shradha Khapra",
+      "channel_url": "https://www.youtube.com/channel/UC1XBh-m27kkgwLAwu_SRJBg",
+      "duration": "24:47",
+      "duration_seconds": 1487,
+      "views": 67172,
+      "likes": 1762,
+      "upload_date": "2025-01-20",
+      "thumbnail": "https://i.ytimg.com/vi/I8b0rff5F9M/maxresdefault.jpg",
+      "description": "Lecture 63 of DSA Placement Series \n\nCompany wise DSA Sheet Link : https://docs.google.com/spreadsheets/d/1mvlc8EYc3OVVU3X7NKoC0iZJr_45BL_pVxiJec0r94c/edi
+t?usp=sharing\n\nShare your progress on Twitter : https://x.com/ShradhaKhapra_\nDSA Series full playlist : https://www.youtube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55p
+t\n\n✨ Instagram : https://www.instagram.com/shradhakhapra/\n✨ LinkedIn : https://www.linkedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 66,
+      "id": "-swgIiMIlJo",
+      "title": "Reverse Nodes in K-Group | Linked List",
+      "url": "https://www.youtube.com/watch?v=-swgIiMIlJo",
+      "channel": "Shradha Khapra",
+      "channel_url": "https://www.youtube.com/channel/UC1XBh-m27kkgwLAwu_SRJBg",
+      "duration": "20:39",
+      "duration_seconds": 1239,
+      "views": 77354,
+      "likes": 1864,
+      "upload_date": "2025-01-21",
+      "thumbnail": "https://i.ytimg.com/vi/-swgIiMIlJo/maxresdefault.jpg",
+      "description": "Lecture 64 of DSA Series for Placements : Chapter : Linked List\nLearn from the best DSA series for Placements 🚀\n✨ Instagram : https://www.instagram.com/shra
+dhakhapra/\n✨ LinkedIn : https://www.linkedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 67,
+      "id": "wwbTMNVlFHQ",
+      "title": "Swap Nodes in Pairs | Linked List",
+      "url": "https://www.youtube.com/watch?v=wwbTMNVlFHQ",
+      "channel": "Shradha Khapra",
+      "channel_url": "https://www.youtube.com/channel/UC1XBh-m27kkgwLAwu_SRJBg",
+      "duration": "20:06",
+      "duration_seconds": 1206,
+      "views": 61033,
+      "likes": 1585,
+      "upload_date": "2025-01-22",
+      "thumbnail": "https://i.ytimg.com/vi/wwbTMNVlFHQ/maxresdefault.jpg",
+      "description": "Lecture 65 of DSA Series for Placements : Chapter : Linked List\n\nLearn from the best DSA series for Placements 🚀\n✨ Instagram : https://www.instagram.com/sh
+radhakhapra/\n✨ LinkedIn : https://www.linkedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 68,
+      "id": "0X-fV-1ir9c",
+      "title": "Introduction to STACKS | Data Structures & Algorithms | Lecture 66",
+      "url": "https://www.youtube.com/watch?v=0X-fV-1ir9c",
+      "channel": "Shradha Khapra",
+      "channel_url": "https://www.youtube.com/channel/UC1XBh-m27kkgwLAwu_SRJBg",
+      "duration": "22:11",
+      "duration_seconds": 1331,
+      "views": 417213,
+      "likes": 6312,
+      "upload_date": "2025-01-30",
+      "thumbnail": "https://i.ytimg.com/vi/0X-fV-1ir9c/maxresdefault.jpg",
+      "description": "✨New DSA Sheet Link : https://dsa.apnacollege.in\nNow you can track your progress & do group study with the new DSA sheet & Codebuddy feature.\n\nLecture 66 
+of DSA Placement Series \n\nShare your progress on Twitter : https://x.com/ShradhaKhapra_\nDSA Series full playlist : https://www.youtube.com/playlist?list=PLfqMhTWNBTe137I_EPQd3
+4TsgV6IO55pt\n\n✨ Instagram : https://www.instagram.com/shradhakhapra/\n✨ LinkedIn : https://www.linkedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 69,
+      "id": "NlHupEeDXzY",
+      "title": "Valid Parentheses | Stack | Lecture 67",
+      "url": "https://www.youtube.com/watch?v=NlHupEeDXzY",
+      "channel": "Shradha Khapra",
+      "channel_url": "https://www.youtube.com/channel/UC1XBh-m27kkgwLAwu_SRJBg",
+      "duration": "16:24",
+      "duration_seconds": 984,
+      "views": 144732,
+      "likes": 3022,
+      "upload_date": "2025-01-31",
+      "thumbnail": "https://i.ytimg.com/vi/NlHupEeDXzY/maxresdefault.jpg",
+      "description": "✨New DSA Sheet Link : https://dsa.apnacollege.in\nNow you can track your progress & do group study with the new DSA sheet & Codebuddy feature.\n\nLecture 67 
+of DSA Placement Series \n\nShare your progress on Twitter : https://x.com/ShradhaKhapra_\nDSA Series full playlist : https://www.youtube.com/playlist?list=PLfqMhTWNBTe137I_EPQd3
+4TsgV6IO55pt\n\n✨ Instagram : https://www.instagram.com/shradhakhapra/\n✨ LinkedIn : https://www.linkedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 70,
+      "id": "01vBuZyMfqk",
+      "title": "Stock Span Problem | Optimal Solution",
+      "url": "https://www.youtube.com/watch?v=01vBuZyMfqk",
+      "channel": "Shradha Khapra",
+      "channel_url": "https://www.youtube.com/channel/UC1XBh-m27kkgwLAwu_SRJBg",
+      "duration": "26:29",
+      "duration_seconds": 1589,
+      "views": 90772,
+      "likes": 2006,
+      "upload_date": "2025-02-03",
+      "thumbnail": "https://i.ytimg.com/vi/01vBuZyMfqk/maxresdefault.jpg",
+      "description": "Lecture 68 of DSA Placement Series \n\nCompany wise DSA Sheet Link : https://docs.google.com/spreadsheets/d/1mvlc8EYc3OVVU3X7NKoC0iZJr_45BL_pVxiJec0r94c/edi
+t?usp=sharing\n\nShare your progress on Twitter : https://x.com/ShradhaKhapra_\nDSA Series full playlist : https://www.youtube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55p
+t\n\n✨ Instagram : https://www.instagram.com/shradhakhapra/\n✨ LinkedIn : https://www.linkedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 71,
+      "id": "NKbExYwvjb0",
+      "title": "Next Greater Element | Optimal Solution & Code",
+      "url": "https://www.youtube.com/watch?v=NKbExYwvjb0",
+      "channel": "Shradha Khapra",
+      "channel_url": "https://www.youtube.com/channel/UC1XBh-m27kkgwLAwu_SRJBg",
+      "duration": "23:32",
+      "duration_seconds": 1412,
+      "views": 97757,
+      "likes": 2307,
+      "upload_date": "2025-02-05",
+      "thumbnail": "https://i.ytimg.com/vi/NKbExYwvjb0/maxresdefault.jpg",
+      "description": "Lecture 69 of DSA Placement Series \n\nCompany wise DSA Sheet Link : https://docs.google.com/spreadsheets/d/1mvlc8EYc3OVVU3X7NKoC0iZJr_45BL_pVxiJec0r94c/edi
+t?usp=sharing\n\nShare your progress on Twitter : https://x.com/ShradhaKhapra_\nDSA Series full playlist : https://www.youtube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55p
+t\n\n✨ Instagram : https://www.instagram.com/shradhakhapra/\n✨ LinkedIn : https://www.linkedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 72,
+      "id": "WnjUfBn9nZM",
+      "title": "Previous Smaller Element | Optimal Solution & Code",
+      "url": "https://www.youtube.com/watch?v=WnjUfBn9nZM",
+      "channel": "Shradha Khapra",
+      "channel_url": "https://www.youtube.com/channel/UC1XBh-m27kkgwLAwu_SRJBg",
+      "duration": "9:23",
+      "duration_seconds": 563,
+      "views": 41925,
+      "likes": 1113,
+      "upload_date": "2025-02-07",
+      "thumbnail": "https://i.ytimg.com/vi/WnjUfBn9nZM/maxresdefault.jpg",
+      "description": "Lecture 70 of DSA Placement Series \n\nCompany wise DSA Sheet Link : https://docs.google.com/spreadsheets/d/1mvlc8EYc3OVVU3X7NKoC0iZJr_45BL_pVxiJec0r94c/edi
+t?usp=sharing\n\nShare your progress on Twitter : https://x.com/ShradhaKhapra_\nDSA Series full playlist : https://www.youtube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55p
+t\n\n✨ Instagram : https://www.instagram.com/shradhakhapra/\n✨ LinkedIn : https://www.linkedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 73,
+      "id": "wHDm-N2m2XY",
+      "title": "Design a Min Stack | Optimal Solution & Code",
+      "url": "https://www.youtube.com/watch?v=wHDm-N2m2XY",
+      "channel": "Shradha Khapra",
+      "channel_url": "https://www.youtube.com/channel/UC1XBh-m27kkgwLAwu_SRJBg",
+      "duration": "24:34",
+      "duration_seconds": 1474,
+      "views": 69143,
+      "likes": 1715,
+      "upload_date": "2025-02-10",
+      "thumbnail": "https://i.ytimg.com/vi/wHDm-N2m2XY/maxresdefault.jpg",
+      "description": "Lecture 71 of DSA Placement Series \n\nCompany wise DSA Sheet Link : https://docs.google.com/spreadsheets/d/1mvlc8EYc3OVVU3X7NKoC0iZJr_45BL_pVxiJec0r94c/edi
+t?usp=sharing\n\nShare your progress on Twitter : https://x.com/ShradhaKhapra_\nDSA Series full playlist : https://www.youtube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55p
+t\n\n✨ Instagram : https://www.instagram.com/shradhakhapra/\n✨ LinkedIn : https://www.linkedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 74,
+      "id": "ysy1o-QEj3k",
+      "title": "Largest Rectangle in Histogram | Best Solution & Code",
+      "url": "https://www.youtube.com/watch?v=ysy1o-QEj3k",
+      "channel": "Shradha Khapra",
+      "channel_url": "https://www.youtube.com/channel/UC1XBh-m27kkgwLAwu_SRJBg",
+      "duration": "32:56",
+      "duration_seconds": 1976,
+      "views": 87742,
+      "likes": 2113,
+      "upload_date": "2025-02-12",
+      "thumbnail": "https://i.ytimg.com/vi/ysy1o-QEj3k/maxresdefault.jpg",
+      "description": "Lecture 72 of DSA Placement Series \n\nCompany wise DSA Sheet Link : https://docs.google.com/spreadsheets/d/1mvlc8EYc3OVVU3X7NKoC0iZJr_45BL_pVxiJec0r94c/edi
+t?usp=sharing\n\nShare your progress on Twitter : https://x.com/ShradhaKhapra_\nDSA Series full playlist : https://www.youtube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55p
+t\n\n✨ Instagram : https://www.instagram.com/shradhakhapra/\n✨ LinkedIn : https://www.linkedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 75,
+      "id": "If--3pm9K3U",
+      "title": "L73. Next Greater Element - II | Stack & Queue",
+      "url": "https://www.youtube.com/watch?v=If--3pm9K3U",
+      "channel": "Shradha Khapra",
+      "channel_url": "https://www.youtube.com/channel/UC1XBh-m27kkgwLAwu_SRJBg",
+      "duration": "20:03",
+      "duration_seconds": 1203,
+      "views": 57570,
+      "likes": 1538,
+      "upload_date": "2025-02-13",
+      "thumbnail": "https://i.ytimg.com/vi/If--3pm9K3U/maxresdefault.jpg",
+      "description": "DSA Series Lecture 73 : Next Greater Element II\nTopic : Stack & Queues \nBest DSA Series website : coming soon 🔥\n\nCompany wise DSA Sheet Link : https://do
+cs.google.com/spreadsheets/d/1mvlc8EYc3OVVU3X7NKoC0iZJr_45BL_pVxiJec0r94c/edit?usp=sharing\n\nShare your progress on Twitter : https://x.com/ShradhaKhapra_\nDSA Series full playl
+ist : https://www.youtube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55pt\n\n✨ Instagram : https://www.instagram.com/shradhakhapra/\n✨ LinkedIn : https://www.linkedin.com/in/s
+hradha-khapra/"
+    },
+    {
+      "position": 76,
+      "id": "UHHp8USwx4M",
+      "title": "L74. Trapping Rainwater Problem | Optimal Solution & Code",
+      "url": "https://www.youtube.com/watch?v=UHHp8USwx4M",
+      "channel": "Shradha Khapra",
+      "channel_url": "https://www.youtube.com/channel/UC1XBh-m27kkgwLAwu_SRJBg",
+      "duration": "30:50",
+      "duration_seconds": 1850,
+      "views": 131582,
+      "likes": 3252,
+      "upload_date": "2025-02-21",
+      "thumbnail": "https://i.ytimg.com/vi/UHHp8USwx4M/maxresdefault.jpg",
+      "description": "Lecture 74 of DSA Placement Series \n\nCompany wise DSA Sheet Link : https://docs.google.com/spreadsheets/d/1mvlc8EYc3OVVU3X7NKoC0iZJr_45BL_pVxiJec0r94c/edi
+t?usp=sharing\n\nShare your progress on Twitter : https://x.com/ShradhaKhapra_\nDSA Series full playlist : https://www.youtube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55p
+t\n\n✨ Instagram : https://www.instagram.com/shradhakhapra/\n✨ LinkedIn : https://www.linkedin.com/in/shradha-khapra/\n\nTimestamps\n00:00 Introduction\n00:19 Problem\n02:13 Naive 
+Approach\n08:32 Optimal Approach1 (Prefix Array)\n17:29 Optimal Approach2 (Two Pointer)"
+    },
+    {
+      "position": 77,
+      "id": "OZPmEA_8FM8",
+      "title": "L75. The Celebrity Problem | Stack & Queue",
+      "url": "https://www.youtube.com/watch?v=OZPmEA_8FM8",
+      "channel": "Shradha Khapra",
+      "channel_url": "https://www.youtube.com/channel/UC1XBh-m27kkgwLAwu_SRJBg",
+      "duration": "15:10",
+      "duration_seconds": 910,
+      "views": 55183,
+      "likes": 1452,
+      "upload_date": "2025-02-24",
+      "thumbnail": "https://i.ytimg.com/vi/OZPmEA_8FM8/maxresdefault.jpg",
+      "description": "Lecture 75 of DSA Series \n\nCompany wise DSA Sheet Link : https://docs.google.com/spreadsheets/d/1mvlc8EYc3OVVU3X7NKoC0iZJr_45BL_pVxiJec0r94c/edit?usp=shar
+ing\n\nShare your progress on Twitter : https://x.com/ShradhaKhapra_\nDSA Series full playlist : https://www.youtube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55pt\n\n✨ Inst
+agram : https://www.instagram.com/shradhakhapra/\n✨ LinkedIn : https://www.linkedin.com/in/shradha-khapra/\n\n@ApnaCollegeOfficial"
+    },
+    {
+      "position": 78,
+      "id": "GsY6y0iPaHw",
+      "title": "L76. Implement LRU Cache | Linked List",
+      "url": "https://www.youtube.com/watch?v=GsY6y0iPaHw",
+      "channel": "Shradha Khapra",
+      "channel_url": "https://www.youtube.com/channel/UC1XBh-m27kkgwLAwu_SRJBg",
+      "duration": "35:33",
+      "duration_seconds": 2133,
+      "views": 84601,
+      "likes": 1862,
+      "upload_date": "2025-02-25",
+      "thumbnail": "https://i.ytimg.com/vi/GsY6y0iPaHw/maxresdefault.jpg",
+      "description": "Lecture 76 of DSA Placement Series \n\nCompany wise DSA Sheet Link : https://docs.google.com/spreadsheets/d/1mvlc8EYc3OVVU3X7NKoC0iZJr_45BL_pVxiJec0r94c/edi
+t?usp=sharing\n\nShare your progress on Twitter : https://x.com/ShradhaKhapra_\nDSA Series full playlist : https://www.youtube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55p
+t\n\n✨ Instagram : https://www.instagram.com/shradhakhapra/\n✨ LinkedIn : https://www.linkedin.com/in/shradha-khapra/\n\nTimestamps\n00:00 Introduction\n00:20 Problem\n05:44 Soluti
+on"
+    },
+    {
+      "position": 79,
+      "id": "Khf9v67Ya30",
+      "title": "New Chapter : Queue Data Structure",
+      "url": "https://www.youtube.com/watch?v=Khf9v67Ya30",
+      "channel": "Shradha Khapra",
+      "channel_url": "https://www.youtube.com/channel/UC1XBh-m27kkgwLAwu_SRJBg",
+      "duration": "18:54",
+      "duration_seconds": 1134,
+      "views": 217933,
+      "likes": 3913,
+      "upload_date": "2025-03-06",
+      "thumbnail": "https://i.ytimg.com/vi/Khf9v67Ya30/maxresdefault.jpg",
+      "description": "✨New DSA Sheet Link : https://dsa.apnacollege.in\nNow you can track your progress & do group study with the new DSA sheet & Codebuddy feature.\n\nStarting wi
+th New Chapter Queue Data Structure (in C++ language) \nLecture 77 of DSA Series for Tech Placements\n\nShare your progress on Twitter : https://x.com/ShradhaKhapra_\nDSA Series 
+full playlist : https://www.youtube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55pt\n\n✨ Instagram : https://www.instagram.com/shradhakhapra/\n✨ LinkedIn : https://www.linkedi
+n.com/in/shradha-khapra/"
+    },
+    {
+      "position": 80,
+      "id": "4mKKolshFD0",
+      "title": "L78. Circular Queue in Data Strucuture",
+      "url": "https://www.youtube.com/watch?v=4mKKolshFD0",
+      "channel": "Shradha Khapra",
+      "channel_url": "https://www.youtube.com/channel/UC1XBh-m27kkgwLAwu_SRJBg",
+      "duration": "18:36",
+      "duration_seconds": 1116,
+      "views": 160784,
+      "likes": 3341,
+      "upload_date": "2025-03-07",
+      "thumbnail": "https://i.ytimg.com/vi/4mKKolshFD0/maxresdefault.jpg",
+      "description": "Lecture 78 of DSA Series for Tech Placements \n\nCompany wise DSA Sheet Link : https://docs.google.com/spreadsheets/d/1mvlc8EYc3OVVU3X7NKoC0iZJr_45BL_pVxiJe
+c0r94c/edit?usp=sharing\n\nShare your progress on Twitter : https://x.com/ShradhaKhapra_\nDSA Series full playlist : https://www.youtube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34
+TsgV6IO55pt\n\n✨ Instagram : https://www.instagram.com/shradhakhapra/\n✨ LinkedIn : https://www.linkedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 81,
+      "id": "sFvP5Ois0CE",
+      "title": "L79. Implement Queue using Stack & Stack using Queue",
+      "url": "https://www.youtube.com/watch?v=sFvP5Ois0CE",
+      "channel": "Shradha Khapra",
+      "channel_url": "https://www.youtube.com/channel/UC1XBh-m27kkgwLAwu_SRJBg",
+      "duration": "15:46",
+      "duration_seconds": 946,
+      "views": 94728,
+      "likes": 2293,
+      "upload_date": "2025-03-10",
+      "thumbnail": "https://i.ytimg.com/vi/sFvP5Ois0CE/maxresdefault.jpg",
+      "description": "Lecture 79 of DSA Placement Series \n\nCompany wise DSA Sheet Link : https://docs.google.com/spreadsheets/d/1mvlc8EYc3OVVU3X7NKoC0iZJr_45BL_pVxiJec0r94c/edi
+t?usp=sharing\n\nShare your progress on Twitter : https://x.com/ShradhaKhapra_\nDSA Series full playlist : https://www.youtube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55p
+t\n\n✨ Instagram : https://www.instagram.com/shradhakhapra/\n✨ LinkedIn : https://www.linkedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 82,
+      "id": "sqyCBvEQN9c",
+      "title": "L80. First Unique Character in String | Easy - Leetcode387",
+      "url": "https://www.youtube.com/watch?v=sqyCBvEQN9c",
+      "channel": "Shradha Khapra",
+      "channel_url": "https://www.youtube.com/channel/UC1XBh-m27kkgwLAwu_SRJBg",
+      "duration": "13:22",
+      "duration_seconds": 802,
+      "views": 51454,
+      "likes": null,
+      "upload_date": "2025-03-12",
+      "thumbnail": "https://i.ytimg.com/vi/sqyCBvEQN9c/maxresdefault.jpg",
+      "description": "Company wise DSA Sheet Link : https://docs.google.com/spreadsheets/d/1mvlc8EYc3OVVU3X7NKoC0iZJr_45BL_pVxiJec0r94c/edit?usp=sharing\n\nShare your progress on
+ Twitter : https://x.com/ShradhaKhapra_\nDSA Series full playlist : https://www.youtube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55pt"
+    },
+    {
+      "position": 83,
+      "id": "XwG5cozqfaM",
+      "title": "L81. Sliding Window Maximum | Queue",
+      "url": "https://www.youtube.com/watch?v=XwG5cozqfaM",
+      "channel": "Shradha Khapra",
+      "channel_url": "https://www.youtube.com/channel/UC1XBh-m27kkgwLAwu_SRJBg",
+      "duration": "31:22",
+      "duration_seconds": 1882,
+      "views": 130545,
+      "likes": 2510,
+      "upload_date": "2025-03-16",
+      "thumbnail": "https://i.ytimg.com/vi/XwG5cozqfaM/maxresdefault.jpg",
+      "description": "✨New DSA Sheet Link : https://dsa.apnacollege.in\nNow you can track your progress & do group study with the new DSA sheet & Codebuddy feature.\n\nThis lectur
+e was made with a lot of love❤️\n\nShare your progress on Twitter : https://x.com/ShradhaKhapra_\nDSA Series full playlist : https://www.youtube.com/playlist?list=PLfqMhTWNBTe137I_
+EPQd34TsgV6IO55pt\n\n✨ Instagram : https://www.instagram.com/shradhakhapra/\n✨ LinkedIn : https://www.linkedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 84,
+      "id": "SmTow5Ht4iU",
+      "title": "L82. Gas Station | Greedy Approach | Leetcode 134",
+      "url": "https://www.youtube.com/watch?v=SmTow5Ht4iU",
+      "channel": "Shradha Khapra",
+      "channel_url": "https://www.youtube.com/channel/UC1XBh-m27kkgwLAwu_SRJBg",
+      "duration": "22:16",
+      "duration_seconds": 1336,
+      "views": 72104,
+      "likes": 1895,
+      "upload_date": "2025-03-24",
+      "thumbnail": "https://i.ytimg.com/vi/SmTow5Ht4iU/maxresdefault.jpg",
+      "description": "This lecture was made with a lot of love❤️\n\nCompany wise DSA Sheet Link : https://docs.google.com/spreadsheets/d/1mvlc8EYc3OVVU3X7NKoC0iZJr_45BL_pVxiJec0r94
+c/edit?usp=sharing\n\nShare your progress on Twitter : https://x.com/ShradhaKhapra_\nDSA Series full playlist : https://www.youtube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34TsgV6
+IO55pt\n\n✨ Instagram : https://www.instagram.com/shradhakhapra/\n✨ LinkedIn : https://www.linkedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 85,
+      "id": "eKJrXBCRuNQ",
+      "title": "Binary Trees in Data Structures | Tree Traversal | DSA Placement Series",
+      "url": "https://www.youtube.com/watch?v=eKJrXBCRuNQ",
+      "channel": "Apna College",
+      "channel_url": "https://www.youtube.com/channel/UCBwmMxybNva6P_5VmxjzwqA",
+      "duration": "1:14:14",
+      "duration_seconds": 4454,
+      "views": 401669,
+      "likes": 6313,
+      "upload_date": "2025-03-30",
+      "thumbnail": "https://i.ytimg.com/vi/eKJrXBCRuNQ/maxresdefault.jpg",
+      "description": "This is Lecture 83 of DSA Placement Series \nComplete Playlist Link : https://www.youtube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55pt\n\n🚀NEW DSA SH
+EET Website (COMING SOON!)\n\nCompany wise DSA Sheet Link : https://docs.google.com/spreadsheets/d/1mvlc8EYc3OVVU3X7NKoC0iZJr_45BL_pVxiJec0r94c/edit?usp=sharing\n\nWant to study 
+for Tech Placements/Internships from us :\nOur Latest Placement Batches : https://linktr.ee/apnacollege.in\n\nShare your progress on Twitter : https://x.com/ShradhaKhapra_\nDSA S
+eries full playlist : https://www.youtube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55pt\n\nShradha Ma'am community \nInstagram : https://www.instagram.com/shradhakhapra\nL
+inkedIn : https://www.linkedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 86,
+      "id": "7tzHzN_Ehus",
+      "title": "L.84 Height of a Binary Tree | Count of Nodes in a Binary Tree",
+      "url": "https://www.youtube.com/watch?v=7tzHzN_Ehus",
+      "channel": "Apna College",
+      "channel_url": "https://www.youtube.com/channel/UCBwmMxybNva6P_5VmxjzwqA",
+      "duration": "23:09",
+      "duration_seconds": 1389,
+      "views": 108259,
+      "likes": 2208,
+      "upload_date": "2025-04-06",
+      "thumbnail": "https://i.ytimg.com/vi/7tzHzN_Ehus/maxresdefault.jpg",
+      "description": "Lecture 84 of DSA Placement Series \nProblem 1 : Height of a Binary Tree \nProblem 2 : Count the Nodes of a Binary Tree\n\nCompany wise DSA Sheet : Web vers
+ion (coming soon 🚀)\n\nWant to study for Tech Placements/Internships from us :\nOur Latest Placement Batches : https://linktr.ee/apnacollege.in\n\nShare your progress on Twitter :
+ https://x.com/ShradhaKhapra_\nDSA Series full playlist : https://www.youtube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55pt\n\n\nShradha Ma'am community \nInstagram : http
+s://www.instagram.com/shradhakhapra\nLinkedIn : https://www.linkedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 87,
+      "id": "tumW7jsjv68",
+      "title": "L.85 Identical Tree (same tree) | Subtree of another Tree",
+      "url": "https://www.youtube.com/watch?v=tumW7jsjv68",
+      "channel": "Shradha Khapra",
+      "channel_url": "https://www.youtube.com/channel/UC1XBh-m27kkgwLAwu_SRJBg",
+      "duration": "23:28",
+      "duration_seconds": 1408,
+      "views": 63133,
+      "likes": 1494,
+      "upload_date": "2025-04-09",
+      "thumbnail": "https://i.ytimg.com/vi/tumW7jsjv68/maxresdefault.jpg",
+      "description": "This is Lecture 85 of DSA Series for Placement Preparation\nNew DSA Sheet Web Version (Coming soon🚀)\n\nCompany wise DSA Sheet Link : https://docs.google.com
+/spreadsheets/d/1mvlc8EYc3OVVU3X7NKoC0iZJr_45BL_pVxiJec0r94c/edit?usp=sharing\n\nShare your progress on Twitter : https://x.com/ShradhaKhapra_\nDSA Series full playlist : https:/
+/www.youtube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55pt\n\n✨ Instagram : https://www.instagram.com/shradhakhapra/\n✨ LinkedIn : https://www.linkedin.com/in/shradha-khapra
+/"
+    },
+    {
+      "position": 88,
+      "id": "aPyDPImR5UM",
+      "title": "L.86 Diameter of Binary Tree",
+      "url": "https://www.youtube.com/watch?v=aPyDPImR5UM",
+      "channel": "Shradha Khapra",
+      "channel_url": "https://www.youtube.com/channel/UC1XBh-m27kkgwLAwu_SRJBg",
+      "duration": "19:29",
+      "duration_seconds": 1169,
+      "views": 65603,
+      "likes": 1541,
+      "upload_date": "2025-04-11",
+      "thumbnail": "https://i.ytimg.com/vi/aPyDPImR5UM/maxresdefault.jpg",
+      "description": "Lecture 86 of DSA Placement Series\nLeetcode 543 \n\nCompany wise DSA Sheet Link : https://docs.google.com/spreadsheets/d/1mvlc8EYc3OVVU3X7NKoC0iZJr_45BL_pV
+xiJec0r94c/edit?usp=sharing\n\nShare your progress on Twitter : https://x.com/ShradhaKhapra_\nDSA Series full playlist : https://www.youtube.com/playlist?list=PLfqMhTWNBTe137I_EP
+Qd34TsgV6IO55pt\n\n✨ Instagram : https://www.instagram.com/shradhakhapra/\n✨ LinkedIn : https://www.linkedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 89,
+      "id": "FGr-syrhvOA",
+      "title": "Top View of a Binary Tree | DSA Series : L.87",
+      "url": "https://www.youtube.com/watch?v=FGr-syrhvOA",
+      "channel": "Shradha Khapra",
+      "channel_url": "https://www.youtube.com/channel/UC1XBh-m27kkgwLAwu_SRJBg",
+      "duration": "19:39",
+      "duration_seconds": 1179,
+      "views": 58475,
+      "likes": 1347,
+      "upload_date": "2025-04-15",
+      "thumbnail": "https://i.ytimg.com/vi/FGr-syrhvOA/maxresdefault.jpg",
+      "description": "Lecture 87 of DSA Placement Series\nTop View of a Binary Tree Problem \n\nCompany wise DSA Sheet Link : https://docs.google.com/spreadsheets/d/1mvlc8EYc3OVV
+U3X7NKoC0iZJr_45BL_pVxiJec0r94c/edit?usp=sharing\n\nShare your progress on Twitter : https://x.com/ShradhaKhapra_\nDSA Series full playlist : https://www.youtube.com/playlist?lis
+t=PLfqMhTWNBTe137I_EPQd34TsgV6IO55pt\n\n✨ Instagram : https://www.instagram.com/shradhakhapra/\n✨ LinkedIn : https://www.linkedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 90,
+      "id": "ze4JO_ODl3w",
+      "title": "Kth Level of a Binary Tree | DSA Series : L.88",
+      "url": "https://www.youtube.com/watch?v=ze4JO_ODl3w",
+      "channel": "Shradha Khapra",
+      "channel_url": "https://www.youtube.com/channel/UC1XBh-m27kkgwLAwu_SRJBg",
+      "duration": "7:59",
+      "duration_seconds": 479,
+      "views": 37997,
+      "likes": 965,
+      "upload_date": "2025-04-16",
+      "thumbnail": "https://i.ytimg.com/vi/ze4JO_ODl3w/maxresdefault.jpg",
+      "description": "✨New DSA Sheet Link : https://dsa.apnacollege.in\nNow you can track your progress & do group study with the new DSA sheet & Codebuddy feature.\n\nLecture 88 
+of DSA Placement Series\nKth Level of a Binary Tree Problem \n\nShare your progress on Twitter : https://x.com/ShradhaKhapra_\nDSA Series full playlist : https://www.youtube.com/
+playlist?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55pt\n\n✨ Instagram : https://www.instagram.com/shradhakhapra/\n✨ LinkedIn : https://www.linkedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 91,
+      "id": "oX5D0uKOMck",
+      "title": "Lowest Common Ancestor in Binary Tree | DSA Series : L.89",
+      "url": "https://www.youtube.com/watch?v=oX5D0uKOMck",
+      "channel": "Shradha Khapra",
+      "channel_url": "https://www.youtube.com/channel/UC1XBh-m27kkgwLAwu_SRJBg",
+      "duration": "18:20",
+      "duration_seconds": 1100,
+      "views": 54698,
+      "likes": 1397,
+      "upload_date": "2025-04-23",
+      "thumbnail": "https://i.ytimg.com/vi/oX5D0uKOMck/maxresdefault.jpg",
+      "description": "Lecture 89 of DSA Placement Series\nLowest Common Ancestor in Binary Tree\n\nCompany wise DSA Sheet Link : https://docs.google.com/spreadsheets/d/1mvlc8EYc3
+OVVU3X7NKoC0iZJr_45BL_pVxiJec0r94c/edit?usp=sharing\n\nShare your progress on Twitter : https://x.com/ShradhaKhapra_\nDSA Series full playlist : https://www.youtube.com/playlist?
+list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55pt\n\n✨ Instagram : https://www.instagram.com/shradhakhapra/\n✨ LinkedIn : https://www.linkedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 92,
+      "id": "33b1M980cCA",
+      "title": "Build Tree from Preorder & Inorder | DSA Series : L.90",
+      "url": "https://www.youtube.com/watch?v=33b1M980cCA",
+      "channel": "Shradha Khapra",
+      "channel_url": "https://www.youtube.com/channel/UC1XBh-m27kkgwLAwu_SRJBg",
+      "duration": "20:59",
+      "duration_seconds": 1259,
+      "views": 64728,
+      "likes": 1336,
+      "upload_date": "2025-04-28",
+      "thumbnail": "https://i.ytimg.com/vi/33b1M980cCA/maxresdefault.jpg",
+      "description": "Lecture 90 of DSA Placement Series\n\nCompany wise DSA Sheet Link : https://docs.google.com/spreadsheets/d/1mvlc8EYc3OVVU3X7NKoC0iZJr_45BL_pVxiJec0r94c/edit
+?usp=sharing\n\nShare your progress on Twitter : https://x.com/ShradhaKhapra_\nDSA Series full playlist : https://www.youtube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55pt
+\n\n✨ Instagram : https://www.instagram.com/shradhakhapra/\n✨ LinkedIn : https://www.linkedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 93,
+      "id": "TY6kEejJEM0",
+      "title": "Transform to Sum Tree | DSA Series : L.91",
+      "url": "https://www.youtube.com/watch?v=TY6kEejJEM0",
+      "channel": "Shradha Khapra",
+      "channel_url": "https://www.youtube.com/channel/UC1XBh-m27kkgwLAwu_SRJBg",
+      "duration": "8:40",
+      "duration_seconds": 520,
+      "views": 28534,
+      "likes": 738,
+      "upload_date": "2025-05-01",
+      "thumbnail": "https://i.ytimg.com/vi/TY6kEejJEM0/maxresdefault.jpg",
+      "description": "✨New DSA Sheet Link : https://dsa.apnacollege.in\nNow you can track your progress & do group study with the new DSA sheet & Codebuddy feature.\n\nLecture 91 
+of DSA Placement Series\n\nShare your progress on Twitter : https://x.com/ShradhaKhapra_\nDSA Series full playlist : https://www.youtube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34
+TsgV6IO55pt\n\n✨ Instagram : https://www.instagram.com/shradhakhapra/\n✨ LinkedIn : https://www.linkedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 94,
+      "id": "AWJD__CfM6A",
+      "title": "Binary Tree Paths | DSA Series : L.92",
+      "url": "https://www.youtube.com/watch?v=AWJD__CfM6A",
+      "channel": "Shradha Khapra",
+      "channel_url": "https://www.youtube.com/channel/UC1XBh-m27kkgwLAwu_SRJBg",
+      "duration": "10:00",
+      "duration_seconds": 600,
+      "views": 37239,
+      "likes": 887,
+      "upload_date": "2025-05-02",
+      "thumbnail": "https://i.ytimg.com/vi/AWJD__CfM6A/maxresdefault.jpg",
+      "description": "✨New DSA Sheet Link : https://dsa.apnacollege.in\nNow you can track your progress & do group study with the new DSA sheet & Codebuddy feature.\n\nLecture 92 
+of DSA Placement Series\n\nShare your progress on Twitter : https://x.com/ShradhaKhapra_\nDSA Series full playlist : https://www.youtube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34
+TsgV6IO55pt\n\n✨ Instagram : https://www.instagram.com/shradhakhapra/\n✨ LinkedIn : https://www.linkedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 95,
+      "id": "rhz-csskg_A",
+      "title": "Maximum Width of Binary Tree | DSA Series : L.93",
+      "url": "https://www.youtube.com/watch?v=rhz-csskg_A",
+      "channel": "Shradha Khapra",
+      "channel_url": "https://www.youtube.com/channel/UC1XBh-m27kkgwLAwu_SRJBg",
+      "duration": "21:09",
+      "duration_seconds": 1269,
+      "views": 42163,
+      "likes": 1045,
+      "upload_date": "2025-05-10",
+      "thumbnail": "https://i.ytimg.com/vi/rhz-csskg_A/maxresdefault.jpg",
+      "description": "✨New DSA Sheet Link : https://dsa.apnacollege.in\nNow you can track your progress & do group study with the new DSA sheet & Codebuddy feature.\n\nLecture 93 
+of DSA Placement Series\n\nShare your progress on Twitter : https://x.com/ShradhaKhapra_\nDSA Series full playlist : https://www.youtube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34
+TsgV6IO55pt\n\n✨ Instagram : https://www.instagram.com/shradhakhapra/\n✨ LinkedIn : https://www.linkedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 96,
+      "id": "PUfADhkq1LI",
+      "title": "Morris Inorder Traversal | DSA Series : L.94",
+      "url": "https://www.youtube.com/watch?v=PUfADhkq1LI",
+      "channel": "Shradha Khapra",
+      "channel_url": "https://www.youtube.com/channel/UC1XBh-m27kkgwLAwu_SRJBg",
+      "duration": "17:51",
+      "duration_seconds": 1071,
+      "views": 48090,
+      "likes": 1138,
+      "upload_date": "2025-05-12",
+      "thumbnail": "https://i.ytimg.com/vi/PUfADhkq1LI/maxresdefault.jpg",
+      "description": "✨New DSA Sheet Link : https://dsa.apnacollege.in\nNow you can track your progress & do group study with the new DSA sheet & Codebuddy feature.\n\nLecture 94 
+of DSA Placement Series\n\nShare your progress on Twitter : https://x.com/ShradhaKhapra_\nDSA Series full playlist : https://www.youtube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34
+TsgV6IO55pt\n\n✨ Instagram : https://www.instagram.com/shradhakhapra/\n✨ LinkedIn : https://www.linkedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 97,
+      "id": "dU2Z5HWSGM0",
+      "title": "Flatten Binary Tree to Linked List | DSA Series : L.95",
+      "url": "https://www.youtube.com/watch?v=dU2Z5HWSGM0",
+      "channel": "Shradha Khapra",
+      "channel_url": "https://www.youtube.com/channel/UC1XBh-m27kkgwLAwu_SRJBg",
+      "duration": "15:42",
+      "duration_seconds": 942,
+      "views": 39223,
+      "likes": 1061,
+      "upload_date": "2025-05-15",
+      "thumbnail": "https://i.ytimg.com/vi/dU2Z5HWSGM0/maxresdefault.jpg",
+      "description": "✨New DSA Sheet Link : https://dsa.apnacollege.in\nNow you can track your progress & do group study with the new DSA sheet & Codebuddy feature.\n\nLecture 95 
+of DSA Placement Series\n\nShare your progress on Twitter : https://x.com/ShradhaKhapra_\nDSA Series full playlist : https://www.youtube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34
+TsgV6IO55pt\n\n✨ Instagram : https://www.instagram.com/shradhakhapra/\n✨ LinkedIn : https://www.linkedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 98,
+      "id": "RuF7dPfj27Q",
+      "title": "Binary Search Trees (BSTs) | DSA Series : L.96",
+      "url": "https://www.youtube.com/watch?v=RuF7dPfj27Q",
+      "channel": "Shradha Khapra",
+      "channel_url": "https://www.youtube.com/channel/UC1XBh-m27kkgwLAwu_SRJBg",
+      "duration": "43:16",
+      "duration_seconds": 2596,
+      "views": 149784,
+      "likes": 2515,
+      "upload_date": "2025-05-20",
+      "thumbnail": "https://i.ytimg.com/vi/RuF7dPfj27Q/maxresdefault.jpg",
+      "description": "✨New DSA Sheet Link : https://dsa.apnacollege.in\nNow you can track your progress & do group study with the new DSA sheet & Codebuddy feature.\n\n\nLecture 9
+6 of DSA Placement Series\n\nShare your progress on Twitter : https://x.com/ShradhaKhapra_\nDSA Series full playlist : https://www.youtube.com/playlist?list=PLfqMhTWNBTe137I_EPQd
+34TsgV6IO55pt\n\n✨ Instagram : https://www.instagram.com/shradhakhapra/\n✨ LinkedIn : https://www.linkedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 99,
+      "id": "0s6sCjs_4g0",
+      "title": "Sorted Array to Balanced BST | DSA Series : L.97",
+      "url": "https://www.youtube.com/watch?v=0s6sCjs_4g0",
+      "channel": "Shradha Khapra",
+      "channel_url": "https://www.youtube.com/channel/UC1XBh-m27kkgwLAwu_SRJBg",
+      "duration": "8:43",
+      "duration_seconds": 523,
+      "views": 42210,
+      "likes": 955,
+      "upload_date": "2025-05-22",
+      "thumbnail": "https://i.ytimg.com/vi/0s6sCjs_4g0/maxresdefault.jpg",
+      "description": "Lecture 97 of DSA Placement Series\n\nCompany wise DSA Sheet Link : https://docs.google.com/spreadsheets/d/1mvlc8EYc3OVVU3X7NKoC0iZJr_45BL_pVxiJec0r94c/edit
+?usp=sharing\n\nShare your progress on Twitter : https://x.com/ShradhaKhapra_\nDSA Series full playlist : https://www.youtube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55pt
+\n\n✨ Instagram : https://www.instagram.com/shradhakhapra/\n✨ LinkedIn : https://www.linkedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 100,
+      "id": "dSBcCynP1nA",
+      "title": "Validate Binary Search Tree | DSA Series : L.98",
+      "url": "https://www.youtube.com/watch?v=dSBcCynP1nA",
+      "channel": "Shradha Khapra",
+      "channel_url": "https://www.youtube.com/channel/UC1XBh-m27kkgwLAwu_SRJBg",
+      "duration": "12:41",
+      "duration_seconds": 761,
+      "views": 37503,
+      "likes": 951,
+      "upload_date": "2025-06-03",
+      "thumbnail": "https://i.ytimg.com/vi/dSBcCynP1nA/maxresdefault.jpg",
+      "description": "Lecture 98 of DSA Placement Series\n\nCompany wise DSA Sheet Link : https://docs.google.com/spreadsheets/d/1mvlc8EYc3OVVU3X7NKoC0iZJr_45BL_pVxiJec0r94c/edit
+?usp=sharing\n\nShare your progress on Twitter : https://x.com/ShradhaKhapra_\nDSA Series full playlist : https://www.youtube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55pt
+\n\n✨ Instagram : https://www.instagram.com/shradhakhapra/\n✨ LinkedIn : https://www.linkedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 101,
+      "id": "WZmjRXF_Zi4",
+      "title": "Min Distance between BST Nodes | DSA Series : L.99",
+      "url": "https://www.youtube.com/watch?v=WZmjRXF_Zi4",
+      "channel": "Shradha Khapra",
+      "channel_url": "https://www.youtube.com/channel/UC1XBh-m27kkgwLAwu_SRJBg",
+      "duration": "14:16",
+      "duration_seconds": 856,
+      "views": 28661,
+      "likes": 756,
+      "upload_date": "2025-06-12",
+      "thumbnail": "https://i.ytimg.com/vi/WZmjRXF_Zi4/maxresdefault.jpg",
+      "description": "Lecture 99 of DSA Placement Series\n\nCompany wise DSA Sheet Link : https://docs.google.com/spreadsheets/d/1mvlc8EYc3OVVU3X7NKoC0iZJr_45BL_pVxiJec0r94c/edit
+?usp=sharing\n\nShare your progress on Twitter : https://x.com/ShradhaKhapra_\nDSA Series full playlist : https://www.youtube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55pt
+\n\n✨ Instagram : https://www.instagram.com/shradhakhapra/\n✨ LinkedIn : https://www.linkedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 102,
+      "id": "Kq4BbvIhj44",
+      "title": "Kth Smallest in BST | DSA Series : L.100",
+      "url": "https://www.youtube.com/watch?v=Kq4BbvIhj44",
+      "channel": "Shradha Khapra",
+      "channel_url": "https://www.youtube.com/channel/UC1XBh-m27kkgwLAwu_SRJBg",
+      "duration": "12:42",
+      "duration_seconds": 762,
+      "views": 29381,
+      "likes": 779,
+      "upload_date": "2025-06-13",
+      "thumbnail": "https://i.ytimg.com/vi/Kq4BbvIhj44/maxresdefault.jpg",
+      "description": "Lecture 100 of DSA Placement Series\n\nCompany wise DSA Sheet Link : https://docs.google.com/spreadsheets/d/1mvlc8EYc3OVVU3X7NKoC0iZJr_45BL_pVxiJec0r94c/edi
+t?usp=sharing\n\nShare your progress on Twitter : https://x.com/ShradhaKhapra_\nDSA Series full playlist : https://www.youtube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55p
+t\n\n✨ Instagram : https://www.instagram.com/shradhakhapra/\n✨ LinkedIn : https://www.linkedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 103,
+      "id": "ORxkZ12FrU4",
+      "title": "Lowest Common Ancestor in BST | DSA Series : L.101",
+      "url": "https://www.youtube.com/watch?v=ORxkZ12FrU4",
+      "channel": "Shradha Khapra",
+      "channel_url": "https://www.youtube.com/channel/UC1XBh-m27kkgwLAwu_SRJBg",
+      "duration": "12:29",
+      "duration_seconds": 749,
+      "views": 24257,
+      "likes": 691,
+      "upload_date": "2025-06-19",
+      "thumbnail": "https://i.ytimg.com/vi/ORxkZ12FrU4/maxresdefault.jpg",
+      "description": "Lecture 101 of DSA Placement Series\n\nCompany wise DSA Sheet Link : https://docs.google.com/spreadsheets/d/1mvlc8EYc3OVVU3X7NKoC0iZJr_45BL_pVxiJec0r94c/edi
+t?usp=sharing\n\nShare your progress on Twitter : https://x.com/ShradhaKhapra_\nDSA Series full playlist : https://www.youtube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55p
+t\n\n✨ Instagram : https://www.instagram.com/shradhakhapra/\n✨ LinkedIn : https://www.linkedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 104,
+      "id": "-n5Ur1wE5Jc",
+      "title": "Construct BST from Preorder | DSA Series : L.102",
+      "url": "https://www.youtube.com/watch?v=-n5Ur1wE5Jc",
+      "channel": "Shradha Khapra",
+      "channel_url": "https://www.youtube.com/channel/UC1XBh-m27kkgwLAwu_SRJBg",
+      "duration": "19:10",
+      "duration_seconds": 1150,
+      "views": 28952,
+      "likes": 733,
+      "upload_date": "2025-06-25",
+      "thumbnail": "https://i.ytimg.com/vi/-n5Ur1wE5Jc/maxresdefault.jpg",
+      "description": "Lecture 102 of DSA Placement Series\n\nCompany wise DSA Sheet Link : https://docs.google.com/spreadsheets/d/1mvlc8EYc3OVVU3X7NKoC0iZJr_45BL_pVxiJec0r94c/edi
+t?usp=sharing\n\nShare your progress on Twitter : https://x.com/ShradhaKhapra_\nDSA Series full playlist : https://www.youtube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55p
+t\n\n✨ Instagram : https://www.instagram.com/shradhakhapra/\n✨ LinkedIn : https://www.linkedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 105,
+      "id": "AiKZjCuy2k4",
+      "title": "Merge Two Binary Search Trees | DSA Series : L.103",
+      "url": "https://www.youtube.com/watch?v=AiKZjCuy2k4",
+      "channel": "Shradha Khapra",
+      "channel_url": "https://www.youtube.com/channel/UC1XBh-m27kkgwLAwu_SRJBg",
+      "duration": "16:39",
+      "duration_seconds": 999,
+      "views": 26586,
+      "likes": 733,
+      "upload_date": "2025-06-26",
+      "thumbnail": "https://i.ytimg.com/vi/AiKZjCuy2k4/maxresdefault.jpg",
+      "description": "Lecture 103 : Merge 2 BST's\n\nCompany wise DSA Sheet Link : https://docs.google.com/spreadsheets/d/1mvlc8EYc3OVVU3X7NKoC0iZJr_45BL_pVxiJec0r94c/edit?usp=sh
+aring\n\nShare your progress on Twitter : https://x.com/ShradhaKhapra_\nDSA Series full playlist : https://www.youtube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55pt\n\n✨ In
+stagram : https://www.instagram.com/shradhakhapra/\n✨ LinkedIn : https://www.linkedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 106,
+      "id": "0KGzfij_SCk",
+      "title": "Recover BST | DSA Series : L.104",
+      "url": "https://www.youtube.com/watch?v=0KGzfij_SCk",
+      "channel": "Shradha Khapra",
+      "channel_url": "https://www.youtube.com/channel/UC1XBh-m27kkgwLAwu_SRJBg",
+      "duration": "24:03",
+      "duration_seconds": 1443,
+      "views": 28141,
+      "likes": 793,
+      "upload_date": "2025-06-27",
+      "thumbnail": "https://i.ytimg.com/vi/0KGzfij_SCk/maxresdefault.jpg",
+      "description": "Lecture 104 : Recover BST\n\nCompany wise DSA Sheet Link : https://docs.google.com/spreadsheets/d/1mvlc8EYc3OVVU3X7NKoC0iZJr_45BL_pVxiJec0r94c/edit?usp=shar
+ing\n\nShare your progress on Twitter : https://x.com/ShradhaKhapra_\nDSA Series full playlist : https://www.youtube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55pt\n\n✨ Inst
+agram : https://www.instagram.com/shradhakhapra/\n✨ LinkedIn : https://www.linkedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 107,
+      "id": "Pr-HFxp7npk",
+      "title": "Largest BST in Binary Tree | DSA Series : L.105",
+      "url": "https://www.youtube.com/watch?v=Pr-HFxp7npk",
+      "channel": "Shradha Khapra",
+      "channel_url": "https://www.youtube.com/channel/UC1XBh-m27kkgwLAwu_SRJBg",
+      "duration": "24:56",
+      "duration_seconds": 1496,
+      "views": 30146,
+      "likes": 730,
+      "upload_date": "2025-07-03",
+      "thumbnail": "https://i.ytimg.com/vi/Pr-HFxp7npk/maxresdefault.jpg",
+      "description": "Lecture 105 : Largest BST in BT\n\nCompany wise DSA Sheet Link : https://docs.google.com/spreadsheets/d/1mvlc8EYc3OVVU3X7NKoC0iZJr_45BL_pVxiJec0r94c/edit?us
+p=sharing\n\nShare your progress on Twitter : https://x.com/ShradhaKhapra_\nDSA Series full playlist : https://www.youtube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55pt\n\
+n✨ Instagram : https://www.instagram.com/shradhakhapra/\n✨ LinkedIn : https://www.linkedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 108,
+      "id": "a8VKpW1DsD8",
+      "title": "Populate Next Right Pointers in Each Node | DSA Series : L.106",
+      "url": "https://www.youtube.com/watch?v=a8VKpW1DsD8",
+      "channel": "Shradha Khapra",
+      "channel_url": "https://www.youtube.com/channel/UC1XBh-m27kkgwLAwu_SRJBg",
+      "duration": "11:11",
+      "duration_seconds": 671,
+      "views": 22724,
+      "likes": 626,
+      "upload_date": "2025-07-15",
+      "thumbnail": "https://i.ytimg.com/vi/a8VKpW1DsD8/maxresdefault.jpg",
+      "description": "Lecture 106 : Populate Next Right Pointers in Each Node\n\nCompany wise DSA Sheet Link : https://docs.google.com/spreadsheets/d/1mvlc8EYc3OVVU3X7NKoC0iZJr_4
+5BL_pVxiJec0r94c/edit?usp=sharing\n\nShare your progress on Twitter : https://x.com/ShradhaKhapra_\nDSA Series full playlist : https://www.youtube.com/playlist?list=PLfqMhTWNBTe1
+37I_EPQd34TsgV6IO55pt\n\n✨ Instagram : https://www.instagram.com/shradhakhapra/\n✨ LinkedIn : https://www.linkedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 109,
+      "id": "dS1bKglre3A",
+      "title": "BST Iterator | DSA Series : L.107",
+      "url": "https://www.youtube.com/watch?v=dS1bKglre3A",
+      "channel": "Shradha Khapra",
+      "channel_url": "https://www.youtube.com/channel/UC1XBh-m27kkgwLAwu_SRJBg",
+      "duration": "17:16",
+      "duration_seconds": 1036,
+      "views": 24466,
+      "likes": 633,
+      "upload_date": "2025-07-17",
+      "thumbnail": "https://i.ytimg.com/vi/dS1bKglre3A/maxresdefault.jpg",
+      "description": "Lecture 107 : BST Iterator\n\nCompany wise DSA Sheet Link : https://docs.google.com/spreadsheets/d/1mvlc8EYc3OVVU3X7NKoC0iZJr_45BL_pVxiJec0r94c/edit?usp=sha
+ring\n\nShare your progress on Twitter : https://x.com/ShradhaKhapra_\nDSA Series full playlist : https://www.youtube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55pt\n\n✨ Ins
+tagram : https://www.instagram.com/shradhakhapra/\n✨ LinkedIn : https://www.linkedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 110,
+      "id": "IHNkql1tAnk",
+      "title": "Inorder Predecessor & Successor in BST | DSA Series : L.108",
+      "url": "https://www.youtube.com/watch?v=IHNkql1tAnk",
+      "channel": "Shradha Khapra",
+      "channel_url": "https://www.youtube.com/channel/UC1XBh-m27kkgwLAwu_SRJBg",
+      "duration": "19:49",
+      "duration_seconds": 1189,
+      "views": 32820,
+      "likes": 759,
+      "upload_date": "2025-07-24",
+      "thumbnail": "https://i.ytimg.com/vi/IHNkql1tAnk/maxresdefault.jpg",
+      "description": "Lecture 108 : Inorder Predecessor & Successor in BST\n\nCompany wise DSA Sheet Link : https://docs.google.com/spreadsheets/d/1mvlc8EYc3OVVU3X7NKoC0iZJr_45BL
+_pVxiJec0r94c/edit?usp=sharing\n\nShare your progress on Twitter : https://x.com/ShradhaKhapra_\nDSA Series full playlist : https://www.youtube.com/playlist?list=PLfqMhTWNBTe137I
+_EPQd34TsgV6IO55pt\n\n✨ Instagram : https://www.instagram.com/shradhakhapra/\n✨ LinkedIn : https://www.linkedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 111,
+      "id": "RpgyCJBbl5E",
+      "title": "Introduction to Graphs | Data Structure & Algorithms",
+      "url": "https://www.youtube.com/watch?v=RpgyCJBbl5E",
+      "channel": "Shradha Khapra",
+      "channel_url": "https://www.youtube.com/channel/UC1XBh-m27kkgwLAwu_SRJBg",
+      "duration": "26:08",
+      "duration_seconds": 1568,
+      "views": 283180,
+      "likes": 4637,
+      "upload_date": "2025-08-09",
+      "thumbnail": "https://i.ytimg.com/vi/RpgyCJBbl5E/maxresdefault.jpg",
+      "description": "Starting an important data structure : Graphs 🚀\n\n📌 New DSA Sheet Link: https://dsa.apnacollege.in/\n\nShare your progress on Twitter : https://x.com/Shradha
+Khapra_\nDSA Series full playlist : https://www.youtube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55pt\n\n✨ Instagram : https://www.instagram.com/shradhakhapra/\n✨ LinkedIn :
+ https://www.linkedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 112,
+      "id": "scQITTLgFJo",
+      "title": "BFS Traversal in Graphs | Data Structure & Algorithms",
+      "url": "https://www.youtube.com/watch?v=scQITTLgFJo",
+      "channel": "Shradha Khapra",
+      "channel_url": "https://www.youtube.com/channel/UC1XBh-m27kkgwLAwu_SRJBg",
+      "duration": "18:31",
+      "duration_seconds": 1111,
+      "views": 168568,
+      "likes": 2743,
+      "upload_date": "2025-08-20",
+      "thumbnail": "https://i.ytimg.com/vi/scQITTLgFJo/maxresdefault.jpg",
+      "description": "Starting an important data structure : Graphs 🚀\n\n📌 New DSA Sheet Link: https://dsa.apnacollege.in/\n\nShare your progress on Twitter : https://x.com/Shradha
+Khapra_\nDSA Series full playlist : https://www.youtube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55pt\n\n✨ Instagram : https://www.instagram.com/shradhakhapra/\n✨ LinkedIn :
+ https://www.linkedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 113,
+      "id": "3czYbhac160",
+      "title": "DFS Traversal in Graphs | Data Structure & Algorithms",
+      "url": "https://www.youtube.com/watch?v=3czYbhac160",
+      "channel": "Shradha Khapra",
+      "channel_url": "https://www.youtube.com/channel/UC1XBh-m27kkgwLAwu_SRJBg",
+      "duration": "14:02",
+      "duration_seconds": 842,
+      "views": 102393,
+      "likes": 1896,
+      "upload_date": "2025-08-27",
+      "thumbnail": "https://i.ytimg.com/vi/3czYbhac160/maxresdefault.jpg",
+      "description": "Starting an important data structure : Graphs 🚀\n\n📌 New DSA Sheet Link: https://dsa.apnacollege.in/\n\nShare your progress on Twitter : https://x.com/Shradha
+Khapra_\nDSA Series full playlist : https://www.youtube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55pt\n\n✨ Instagram : https://www.instagram.com/shradhakhapra/\n✨ LinkedIn :
+ https://www.linkedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 114,
+      "id": "OZClCpPQDR4",
+      "title": "Detect a Cycle in Undirected Graph using DFS | Data Structure & Algorithms",
+      "url": "https://www.youtube.com/watch?v=OZClCpPQDR4",
+      "channel": "Shradha Khapra",
+      "channel_url": "https://www.youtube.com/channel/UC1XBh-m27kkgwLAwu_SRJBg",
+      "duration": "19:45",
+      "duration_seconds": 1185,
+      "views": 49023,
+      "likes": 999,
+      "upload_date": "2025-09-08",
+      "thumbnail": "https://i.ytimg.com/vi/OZClCpPQDR4/maxresdefault.jpg",
+      "description": "📌 New DSA Sheet Link: https://dsa.apnacollege.in/\n\nShare your progress on Twitter : https://x.com/ShradhaKhapra_\nDSA Series full playlist : https://www.yo
+utube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55pt\n\n✨ Instagram : https://www.instagram.com/shradhakhapra/\n✨ LinkedIn : https://www.linkedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 115,
+      "id": "MIjOkApZ39g",
+      "title": "Detect a Cycle in Undirected Graph using BFS | Data Structure & Algorithms",
+      "url": "https://www.youtube.com/watch?v=MIjOkApZ39g",
+      "channel": "Shradha Khapra",
+      "channel_url": "https://www.youtube.com/channel/UC1XBh-m27kkgwLAwu_SRJBg",
+      "duration": "18:23",
+      "duration_seconds": 1103,
+      "views": 31049,
+      "likes": 730,
+      "upload_date": "2025-09-09",
+      "thumbnail": "https://i.ytimg.com/vi/MIjOkApZ39g/maxresdefault.jpg",
+      "description": "📌 New DSA Sheet Link: https://dsa.apnacollege.in/\n\nShare your progress on Twitter : https://x.com/ShradhaKhapra_\nDSA Series full playlist : https://www.yo
+utube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55pt\n\n✨ Instagram : https://www.instagram.com/shradhakhapra/\n✨ LinkedIn : https://www.linkedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 116,
+      "id": "AME6baBpswY",
+      "title": "Number of Islands | Connected Components in Matrix | Leetcode 200",
+      "url": "https://www.youtube.com/watch?v=AME6baBpswY",
+      "channel": "Shradha Khapra",
+      "channel_url": "https://www.youtube.com/channel/UC1XBh-m27kkgwLAwu_SRJBg",
+      "duration": "17:05",
+      "duration_seconds": 1025,
+      "views": 38712,
+      "likes": 932,
+      "upload_date": "2025-09-11",
+      "thumbnail": "https://i.ytimg.com/vi/AME6baBpswY/maxresdefault.jpg",
+      "description": "Starting an important data structure : Graphs 🚀\nCompany wise DSA Sheet Link : https://docs.google.com/spreadsheets/d/1mvlc8EYc3OVVU3X7NKoC0iZJr_45BL_pVxiJec
+0r94c/edit?usp=sharing\n\nShare your progress on Twitter : https://x.com/ShradhaKhapra_\nDSA Series full playlist : https://www.youtube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34T
+sgV6IO55pt\n\n✨ Instagram : https://www.instagram.com/shradhakhapra/\n✨ LinkedIn : https://www.linkedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 117,
+      "id": "RmXo5SWkhCs",
+      "title": "Rotting Oranges | Multi-source BFS | Leetcode 994",
+      "url": "https://www.youtube.com/watch?v=RmXo5SWkhCs",
+      "channel": "Shradha Khapra",
+      "channel_url": "https://www.youtube.com/channel/UC1XBh-m27kkgwLAwu_SRJBg",
+      "duration": "26:22",
+      "duration_seconds": 1582,
+      "views": 38320,
+      "likes": 934,
+      "upload_date": "2025-09-16",
+      "thumbnail": "https://i.ytimg.com/vi/RmXo5SWkhCs/maxresdefault.jpg",
+      "description": "Starting an important data structure : Graphs 🚀\nCompany wise DSA Sheet Link : https://docs.google.com/spreadsheets/d/1mvlc8EYc3OVVU3X7NKoC0iZJr_45BL_pVxiJec
+0r94c/edit?usp=sharing\n\nShare your progress on Twitter : https://x.com/ShradhaKhapra_\nDSA Series full playlist : https://www.youtube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34T
+sgV6IO55pt\n\n✨ Instagram : https://www.instagram.com/shradhakhapra/\n✨ LinkedIn : https://www.linkedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 118,
+      "id": "AcppN5XFt24",
+      "title": "Detect a Cycle in Directed Graph using DFS | Lecture 116",
+      "url": "https://www.youtube.com/watch?v=AcppN5XFt24",
+      "channel": "Shradha Khapra",
+      "channel_url": "https://www.youtube.com/channel/UC1XBh-m27kkgwLAwu_SRJBg",
+      "duration": "15:58",
+      "duration_seconds": 958,
+      "views": 27256,
+      "likes": 654,
+      "upload_date": "2025-09-29",
+      "thumbnail": "https://i.ytimg.com/vi/AcppN5XFt24/maxresdefault.jpg",
+      "description": "This lecture was made with a lot of love❤️\n\n📌 New DSA Sheet Link: https://dsa.apnacollege.in/\n\nShare your progress on Twitter : https://x.com/ShradhaKhapra
+_\nDSA Series full playlist : https://www.youtube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55pt\n\n✨ Instagram : https://www.instagram.com/shradhakhapra/\n✨ LinkedIn : https
+://www.linkedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 119,
+      "id": "0WIINUY12Yg",
+      "title": "Topological Sorting in Graph | using DFS | Lecture 117",
+      "url": "https://www.youtube.com/watch?v=0WIINUY12Yg",
+      "channel": "Shradha Khapra",
+      "channel_url": "https://www.youtube.com/channel/UC1XBh-m27kkgwLAwu_SRJBg",
+      "duration": "15:57",
+      "duration_seconds": 957,
+      "views": 49562,
+      "likes": 1036,
+      "upload_date": "2025-10-02",
+      "thumbnail": "https://i.ytimg.com/vi/0WIINUY12Yg/maxresdefault.jpg",
+      "description": "This lecture was made with a lot of love❤️\n\n📌 New DSA Sheet Link: https://dsa.apnacollege.in/\n\nShare your progress on Twitter : https://x.com/ShradhaKhapra
+_\nDSA Series full playlist : https://www.youtube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55pt\n\n✨ Instagram : https://www.instagram.com/shradhakhapra/\n✨ LinkedIn : https
+://www.linkedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 120,
+      "id": "37cJ38HadM4",
+      "title": "Course Schedule Problem | using Graph & Topological Sort",
+      "url": "https://www.youtube.com/watch?v=37cJ38HadM4",
+      "channel": "Shradha Khapra",
+      "channel_url": "https://www.youtube.com/channel/UC1XBh-m27kkgwLAwu_SRJBg",
+      "duration": "17:54",
+      "duration_seconds": 1074,
+      "views": 24684,
+      "likes": 600,
+      "upload_date": "2025-10-25",
+      "thumbnail": "https://i.ytimg.com/vi/37cJ38HadM4/maxresdefault.jpg",
+      "description": "This lecture was made with a lot of love❤️\n\n📌 New DSA Sheet Link: https://dsa.apnacollege.in/\n\nShare your progress on Twitter : https://x.com/ShradhaKhapra
+_\nDSA Series full playlist : https://www.youtube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55pt\n\n✨ Instagram : https://www.instagram.com/shradhakhapra/\n✨ LinkedIn : https
+://www.linkedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 121,
+      "id": "rZsgWxodGmM",
+      "title": "Course Schedule II Problem | using Graph & Topological Sort",
+      "url": "https://www.youtube.com/watch?v=rZsgWxodGmM",
+      "channel": "Shradha Khapra",
+      "channel_url": "https://www.youtube.com/channel/UC1XBh-m27kkgwLAwu_SRJBg",
+      "duration": "19:33",
+      "duration_seconds": 1173,
+      "views": 17384,
+      "likes": 455,
+      "upload_date": "2025-10-26",
+      "thumbnail": "https://i.ytimg.com/vi/rZsgWxodGmM/maxresdefault.jpg",
+      "description": "This lecture was made with a lot of love❤️\n\n📌 New DSA Sheet Link: https://dsa.apnacollege.in/\n\nShare your progress on Twitter : https://x.com/ShradhaKhapra
+_\nDSA Series full playlist : https://www.youtube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55pt\n\n✨ Instagram : https://www.instagram.com/shradhakhapra/\n✨ LinkedIn : https
+://www.linkedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 122,
+      "id": "JI_e2RzARbM",
+      "title": "Flood Fill Algorithm | Graph Problem",
+      "url": "https://www.youtube.com/watch?v=JI_e2RzARbM",
+      "channel": "Shradha Khapra",
+      "channel_url": "https://www.youtube.com/channel/UC1XBh-m27kkgwLAwu_SRJBg",
+      "duration": "15:09",
+      "duration_seconds": 909,
+      "views": 28096,
+      "likes": 654,
+      "upload_date": "2025-10-31",
+      "thumbnail": "https://i.ytimg.com/vi/JI_e2RzARbM/maxresdefault.jpg",
+      "description": "This lecture was made with a lot of love❤️\n\n📌 New DSA Sheet Link: https://dsa.apnacollege.in/\n\nShare your progress on Twitter : https://x.com/ShradhaKhapra
+_\nDSA Series full playlist : https://www.youtube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55pt\n\n✨ Instagram : https://www.instagram.com/shradhakhapra/\n✨ LinkedIn : https
+://www.linkedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 123,
+      "id": "BnQpaTZg6Sc",
+      "title": "Topological Sorting using Kahn's Algorithm | Graph  - DSA Lecture 121",
+      "url": "https://www.youtube.com/watch?v=BnQpaTZg6Sc",
+      "channel": "Shradha Khapra",
+      "channel_url": "https://www.youtube.com/channel/UC1XBh-m27kkgwLAwu_SRJBg",
+      "duration": "18:46",
+      "duration_seconds": 1126,
+      "views": 22454,
+      "likes": 551,
+      "upload_date": "2025-11-05",
+      "thumbnail": "https://i.ytimg.com/vi/BnQpaTZg6Sc/maxresdefault.jpg",
+      "description": "📌 New *DSA Sheet* Link: https://dsa.apnacollege.in/\n\nThis lecture was made with a lot of love❤️\n\nCompany wise DSA Sheet Link : https://docs.google.com/spre
+adsheets/d/1mvlc8EYc3OVVU3X7NKoC0iZJr_45BL_pVxiJec0r94c/edit?usp=sharing\n\nShare your progress on Twitter : https://x.com/ShradhaKhapra_\nDSA Series full playlist : https://www.
+youtube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55pt\n\n✨ Instagram : https://www.instagram.com/shradhakhapra/\n✨ LinkedIn : https://www.linkedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 124,
+      "id": "8gYBHjtjWBI",
+      "title": "Dijkstra's Algorithm - Single Source Shortest Path - Greedy Method",
+      "url": "https://www.youtube.com/watch?v=8gYBHjtjWBI",
+      "channel": "Shradha Khapra",
+      "channel_url": "https://www.youtube.com/channel/UC1XBh-m27kkgwLAwu_SRJBg",
+      "duration": "35:20",
+      "duration_seconds": 2120,
+      "views": 76124,
+      "likes": 1341,
+      "upload_date": "2025-12-09",
+      "thumbnail": "https://i.ytimg.com/vi/8gYBHjtjWBI/maxresdefault.jpg",
+      "description": "📌 New *DSA Sheet* Link: https://dsa.apnacollege.in/\n\nThis lecture was made with a lot of love❤️\n\nCompany wise DSA Sheet Link : https://docs.google.com/spre
+adsheets/d/1mvlc8EYc3OVVU3X7NKoC0iZJr_45BL_pVxiJec0r94c/edit?usp=sharing\n\nShare your progress on Twitter : https://x.com/ShradhaKhapra_\nDSA Series full playlist : https://www.
+youtube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55pt\n\n✨ Instagram : https://www.instagram.com/shradhakhapra/\n✨ LinkedIn : https://www.linkedin.com/in/shradha-khapra/\n\n
+Timestamps\n00:00 What is shortest Path?\n06:23 Logic (Edge Relaxation)\n11:18 Dijkstra's Algorithm\n21:50 Pseudocode\n24:56 Code\n30:56 Time Complexity"
+    },
+    {
+      "position": 125,
+      "id": "3rFHlbJ7qKc",
+      "title": "Bellman Ford Algorithm - Single Source Shortest Path - Dynamic Programming",
+      "url": "https://www.youtube.com/watch?v=3rFHlbJ7qKc",
+      "channel": "Shradha Khapra",
+      "channel_url": "https://www.youtube.com/channel/UC1XBh-m27kkgwLAwu_SRJBg",
+      "duration": "23:37",
+      "duration_seconds": 1417,
+      "views": 38678,
+      "likes": 702,
+      "upload_date": "2025-12-10",
+      "thumbnail": "https://i.ytimg.com/vi/3rFHlbJ7qKc/maxresdefault.jpg",
+      "description": "📌 New *DSA Sheet* Link: https://dsa.apnacollege.in/\n\nThis lecture was made with a lot of love❤️\n\nCompany wise DSA Sheet Link : https://docs.google.com/spre
+adsheets/d/1mvlc8EYc3OVVU3X7NKoC0iZJr_45BL_pVxiJec0r94c/edit?usp=sharing\n\nShare your progress on Twitter : https://x.com/ShradhaKhapra_\nDSA Series full playlist : https://www.
+youtube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55pt\n\n✨ Instagram : https://www.instagram.com/shradhakhapra/\n✨ LinkedIn : https://www.linkedin.com/in/shradha-khapra/\n\n
+Timestamps\n00:00 What is shortest Path?\n06:23 Logic (Edge Relaxation)\n11:18 Dijkstra's Algorithm\n21:50 Pseudocode\n24:56 Code\n30:56 Time Complexity"
+    },
+    {
+      "position": 126,
+      "id": "YlmU4gBgePA",
+      "title": "DSA Series Quick Update - 125 lectures | New DSA Sheet | DP, Heaps, Tries etc",
+      "url": "https://www.youtube.com/watch?v=YlmU4gBgePA",
+      "channel": "Shradha Khapra",
+      "channel_url": "https://www.youtube.com/channel/UC1XBh-m27kkgwLAwu_SRJBg",
+      "duration": "6:24",
+      "duration_seconds": 384,
+      "views": 82387,
+      "likes": 2995,
+      "upload_date": "2026-01-07",
+      "thumbnail": "https://i.ytimg.com/vi/YlmU4gBgePA/maxresdefault.jpg",
+      "description": "✨New DSA Sheet Link : https://dsa.apnacollege.in\n\n\nTime stamps : \n\n00:00 Upcoming DSA topics\n02:30 New DSA Sheet for Practice\n03:44 Company wise DSA s
+heet\n04:20  : Codebuddy Feature : Group study & track progress\n\n\nShare your progress on Twitter : https://x.com/ShradhaKhapra_\nDSA Series full playlist : https://www.youtube
+.com/playlist?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55pt\n\n✨ Instagram : https://www.instagram.com/shradhakhapra/\n✨ LinkedIn : https://www.linkedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 127,
+      "id": "Sflh1z6cIMk",
+      "title": "Prim's Algorithm - Minimum Spanning Tree in Graph",
+      "url": "https://www.youtube.com/watch?v=Sflh1z6cIMk",
+      "channel": "Shradha Khapra",
+      "channel_url": "https://www.youtube.com/channel/UC1XBh-m27kkgwLAwu_SRJBg",
+      "duration": "26:07",
+      "duration_seconds": 1567,
+      "views": 36150,
+      "likes": 711,
+      "upload_date": "2026-02-08",
+      "thumbnail": "https://i.ytimg.com/vi/Sflh1z6cIMk/maxresdefault.jpg",
+      "description": "📌 New *DSA Sheet* Link: https://dsa.apnacollege.in/\n\nThis lecture was made with a lot of love❤️\n\nShare your progress on Twitter : https://x.com/ShradhaKhap
+ra_\nDSA Series full playlist : https://www.youtube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55pt\n\n✨ Instagram : https://www.instagram.com/shradhakhapra/\n✨ LinkedIn : htt
+ps://www.linkedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 128,
+      "id": "nnrjWxWMo3E",
+      "title": "Disjoint Set Union | With Rank/Size & Path Compression | Union Find",
+      "url": "https://www.youtube.com/watch?v=nnrjWxWMo3E",
+      "channel": "Shradha Khapra",
+      "channel_url": "https://www.youtube.com/channel/UC1XBh-m27kkgwLAwu_SRJBg",
+      "duration": "34:04",
+      "duration_seconds": 2044,
+      "views": 15670,
+      "likes": 410,
+      "upload_date": "2026-04-29",
+      "thumbnail": "https://i.ytimg.com/vi/nnrjWxWMo3E/maxresdefault.jpg",
+      "description": "✨New DSA Sheet Link : https://dsa.apnacollege.in\n\nShare your progress on Twitter : https://x.com/ShradhaKhapra_\nDSA Series full playlist : https://www.you
+tube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55pt\n\n✨ Instagram : https://www.instagram.com/shradhakhapra/\n✨ LinkedIn : https://www.linkedin.com/in/shradha-khapra/\n\nTim
+estamps:\n00:00 Logic of Union Find\n05:46 Implementation & Pseudocode\n24:13 Code\n29:00 Path Compression Optimization"
+    },
+    {
+      "position": 129,
+      "id": "inoM6jwj1CA",
+      "title": "Kruskal's Algorithm - Minimum Spanning Tree in Graph",
+      "url": "https://www.youtube.com/watch?v=inoM6jwj1CA",
+      "channel": "Shradha Khapra",
+      "channel_url": "https://www.youtube.com/channel/UC1XBh-m27kkgwLAwu_SRJBg",
+      "duration": "29:07",
+      "duration_seconds": 1747,
+      "views": 18285,
+      "likes": 411,
+      "upload_date": "2026-04-30",
+      "thumbnail": "https://i.ytimg.com/vi/inoM6jwj1CA/maxresdefault.jpg",
+      "description": "📌 New *DSA Sheet* Link: https://dsa.apnacollege.in/\n\nThis lecture was made with a lot of love❤️\n\n✨New DSA Sheet Link : https://dsa.apnacollege.in\n\nShare y
+our progress on Twitter : https://x.com/ShradhaKhapra_\nDSA Series full playlist : https://www.youtube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55pt\n\n✨ Instagram : https:
+//www.instagram.com/shradhakhapra/\n✨ LinkedIn : https://www.linkedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 130,
+      "id": "J1yCPIP-K8s",
+      "title": "Number of Provinces | Graph Problem",
+      "url": "https://www.youtube.com/watch?v=J1yCPIP-K8s",
+      "channel": "Shradha Khapra",
+      "channel_url": "https://www.youtube.com/channel/UC1XBh-m27kkgwLAwu_SRJBg",
+      "duration": "12:34",
+      "duration_seconds": 754,
+      "views": 6926,
+      "likes": 226,
+      "upload_date": "2026-05-05",
+      "thumbnail": "https://i.ytimg.com/vi/J1yCPIP-K8s/maxresdefault.jpg",
+      "description": "This lecture was made with a lot of love❤️\n\nLink to Union-Find Code: https://drive.google.com/file/d/15Z4pXIiWpWsZdjeX7kdWWRCiEothN4Xi/view?usp=sharing\n\n✨N
+ew DSA Sheet Link : https://dsa.apnacollege.in\n\nShare your progress on Twitter : https://x.com/ShradhaKhapra_\nDSA Series full playlist : https://www.youtube.com/playlist?list=
+PLfqMhTWNBTe137I_EPQd34TsgV6IO55pt\n\n✨ Instagram : https://www.instagram.com/shradhakhapra/\n✨ LinkedIn : https://www.linkedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 131,
+      "id": "mEx8JJQJUs8",
+      "title": "Min Cost to Connect All Points | Graph Problem",
+      "url": "https://www.youtube.com/watch?v=mEx8JJQJUs8",
+      "channel": "Shradha Khapra",
+      "channel_url": "https://www.youtube.com/channel/UC1XBh-m27kkgwLAwu_SRJBg",
+      "duration": "21:16",
+      "duration_seconds": 1276,
+      "views": 5706,
+      "likes": 174,
+      "upload_date": "2026-05-07",
+      "thumbnail": "https://i.ytimg.com/vi/mEx8JJQJUs8/maxresdefault.jpg",
+      "description": "This lecture was made with a lot of love❤️\n\n✨New DSA Sheet Link : https://dsa.apnacollege.in\n\nShare your progress on Twitter : https://x.com/ShradhaKhapra_
+\nDSA Series full playlist : https://www.youtube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55pt\n\n✨ Instagram : https://www.instagram.com/shradhakhapra/\n✨ LinkedIn : https:
+//www.linkedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 132,
+      "id": "CLmykzpeCCs",
+      "title": "Cheapest Flights Within K Stops | Graph Problem",
+      "url": "https://www.youtube.com/watch?v=CLmykzpeCCs",
+      "channel": "Shradha Khapra",
+      "channel_url": "https://www.youtube.com/channel/UC1XBh-m27kkgwLAwu_SRJBg",
+      "duration": "30:28",
+      "duration_seconds": 1828,
+      "views": 8303,
+      "likes": 224,
+      "upload_date": "2026-05-09",
+      "thumbnail": "https://i.ytimg.com/vi/CLmykzpeCCs/maxresdefault.jpg",
+      "description": "This lecture was made with a lot of love❤️\n\n✨New DSA Sheet Link : https://dsa.apnacollege.in\n\nShare your progress on Twitter : https://x.com/ShradhaKhapra_
+\nDSA Series full playlist : https://www.youtube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55pt\n\n✨ Instagram : https://www.instagram.com/shradhakhapra/\n✨ LinkedIn : https:
+//www.linkedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 133,
+      "id": "6h1SucBNxgc",
+      "title": "Bridge in Graph using Tarjan's Algorithm | Critical Connections",
+      "url": "https://www.youtube.com/watch?v=6h1SucBNxgc",
+      "channel": "Shradha Khapra",
+      "channel_url": "https://www.youtube.com/channel/UC1XBh-m27kkgwLAwu_SRJBg",
+      "duration": "32:36",
+      "duration_seconds": 1956,
+      "views": 8713,
+      "likes": 227,
+      "upload_date": "2026-05-13",
+      "thumbnail": "https://i.ytimg.com/vi/6h1SucBNxgc/maxresdefault.jpg",
+      "description": "This lecture was made with a lot of love❤️\n\n✨New DSA Sheet Link : https://dsa.apnacollege.in\n\nShare your progress on Twitter : https://x.com/ShradhaKhapra_
+\nDSA Series full playlist : https://www.youtube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55pt\n\n✨ Instagram : https://www.instagram.com/shradhakhapra/\n✨ LinkedIn : https:
+//www.linkedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 134,
+      "id": "cn7pov3BEmg",
+      "title": "Articulation Point in Graph using Tarjan's Algorithm | Critical Points",
+      "url": "https://www.youtube.com/watch?v=cn7pov3BEmg",
+      "channel": "Shradha Khapra",
+      "channel_url": "https://www.youtube.com/channel/UC1XBh-m27kkgwLAwu_SRJBg",
+      "duration": "36:53",
+      "duration_seconds": 2213,
+      "views": 10127,
+      "likes": 239,
+      "upload_date": "2026-05-14",
+      "thumbnail": "https://i.ytimg.com/vi/cn7pov3BEmg/maxresdefault.jpg",
+      "description": "This lecture was made with a lot of love❤️\n\n✨New DSA Sheet Link : https://dsa.apnacollege.in\n\nShare your progress on Twitter : https://x.com/ShradhaKhapra_
+\nDSA Series full playlist : https://www.youtube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55pt\n\n✨ Instagram : https://www.instagram.com/shradhakhapra/\n✨ LinkedIn : https:
+//www.linkedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 135,
+      "id": "lqY8TE0P1S8",
+      "title": "Strongly Connected Components - Kosaraju's Algorithm | Graphs",
+      "url": "https://www.youtube.com/watch?v=lqY8TE0P1S8",
+      "channel": "Shradha Khapra",
+      "channel_url": "https://www.youtube.com/channel/UC1XBh-m27kkgwLAwu_SRJBg",
+      "duration": "26:26",
+      "duration_seconds": 1586,
+      "views": 7256,
+      "likes": 209,
+      "upload_date": "2026-06-01",
+      "thumbnail": "https://i.ytimg.com/vi/lqY8TE0P1S8/maxresdefault.jpg",
+      "description": "This lecture was made with a lot of love❤️\n\n✨New DSA Sheet Link : https://dsa.apnacollege.in\n\nShare your progress on Twitter : https://x.com/ShradhaKhapra_
+\nDSA Series full playlist : https://www.youtube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55pt\n\n✨ Instagram : https://www.instagram.com/shradhakhapra/\n✨ LinkedIn : https:
+//www.linkedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 136,
+      "id": "iZBXd-vjHUA",
+      "title": "Floyd Warshall Algorithm | All Pairs Shortest Path in Graph",
+      "url": "https://www.youtube.com/watch?v=iZBXd-vjHUA",
+      "channel": "Shradha Khapra",
+      "channel_url": "https://www.youtube.com/channel/UC1XBh-m27kkgwLAwu_SRJBg",
+      "duration": "27:36",
+      "duration_seconds": 1656,
+      "views": 15671,
+      "likes": 279,
+      "upload_date": "2026-06-04",
+      "thumbnail": "https://i.ytimg.com/vi/iZBXd-vjHUA/maxresdefault.jpg",
+      "description": "This lecture was made with a lot of love❤️\n\n✨New DSA Sheet Link : https://dsa.apnacollege.in\n\nShare your progress on Twitter : https://x.com/ShradhaKhapra_
+\nDSA Series full playlist : https://www.youtube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55pt\n\n✨ Instagram : https://www.instagram.com/shradhakhapra/\n✨ LinkedIn : https:
+//www.linkedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 137,
+      "id": "uBA8DkCBdco",
+      "title": "Complete Dynamic Programming | DP Series - Lecture 1",
+      "url": "https://www.youtube.com/watch?v=uBA8DkCBdco",
+      "channel": "Apna College",
+      "channel_url": "https://www.youtube.com/channel/UCBwmMxybNva6P_5VmxjzwqA",
+      "duration": "41:33",
+      "duration_seconds": 2493,
+      "views": 89102,
+      "likes": 2724,
+      "upload_date": "2026-07-08",
+      "thumbnail": "https://i.ytimg.com/vi/uBA8DkCBdco/maxresdefault.jpg",
+      "description": "🚀 DP Sheet: https://dsa.apnacollege.in/sheet/dp-sheet\n\n🚀 Company wise DSA Sheet: https://dsa.apnacollege.in/\n\n🚀 Complete Playlist Link : https://www.youtub
+e.com/playlist?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55pt\n\nWant to study for Tech Placements/Internships from us :\nOur Latest Placement Batches : https://linktr.ee/apnacollege.in
+\n\nShare your progress on Twitter : https://x.com/ShradhaKhapra_\nDSA Series full playlist : https://www.youtube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55pt\n\nShradha 
+Ma'am community \nInstagram : https://www.instagram.com/shradhakhapra\nLinkedIn : https://www.linkedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 138,
+      "id": "3GzA0mz6wp0",
+      "title": "DP 2. Climbing Stairs | 1D Dynamic Programming",
+      "url": "https://www.youtube.com/watch?v=3GzA0mz6wp0",
+      "channel": "Shradha Khapra",
+      "channel_url": "https://www.youtube.com/channel/UC1XBh-m27kkgwLAwu_SRJBg",
+      "duration": "26:25",
+      "duration_seconds": 1585,
+      "views": 8182,
+      "likes": 292,
+      "upload_date": "2026-07-11",
+      "thumbnail": "https://i.ytimg.com/vi/3GzA0mz6wp0/maxresdefault.jpg",
+      "description": "🔷 New DSA Sheet Link : https://dsa.apnacollege.in\n\nShare your progress on Twitter : https://x.com/ShradhaKhapra_\nDSA Series full playlist : https://www.yo
+utube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55pt\n\n- Instagram : https://www.instagram.com/shradhakhapra/\n- LinkedIn : https://www.linkedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 139,
+      "id": "BRmLlJA6ncI",
+      "title": "DP 3. House Robber | 1D Dynamic Programming",
+      "url": "https://www.youtube.com/watch?v=BRmLlJA6ncI",
+      "channel": "Shradha Khapra",
+      "channel_url": "https://www.youtube.com/channel/UC1XBh-m27kkgwLAwu_SRJBg",
+      "duration": "25:42",
+      "duration_seconds": 1542,
+      "views": 6420,
+      "likes": 240,
+      "upload_date": "2026-07-13",
+      "thumbnail": "https://i.ytimg.com/vi/BRmLlJA6ncI/maxresdefault.jpg",
+      "description": "🔷 New DSA Sheet Link : https://dsa.apnacollege.in\n\nShare your progress on Twitter : https://x.com/ShradhaKhapra_\nDSA Series full playlist : https://www.yo
+utube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55pt\n\n- Instagram : https://www.instagram.com/shradhakhapra/\n- LinkedIn : https://www.linkedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 140,
+      "id": "hSMJj9AdNBo",
+      "title": "DP 4. House Robber II | 1D Dynamic Programming",
+      "url": "https://www.youtube.com/watch?v=hSMJj9AdNBo",
+      "channel": "Shradha Khapra",
+      "channel_url": "https://www.youtube.com/channel/UC1XBh-m27kkgwLAwu_SRJBg",
+      "duration": "22:30",
+      "duration_seconds": 1350,
+      "views": 4589,
+      "likes": 177,
+      "upload_date": "2026-07-14",
+      "thumbnail": "https://i.ytimg.com/vi/hSMJj9AdNBo/maxresdefault.jpg",
+      "description": "🔷 New DSA Sheet Link : https://dsa.apnacollege.in\n\nShare your progress on Twitter : https://x.com/ShradhaKhapra_\nDSA Series full playlist : https://www.yo
+utube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55pt\n\n- Instagram : https://www.instagram.com/shradhakhapra/\n- LinkedIn : https://www.linkedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 141,
+      "id": "AKqlgskrZwI",
+      "title": "DP 5. Frog Jump | 1D Dynamic Programming",
+      "url": "https://www.youtube.com/watch?v=AKqlgskrZwI",
+      "channel": "Shradha Khapra",
+      "channel_url": "https://www.youtube.com/channel/UC1XBh-m27kkgwLAwu_SRJBg",
+      "duration": "29:29",
+      "duration_seconds": 1769,
+      "views": 4904,
+      "likes": 161,
+      "upload_date": "2026-07-15",
+      "thumbnail": "https://i.ytimg.com/vi/AKqlgskrZwI/maxresdefault.jpg",
+      "description": "🔷 New DSA Sheet Link : https://dsa.apnacollege.in\n\nShare your progress on Twitter : https://x.com/ShradhaKhapra_\nDSA Series full playlist : https://www.yo
+utube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55pt\n\n- Instagram : https://www.instagram.com/shradhakhapra/\n- LinkedIn : https://www.linkedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 142,
+      "id": "KwItlcfF9vE",
+      "title": "DP 6. Min Cost Climbing Stairs | 1D Dynamic Programming",
+      "url": "https://www.youtube.com/watch?v=KwItlcfF9vE",
+      "channel": "Shradha Khapra",
+      "channel_url": "https://www.youtube.com/channel/UC1XBh-m27kkgwLAwu_SRJBg",
+      "duration": "26:08",
+      "duration_seconds": 1568,
+      "views": 4077,
+      "likes": 139,
+      "upload_date": "2026-07-17",
+      "thumbnail": "https://i.ytimg.com/vi/KwItlcfF9vE/maxresdefault.jpg",
+      "description": "🔷 New DSA Sheet Link : https://dsa.apnacollege.in\n\nShare your progress on Twitter : https://x.com/ShradhaKhapra_\nDSA Series full playlist : https://www.yo
+utube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55pt\n\n- Instagram : https://www.instagram.com/shradhakhapra/\n- LinkedIn : https://www.linkedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 143,
+      "id": "yggezlvUN2w",
+      "title": "Fractional Knapsack Algorithm | Greedy Method",
+      "url": "https://www.youtube.com/watch?v=yggezlvUN2w",
+      "channel": "Shradha Khapra",
+      "channel_url": "https://www.youtube.com/channel/UC1XBh-m27kkgwLAwu_SRJBg",
+      "duration": "16:33",
+      "duration_seconds": 993,
+      "views": 4591,
+      "likes": 172,
+      "upload_date": "2026-07-18",
+      "thumbnail": "https://i.ytimg.com/vi/yggezlvUN2w/maxresdefault.jpg",
+      "description": "🔷 New DSA Sheet Link : https://dsa.apnacollege.in\n\nShare your progress on Twitter : https://x.com/ShradhaKhapra_\nDSA Series full playlist : https://www.yo
+utube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55pt\n\n- Instagram : https://www.instagram.com/shradhakhapra/\n- LinkedIn : https://www.linkedin.com/in/shradha-khapra/"
+    },
+    {
+      "position": 144,
+      "id": "tEW-zDckvFw",
+      "title": "DP 8. 0/1 Knapsack | Recursion to DP Solution | Space Optimized",
+      "url": "https://www.youtube.com/watch?v=tEW-zDckvFw",
+      "channel": "Shradha Khapra",
+      "channel_url": "https://www.youtube.com/channel/UC1XBh-m27kkgwLAwu_SRJBg",
+      "duration": "45:03",
+      "duration_seconds": 2703,
+      "views": 5561,
+      "likes": 154,
+      "upload_date": "2026-07-21",
+      "thumbnail": "https://i.ytimg.com/vi/tEW-zDckvFw/maxresdefault.jpg",
+      "description": "🔷 New DSA Sheet Link : https://dsa.apnacollege.in\n\nShare your progress on Twitter : https://x.com/ShradhaKhapra_\nDSA Series full playlist : https://www.yo
+utube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55pt\n\n- Instagram : https://www.instagram.com/shradhakhapra/\n- LinkedIn : https://www.linkedin.com/in/shradha-khapra/"
+    }
+  ]
+}
